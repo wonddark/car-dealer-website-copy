@@ -1,6 +1,6 @@
-import {toast} from "react-toastify";
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {getLocalStorage, setLocalStorage} from "@/utils/localstorage";
+import { toast } from "react-toastify";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { getLocalStorage, setLocalStorage } from "@/utils/localstorage";
 
 interface Product {
   id: string;
@@ -10,7 +10,7 @@ interface Product {
 }
 interface CartState {
   cart: Product[];
-  orderQuantity: number,
+  orderQuantity: number;
 }
 const initialState: CartState = {
   cart: [],
@@ -22,7 +22,9 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, { payload }: PayloadAction<Product>) => {
-      const productIndex = state.cart.findIndex((item) => item.id === payload.id);
+      const productIndex = state.cart.findIndex(
+        (item) => item.id === payload.id,
+      );
       if (productIndex >= 0) {
         state.cart[productIndex].quantity += 1;
         toast.info(`${payload.title} Increase Product Quantity`, {
@@ -67,7 +69,9 @@ const cartSlice = createSlice({
       setLocalStorage("cart", state.cart);
     },
     clear_cart: (state) => {
-      const confirmMsg = window.confirm("Are you sure you want to delete your bag?");
+      const confirmMsg = window.confirm(
+        "Are you sure you want to delete your bag?",
+      );
       if (confirmMsg) {
         state.cart = [];
       }
@@ -95,10 +99,8 @@ export const {
   clear_cart,
   get_cart_products,
   quantityDecrement,
-  increment, 
+  increment,
   decrement,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;
-
-

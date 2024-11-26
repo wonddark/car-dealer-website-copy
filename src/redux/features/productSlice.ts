@@ -1,6 +1,6 @@
-"use client"
-import top_product from '@/data/top_product';
-import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+"use client";
+import top_product from "@/data/top_product";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 // import products from '@/data/ShopData';
 
@@ -20,11 +20,13 @@ const initialState: ProductState = {
 };
 
 export const productSlice = createSlice({
-  name: 'products',
+  name: "products",
   initialState,
   reducers: {
     single_product: (state, action: PayloadAction<number>) => {
-      state.product = state.products.find((p) => Number(p.id) === Number(action.payload)) || {};
+      state.product =
+        state.products.find((p) => Number(p.id) === Number(action.payload)) ||
+        {};
     },
   },
 });
@@ -32,8 +34,9 @@ export const productSlice = createSlice({
 export const { single_product } = productSlice.actions;
 
 // Selectors
-export const selectProducts = (state: { products: ProductState }) => state?.products?.products;
-export const selectProduct = (state: { products: ProductState }) => state?.products?.product;
+export const selectProducts = (state: { products: ProductState }) =>
+  state?.products?.products;
+export const selectProduct = (state: { products: ProductState }) =>
+  state?.products?.product;
 
 export default productSlice.reducer;
-

@@ -1,29 +1,27 @@
 "use client";
 
-import {useEffect} from "react";
-import {animationCreate} from "@/utils/utils"
-import {ToastContainer} from "react-toastify";
+import { useEffect } from "react";
+import { animationCreate } from "@/utils/utils";
+import { ToastContainer } from "react-toastify";
 
 if (typeof window !== "undefined") {
-	require("bootstrap/dist/js/bootstrap");
+  require("bootstrap/dist/js/bootstrap");
 }
 
 const Wrapper = ({ children }: any) => {
+  useEffect(() => {
+    // animation
+    const timer = setTimeout(() => {
+      animationCreate();
+    }, 100);
 
-	useEffect(() => {
-		// animation
-		const timer = setTimeout(() => {
-			animationCreate();
-		}, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
-		return () => clearTimeout(timer);
-	}, []);
-
-
-	return (
+  return (
     <>
-    {children}
-    <ToastContainer position="top-right"/>
+      {children}
+      <ToastContainer position="top-right" />
     </>
   );
 };
