@@ -1,4 +1,4 @@
-import MainHome from "@/components/MainHome";
+import Home from "@/components/Home";
 import Wrapper from "@/layouts/Wrapper";
 import React from "react";
 
@@ -9,7 +9,7 @@ export const metadata = {
 const index = () => {
   return (
     <Wrapper>
-      <MainHome />
+      <Home />
     </Wrapper>
   );
 };

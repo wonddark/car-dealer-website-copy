@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 
-const Offcanvas = ({ handleShow, show }: any) => {
+const OffCanvas = ({ handleShow, show }: any) => {
   return (
     <>
       <div
@@ -101,4 +101,4 @@ const Offcanvas = ({ handleShow, show }: any) => {
   );
 };
 
-export default Offcanvas;
+export default OffCanvas;

@@ -8,6 +8,9 @@ const top_product = [
     new_price: 13,
     old_price: 42,
     ratting: 5,
+    mileage: "4789",
+    fuelType: "Diesel",
+    transmission: "Automatic",
   },
   {
     id: 2,
@@ -18,6 +21,9 @@ const top_product = [
     new_price: 74,
     old_price: 99,
     ratting: 5,
+    mileage: "4789",
+    fuelType: "Diesel",
+    transmission: "Automatic",
   },
   {
     id: 3,
@@ -28,6 +34,9 @@ const top_product = [
     new_price: 99,
     old_price: 113,
     ratting: 5,
+    mileage: "4789",
+    fuelType: "Diesel",
+    transmission: "Automatic",
   },
   {
     id: 4,
@@ -38,6 +47,9 @@ const top_product = [
     new_price: 87,
     old_price: 92,
     ratting: 5,
+    mileage: "4789",
+    fuelType: "Diesel",
+    transmission: "Automatic",
   },
   {
     id: 5,
@@ -48,6 +60,9 @@ const top_product = [
     new_price: 21,
     old_price: 25,
     ratting: 5,
+    mileage: "4789",
+    fuelType: "Diesel",
+    transmission: "Automatic",
   },
   {
     id: 6,
@@ -58,6 +73,9 @@ const top_product = [
     new_price: 38,
     old_price: 41,
     ratting: 5,
+    mileage: "4789",
+    fuelType: "Diesel",
+    transmission: "Automatic",
   },
 ];
 export default top_product;

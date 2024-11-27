@@ -1,4 +1,4 @@
-const product_catagories = [
+const product_categories = [
   {
     img: "/assets/img/core-img/woman-clothes.png",
     title: "Womens Fashion",
@@ -33,4 +33,4 @@ const product_catagories = [
   },
 ];
 
-export default product_catagories;
+export default product_categories;
