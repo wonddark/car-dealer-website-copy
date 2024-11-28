@@ -2,8 +2,9 @@ import { toast } from "react-toastify";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { getLocalStorage, setLocalStorage } from "@/utils/localstorage";
 
-interface Product {
-  id: string;
+export interface Product
+  extends Record<string, string | number | boolean | undefined> {
+  id: string | number;
   title: string;
   quantity: number;
   // Add other properties here if needed
@@ -40,10 +41,10 @@ const cartSlice = createSlice({
       setLocalStorage("cart", state.cart);
     },
     //
-    increment: (state, { payload }) => {
+    increment: (state) => {
       state.orderQuantity = state.orderQuantity + 1;
     },
-    decrement: (state, { payload }) => {
+    decrement: (state) => {
       state.orderQuantity =
         state.orderQuantity > 1
           ? state.orderQuantity - 1

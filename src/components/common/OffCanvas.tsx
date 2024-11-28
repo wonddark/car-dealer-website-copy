@@ -1,8 +1,14 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { MouseEventHandler } from "react";
 
-const OffCanvas = ({ handleShow, show }: any) => {
+const OffCanvas = ({
+  handleShow,
+  show,
+}: Readonly<{
+  handleShow: MouseEventHandler<HTMLButtonElement>;
+  show: boolean;
+}>) => {
   return (
     <>
       <div

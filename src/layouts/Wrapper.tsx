@@ -1,14 +1,10 @@
 "use client";
 
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { animationCreate } from "@/utils/utils";
 import { ToastContainer } from "react-toastify";
 
-if (typeof window !== "undefined") {
-  require("bootstrap/dist/js/bootstrap");
-}
-
-const Wrapper = ({ children }: any) => {
+const Wrapper = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     // animation
     const timer = setTimeout(() => {

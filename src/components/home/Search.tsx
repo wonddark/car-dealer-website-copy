@@ -2,10 +2,6 @@
 import React from "react";
 
 const Search = () => {
-  if (typeof window !== "undefined") {
-    require("bootstrap/dist/js/bootstrap");
-  }
-
   return (
     <>
       <div className="container">

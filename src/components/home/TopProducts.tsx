@@ -5,13 +5,13 @@ import Link from "next/link";
 import React from "react";
 import dynamic from "next/dynamic";
 import { useDispatch } from "react-redux";
-import { addToCart } from "@/redux/features/cartSlice";
+import { addToCart, Product } from "@/redux/features/cartSlice";
 
 const MyTimer = dynamic(() => import("../common/Timer"), { ssr: false });
 
 const TopProducts = () => {
   const dispatch = useDispatch();
-  const handleAddToCart = (item: any) => {
+  const handleAddToCart = (item: Product) => {
     dispatch(addToCart(item));
   };
 
@@ -42,7 +42,7 @@ const TopProducts = () => {
                       className="product-thumbnail d-block"
                       href={`/single-product/${item.id}`}
                     >
-                      <img className="mb-2" src={item.img} alt="" />
+                      <img className="mb-2" src={item.img as string} alt="" />
                       {i === 0 || i === 3 ? (
                         <ul className="offer-countdown-timer d-flex align-items-center shadow-sm">
                           <MyTimer />
@@ -66,7 +66,9 @@ const TopProducts = () => {
                       <ul className="p-0">
                         <li className="list-inline-item me-2">
                           <span className="flaticon-road-perspective me-1" />
-                          {item.mileage}
+                          {
+                            item.mileage
+                          } <span>mi</span>
                         </li>
                         <li className="list-inline-item me-2">
                           <span className="flaticon-gas-station me-2" />
@@ -77,6 +79,21 @@ const TopProducts = () => {
                           {item.transmission}
                         </li>
                       </ul>
+                    </div>
+
+                    <div>
+                      {item.flagPrice && (
+                        <p className="mb-0 mt-4 text-warning">
+                          <strong className="fs-2">${item.flagPrice}</strong>
+                          <span className="fs-6 fw-light ms-2">
+                            !Cómpralo ya!
+                          </span>
+                        </p>
+                      )}
+                      <p className="m-0">
+                        <strong>${item.currentBid}</strong>{" "}
+                        <span>Oferta actual</span>
+                      </p>
                     </div>
 
                     <a

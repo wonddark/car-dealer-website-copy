@@ -5,18 +5,18 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // import products from '@/data/ShopData';
 
 interface Product {
-  id: number;
+  id: number | string;
   // Add other properties of your product here
 }
 
 interface ProductState {
-  products: Product[] | any[];
-  product: Product | {};
+  products: Product[];
+  product: Product | undefined;
 }
 
 const initialState: ProductState = {
   products: top_product,
-  product: {},
+  product: undefined,
 };
 
 export const productSlice = createSlice({
@@ -26,7 +26,7 @@ export const productSlice = createSlice({
     single_product: (state, action: PayloadAction<number>) => {
       state.product =
         state.products.find((p) => Number(p.id) === Number(action.payload)) ||
-        {};
+        undefined;
     },
   },
 });
