@@ -5,7 +5,9 @@ import React from "react";
 import { addToCart, Product } from "@/redux/features/cartSlice";
 import { useDispatch } from "react-redux";
 
-export default function ProductCard({ product }: { product: Product }) {
+export default function ProductCard({
+  product,
+}: Readonly<{ product: Product }>) {
   const dispatch = useDispatch();
   const handleAddToCart = (item: Product) => {
     dispatch(addToCart(item));
@@ -58,7 +60,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
           <div>
             {product.flagPrice && (
-              <p className="mb-0 mt-4 d-flex align-products-end">
+              <p className="mb-0 mt-4 d-flex align-items-end">
                 <strong className="fs-2 lh-base">${product.flagPrice}</strong>
                 <span className="small fw-semibold ms-2 pb-1 text-primary">
                   Venta directa
