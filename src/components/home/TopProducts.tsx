@@ -20,20 +20,21 @@ const TopProducts = () => {
             <div key={item.id} className="col-12 col-md-6">
               <div className="card product-card">
                 <div className="card-body">
-                  <a className="wishlist-btn" href={`/products/${item.id}`}>
+                  <button className="wishlist-btn">
                     <i className="ti ti-heart"></i>
-                  </a>
+                  </button>
                   <Link
                     className="product-thumbnail d-block"
-                    href={`/single-product/${item.id}`}
+                    href={`/vehicles/${item.id}`}
                   >
-                    <img className="mb-2" src={item.img as string} alt="" />
+                    <img
+                      className="mb-2 rounded-2"
+                      src={item.img as string}
+                      alt=""
+                    />
                   </Link>
 
-                  <Link
-                    className="product-title"
-                    href={`/single-product/${item.id}`}
-                  >
+                  <Link className="product-title" href={`/vehicles/${item.id}`}>
                     {item.title}
                   </Link>
 
@@ -63,10 +64,12 @@ const TopProducts = () => {
 
                   <div>
                     {item.flagPrice && (
-                      <p className="mb-0 mt-4">
-                        <strong className="fs-2">${item.flagPrice}</strong>
-                        <span className="fs-6 fw-medium ms-2">
-                          !Cómpralo ya!
+                      <p className="mb-0 mt-4 d-flex align-items-end">
+                        <strong className="fs-2 lh-base">
+                          ${item.flagPrice}
+                        </strong>
+                        <span className="small fw-semibold ms-2 pb-1 text-primary">
+                          Venta directa
                         </span>
                       </p>
                     )}
