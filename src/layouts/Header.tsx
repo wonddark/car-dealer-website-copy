@@ -12,8 +12,12 @@ const Header = () => {
       <div className="header-area" id="headerArea">
         <div className="container h-100 d-flex align-items-center justify-content-between d-flex rtl-flex-d-row-r">
           <div className="logo-wrapper">
-            <Link href="/home">
-              <img src="/assets/img/core-img/logo-small.png" alt="" />
+            <Link href="/">
+              <img
+                src="/assets/img/core-img/logo-round.png"
+                alt=""
+                className="h-100 mh-100 w-auto"
+              />
             </Link>
           </div>
           <div className="navbar-logo-container d-flex align-items-center">

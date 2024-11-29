@@ -1,7 +1,10 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import OffCanvasTwo from "@/components/common/OffCanvasTwo";
 
 const Search = () => {
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(!show);
   return (
     <>
       <div className="container">
@@ -18,43 +21,24 @@ const Search = () => {
           </form>
 
           <div className="alternative-search-options">
-            <div className="dropdown">
-              <a
-                className="btn btn-primary dropdown-toggle"
-                id="altSearchOption"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
+            <div
+              className="filter-option ms-2"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#suhaFilterOffcanvas"
+              aria-controls="suhaFilterOffcanvas"
+            >
+              <button
+                onClick={() => handleShow()}
+                className="text-primary p-1 rounded-2"
               >
                 <i className="ti ti-adjustments-horizontal"></i>
-              </a>
-
-              <ul
-                className="dropdown-menu dropdown-menu-end"
-                style={{
-                  position: "absolute",
-                  inset: "0px 0px auto auto",
-                  margin: "0px",
-                  transform: "translate3d(0px, 42.4px, 0px)",
-                }}
-                aria-labelledby="altSearchOption"
-              >
-                <li>
-                  <a className="dropdown-item" href="#">
-                    <i className="ti ti-microphone"> </i>Voice
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item" href="#">
-                    <i className="ti ti-layout-collage"> </i>Image
-                  </a>
-                </li>
-              </ul>
+              </button>
             </div>
           </div>
         </div>
       </div>
+
+      <OffCanvasTwo handleShow={handleShow} show={show} />
     </>
   );
 };
