@@ -16,7 +16,7 @@ const TopProducts = () => {
     <div className="top-products-area py-3">
       <div className="container">
         <div className="row g-2">
-          {top_product.map((item, i) => (
+          {top_product.map((item) => (
             <div key={item.id} className="col-12 col-md-6">
               <div className="card product-card">
                 <div className="card-body">
