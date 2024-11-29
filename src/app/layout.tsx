@@ -4,6 +4,12 @@ import "../styles/style.css";
 import "../styles/style.scss";
 import store from "@/redux/store";
 import { Provider } from "react-redux";
+import Wrapper from "@/layouts/Wrapper";
+import Header from "@/layouts/Header";
+import Search from "@/components/home/Search";
+import React from "react";
+import Footer from "@/layouts/Footer";
+import { ToastContainer } from "react-toastify";
 
 if (typeof window !== "undefined") {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -23,7 +29,17 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <Provider store={store}>{children}</Provider>
+        <Provider store={store}>
+          <Wrapper>
+            <Header />
+            <div className="page-content-wrapper">
+              <Search />
+              {children}
+            </div>
+            <Footer />
+            <ToastContainer position="top-right" />
+          </Wrapper>
+        </Provider>
       </body>
     </html>
   );
