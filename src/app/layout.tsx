@@ -27,6 +27,11 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap"
           rel="stylesheet"
         />
+        <link
+          rel="icon"
+          type="image/png"
+          href="/assets/img/core-img/logo-small.png"
+        />
       </head>
       <body>
         <Provider store={store}>
