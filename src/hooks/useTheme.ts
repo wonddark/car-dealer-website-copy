@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
 const useTheme = () => {
-  const [theme, setTheme] = useState("dark"); // Default to 'dark'
+  const [theme, setTheme] = useState("light");
   const [viewMode, setViewMode] = useState("ltr");
 
   useEffect(() => {
-    const currentTheme = localStorage.getItem("theme") || "dark"; // Default to 'dark'
+    const currentTheme = localStorage.getItem("theme") || "light";
     const currentViewMode = localStorage.getItem("view") || "ltr";
 
     document.documentElement.setAttribute("theme-color", currentTheme);
