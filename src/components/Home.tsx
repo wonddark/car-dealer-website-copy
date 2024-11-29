@@ -6,7 +6,6 @@ import Search from "./home/Search";
 import CtaArea from "./home/CtaArea";
 import FlashSale from "./home/FlashSale";
 import HeroSlider from "./home/HeroSlider";
-import DarkLight from "@/components/common/DarkLight";
 import TopProducts from "./home/TopProducts";
 import ProductCategories from "./home/ProductCategories";
 import WeeklyBestSellers from "./home/WeeklyBestSellers";
@@ -25,7 +24,6 @@ const Home = () => {
         <HeroSlider />
         <ProductCategories />
         <FlashSale />
-        <DarkLight />
         <TopProducts />
         <CtaArea />
         <WeeklyBestSellers />

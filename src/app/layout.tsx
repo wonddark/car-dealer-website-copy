@@ -14,7 +14,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" theme-color="dark">
+    <html lang="en" theme-color="light">
       <head>
         <title>La Subasta Cubana</title>
         <link
