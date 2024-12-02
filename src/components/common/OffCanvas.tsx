@@ -51,6 +51,34 @@ const OffCanvas = ({
               Notifications<span className="ms-1 badge badge-warning">3</span>
             </Link>
           </li>
+          <li>
+            <a
+              data-bs-toggle="collapse"
+              href="#companyLinks"
+              role="button"
+              aria-expanded="false"
+              aria-controls="companyLinks"
+            >
+              <i className="ti ti-building" />
+              Our company
+            </a>
+            <div className="collapse" id="companyLinks">
+              <ul>
+                <li>
+                  <a href="/about-us">About us</a>
+                </li>
+                <li>
+                  <a href="/contact">Contact us</a>
+                </li>
+                <li>
+                  <a href="/privacy-policy">Privacy policy</a>
+                </li>
+                <li>
+                  <a href="/terms">Terms & conditions</a>
+                </li>
+              </ul>
+            </div>
+          </li>
           <li className="suha-dropdown-menu">
             <a href="/">
               <i className="ti ti-building-store"></i>Shop Pages

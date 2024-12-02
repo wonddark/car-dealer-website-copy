@@ -9,81 +9,91 @@ const PrivacyPolicy = () => {
 
       <div className="page-content-wrapper">
         <div className="container">
-          <div className="privacy-policy-wrapper py-3">
-            <h6>PRIVACY POLICY</h6>
+          <div className="py-3">
+            <h5>Política de Privacidad</h5>
             <p>
-              By using or accessing the service in any manner, you acknowledge
-              that you accept the practices and policies outlined in this
-              Privacy Policy, and you hereby consent that we will collect, use,
-              and share your information in the following ways.
+              En La Subasta Cubana, valoramos su privacidad y estamos
+              comprometidos a proteger la información personal que nos
+              proporciona. A continuación, detallamos cómo recopilamos, usamos y
+              protegemos su información:
             </p>
-            <h6>WHAT DATA WE COLLECT AND WHY WE COLLECT</h6>
+            <h6>Principios Generales</h6>
             <p>
-              As is true of most websites, we gather certain information (such
-              as mobile provider, operating system, etc.) automatically and
-              store it in log files. We use this information, which does not
-              identify individual users, to analyze trends, to administer the
-              website, to track users movements around the website and to gather
-              demographic information about our user base as a whole. We may
-              link some of this automatically-collected data to certain
-              Personally Identifiable Information.
+              <ol>
+                <li>
+                  Una vez introducida su información personal (dígase nombre,
+                  dirección, correo electrónico y número de teléfono a nuestro
+                  sitio web) estos estarán sujetos a los términos de la Política
+                  de Privacidad expresados aquí.
+                </li>
+                <li>
+                  Esta información permanecerá protegida, salvo que por
+                  imposición legal o en virtud de un acuerdo o petición emitida
+                  por el Regulador Fiscal u otra autoridad legal o reguladora
+                  competente, deba ser compartida con dichas instancias.
+                </li>
+                <li>
+                  Los datos deberán ser accesibles solo para nosotros, nuestros
+                  agentes, o una empresa controlada por nosotros; y serán
+                  procesados o utilizados por nosotros para los propósitos y de
+                  una manera compatible con el cumplimiento de nuestra
+                  obligación en virtud de los usos legales admitidos.
+                </li>
+                <li>
+                  La información obtenida de usted será tratada por nosotros en
+                  forma confidencial y no será revelada a terceros.
+                </li>
+              </ol>
             </p>
-            <h6>PERSONALLY IDENTIFIABLE INFORMATION</h6>
+            <h6>Información que Recopilamos</h6>
             <p>
-              If you are a Client, when you register with us via our Website, we
-              will ask you for some personally identifiable information, such as
-              your first and last name, company name, email address, billing
-              address, and credit card information. You may review and update
-              this personally identifiable information in your profile by
-              logging in and editing such information on your dashboard. If you
-              decide to delete all of your information, we may cancel your
-              account. We may retain an archived copy of your records as
-              required by law or for reasonable business purposes.
+              <ol>
+                <li>
+                  Recopilamos diferentes tipos de datos personales de los
+                  usuarios (nombre y apellidos, correo electrónico, número de
+                  teléfono, historial de compras y métodos de pago), con el
+                  objetivo de ofrecer una experiencia personalizada.
+                </li>
+                <li>
+                  Los datos obtenidos se archivan en nuestro servidor de modo
+                  encriptado para proteger la privacidad. Los recopilamos para
+                  ofrecer una atención individual que permita solucionar los
+                  problemas y necesidades de cada cliente por parte de nuestro
+                  equipo de soporte; así como facilitar las transacciones,
+                  compras y la comunicación de y con nuestros clientes.
+                </li>
+                <li>
+                  Para solicitar la eliminación de su cuenta, por favor contacte
+                  a nuestro equipo de soporte llamando al +1 786 600 2222 o
+                  enviando un correo electrónico a soporte@lasubastacubana.com.
+                  Estaremos encantados de asistirle.
+                </li>
+              </ol>
             </p>
+            <h6>Uso de la Información</h6>
+            <p>Utilizamos la información recopilada para:</p>
             <p>
-              Due to the nature of the Service, except to assist Clients with
-              certain limited technical problems or as otherwise legally
-              compelled, we will not access any of the Content that you upload
-              to the Service.
-            </p>
-            <p>
-              Some Personally Identifiable Information may also be provided to
-              intermediaries and third parties who assist us with the Service,
-              but who may make no use of any such information other than to
-              assist us in providing the Service. Except as otherwise provided
-              in this Privacy Policy, however, we will not rent or sell your
-              Personally Identifiable Information to third parties.
-            </p>
-            <h6>USE OF INFORMATION</h6>
-            <p>
-              For our Clients, we use personal information mainly to provide the
-              Services and contact our Clients regarding account activities, new
-              versions, and product offerings, or other communications relevant
-              to the Services. We do not sell or share any personally
-              identifiable or other information of End Users to any third
-              parties, except, of course, to the applicable Client whose website
-              you are using.
-            </p>
-            <p>
-              If you contact us by email or by filling out a registration form,
-              we may keep a record of your contact information and
-              correspondence and may use your email address, and any information
-              that you provide to us in your message, to respond to you. In
-              addition, we may use the personal information described above to
-              send you information regarding the Service. If you decide at any
-              time that you no longer wish to receive such information or
-              communications from us, email us at and request to be removed from
-              our list. The circumstances under which we may share such
-              information with third parties are described below in “Complying
-              with Legal Process”.
-            </p>
-            <h6>STORAGE AND SECURITY OF INFORMATION</h6>
-            <p className="mb-0">
-              It is operates secure data networks protected by industry-standard
-              firewalls and password protection systems. Our security and
-              privacy policies are periodically reviewed and enhanced as
-              necessary, and only authorized individuals have access to the
-              information provided by our Clients.
+              <ol>
+                <li>
+                  Por defecto, La Subasta Cubana enviará notificaciones y
+                  comunicaciones usando la información de contacto almacenada en
+                  el perfil del usuario.
+                </li>
+                <li>
+                  Sus datos podrán ser usados para notificarle sobre información
+                  referente a nuestras ofertas, el estado de sus transacciones u
+                  otras notificaciones enviadas por La Subasta Cubana.
+                </li>
+                <li>
+                  El usuario tiene la opción de aceptar o rechazar la recepción
+                  de estas notificaciones. Del mismo modo, si en algún momento
+                  desea dejar de recibir futuras notificaciones, puede ponerse
+                  en contacto con nuestro equipo de soporte llamando al +1 786
+                  600 2222 o enviando un correo electrónico a
+                  soporte@lasubastacubana.com. Estaremos encantados de ayudarle
+                  con su solicitud.
+                </li>
+              </ol>
             </p>
           </div>
         </div>
