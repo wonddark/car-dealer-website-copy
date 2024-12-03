@@ -5,7 +5,7 @@ import React from "react";
 const AboutUs = () => {
   return (
     <>
-      <HeaderTwo links="home" title="About Us" />
+      <HeaderTwo links="" title="About Us" />
 
       <div className="page-content-wrapper py-3">
         <div className="container">

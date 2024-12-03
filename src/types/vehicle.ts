@@ -13,7 +13,7 @@ export type Vehicle = {
   driveType: string;
   vehicleType: string;
   fuelType: string;
-  hasKeys: true;
+  hasKeys: boolean;
   details: string;
   offerStatus: string;
   saleStatus: string;
@@ -35,6 +35,7 @@ export type Vehicle = {
   auction: string;
   laneAndItem: string;
   lastUpdate: string;
+  images: string[];
 };
 
 export type SearchResults = Vehicle[];

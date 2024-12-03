@@ -4,7 +4,7 @@ import React from "react";
 export default function TermsAndConditions() {
   return (
     <>
-      <HeaderTwo links="home" title="Terms and Conditions" />
+      <HeaderTwo links="" title="Terms and Conditions" />
 
       <div className="page-content-wrapper">
         <div className="container">

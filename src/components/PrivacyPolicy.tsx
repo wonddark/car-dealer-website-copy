@@ -5,7 +5,7 @@ import React from "react";
 const PrivacyPolicy = () => {
   return (
     <>
-      <HeaderTwo links="home" title="Privacy Policy" />
+      <HeaderTwo links="" title="Privacy Policy" />
 
       <div className="page-content-wrapper">
         <div className="container">

@@ -10,7 +10,7 @@ const TopProducts = () => {
       <div className="container">
         <div className="row g-2">
           {top_product.map((item) => (
-            <ProductCard product={item} key={item.id} />
+            <ProductCard vehicle={item} key={item.vin} />
           ))}
         </div>
       </div>
