@@ -1868,7 +1868,7 @@ textarea:invalid {
   margin-bottom: 0.25rem;
 }
 
-.sidenav-nav li a i {
+.sidenav-nav li a i, .sidenav-nav li a::after, .sidenav-nav li a::before {
   transition-duration: 500ms;
   display: inline-block;
   font-size: 1rem;

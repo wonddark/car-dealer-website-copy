@@ -1,6 +1,5 @@
 import Footer from "@/layouts/Footer";
 import HeaderTwo from "@/layouts/HeaderTwo";
-import Link from "next/link";
 import React from "react";
 
 const AboutUs = () => {
@@ -13,89 +12,54 @@ const AboutUs = () => {
           <div className="card">
             <div className="card-body">
               <div className="about-content-wrap dir-rtl">
-                <img className="mb-3" src="/assets/img/bg-img/12.png" alt="" />
-                <h5>
-                  We are here for your all needs. Lets together safer the world.
-                  Stay at home, stay safe.
-                </h5>
                 <p>
-                  A versatile e-commerce shop template. It is very nicely
-                  designed with modern features & coded with the latest
-                  technology.
+                  La Subasta Cubana nace en 2024 como respuesta a las
+                  necesidades de la creciente comunidad cubana en Estados
+                  Unidos, que enfrenta retos significativos al buscar el
+                  vehículo ideal. Conscientes de los altos costos asociados a
+                  los concesionarios tradicionales y la demanda creciente de
+                  vehículos, decidimos crear un espacio donde la compra de
+                  automóviles se convierta en una experiencia accesible,
+                  transparente y confiable.
                 </p>
+
                 <p>
-                  It nicely views on all devices with smartphones, tablets,
-                  laptops & desktops.
+                  Nuestra misión es ofrecerte las mejores oportunidades de
+                  compra en tu camino hacia el carro de tus sueños. En La
+                  Subasta Cubana, facilitamos el acceso a una amplia gama de
+                  vehículos a través de subastas públicas y privadas como
+                  Copart, IAA y Manheim. Nos especializamos en conectar a
+                  nuestros clientes con vehículos de calidad, permitiéndote
+                  explorar opciones que se ajusten a tus necesidades y
+                  presupuesto.
                 </p>
-                <ul className="mb-3 ps-3">
-                  <li>
-                    <i className="ti ti-check me-1"></i>Versatile e-commerce
-                    mobile template.
-                  </li>
-                  <li>
-                    <i className="ti ti-check me-1"></i>Nicely designed with
-                    modern features.
-                  </li>
-                  <li>
-                    <i className="ti ti-check me-1"></i>Coded with the latest
-                    technology.
-                  </li>
-                </ul>
+
                 <p>
-                  It nicely views on all devices with smartphones, tablets,
-                  laptops & desktops.
+                  Estamos Comprometidos a ser tu aliado en todo el proceso de
+                  compra. Desde la búsqueda inicial hasta la adquisición final,
+                  brindándote el apoyo que necesites, en cada etapa. Te
+                  proporcionamos herramientas y conocimientos específicos sobre
+                  las subastas, asegurando que entiendas cada paso y que puedas
+                  tomar decisiones informadas.
                 </p>
-                <div className="row g-2">
-                  <div className="col-6">
-                    <img
-                      className="mb-3 rounded"
-                      src="/assets/img/bg-img/12.jpg"
-                      alt=""
-                    />
-                  </div>
-                  <div className="col-6">
-                    <img
-                      className="mb-3 rounded"
-                      src="/assets/img/bg-img/16.jpg"
-                      alt=""
-                    />
-                  </div>
-                </div>
+
                 <p>
-                  A versatile e-commerce shop template. It is very nicely
-                  designed with modern features & coded with the latest
-                  technology.
+                  En La Subasta Cubana, creemos que todos merecen la oportunidad
+                  de adquirir el vehículo que desean sin complicaciones ni
+                  sorpresas. Por eso, garantizamos que cada miembro de nuestra
+                  comunidad tenga acceso a las subastas de autos, con la certeza
+                  de que estás recibiendo un servicio de calidad.
                 </p>
+
                 <p>
-                  It nicely views on all devices with smartphones, tablets,
-                  laptops & desktops.
+                  Al elegir La Subasta Cubana, no solo tendrás la oportunidad de
+                  adquirir un vehículo a precios mayoristas, evitando las
+                  ganancias de concesionarios e intermediarios; también te
+                  unirás a una familia que valora la confianza, la transparencia
+                  y el compromiso con cada uno de nuestros clientes. Juntos,
+                  transformaremos tu experiencia de compra en una aventura
+                  emocionante y satisfactoria.
                 </p>
-                <h6>Authors Help</h6>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Molestiae suscipit blanditiis facilis, est modi, maxime
-                  dolorem voluptatibus ea deserunt voluptate minima eaque
-                  quidem?
-                </p>
-                <h6>Buyers Help</h6>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Possimus sint reiciendis minima iusto ex beatae. Odio ducimus
-                  eveniet excepturi quaerat optio totam repellat eligendi! Eaque
-                  veritatis omnis doloribus vitae dolore similique facere eos
-                  molestiae quibusdam perspiciatis.
-                </p>
-                <div className="contact-btn-wrap text-center">
-                  <p className="mb-2">
-                    For more information, submit a request.
-                  </p>
-                  <Link
-                    className="btn btn-primary btn-lg w-100"
-                    href="/contact"
-                  >
-                    <i className="ti ti-mail me-2"></i>Submit A Query
-                  </Link>
-                </div>
               </div>
             </div>
           </div>
