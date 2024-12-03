@@ -1057,11 +1057,11 @@ export default function TermsAndConditions() {
                   nuestros Servicios (a través de nuestro sitio web o de otro
                   modo), o cualquier vehículo por el que haya ofertado o
                   comprado utilizando nuestros Servicios (cada uno, un
-                  "Reclamo") se resolverá de acuerdo con las disposiciones
-                  establecidas en esta sección. Por favor, lea esta sección
-                  atentamente, pues afecta sus derechos legales e impactará en
-                  la resolución de cualquier reclamo entre usted y La Subasta
-                  Cubana.
+                  &#34;Reclamo&#34;) se resolverá de acuerdo con las
+                  disposiciones establecidas en esta sección. Por favor, lea
+                  esta sección atentamente, pues afecta sus derechos legales e
+                  impactará en la resolución de cualquier reclamo entre usted y
+                  La Subasta Cubana.
                 </p>
 
                 <dl>
@@ -1135,10 +1135,10 @@ export default function TermsAndConditions() {
                     </p>
                     <p>
                       Todas las notificaciones, reclamos, demandas y
-                      comunicaciones (que llamaremos "Notificación") que sean
-                      necesarias o permitidas en este acuerdo deben hacerse por
-                      escrito y deben enviarse de la siguiente manera: (a) por
-                      correo registrado o certificado, con el franqueo de
+                      comunicaciones (que llamaremos &#34;Notificación&#34;) que
+                      sean necesarias o permitidas en este acuerdo deben hacerse
+                      por escrito y deben enviarse de la siguiente manera: (a)
+                      por correo registrado o certificado, con el franqueo de
                       Primera Clase pagado; (b) entregadas en mano o mediante un
                       servicio de entrega rápida; o (c) enviadas por correo
                       electrónico, dirigidas a las partes correspondientes como
@@ -1335,15 +1335,15 @@ export default function TermsAndConditions() {
                         proporcionan únicamente por conveniencia y no afectarán
                         el significado ni la interpretación de ninguna
                         disposición de este Acuerdo. Todas las referencias en
-                        este Acuerdo a "sección", o "secciones", sin
-                        identificación adicional se refieren a la sección o
+                        este Acuerdo a &#34;sección&#34;, o &#34;secciones&#34;,
+                        sin identificación adicional se refieren a la sección o
                         secciones de este Acuerdo. El singular incluirá el
                         plural y el plural incluirá el singular, y el masculino
                         y el neutro incluirán el masculino, el femenino y el
                         neutro, según lo requiera el contexto. Siempre que se
-                        utilicen las palabras "incluir" o "incluido" en este
-                        Acuerdo, se considerará que van seguidas de las palabras
-                        "sin limitación".
+                        utilicen las palabras &#34;incluir&#34; o
+                        &#34;incluido&#34; en este Acuerdo, se considerará que
+                        van seguidas de las palabras &#34;sin limitación&#34;.
                       </p>
                     </dd>
 
