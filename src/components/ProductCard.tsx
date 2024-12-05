@@ -2,14 +2,15 @@
 
 import Link from "next/link";
 import React from "react";
-import { addToCart, Product } from "@/redux/features/cartSlice";
+import { addToCart } from "@/redux/features/cartSlice";
 import { useDispatch } from "react-redux";
+import { Vehicle } from "@/types/vehicle";
 
 export default function ProductCard({
-  product,
-}: Readonly<{ product: Product }>) {
+  vehicle,
+}: Readonly<{ vehicle: Vehicle }>) {
   const dispatch = useDispatch();
-  const handleAddToCart = (item: Product) => {
+  const handleAddToCart = (item: Vehicle) => {
     dispatch(addToCart(item));
   };
   return (
@@ -21,60 +22,56 @@ export default function ProductCard({
           </button>
           <Link
             className="product-thumbnail d-block"
-            href={`/vehicles/${product.id}`}
+            href={`/vehicles/${vehicle.vin}`}
           >
             <img
               className="mb-2 rounded-2"
-              src={product.img as string}
-              alt=""
+              src={vehicle.images[0]}
+              alt={vehicle.titleCode}
             />
           </Link>
 
-          <Link className="product-title" href={`/vehicles/${product.id}`}>
-            {product.title}
+          <Link className="product-title" href={`/vehicles/${vehicle.vin}`}>
+            {vehicle.titleCode}
           </Link>
-
-          <p className="sale-price">
-            $ {product.new_price}
-            <span>$ {product.old_price}</span>
-          </p>
 
           <div className="mt-3">
             <ul className="p-0">
-              <li className="list-inline-product me-2">
+              <li className="list-inline-item me-2">
                 <span className="flaticon-road-perspective me-1" />
                 {
-                  product.mileage
+                  vehicle.odometer
                 } <span>mi</span>
               </li>
-              <li className="list-inline-product me-2">
+              <li className="list-inline-item me-2">
                 <span className="flaticon-gas-station me-2" />
-                {product.fuelType}
+                {vehicle.fuelType}
               </li>
-              <li className="list-inline-product">
+              <li className="list-inline-item">
                 <span className="flaticon-gear me-1" />
-                {product.transmission}
+                {vehicle.transmission}
               </li>
             </ul>
           </div>
 
           <div>
-            {product.flagPrice && (
+            {vehicle.buyNowPrice ? (
               <p className="mb-0 mt-4 d-flex align-items-end">
-                <strong className="fs-2 lh-base">${product.flagPrice}</strong>
+                <strong className="fs-2 lh-base">${vehicle.buyNowPrice}</strong>
                 <span className="small fw-semibold ms-2 pb-1 text-primary">
                   Venta directa
                 </span>
               </p>
-            )}
+            ) : null}
             <p className="m-0">
-              <strong>${product.currentBid}</strong> <span>Oferta actual</span>
+              <strong>${vehicle.currentOffer}</strong>{" "}
+              <span>Oferta actual</span>
             </p>
           </div>
 
           <button
             className="btn btn-primary btn-sm"
-            onClick={() => handleAddToCart(product)}
+            onClick={() => handleAddToCart(vehicle)}
             style={{ cursor: "pointer" }}
           >
             <i className="ti ti-plus"></i>

@@ -9,7 +9,7 @@ const Contact = () => {
 
   return (
     <>
-      <HeaderTwo links="home" title="Contact" />
+      <HeaderTwo links="" title="Contact" />
 
       <div className="page-content-wrapper">
         <div className="google-maps-wrap">

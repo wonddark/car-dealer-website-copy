@@ -14,7 +14,7 @@ const Category = ({ title }: { title: string }) => {
           <div className="container">
             <div className="row g-2 rtl-flex-d-row-r">
               {top_product.map((item) => (
-                <ProductCard product={item} key={item.id} />
+                <ProductCard vehicle={item} key={item.id} />
               ))}
             </div>
           </div>
