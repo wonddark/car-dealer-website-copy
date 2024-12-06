@@ -1,70 +1,64 @@
 "use client";
+
 import React from "react";
 import Footer from "@/layouts/Footer";
 import HeaderTwo from "@/layouts/HeaderTwo";
-import NiceSelect from "@/ui/NiceSelect";
 
 const Contact = () => {
-  const selectHandler = () => {};
-
   return (
     <>
       <HeaderTwo links="" title="Contact" />
 
       <div className="page-content-wrapper">
-        <div className="google-maps-wrap">
+        <div className="container google-maps-wrap">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d37902.096510377676!2d101.6393079588335!3d3.103387873464772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cc49c701efeae7%3A0xf4d98e5b2f1c287d!2sKuala%20Lumpur%2C%20Federal%20Territory%20of%20Kuala%20Lumpur%2C%20Malaysia!5e0!3m2!1sen!2sbd!4v1591684973931!5m2!1sen!2sbd"
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d895.7419482618508!2d-80.3661227304297!3d26.099969998571307!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDA1JzU5LjkiTiA4MMKwMjEnNTUuNyJX!5e0!3m2!1sen!2sae!4v1733497993940!5m2!1sen!2sae"
             allowFullScreen={true}
-            aria-hidden="false"
-            tabIndex={0}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Ubicación de las oficinas de la Subasta Cubana"
           ></iframe>
         </div>
         <div className="container">
           <div className="card">
             <div className="card-body">
-              <div className="rtl-text-right">
-                <h5 className="mb-1">Contact Us</h5>
-                <p className="mb-4">
-                  Write to us. We will reply to you as soon as possible. But
-                  yes, it can take up to 24 hours.
+              <div className="rtl-text-right mb-4">
+                <h5 className="mb-1">Contactanos</h5>
+                <p>
+                  En <strong>La Subasta Cubana</strong>, estamos comprometidos a
+                  ayudarte a encontrar el auto perfecto. Nuestro equipo de
+                  expertos está disponible para asistirte en cada paso del
+                  proceso de compra, asegurando una experiencia sin
+                  complicaciones. No dudes en ponerte en contacto con nosotros a
+                  través de los siguientes canales:
                 </p>
+
+                <div className="d-flex fs-1 justify-content-center gap-5">
+                  <a href="https://www.facebook.com/lasubastacubana">
+                    <i className="ti ti-brand-facebook-filled text-primary"></i>
+                  </a>
+                  <a href="https://www.instagram.com/lasubastacubana">
+                    <i className="ti ti-brand-instagram text-primary"></i>
+                  </a>
+                  <a href="https://www.youtube.com/@LaSubastaCubana">
+                    <i className="ti ti-brand-youtube text-primary"></i>
+                  </a>
+                </div>
               </div>
 
               <div className="contact-form mt-3">
-                <form onSubmit={(e) => e.preventDefault()}>
+                <form>
                   <input
                     className="form-control border mb-3"
                     id="username"
                     type="text"
-                    placeholder="Your Name"
+                    placeholder="Nombre completo"
                   />
                   <input
                     className="form-control border mb-3"
                     id="email"
                     type="email"
-                    placeholder="Enter email"
-                  />
-
-                  <NiceSelect
-                    className="contact_select mb-3 w-100 border d-flex align-items-center"
-                    options={[
-                      { value: "00", text: "Buying & Support" },
-                      { value: "01", text: "Authors Help" },
-                      { value: "02", text: "Buyer Help" },
-                      { value: "04", text: "License" },
-                    ]}
-                    defaultCurrent={0}
-                    onChange={selectHandler}
-                    placeholder="Select an option"
-                    name="myNiceSelect"
-                  />
-
-                  <input
-                    className="form-control border mb-3"
-                    id="username"
-                    type="text"
-                    placeholder="Include a relevant URL"
+                    placeholder="Correo electrónico"
                   />
                   <textarea
                     className="form-control border mb-3"
@@ -72,10 +66,13 @@ const Contact = () => {
                     name=""
                     cols={30}
                     rows={10}
-                    placeholder="Write something..."
+                    placeholder="Déjanos saber qué podemos ayudarte"
                   ></textarea>
-                  <button className="btn btn-primary btn-lg w-100">
-                    Send Now
+                  <button
+                    type="submit"
+                    className="btn btn-primary btn-lg w-100"
+                  >
+                    Enviar mensaje
                   </button>
                 </form>
               </div>

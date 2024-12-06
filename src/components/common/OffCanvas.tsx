@@ -33,7 +33,7 @@ const OffCanvas = ({
             <img src="/assets/img/bg-img/9.jpg" alt="" />
           </div>
           <div className="user-info">
-            <h5 className="user-name mb-1 text-white">Suha Sarah</h5>
+            <h5 className="user-name mb-1 text-white">Jane Doe</h5>
           </div>
         </div>
 
@@ -45,18 +45,12 @@ const OffCanvas = ({
           </li>
           <li>
             <Link href="/register">
-              <i className="ti ti-user"></i>Registrarse
+              <i className="ti ti-user"></i>Crear cuenta
             </Link>
           </li>
           <li>
             <Link href="/profile">
               <i className="ti ti-user"></i>Mi perfil
-            </Link>
-          </li>
-          <li>
-            <Link href="/notifications">
-              <i className="ti ti-bell-ringing lni-tada-effect"></i>
-              Notifications<span className="ms-1 badge badge-warning">3</span>
             </Link>
           </li>
           <li>
@@ -68,21 +62,21 @@ const OffCanvas = ({
               aria-controls="companyLinks"
             >
               <i className="ti ti-building" />
-              Our company
+              Nuestra empresa
             </a>
             <div className="collapse" id="companyLinks">
               <ul>
                 <li>
-                  <Link href="/about-us">About us</Link>
+                  <Link href="/about-us">Sobre nosotros</Link>
                 </li>
                 <li>
-                  <Link href="/contact">Contact us</Link>
+                  <Link href="/contact">Contactános</Link>
                 </li>
                 <li>
-                  <Link href="/privacy-policy">Privacy policy</Link>
+                  <Link href="/privacy-policy">Privacidad</Link>
                 </li>
                 <li>
-                  <Link href="/terms">Terms & conditions</Link>
+                  <Link href="/terms">Términos</Link>
                 </li>
               </ul>
             </div>
@@ -93,26 +87,8 @@ const OffCanvas = ({
             </Link>
           </li>
           <li>
-            <div className="form-check form-switch mb-0 ps-5">
-              <label
-                className="form-check-label text-white h6 mb-0"
-                htmlFor="darkSwitch"
-              >
-                {`${theme.slice(0, 1).toUpperCase()}${theme.slice(1)} mode`}
-              </label>
-
-              <input
-                className="form-check-input"
-                id="darkSwitch"
-                type="checkbox"
-                checked={theme === "dark"}
-                onChange={toggleTheme}
-              />
-            </div>
-          </li>
-          <li>
             <Link href="/settings">
-              <i className="ti ti-adjustments-horizontal"></i>Settings
+              <i className="ti ti-adjustments-horizontal"></i>Preferencias
             </Link>
           </li>
           <li>
