@@ -1301,7 +1301,7 @@ textarea:invalid {
   justify-content: center;
 }
 
-.suha-navbar-toggler div {
+.suha-navbar-toggler button {
   position: relative;
   z-index: 1;
 }
