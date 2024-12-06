@@ -6,7 +6,7 @@ import { addToCart } from "@/redux/features/cartSlice";
 import { useDispatch } from "react-redux";
 import { Vehicle } from "@/types/vehicle";
 
-export default function ProductCard({
+export default function VehicleCard({
   vehicle,
 }: Readonly<{ vehicle: Vehicle }>) {
   const dispatch = useDispatch();

@@ -2,7 +2,7 @@
 
 import top_product from "@/data/top_product";
 import React from "react";
-import ProductCard from "@/components/ProductCard";
+import VehicleCard from "@/components/VehicleCard";
 
 const TopProducts = () => {
   return (
@@ -10,7 +10,7 @@ const TopProducts = () => {
       <div className="container">
         <div className="row g-2">
           {top_product.map((item) => (
-            <ProductCard vehicle={item} key={item.vin} />
+            <VehicleCard vehicle={item} key={item.vin} />
           ))}
         </div>
       </div>

@@ -1447,15 +1447,6 @@ textarea:invalid {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: #042cd7;
-  background: -webkit-gradient(
-    linear,
-    right top,
-    left top,
-    from(#042cd7),
-    to(#0d5cd1)
-  );
-  background: linear-gradient(to left, #042cd7, #0d5cd1);
   z-index: 10;
   overflow: hidden auto;
   padding-top: 2rem;
@@ -1482,7 +1473,6 @@ textarea:invalid {
 }
 
 .register-form span {
-  color: #fff;
   font-size: 0.875rem;
   display: block;
 }
@@ -1495,43 +1485,36 @@ textarea:invalid {
   left: 0;
   font-size: 1rem;
   margin-bottom: 0;
-  color: #fff;
   top: 1.75rem;
 }
 
 .register-form .form-control {
   border-radius: 0;
   border: 0;
-  color: #fff;
   font-size: 0.813rem;
-  background-color: transparent;
   height: 2.5rem;
   padding: 0.5rem 0.5rem 0.5rem 1.5rem;
   border-bottom: 0.063rem solid rgb(255 255 255 / 15%);
+  background-color: #fff;
 }
 
 .register-form .form-control::input-placeholder {
-  color: #fff;
   opacity: 0.5;
 }
 
 .register-form .form-control::placeholder {
-  color: #fff;
   opacity: 0.5;
 }
 
 .register-form .form-control:input-placeholder {
-  color: #fff;
   opacity: 0.5;
 }
 
 .register-form .form-control::input-placeholder {
-  color: #fff;
   opacity: 0.5;
 }
 
 .register-form .form-control::placeholder {
-  color: #fff;
   opacity: 0.5;
 }
 
@@ -1546,7 +1529,6 @@ textarea:invalid {
 .register-form .password-score {
   font-size: 0.75rem;
   font-weight: 500;
-  color: #fff;
   display: -webkit-box;
   display: flex;
 }
@@ -1558,7 +1540,6 @@ textarea:invalid {
 
 .register-form .password-recommendation ul {
   padding-left: 0;
-  color: #fff;
 }
 
 .register-form .password-recommendation ul li {
@@ -1567,22 +1548,10 @@ textarea:invalid {
 
 .register-form #password-recommendation-heading {
   font-weight: 600;
-  color: #fff;
   font-size: 1rem;
 }
 
-.view-as-guest .btn {
-  transition-duration: 500ms;
-  color: #fff;
-  opacity: 0.75;
-}
-
-.view-as-guest .btn:hover {
-  opacity: 1;
-}
-
 .login-meta-data a {
-  color: #fff;
   font-size: 0.875rem;
 }
 
@@ -1591,11 +1560,9 @@ textarea:invalid {
 }
 
 .login-meta-data p {
-  color: rgb(255 255 255 / 70%);
 }
 
 .login-meta-data p a {
-  color: #fff;
 }
 
 .login-meta-data p a:hover {

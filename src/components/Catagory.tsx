@@ -2,7 +2,7 @@ import top_product from "@/data/top_product";
 import Footer from "@/layouts/Footer";
 import React from "react";
 import HeaderThree from "@/layouts/HeaderThree";
-import ProductCard from "@/components/ProductCard";
+import VehicleCard from "@/components/VehicleCard";
 
 const Category = ({ title }: { title: string }) => {
   return (
@@ -14,7 +14,7 @@ const Category = ({ title }: { title: string }) => {
           <div className="container">
             <div className="row g-2 rtl-flex-d-row-r">
               {top_product.map((item) => (
-                <ProductCard vehicle={item} key={item.id} />
+                <VehicleCard vehicle={item} key={item.vin} />
               ))}
             </div>
           </div>
