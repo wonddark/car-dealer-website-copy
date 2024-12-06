@@ -9,7 +9,7 @@ const Search = () => {
     <>
       <div className="container">
         <div className="search-form pt-3 rtl-flex-d-row-r">
-          <form onSubmit={(e) => e.preventDefault()}>
+          <form>
             <input
               className="form-control"
               type="search"

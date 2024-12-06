@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import React, { MouseEventHandler } from "react";
 import useTheme from "@/hooks/useTheme";
@@ -43,6 +44,11 @@ const OffCanvas = ({
             </Link>
           </li>
           <li>
+            <Link href="/register">
+              <i className="ti ti-user"></i>Registrarse
+            </Link>
+          </li>
+          <li>
             <Link href="/profile">
               <i className="ti ti-user"></i>Mi perfil
             </Link>
@@ -67,16 +73,16 @@ const OffCanvas = ({
             <div className="collapse" id="companyLinks">
               <ul>
                 <li>
-                  <a href="/about-us">About us</a>
+                  <Link href="/about-us">About us</Link>
                 </li>
                 <li>
-                  <a href="/contact">Contact us</a>
+                  <Link href="/contact">Contact us</Link>
                 </li>
                 <li>
-                  <a href="/privacy-policy">Privacy policy</a>
+                  <Link href="/privacy-policy">Privacy policy</Link>
                 </li>
                 <li>
-                  <a href="/terms">Terms & conditions</a>
+                  <Link href="/terms">Terms & conditions</Link>
                 </li>
               </ul>
             </div>
