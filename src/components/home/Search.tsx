@@ -13,7 +13,7 @@ const Search = () => {
             <input
               className="form-control"
               type="search"
-              placeholder="Search in Suha"
+              placeholder="Buscar vehículos"
             />
             <button type="submit">
               <i className="ti ti-search"></i>
