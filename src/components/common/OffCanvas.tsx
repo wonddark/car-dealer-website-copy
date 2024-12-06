@@ -33,16 +33,18 @@ const OffCanvas = ({
           </div>
           <div className="user-info">
             <h5 className="user-name mb-1 text-white">Suha Sarah</h5>
-            <p className="available-balance text-white">
-              Current Balance $<span className="counter">99</span>
-            </p>
           </div>
         </div>
 
         <ul className="sidenav-nav ps-0">
           <li>
+            <Link href="/login">
+              <i className="ti ti-user"></i>Acceder
+            </Link>
+          </li>
+          <li>
             <Link href="/profile">
-              <i className="ti ti-user"></i>My Profile
+              <i className="ti ti-user"></i>Mi perfil
             </Link>
           </li>
           <li>
@@ -80,44 +82,9 @@ const OffCanvas = ({
             </div>
           </li>
           <li className="suha-dropdown-menu">
-            <a href="/">
-              <i className="ti ti-building-store"></i>Shop Pages
-            </a>
-            <ul>
-              <li>
-                <Link href="/shop-grid">Shop Grid</Link>
-              </li>
-              <li>
-                <Link href="/shop-list">Shop List</Link>
-              </li>
-              <li>
-                <Link href="/single-product">Product Details</Link>
-              </li>
-              <li>
-                <Link href="/featured-products">Featured Products</Link>
-              </li>
-              <li>
-                <Link href="/flash-sale">Flash Sale</Link>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <Link href="/pages">
-              <i className="ti ti-notebook"></i>All Pages
+            <Link href="/wishlist">
+              <i className="ti ti-heart"></i>Mi lista de deseos
             </Link>
-          </li>
-          <li className="suha-dropdown-menu">
-            <Link href="/wishlist-grid">
-              <i className="ti ti-heart"></i>My Wishlist
-            </Link>
-            <ul>
-              <li>
-                <Link href="/wishlist-grid">Wishlist Grid</Link>
-              </li>
-              <li>
-                <Link href="/wishlist-list">Wishlist List</Link>
-              </li>
-            </ul>
           </li>
           <li>
             <div className="form-check form-switch mb-0 ps-5">
@@ -143,8 +110,8 @@ const OffCanvas = ({
             </Link>
           </li>
           <li>
-            <Link href="/intro">
-              <i className="ti ti-logout"></i>Sign Out
+            <Link href="/">
+              <i className="ti ti-logout"></i>Cerrar sesión
             </Link>
           </li>
         </ul>

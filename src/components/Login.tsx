@@ -66,12 +66,6 @@ const Login = () => {
                   </Link>
                 </p>
               </div>
-
-              <div className="view-as-guest mt-3">
-                <Link className="btn btn-primary btn-sm" href="/home">
-                  View as guest<i className="ps-2 ti ti-arrow-right"></i>
-                </Link>
-              </div>
             </div>
           </div>
         </div>
