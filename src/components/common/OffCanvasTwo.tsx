@@ -374,7 +374,6 @@ const OffCanvasTwo = ({
                             id="floatingInput"
                             type="text"
                             placeholder="1"
-                            value="1"
                           />
                           <label htmlFor="floatingInput">Min</label>
                         </div>
@@ -386,7 +385,6 @@ const OffCanvasTwo = ({
                             id="floatingInput"
                             type="text"
                             placeholder="1"
-                            value="5000"
                           />
                           <label htmlFor="floatingInput">Max</label>
                         </div>
