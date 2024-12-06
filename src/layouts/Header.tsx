@@ -21,10 +21,6 @@ const Header = () => {
             </Link>
           </div>
           <div className="navbar-logo-container d-flex align-items-center">
-            <Link href="/login" className="btn btn-primary">
-              Acceder
-            </Link>
-
             <div
               className="suha-navbar-toggler ms-2"
               data-bs-toggle="offcanvas"
