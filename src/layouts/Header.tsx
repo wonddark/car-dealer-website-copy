@@ -21,18 +21,9 @@ const Header = () => {
             </Link>
           </div>
           <div className="navbar-logo-container d-flex align-items-center">
-            <div className="cart-icon-wrap">
-              <Link href="/cart">
-                <i className="ti ti-basket-bolt"></i>
-                <span>13</span>
-              </Link>
-            </div>
-
-            <div className="user-profile-icon ms-2">
-              <Link href="/profile">
-                <img src="/assets/img/bg-img/9.jpg" alt="" />
-              </Link>
-            </div>
+            <Link href="/login" className="btn btn-primary">
+              Acceder
+            </Link>
 
             <div
               className="suha-navbar-toggler ms-2"
@@ -40,11 +31,11 @@ const Header = () => {
               data-bs-target="#suhaOffcanvas"
               aria-controls="suhaOffcanvas"
             >
-              <div onClick={() => handleShow()}>
+              <button className="btn" onClick={() => handleShow()}>
                 <span></span>
                 <span></span>
                 <span></span>
-              </div>
+              </button>
             </div>
           </div>
         </div>
