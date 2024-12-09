@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import React, { MouseEventHandler } from "react";
-import useTheme from "@/hooks/useTheme";
 
 const OffCanvas = ({
   handleShow,
@@ -11,7 +10,6 @@ const OffCanvas = ({
   handleShow: MouseEventHandler<HTMLButtonElement>;
   show: boolean;
 }>) => {
-  const { theme, toggleTheme } = useTheme();
   return (
     <div
       className={`offcanvas offcanvas-start suha-offcanvas-wrap ${
@@ -86,11 +84,11 @@ const OffCanvas = ({
               <i className="ti ti-heart"></i>Mi lista de deseos
             </Link>
           </li>
-          <li>
+          {/*<li>
             <Link href="/settings">
               <i className="ti ti-adjustments-horizontal"></i>Preferencias
             </Link>
-          </li>
+          </li>*/}
           <li>
             <Link href="/">
               <i className="ti ti-logout"></i>Cerrar sesión

@@ -21,6 +21,37 @@ const Header = () => {
             </Link>
           </div>
           <div className="navbar-logo-container d-flex align-items-center">
+            <div className="dropdown">
+              <button
+                className="btn rounded-circle"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <img
+                  src="/assets/img/bg-img/9.jpg"
+                  alt=""
+                  className="user-profile-icon rounded-circle"
+                />
+              </button>
+              <ul className="dropdown-menu">
+                <li>
+                  <Link href="/profile" className="dropdown-item">
+                    Perfil
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="/login">
+                    Acceder
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" href="/register">
+                    Registro
+                  </Link>
+                </li>
+              </ul>
+            </div>
             <div
               className="suha-navbar-toggler ms-2"
               data-bs-toggle="offcanvas"
