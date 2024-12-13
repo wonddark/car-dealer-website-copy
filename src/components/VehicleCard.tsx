@@ -26,7 +26,8 @@ export default function VehicleCard({
           >
             <img
               className="mb-2 rounded-2"
-              src={vehicle.images[0]}
+              // src={vehicle.images[0]}
+              src="/assets/img/cars/car1.jpg"
               alt={vehicle.titleCode}
             />
           </Link>
