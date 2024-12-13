@@ -2,10 +2,9 @@ import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
   try {
-    const searchParams = request.nextUrl.searchParams;
-    const makes = searchParams.get("makes");
+    const sp = request.nextUrl.searchParams;
     const response = await fetch(
-      `${process.env.API_ENDPOINT}/auction-inventories/search?makes=${makes}`,
+      `${process.env.API_ENDPOINT}/auction-inventories/search?${sp.toString()}`,
     );
     if (response.status === 200) {
       const data = await response.json();
