@@ -1,8 +1,6 @@
-export default function Categories() {
-  return (
-    <>
-      This will be our categories page. Here we will list all the categories
-      with their respective page link.
-    </>
-  );
+import React from "react";
+import CategoriesList from "@/components/CategoriesList";
+
+export default function CategoriesPage() {
+  return <CategoriesList />;
 }
