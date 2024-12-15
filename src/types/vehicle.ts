@@ -36,6 +36,28 @@ export type Vehicle = {
   laneAndItem: string;
   lastUpdate: string;
   images: string[];
+  imageUrl: string;
+  year: string;
+  make: string;
+  model: string;
+  runAndDrive: boolean;
 };
 
-export type SearchResults = Vehicle[];
+export type VehicleResponse = {
+  totalPages: number;
+  totalCount: number;
+  prev?: string;
+  next?: string;
+  pageNumber: number;
+  pageSize: number;
+  data: Vehicle[];
+};
+
+export const DEFAULT_VEHICLE_PAGE_SIZE = 12;
+
+export type VehicleCategory = {
+  title: string;
+  img: string;
+  url: string;
+  apiFilter: string;
+};
