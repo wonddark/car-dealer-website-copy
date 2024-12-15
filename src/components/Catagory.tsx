@@ -1,24 +1,24 @@
-import top_product from "@/data/top_product";
+"use client";
+
 import Footer from "@/layouts/Footer";
 import React from "react";
 import HeaderThree from "@/layouts/HeaderThree";
-import VehicleCard from "@/components/VehicleCard";
+import useCategoryProducts from "@/components/Category/use-category-products";
+import InfiniteVehiclesList from "@/components/InfiniteVehiclesList";
 
-const Category = ({ title }: { title: string }) => {
+const Category = () => {
+  const { category, getNextPage, requestStatus, response } =
+    useCategoryProducts();
   return (
     <>
-      <HeaderThree links="" title={title} />
+      <HeaderThree links="" title={category.title} />
 
-      <div className="page-content-wrapper">
-        <div className="top-products-area pb-3">
-          <div className="container">
-            <div className="row g-2 rtl-flex-d-row-r">
-              {top_product.map((item) => (
-                <VehicleCard vehicle={item} key={item.vin} />
-              ))}
-            </div>
-          </div>
-        </div>
+      <div className="page-content-wrapper mt-3">
+        <InfiniteVehiclesList
+          response={response}
+          requestStatus={requestStatus}
+          getNextPage={getNextPage}
+        />
       </div>
 
       <div className="internet-connection-status" id="internetStatus"></div>
