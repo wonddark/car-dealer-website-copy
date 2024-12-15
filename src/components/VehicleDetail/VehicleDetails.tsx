@@ -1,18 +1,22 @@
 import HeaderTwo from "@/layouts/HeaderTwo";
-import { Vehicle } from "@/types/vehicle";
 import OfferInput from "@/components/OfferInput";
+import { Vehicle } from "@/types/vehicle";
 
 export default function VehicleDetails({
   vehicle,
 }: Readonly<{ vehicle: Vehicle }>) {
   return (
     <>
-      <HeaderTwo links="" title={vehicle.titleCode} />
-
-      <div className="page-content-wrapper py-3">
+      <HeaderTwo
+        links=""
+        title={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
+      />
+      <div className="page-content-wrapper py-3 mt-0">
         <div className="container">
           <div className="card">
-            <div className="card-body"></div>
+            <div className="card-body">
+              <img src={vehicle.imageUrl} alt={vehicle.vin} />
+            </div>
           </div>
           <div className="card">
             <div className="card-body">
