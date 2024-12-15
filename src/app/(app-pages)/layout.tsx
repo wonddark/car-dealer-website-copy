@@ -1,7 +1,6 @@
 "use client";
 
 import "../../styles/style.css";
-import "../../styles/style.scss";
 import store from "@/redux/store";
 import { Provider } from "react-redux";
 import Header from "@/layouts/Header";
@@ -9,7 +8,7 @@ import Search from "@/components/home/Search";
 import React from "react";
 import Footer from "@/layouts/Footer";
 
-export default function RootLayout({
+export default function AppPagesLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
