@@ -23,15 +23,15 @@ const OffCanvasTwo = ({
     useState<{ value: string; label: string }[]>(MODELS);
   const createQueryString = useCallback(
     (...params: { name: string; value: string; add: boolean }[]) => {
-      const params = new URLSearchParams(searchParams.toString());
+      const sp = new URLSearchParams(searchParams.toString());
       for (const param of params) {
         if (param.add) {
-          params.append(param.name, param.value);
+          sp.append(param.name, param.value);
         } else {
-          params.delete(param.name, param.value);
+          sp.delete(param.name, param.value);
         }
       }
-      return params.toString();
+      return sp.toString();
     },
     [searchParams],
   );
