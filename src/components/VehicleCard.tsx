@@ -1,84 +1,217 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
-import { addToCart } from "@/redux/features/cartSlice";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import { Vehicle } from "@/types/vehicle";
 
 export default function VehicleCard({
   vehicle,
 }: Readonly<{ vehicle: Vehicle }>) {
-  const dispatch = useDispatch();
-  const handleAddToCart = (item: Vehicle) => {
-    dispatch(addToCart(item));
+  const [expanded, setExpanded] = useState(false);
+  const toggleExpanded = () => {
+    setExpanded((prevState) => !prevState);
   };
   return (
-    <div className="col-12 col-md-6">
-      <div className="card product-card">
-        <div className="card-body">
+    <div className="col-12 col-md-6 col-xl-4">
+      <div className="card product-card h-100">
+        <div className="card-body p-2 p-md-3 h-100">
           <button className="wishlist-btn">
             <i className="ti ti-heart"></i>
           </button>
-          <Link
-            className="product-thumbnail d-block"
-            href={`/vehicles/${vehicle.vin}`}
-          >
-            <img
-              className="mb-2 rounded-2"
-              // src={vehicle.images[0]}
-              src="/assets/img/cars/car1.jpg"
-              alt={vehicle.titleCode}
-            />
-          </Link>
+          <div className="d-flex flex-column h-100">
+            <Link
+              className="product-thumbnail d-block"
+              href={`/vehicles/${vehicle.vin}`}
+            >
+              <img
+                className="mb-2 rounded-2"
+                src={vehicle.imageUrl}
+                alt={vehicle.titleCode}
+              />
+            </Link>
 
-          <Link className="product-title" href={`/vehicles/${vehicle.vin}`}>
-            {vehicle.titleCode}
-          </Link>
+            <Link className="product-title" href={`/vehicles/${vehicle.vin}`}>
+              {`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
+            </Link>
 
-          <div className="mt-3">
-            <ul className="p-0">
-              <li className="list-inline-item me-2">
-                <span className="flaticon-road-perspective me-1" />
-                {
-                  vehicle.odometer
-                } <span>mi</span>
-              </li>
-              <li className="list-inline-item me-2">
-                <span className="flaticon-gas-station me-2" />
-                {vehicle.fuelType}
-              </li>
-              <li className="list-inline-item">
-                <span className="flaticon-gear me-1" />
-                {vehicle.transmission}
-              </li>
-            </ul>
+            {!expanded && (
+              <div className="d-flex flex-column align-items-start flex-fill">
+                <ul className="p-0">
+                  <li className="list-inline-item me-2">
+                    <span className="flaticon-road-perspective me-1" />
+                    <span className="me-1">
+                      {Number(vehicle.odometer).toLocaleString("en-US")}
+                    </span>
+                    <span>mi</span>
+                  </li>
+                  <li className="list-inline-item me-2">
+                    <span className="flaticon-gas-station me-1" />
+                    {vehicle.fuelType ?? "N/A"}
+                  </li>
+                  <li className="list-inline-item">
+                    <span className="flaticon-gear me-1" />
+                    {renderTransmissionType(vehicle.transmission)}
+                  </li>
+                </ul>
+                {vehicle.runAndDrive ? (
+                  <div className="d-inline-flex mt-2 align-items-center gap-1">
+                    <i className="ti ti-circle-check-filled text-success"></i>
+                    <small className="text-opacity-75">
+                      Listo para conducir
+                    </small>
+                  </div>
+                ) : (
+                  <div className="d-inline-flex mt-2 align-items-center gap-1">
+                    <i className="ti ti-alert-circle-filled fs-5 text-danger"></i>
+                    <small>Reparar para conducir</small>
+                  </div>
+                )}
+
+                <div className="mt-2">
+                  {vehicle.buyNowPrice ? (
+                    <p className="mb-0 mt-4 d-flex align-items-end">
+                      <strong className="fs-2 lh-base">
+                        ${vehicle.buyNowPrice}
+                      </strong>
+                      <span className="small fw-semibold ms-2 pb-1 text-primary">
+                        Venta directa
+                      </span>
+                    </p>
+                  ) : null}
+                  <p className="m-0">
+                    {vehicle.currentOffer > 0 ? (
+                      <>
+                        <strong className="me-1">
+                          ${vehicle.currentOffer.toLocaleString("en-US")}
+                        </strong>
+                        <small>Oferta actual</small>
+                      </>
+                    ) : (
+                      <small>No hay oferta actualmente</small>
+                    )}
+                  </p>
+                </div>
+
+                <button
+                  className="btn btn-link px-0 text-decoration-none"
+                  onClick={toggleExpanded}
+                >
+                  <span>Expandir </span>
+                  <i className="ti ti-caret-down"></i>
+                </button>
+              </div>
+            )}
+
+            {expanded && (
+              <div className="d-flex flex-column align-items-start flex-fill">
+                <div
+                  className="d-grid row-gap-1 w-100"
+                  style={{
+                    fontSize: "0.8rem",
+                  }}
+                >
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">
+                      Certificado de salvamento
+                    </strong>
+                    <span>{vehicle.titleCode ?? "No disponible"}</span>
+                  </div>
+                  <hr className="border-1 border-secondary m-0" />
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">Número de lote</strong>
+                    <span className="text-end">
+                      {vehicle.lotNumber ?? "No disponible"}
+                    </span>
+                  </div>
+                  <hr className="border-1 border-secondary m-0" />
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">Odómetro</strong>
+                    <span className="text-end">
+                      {vehicle.odometer ?? "No disponible"}
+                    </span>
+                  </div>
+                  <hr className="border-1 border-secondary m-0" />
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">VIN</strong>
+                    <span className="text-end">
+                      {vehicle.vin ?? "No disponible"}
+                    </span>
+                  </div>
+                  <hr className="border-1 border-secondary m-0" />
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">Motor</strong>
+                    <span className="text-end">
+                      {vehicle.engine ?? "No disponible"}
+                    </span>
+                  </div>
+                  <hr className="border-1 border-secondary m-0" />
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">Ubicación</strong>
+                    <span className="text-end">
+                      {vehicle.auctionLocation ?? "No disponible"}
+                    </span>
+                  </div>
+                  <hr className="border-1 border-secondary m-0" />
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">Fecha de venta</strong>
+                    <span className="text-end">
+                      {vehicle.saleDate ?? "No disponible"}
+                    </span>
+                  </div>
+                  <hr className="border-1 border-secondary m-0" />
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">Precio de Subasta</strong>
+                    <span className="text-end">
+                      {vehicle.maximumBid ?? "No disponible"}
+                    </span>
+                  </div>
+                  <hr className="border-1 border-secondary m-0" />
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">Compra inmediata</strong>
+                    <span className="text-end">
+                      ${vehicle.buyNowPrice ?? "No disponible"}
+                    </span>
+                  </div>
+                  <hr className="border-1 border-secondary m-0" />
+                  <div className="d-flex justify-content-between">
+                    <strong className="opacity-75">Oferta actual</strong>
+                    <span className="text-end">
+                      ${vehicle.currentOffer ?? "No disponible"}
+                    </span>
+                  </div>
+                </div>
+                <button
+                  className="btn btn-link px-0 text-decoration-none"
+                  onClick={toggleExpanded}
+                >
+                  <span>Contraer </span>
+                  <i className="ti ti-caret-up"></i>
+                </button>
+              </div>
+            )}
+
+            <div>
+              <Link
+                href={`/vehicles/${vehicle.vin}`}
+                className="btn btn-primary w-100 mt-2"
+              >
+                <span>Me interesa</span>
+              </Link>
+            </div>
           </div>
-
-          <div>
-            {vehicle.buyNowPrice ? (
-              <p className="mb-0 mt-4 d-flex align-items-end">
-                <strong className="fs-2 lh-base">${vehicle.buyNowPrice}</strong>
-                <span className="small fw-semibold ms-2 pb-1 text-primary">
-                  Venta directa
-                </span>
-              </p>
-            ) : null}
-            <p className="m-0">
-              <strong>${vehicle.currentOffer}</strong>{" "}
-              <span>Oferta actual</span>
-            </p>
-          </div>
-
-          <button
-            className="btn btn-primary btn-sm"
-            onClick={() => handleAddToCart(vehicle)}
-            style={{ cursor: "pointer" }}
-          >
-            <i className="ti ti-plus"></i>
-          </button>
         </div>
       </div>
     </div>
   );
+}
+
+function renderTransmissionType(transmission: string | null) {
+  switch (transmission?.toUpperCase()) {
+    case "AUTOMATIC":
+      return "Automático";
+    case "MANUAL":
+      return "Manual";
+    default:
+      return "N/A";
+  }
 }
