@@ -1,20 +1,17 @@
 "use client";
 
-import top_product from "@/data/top_product";
 import React from "react";
-import VehicleCard from "@/components/VehicleCard";
+import useTopProducts from "@/components/home/use-top-products";
+import InfiniteVehiclesList from "@/components/InfiniteVehiclesList";
 
 const TopProducts = () => {
+  const { response, requestStatus, getNextPage } = useTopProducts();
   return (
-    <div className="top-products-area py-3">
-      <div className="container">
-        <div className="row g-2">
-          {top_product.map((item) => (
-            <VehicleCard vehicle={item} key={item.vin} />
-          ))}
-        </div>
-      </div>
-    </div>
+    <InfiniteVehiclesList
+      response={response}
+      requestStatus={requestStatus}
+      getNextPage={getNextPage}
+    />
   );
 };
 
