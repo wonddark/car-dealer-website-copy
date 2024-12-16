@@ -4,7 +4,7 @@ import React, { MouseEventHandler, useCallback, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 import { resetData } from "@/redux/features/vehicles.slice";
-import { BRANDS, MODELS } from "@/data/hardcoded";
+import { BRANDS, MODELS, TITLE_TYPES } from "@/data/hardcoded";
 
 const OffCanvasTwo = ({
   handleShow,
@@ -244,6 +244,52 @@ const OffCanvasTwo = ({
                       </div>
                     ))}
                   </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-12">
+              <div className="widget catagory mb-4">
+                <h6 className="widget-title mb-2">Tipo de título</h6>
+                <div className="widget-desc mt-2 w-100 position-sitcky top-0">
+                  {TITLE_TYPES.map((item) => (
+                    <div key={item.value} className="form-check">
+                      <input
+                        className="form-check-input"
+                        id={item.value}
+                        type="checkbox"
+                        name="model"
+                        value={item.value}
+                        onChange={({ target: { value, checked } }) => {
+                          if (checked) {
+                            dispatch(resetData());
+                            r.push(
+                              pathname +
+                                "?" +
+                                createQueryString({
+                                  name: "TitleTypes",
+                                  value,
+                                  add: true,
+                                }),
+                            );
+                          } else {
+                            dispatch(resetData());
+                            r.push(
+                              pathname +
+                                "?" +
+                                createQueryString({
+                                  name: "TitleTypes",
+                                  value,
+                                  add: false,
+                                }),
+                            );
+                          }
+                        }}
+                      />
+                      <label className="form-check-label" htmlFor={item.value}>
+                        {item.label}
+                      </label>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

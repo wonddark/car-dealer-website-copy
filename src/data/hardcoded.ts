@@ -25259,3 +25259,8 @@ export const MODELS = [
     label: "Ezgo",
   },
 ];
+
+export const TITLE_TYPES = [
+  { value: "clean", label: "Título Limpio" },
+  { value: "savage", label: "Título de Salvamento" },
+];
