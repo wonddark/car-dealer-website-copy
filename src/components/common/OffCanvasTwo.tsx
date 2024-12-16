@@ -98,12 +98,78 @@ const OffCanvasTwo = ({
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckDefault"
+                    onChange={({ target: { checked } }) => {
+                      if (checked) {
+                        dispatch(resetData());
+                        r.push(
+                          pathname +
+                            "?" +
+                            createQueryString({
+                              name: "InBuyNow",
+                              value: "true",
+                              add: true,
+                            }),
+                        );
+                      } else {
+                        dispatch(resetData());
+                        r.push(
+                          pathname +
+                            "?" +
+                            createQueryString({
+                              name: "InBuyNow",
+                              value: "true",
+                              add: false,
+                            }),
+                        );
+                      }
+                    }}
                   />
                   <label
                     className="form-check-label"
                     htmlFor="flexSwitchCheckDefault"
                   >
                     Para comprar ahora
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div className="col-12">
+              <div className="widget catagory mb-4">
+                <div className="form-check form-switch">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="best-offer"
+                    defaultChecked
+                    onChange={({ target: { checked } }) => {
+                      if (checked) {
+                        dispatch(resetData());
+                        r.push(
+                          pathname +
+                            "?" +
+                            createQueryString({
+                              name: "isBestOffert",
+                              value: "true",
+                              add: true,
+                            }),
+                        );
+                      } else {
+                        dispatch(resetData());
+                        r.push(
+                          pathname +
+                            "?" +
+                            createQueryString({
+                              name: "isBestOffert",
+                              value: "true",
+                              add: false,
+                            }),
+                        );
+                      }
+                    }}
+                  />
+                  <label className="form-check-label" htmlFor="best-offer">
+                    Solo mejores ofertas
                   </label>
                 </div>
               </div>
