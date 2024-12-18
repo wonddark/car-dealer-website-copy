@@ -1,18 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { appendData, getResponse } from "@/redux/features/vehicles.slice";
+import {
+  appendData,
+  getErrorStatus,
+  getIsBestOffer,
+  getLoadingStatus,
+  getResponse,
+  toggleError,
+  toggleLoading,
+} from "@/redux/features/vehicles.slice";
 
 export default function useTopProducts() {
   const response = useAppSelector(getResponse);
+  const isBestOffer = useAppSelector(getIsBestOffer);
+  const loading = useAppSelector(getLoadingStatus);
+  const error = useAppSelector(getErrorStatus);
   const dispatch = useAppDispatch();
-  const [requestStatus, setRequestStatus] = useState<{
-    loading: boolean;
-    error: boolean;
-  }>({ loading: true, error: false });
   const sp = useSearchParams();
   const getNextPage = () => {
-    setRequestStatus({ loading: true, error: false });
+    dispatch(toggleLoading());
     const controller = new AbortController();
     fetch(
       process.env.NEXT_PUBLIC_DOMAIN +
@@ -21,24 +28,26 @@ export default function useTopProducts() {
         "&PageSize=" +
         response.pageSize +
         "&" +
-        sp.toString(),
+        sp.toString() +
+        (isBestOffer ? "&IsBestOffer=true" : ""),
       { signal: controller.signal },
     )
       .then((res) => res.json())
       .then((res) => {
         dispatch(appendData(res));
-        setRequestStatus({ loading: false, error: false });
       })
       .catch((reason) => {
-        if (!(reason instanceof DOMException) || reason.name !== "AbortError") {
-          setRequestStatus({ loading: false, error: true });
+        if (reason instanceof DOMException && reason.name === "AbortError") {
+          null;
+        } else {
+          dispatch(toggleError());
         }
       });
     return () => {
       controller.abort();
     };
   };
-  useEffect(getNextPage, [sp]);
+  useEffect(getNextPage, [sp, isBestOffer]);
 
-  return { response, requestStatus, getNextPage };
+  return { response, loading, error, getNextPage };
 }

@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { initialState } from "@/redux/features/vehicles.slice";
 
 export const dynamic = "force-dynamic";
 
@@ -13,11 +14,11 @@ export async function GET(request: NextRequest) {
       return Response.json({ ...data }, { status: 200 });
     }
     if (response.status === 204) {
-      return new Response(null, { status: 204 });
+      return Response.json({ ...initialState.response });
     }
     const text = await response.text();
     return Response.json(
-      { data: [], message: text },
+      { ...initialState.response, message: text },
       { status: response.status, statusText: response.statusText },
     );
   } catch (e) {

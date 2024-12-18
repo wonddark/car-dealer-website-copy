@@ -1236,16 +1236,6 @@ textarea:invalid {
   width: 1rem;
 }
 
-.filter-option {
-  cursor: pointer;
-  text-align: right;
-  font-size: 1.375rem;
-}
-
-.filter-option button {
-  all:unset;
-}
-
 .back-button a {
   display: block;
   color: #747794;

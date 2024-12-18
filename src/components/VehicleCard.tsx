@@ -11,6 +11,7 @@ export default function VehicleCard({
   const toggleExpanded = () => {
     setExpanded((prevState) => !prevState);
   };
+  const [fullyLoaded, setFullyLoaded] = useState(false);
   return (
     <div className="col-12 col-md-6 col-xl-4">
       <div className="card product-card h-100">
@@ -20,15 +21,21 @@ export default function VehicleCard({
           </button>
           <div className="d-flex flex-column h-100">
             <Link
-              className="product-thumbnail d-block"
+              className={`product-thumbnail ${fullyLoaded ? "d-block" : "d-none"}`}
               href={`/vehicles/${vehicle.vin}`}
             >
               <img
                 className="mb-2 rounded-2"
                 src={vehicle.imageUrl}
                 alt={vehicle.titleCode}
+                onLoad={() => setFullyLoaded(true)}
               />
             </Link>
+            {!fullyLoaded ? (
+              <div className="ratio ratio-4x3 w-100 placeholder-glow mb-2">
+                <div className="h-100 w-100 placeholder rounded-2"></div>
+              </div>
+            ) : null}
 
             <Link className="product-title" href={`/vehicles/${vehicle.vin}`}>
               {`${vehicle.year} ${vehicle.make} ${vehicle.model}`}

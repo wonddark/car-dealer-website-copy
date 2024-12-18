@@ -61,3 +61,17 @@ export type VehicleCategory = {
   url: string;
   apiFilter: string;
 };
+
+export type VehicleType = {
+  key: string;
+  type: string;
+  weight: string;
+};
+
+export type VehicleTitle = {
+  key: string;
+  type: string;
+  meaning: string;
+  cleanOrSalvage: string;
+  process: string;
+};

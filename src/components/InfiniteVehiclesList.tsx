@@ -2,6 +2,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import VehicleCard from "@/components/VehicleCard";
 import React from "react";
 import { VehicleResponse } from "@/types/vehicle";
+import NoData from "@/components/NoData";
 
 type Props = {
   response: VehicleResponse;
@@ -13,30 +14,26 @@ export default function InfiniteVehiclesList(props: Readonly<Props>) {
   const { response, requestStatus, getNextPage } = props;
   return (
     <div className="container-xl">
-      {!requestStatus.error ? (
-        <InfiniteScroll
-          dataLength={response.data.length}
-          next={getNextPage}
-          hasMore={Boolean(response.next)}
-          loader={null}
-          endMessage={
-            <EndMessage
-              length={response.data.length}
-              loading={requestStatus.loading}
-            />
-          }
-          refreshFunction={getNextPage}
-          pullDownToRefresh={false}
-          className="row g-2"
-        >
-          {response.data.map((item) => (
-            <VehicleCard vehicle={item} key={item.vin} />
-          ))}
-          <VehiclesLoading loading={true} />
-        </InfiniteScroll>
-      ) : (
-        <p>No hemos podido recuperar la lista de vehículos</p>
-      )}
+      <InfiniteScroll
+        dataLength={response.data.length}
+        next={getNextPage}
+        hasMore={Boolean(response.next)}
+        loader={null}
+        endMessage={
+          <EndMessage
+            length={response.data.length}
+            loading={requestStatus.loading}
+          />
+        }
+        refreshFunction={getNextPage}
+        pullDownToRefresh={false}
+        className="row g-2"
+      >
+        {response.data.map((item) => (
+          <VehicleCard vehicle={item} key={item.vin} />
+        ))}
+        <VehiclesLoading loading={requestStatus.loading} />
+      </InfiniteScroll>
     </div>
   );
 }
@@ -74,9 +71,28 @@ const VehiclesLoading = ({ loading }: { loading: boolean }) => (
 const EndMessage = ({
   length,
   loading,
-}: {
+}: Readonly<{
   length: number;
   loading: boolean;
-}) => (
-  <>{!loading && length === 0 && <p>No hay más vehículos para mostrar</p>}</>
+}>) => (
+  <>
+    {!loading && length === 0 && <EmptyResult />}
+    {!loading && length > 0 && <p>No hay más vehículos para mostrar.</p>}
+  </>
 );
+
+const EmptyResult = () => {
+  return (
+    <div className="d-flex flex-column align-items-center mx-auto">
+      <div style={{ maxWidth: 200 }} className="mb-4">
+        <NoData />
+      </div>
+      <p className="text-center display-6 fw-medium">
+        No tenemos vehículos para mostrar
+      </p>
+      <p className="text-center fs-5">
+        Te sugerimos que modifiques el criterio de búsqueda.
+      </p>
+    </div>
+  );
+};
