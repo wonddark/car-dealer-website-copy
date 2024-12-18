@@ -2,8 +2,14 @@
 
 import React, { useState } from "react";
 import OffCanvasTwo from "@/components/common/OffCanvasTwo";
+import { useSearchParams } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
+import { getIsBestOffer } from "@/redux/features/vehicles.slice";
 
 const Search = () => {
+  const sp = useSearchParams();
+  const isBestOffer = useAppSelector(getIsBestOffer);
+  const activeFilters = Array.from(sp.entries()).length + (isBestOffer ? 1 : 0);
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
   return (
@@ -11,17 +17,20 @@ const Search = () => {
       <div className="container-xl">
         <div className="search-form pt-3 rtl-flex-d-row-r">
           <div className="alternative-search-options">
-            <div
-              className="filter-option ms-2"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#suhaFilterOffcanvas"
-              aria-controls="suhaFilterOffcanvas"
-            >
+            <div className="ms-2">
               <button
                 onClick={() => handleShow()}
-                className="text-primary p-1 rounded-2"
+                className="btn btn-sm text-primary"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#suhaFilterOffcanvas"
+                aria-controls="suhaFilterOffcanvas"
               >
-                <i className="ti ti-adjustments-horizontal"></i>
+                Filtros
+                {activeFilters ? (
+                  <strong className="badge text-bg-primary rounded-pill ms-2">
+                    {activeFilters}
+                  </strong>
+                ) : null}
               </button>
             </div>
           </div>
