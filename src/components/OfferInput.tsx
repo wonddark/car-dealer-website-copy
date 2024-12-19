@@ -39,7 +39,7 @@ export default function OfferInput({
         </button>
       </div>
       <div className="d-grid gap-1 mt-2">
-        <button type="button" className="btn btn-primary">
+        <button type="button" className="btn btn-primary btn-lg">
           Publicar mi oferta
         </button>
         <p className="text-center small text-muted">
