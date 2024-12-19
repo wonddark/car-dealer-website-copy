@@ -1,12 +1,18 @@
 import HeaderTwo from "@/layouts/HeaderTwo";
 import OfferInput from "@/components/OfferInput";
 import { Vehicle } from "@/types/vehicle";
+import * as motion from "motion/react-client";
 
 export default function VehicleDetails({
   vehicle,
 }: Readonly<{ vehicle: Vehicle }>) {
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, x: "200vw", shadow: "-1px 0 0 7px #333" }}
+      animate={{ opacity: 1, x: 0, shadow: "0px 0 0 0 #333" }}
+      exit={{ opacity: 0, x: "200vw", shadow: "-1px 0 0 7px #333" }}
+      transition={{ type: "keyframes" }}
+    >
       <HeaderTwo
         links=""
         title={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
@@ -140,6 +146,6 @@ export default function VehicleDetails({
           </div>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 }
