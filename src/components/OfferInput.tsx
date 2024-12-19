@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Vehicle } from "@/types/vehicle";
+import Link from "next/link";
 
 const OFFER_STEP = 50;
 
@@ -44,13 +45,85 @@ export default function OfferInput({
         </button>
         <p className="text-center small text-muted">
           Todas las ofertas son legalmente vinculantes y se venden &#34;donde
-          esta y como esta&#34;.
+          está y como está&#34;.
           <button
             className="btn btn-link d-inline btn-sm"
             onClick={() => console.log(myOffer)}
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
           >
             Obtener más información
           </button>
+          <div
+            className="modal fade"
+            id="exampleModal"
+            tabIndex={-1}
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog modal-dialog-centered modal-xl">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="exampleModalLabel">
+                    Condiciones de Oferta y Compra en La Subasta Cubana
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body text-start">
+                  <p>
+                    Cuando realiza una oferta a través de La subasta cubana,
+                    ofrece pagar la subasta por el vehículo especificado al
+                    precio que especifique. Su precio de compra final incluirá
+                    las tarifas de subasta, las tarifas de La subasta cubana y
+                    otras tarifas que se detallan en los Términos y condiciones.
+                    El vendedor puede aceptar la oferta más alta realizada
+                    durante la subasta o contraofertas posteriores y, por lo
+                    tanto, si usted es el postor más alto y se acepta su oferta
+                    o contraoferta, estará obligado contractualmente a comprar
+                    el vehículo al precio que especifique más las tarifas de
+                    subasta aplicables, las tarifas de La subasta cubana y otras
+                    tarifas que se detallan en los Términos y condiciones. Todas
+                    las ofertas y ventas son definitivas. No existe derecho de
+                    rescisión ni derechos de reembolso o cambio.
+                  </p>
+                  <p>
+                    Dado que este vehículo se vende &#34;COMO ESTÁ - DONDE
+                    ESTÁ&#34;, significa que el comprador lo compra &#34;con
+                    todos los defectos&#34; y sin ninguna &#34;garantía&#34; de
+                    ningún tipo, expresa o implícita. Cualquier información
+                    sobre este vehículo proporcionada por el vendedor o Copart
+                    es solo para conveniencia. Es su exclusiva responsabilidad
+                    verificar, confirmar, investigar, inspeccionar e investigar
+                    un vehículo y cualquier información relacionada con dicho
+                    vehículo antes de ofertar por él. La subasta cubana niega
+                    expresamente la exactitud de la información del vehículo en
+                    esta página, incluidos los detalles de daños, las lecturas
+                    del odómetro y los números de identificación del vehículo
+                    (VIN).
+                  </p>
+                  <p>
+                    Para obtener más información, consulte los{" "}
+                    <Link href="/terms">Términos y Condiciones</Link> de
+                    Miembros.
+                  </p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </p>
       </div>
     </div>
