@@ -43,7 +43,7 @@ const vehiclesSlice = createSlice({
     },
     resetData: (state) => ({ ...state, response: initialState.response }),
     toggleBestOffer: (state) => ({
-      ...state,
+      ...initialState,
       onlyBestOffer: !state.onlyBestOffer,
     }),
     toggleLoading: (state) => ({
