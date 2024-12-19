@@ -14,24 +14,28 @@ const Search = () => {
   const handleShow = () => setShow(!show);
   return (
     <>
-      <div className="container-xl">
-        <div className="search-form pt-3 rtl-flex-d-row-r">
-          <div className="alternative-search-options">
-            <div className="ms-2">
-              <button
-                onClick={() => handleShow()}
-                className="btn btn-sm text-primary"
-                data-bs-toggle="offcanvas"
-                data-bs-target="#suhaFilterOffcanvas"
-                aria-controls="suhaFilterOffcanvas"
-              >
-                Filtros
-                {activeFilters ? (
-                  <strong className="badge text-bg-primary rounded-pill ms-2">
-                    {activeFilters}
-                  </strong>
-                ) : null}
-              </button>
+      <div className="container-xl mb-3">
+        <div className="card">
+          <div className="card-body">
+            <div className="search-form">
+              <div className="alternative-search-options">
+                <div className="ms-2">
+                  <button
+                    onClick={() => handleShow()}
+                    className="btn btn-sm text-primary"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#suhaFilterOffcanvas"
+                    aria-controls="suhaFilterOffcanvas"
+                  >
+                    Filtros
+                    {activeFilters ? (
+                      <strong className="badge text-bg-primary rounded-pill ms-2">
+                        {activeFilters}
+                      </strong>
+                    ) : null}
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

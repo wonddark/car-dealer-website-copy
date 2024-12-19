@@ -5,6 +5,7 @@ import React from "react";
 import HeaderThree from "@/layouts/HeaderThree";
 import useCategoryProducts from "@/components/Category/use-category-products";
 import InfiniteVehiclesList from "@/components/InfiniteVehiclesList";
+import Search from "@/components/home/Search";
 
 const Category = () => {
   const { category, getNextPage, requestStatus, response } =
@@ -12,6 +13,9 @@ const Category = () => {
   return (
     <>
       <HeaderThree links="" title={category.title} />
+      <div className="pt-3">
+        <Search />
+      </div>
 
       <div className="page-content-wrapper mt-3">
         <InfiniteVehiclesList
