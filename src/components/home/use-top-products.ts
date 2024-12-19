@@ -47,7 +47,6 @@ export default function useTopProducts() {
       controller.abort();
     };
   };
-  console.log(isBestOffer);
   useEffect(getNextPage, [sp, isBestOffer]);
 
   return { response, loading, error, getNextPage };
