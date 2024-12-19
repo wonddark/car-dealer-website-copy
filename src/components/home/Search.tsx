@@ -21,8 +21,8 @@ const Search = () => {
               <div className="alternative-search-options">
                 <div className="ms-2">
                   <button
-                    onClick={() => handleShow()}
-                    className="btn btn-sm text-primary"
+                    onClick={handleShow}
+                    className="btn btn-sm text-primary d-lg-none"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#suhaFilterOffcanvas"
                     aria-controls="suhaFilterOffcanvas"
