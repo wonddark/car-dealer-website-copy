@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { Vehicle } from "@/types/vehicle";
+import { useSearchParams } from "next/navigation";
 
 export default function VehicleCard({
   vehicle,
@@ -12,6 +13,7 @@ export default function VehicleCard({
     setExpanded((prevState) => !prevState);
   };
   const [fullyLoaded, setFullyLoaded] = useState(false);
+  const sp = useSearchParams();
   return (
     <div className="col-12 col-md-6 col-xl-4">
       <div className="card product-card h-100">
@@ -22,7 +24,7 @@ export default function VehicleCard({
           <div className="d-flex flex-column h-100">
             <Link
               className={`product-thumbnail ${fullyLoaded ? "d-block" : "d-none"}`}
-              href={`/vehicles/${vehicle.vin}`}
+              href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
             >
               <img
                 className="mb-2 rounded-2"
@@ -37,7 +39,10 @@ export default function VehicleCard({
               </div>
             ) : null}
 
-            <Link className="product-title" href={`/vehicles/${vehicle.vin}`}>
+            <Link
+              className="product-title"
+              href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
+            >
               {`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
             </Link>
 
@@ -199,7 +204,7 @@ export default function VehicleCard({
 
             <div>
               <Link
-                href={`/vehicles/${vehicle.vin}`}
+                href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
                 className="btn btn-primary w-100 mt-2"
               >
                 <span>Me interesa</span>

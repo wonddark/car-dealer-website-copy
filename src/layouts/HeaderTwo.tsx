@@ -3,17 +3,19 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import OffCanvas from "@/components/common/OffCanvas";
+import { useSearchParams } from "next/navigation";
 
 const HeaderTwo = ({ links, title }: { links: string; title: string }) => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
+  const sp = useSearchParams();
 
   return (
     <>
       <div className="header-area" id="headerArea">
         <div className="container-xl h-100 d-flex align-items-center justify-content-between rtl-flex-d-row-r">
           <div className="back-button me-2">
-            <Link href={`/${links}`}>
+            <Link href={`/${links}?${sp.toString()}`}>
               <i className="ti ti-arrow-left"></i>
             </Link>
           </div>
