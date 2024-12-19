@@ -38,33 +38,43 @@ export default function VehicleDetails({
                     <div className="vstack gap-2">
                       <div className="hstack">
                         <strong className="text-muted">Número de lote</strong>
-                        <span className="ms-auto">{vehicle.lotNumber}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.lotNumber}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">VIN</strong>
-                        <span className="ms-auto">{vehicle.vin}</span>
+                        <span className="ms-auto text-end">{vehicle.vin}</span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Código de Título</strong>
-                        <span className="ms-auto">{vehicle.titleCode}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.titleCode}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Odómetro</strong>
-                        <span className="ms-auto">{vehicle.odometer}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.odometer}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Color</strong>
-                        <span className="ms-auto">{vehicle.color}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.color}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Daños Primarios</strong>
-                        <span className="ms-auto">{vehicle.primaryDamage}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.primaryDamage}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">
                           Daños Secundarios
                         </strong>
-                        <span className="ms-auto">
+                        <span className="ms-auto text-end">
                           {vehicle.secondaryDamage}
                         </span>
                       </div>
@@ -72,45 +82,59 @@ export default function VehicleDetails({
                         <strong className="text-muted">
                           Costo Estimado de Reparación
                         </strong>
-                        <span className="ms-auto">
+                        <span className="ms-auto text-end">
                           {vehicle.estimatedRepairCost}
                         </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Valor Estimado</strong>
-                        <span className="ms-auto">
+                        <span className="ms-auto text-end">
                           {vehicle.estimatedValue}
                         </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Motor</strong>
-                        <span className="ms-auto">{vehicle.engine}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.engine}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Transmisión</strong>
-                        <span className="ms-auto">{vehicle.transmission}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.transmission}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">
                           Tipo de conducción
                         </strong>
-                        <span className="ms-auto">{vehicle.driveType}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.driveType}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Tipo de vehículo</strong>
-                        <span className="ms-auto">{vehicle.vehicleType}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.vehicleType}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Combustible</strong>
-                        <span className="ms-auto">{vehicle.fuelType}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.fuelType}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Llaves</strong>
-                        <span className="ms-auto">{vehicle.hasKeys}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.hasKeys}
+                        </span>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Detalles</strong>
-                        <span className="ms-auto">{vehicle.details}</span>
+                        <span className="ms-auto text-end">
+                          {vehicle.details}
+                        </span>
                       </div>
                     </div>
                     <p className="text-muted small mt-4">
