@@ -14,6 +14,7 @@ import {
   getIsBestOffer,
   resetData,
   toggleBestOffer,
+  toggleLoading,
 } from "@/redux/features/vehicles.slice";
 import { VehicleTitle, VehicleType } from "@/types/vehicle";
 import OdometerFilter from "@/components/common/OdometerFilter";
@@ -314,6 +315,7 @@ const useFilters = () => {
   const odometerMax = useRef<HTMLInputElement>(null);
 
   const applyFilters = () => {
+    dispatch(toggleLoading());
     dispatch(resetData());
     r.push(
       pathname +
@@ -353,6 +355,7 @@ const useFilters = () => {
       target: { checked, name, value },
     } = e;
     if (checked) {
+      dispatch(toggleLoading());
       dispatch(resetData());
       r.push(
         pathname +
@@ -364,6 +367,7 @@ const useFilters = () => {
           }),
       );
     } else {
+      dispatch(toggleLoading());
       dispatch(resetData());
       r.push(
         pathname +
