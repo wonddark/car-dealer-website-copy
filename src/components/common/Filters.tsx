@@ -16,6 +16,7 @@ import {
   toggleBestOffer,
 } from "@/redux/features/vehicles.slice";
 import { VehicleTitle, VehicleType } from "@/types/vehicle";
+import OdometerFilter from "@/components/common/OdometerFilter";
 
 export default function Filters() {
   const {
@@ -27,8 +28,6 @@ export default function Filters() {
     titleTypes,
     bestOfferChecked,
     buyNowChecked,
-    odometerMinVal,
-    odometerMaxVal,
     auctionName,
     auctionState,
     handleToggleBestOffer,
@@ -164,34 +163,7 @@ export default function Filters() {
             <div className="widget price-range mb-4">
               <h6 className="widget-title mb-2">Odómetro</h6>
               <div className="widget-desc">
-                <div className="row g-2">
-                  <div className="col-12">
-                    <div className="form-floating">
-                      <input
-                        className="form-control"
-                        id="floatingInput"
-                        type="text"
-                        placeholder="1"
-                        ref={odometerMin}
-                        defaultValue={odometerMinVal}
-                      />
-                      <label htmlFor="floatingInput">Min</label>
-                    </div>
-                  </div>
-                  <div className="col-12">
-                    <div className="form-floating">
-                      <input
-                        className="form-control"
-                        id="floatingInput"
-                        type="text"
-                        placeholder="1"
-                        ref={odometerMax}
-                        defaultValue={odometerMaxVal}
-                      />
-                      <label htmlFor="floatingInput">Max</label>
-                    </div>
-                  </div>
-                </div>
+                <OdometerFilter />
               </div>
             </div>
           </div>

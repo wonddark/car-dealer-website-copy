@@ -6221,3 +6221,30 @@ li.suha-dropdown-menu .dropdown-trigger-btn.active i {
   left: 16px;
   transform: translateY(-50%);
 }
+
+.noUi-target {
+  background: rgb(4 44 215 / 5%) !important;
+  border: none !important;
+  box-shadow: none !important;
+  height: 10px !important;
+}
+
+.noUi-connect {
+  background: rgb(4 44 215 / 15%) !important;
+  height: 10px !important;
+}
+
+.noUi-handle {
+  border-color: #00156c !important;
+  border-radius: 50% !important;
+  background: #042cd7 !important;
+  box-shadow: none !important;
+  height: 18px !important;
+  width: 18px !important;
+  top: -4px !important;
+  right: -9px !important;
+}
+
+.noUi-handle::after, .noUi-handle::before {
+  content: none !important;
+}

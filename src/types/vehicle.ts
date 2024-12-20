@@ -75,3 +75,6 @@ export type VehicleTitle = {
   cleanOrSalvage: string;
   process: string;
 };
+
+export const STEP_ODOMETER_VAL = 1000;
+export const MAX_ODOMETER_VAL = 50_000;
