@@ -26,6 +26,7 @@ export default function VehicleCard({
             <Link
               className={`product-thumbnail ${fullyLoaded ? "d-block" : "d-none"}`}
               href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
+              target="_blank"
             >
               <img
                 className="mb-2 rounded-2"
@@ -43,6 +44,7 @@ export default function VehicleCard({
             <Link
               className="product-title"
               href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
+              target="_blank"
             >
               {`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
             </Link>
@@ -254,6 +256,7 @@ export default function VehicleCard({
             <div>
               <Link
                 href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
+                target="_blank"
                 className="btn btn-primary w-100 mt-2"
               >
                 <span>Me interesa</span>
