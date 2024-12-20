@@ -54,7 +54,7 @@ const useOdometerRange = () => {
         createQueryString(
           {
             name: "OdometerFrom",
-            value: Number(values[0]) > 0 ? `${Number(values[0])}` : "null",
+            value: `${Number(values[0])}`,
           },
           {
             name: "OdometerTo",
