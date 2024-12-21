@@ -13,7 +13,7 @@ export default function OdometerFilter() {
     <div className="vstack gap-2 pt-4 px-3 pb-1">
       <div className="hstack justify-content-between align-items-center text-muted">
         <small>{min}</small>
-        <small>{max}</small>
+        <small>{Number(max) < MAX_ODOMETER_VAL ? max : "Max"}</small>
       </div>
       <Nouislider
         range={{ min: 0, max: MAX_ODOMETER_VAL }}
