@@ -76,5 +76,5 @@ export type VehicleTitle = {
   process: string;
 };
 
-export const STEP_ODOMETER_VAL = 1000;
-export const MAX_ODOMETER_VAL = 50_000;
+export const STEP_ODOMETER_VAL = 5000;
+export const MAX_ODOMETER_VAL = 500_000;
