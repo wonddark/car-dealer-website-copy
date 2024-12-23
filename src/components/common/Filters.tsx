@@ -18,6 +18,7 @@ import {
 } from "@/redux/features/vehicles.slice";
 import { VehicleTitle, VehicleType } from "@/types/vehicle";
 import OdometerFilter from "@/components/common/OdometerFilter";
+import { YEARS } from "@/data/options";
 
 export default function Filters() {
   const {
@@ -37,11 +38,14 @@ export default function Filters() {
     filterModels,
     auctionVal,
     stateVal,
+    yearFrom,
+    yearTo,
     brandChecked,
     modelChecked,
     vehicleTypeChecked,
     titleChecked,
     applyFilters,
+    handleFilterYearChange,
   } = useFilters();
   return (
     <div className="offcanvas-body py-5">
@@ -165,6 +169,47 @@ export default function Filters() {
               <h6 className="widget-title mb-2">Odómetro</h6>
               <div className="widget-desc">
                 <OdometerFilter />
+              </div>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="widget price-range mb-4">
+              <h6 className="widget-title mb-2">Año</h6>
+              <div className="widget-desc">
+                <div className="hstack gap-4">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={handleFilterYearChange}
+                    name="YearFrom"
+                    defaultValue={yearFrom}
+                  >
+                    {YEARS.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={handleFilterYearChange}
+                    name="YearTo"
+                    defaultValue={yearTo}
+                  >
+                    {YEARS.map((item) => (
+                      <option
+                        key={item}
+                        value={item}
+                        disabled={Boolean(
+                          yearFrom && Number(yearFrom) > Number(item),
+                        )}
+                      >
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -470,6 +515,22 @@ const useFilters = () => {
     return titles.includes(titleVal);
   };
 
+  const yearFrom = searchParams.get("YearFrom") ?? "";
+  const yearTo = searchParams.get("YearTo") ?? "";
+  const handleFilterYearChange: ChangeEventHandler<HTMLSelectElement> = ({
+    target: { name, value },
+  }) => {
+    dispatch(toggleLoading());
+    dispatch(resetData());
+    const sp = new URLSearchParams(searchParams.toString());
+    if (value !== "") {
+      sp.set(name, value);
+    } else {
+      sp.delete(name);
+    }
+    r.push(pathname + "?" + sp);
+  };
+
   return {
     brands,
     models,
@@ -485,6 +546,8 @@ const useFilters = () => {
     odometerMaxVal,
     auctionVal,
     stateVal,
+    yearFrom,
+    yearTo,
     brandChecked,
     modelChecked,
     vehicleTypeChecked,
@@ -494,5 +557,6 @@ const useFilters = () => {
     filterBrands,
     filterModels,
     applyFilters,
+    handleFilterYearChange,
   };
 };
