@@ -6226,22 +6226,22 @@ li.suha-dropdown-menu .dropdown-trigger-btn.active i {
   background: rgb(4 44 215 / 5%) !important;
   border: none !important;
   box-shadow: none !important;
-  height: 10px !important;
+  height: 4px !important;
 }
 
 .noUi-connect {
-  background: rgb(4 44 215 / 15%) !important;
-  height: 10px !important;
+  background: #042cd7 !important;
+  height: 4px !important;
 }
 
 .noUi-handle {
-  border-color: #00156c !important;
+  border-color: #042cd7 !important;
   border-radius: 50% !important;
-  background: #042cd7 !important;
+  background: #f1f1f1 !important;
   box-shadow: none !important;
-  height: 18px !important;
-  width: 18px !important;
-  top: -4px !important;
+  height: 16px !important;
+  width: 16px !important;
+  top: -7px !important;
   right: -9px !important;
 }
 
