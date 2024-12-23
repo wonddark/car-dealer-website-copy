@@ -1,5 +1,5 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { MAX_ODOMETER_VAL, STEP_ODOMETER_VAL } from "@/types/vehicle";
 import Nouislider from "nouislider-react";
 import "nouislider/dist/nouislider.min.css";
@@ -7,17 +7,19 @@ import { resetData, toggleLoading } from "@/redux/features/vehicles.slice";
 import { useAppDispatch } from "@/redux/hooks";
 
 export default function OdometerFilter() {
-  const { min, max, filterByOdometer } = useOdometerRange();
+  const { limits, filterByOdometer } = useOdometerRange();
 
   return (
     <div className="vstack gap-2 pt-4 px-3 pb-1">
       <div className="hstack justify-content-between align-items-center text-muted">
-        <small>{min}</small>
-        <small>{Number(max) < MAX_ODOMETER_VAL ? max : "Max"}</small>
+        <small>{`${limits.min} Millas`}</small>
+        <small>
+          {`${Number(limits.max) < MAX_ODOMETER_VAL ? limits.max : MAX_ODOMETER_VAL + "+"} Millas`}
+        </small>
       </div>
       <Nouislider
         range={{ min: 0, max: MAX_ODOMETER_VAL }}
-        start={[Number(min), Number(max)]}
+        start={[Number(limits.min), Number(limits.max)]}
         connect
         animate
         onChange={filterByOdometer}
@@ -32,8 +34,13 @@ const useOdometerRange = () => {
   const searchParams = useSearchParams();
   const dispatch = useAppDispatch();
   const pathname = usePathname();
-  const min = searchParams.get("OdometerFrom") ?? 0;
-  const max = searchParams.get("OdometerTo") ?? MAX_ODOMETER_VAL;
+  const [limits, setLimits] = useState<{
+    min: string | number;
+    max: string | number;
+  }>({
+    min: searchParams.get("OdometerFrom") ?? 0,
+    max: searchParams.get("OdometerTo") ?? MAX_ODOMETER_VAL,
+  });
 
   const createQueryString = useCallback(
     (...params: { name: string; value: string | null }[]) => {
@@ -55,6 +62,7 @@ const useOdometerRange = () => {
     dispatch(resetData());
     const from = Number(values[0]);
     const to = Number(values[1]);
+    setLimits({ min: from, max: to });
     r.push(
       pathname +
         "?" +
@@ -71,5 +79,5 @@ const useOdometerRange = () => {
     );
   };
 
-  return { min, max, filterByOdometer };
+  return { limits, filterByOdometer };
 };
