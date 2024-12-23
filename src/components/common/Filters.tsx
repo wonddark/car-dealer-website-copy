@@ -94,6 +94,129 @@ export default function Filters() {
           </div>
           <div className="col-12">
             <div className="widget catagory mb-4">
+              <h6 className="widget-title mb-2">Tipo de vehículo</h6>
+              <div
+                className="widget-desc mt-2 w-100 position-sitcky top-0"
+                style={{
+                  maxHeight: 130,
+                  overflow: "auto",
+                }}
+              >
+                {!vehicleTypes.loading &&
+                  !vehicleTypes.error &&
+                  vehicleTypes.data.map((item) => (
+                    <div key={item.key} className="form-check">
+                      <input
+                        className="form-check-input"
+                        id={item.key}
+                        type="checkbox"
+                        name="VehicleTypes"
+                        value={item.key}
+                        onChange={handleCheckChange}
+                        defaultChecked={vehicleTypeChecked(item.key)}
+                      />
+                      <label className="form-check-label" htmlFor={item.key}>
+                        {item.type}
+                      </label>
+                    </div>
+                  ))}
+                {vehicleTypes.loading &&
+                  [0, 1, 2].map((i) => (
+                    <div key={i} className="placeholder">
+                      <div className="form-input placeholder-glow"></div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="widget price-range mb-4">
+              <h6 className="widget-title mb-2">Odómetro</h6>
+              <div className="widget-desc">
+                <OdometerFilter />
+              </div>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="widget price-range mb-4">
+              <h6 className="widget-title mb-2">Año</h6>
+              <div className="widget-desc">
+                <div className="hstack gap-4">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={handleFilterYearChange}
+                    name="YearFrom"
+                    defaultValue={yearFrom}
+                  >
+                    {YEARS.map((item) => (
+                      <option key={item} value={item}>
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    onChange={handleFilterYearChange}
+                    name="YearTo"
+                    defaultValue={yearTo}
+                  >
+                    {YEARS.map((item) => (
+                      <option
+                        key={item}
+                        value={item}
+                        disabled={Boolean(
+                          yearFrom && Number(yearFrom) > Number(item),
+                        )}
+                      >
+                        {item}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="widget catagory mb-4">
+              <h6 className="widget-title mb-2">Tipo de título</h6>
+              <div
+                className="widget-desc mt-2 w-100 position-sitcky top-0"
+                style={{
+                  maxHeight: 130,
+                  overflow: "auto",
+                }}
+              >
+                {!titleTypes.loading &&
+                  !titleTypes.error &&
+                  titleTypes.data.map((item) => (
+                    <div key={item.key} className="form-check">
+                      <input
+                        className="form-check-input"
+                        id={item.key}
+                        type="checkbox"
+                        name="TitleTypes"
+                        value={item.key}
+                        onChange={handleCheckChange}
+                        defaultChecked={titleChecked(item.key)}
+                      />
+                      <label className="form-check-label" htmlFor={item.key}>
+                        {item.meaning}
+                      </label>
+                    </div>
+                  ))}
+                {titleTypes.loading &&
+                  [0, 1, 2].map((i) => (
+                    <div key={i} className="placeholder">
+                      <div className="form-input placeholder-glow"></div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="widget catagory mb-4">
               <h6 className="widget-title mb-2">Marca</h6>
               <div className="position-relative">
                 <input
@@ -161,129 +284,6 @@ export default function Filters() {
                     </div>
                   ))}
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-12">
-            <div className="widget price-range mb-4">
-              <h6 className="widget-title mb-2">Odómetro</h6>
-              <div className="widget-desc">
-                <OdometerFilter />
-              </div>
-            </div>
-          </div>
-          <div className="col-12">
-            <div className="widget price-range mb-4">
-              <h6 className="widget-title mb-2">Año</h6>
-              <div className="widget-desc">
-                <div className="hstack gap-4">
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    onChange={handleFilterYearChange}
-                    name="YearFrom"
-                    defaultValue={yearFrom}
-                  >
-                    {YEARS.map((item) => (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    onChange={handleFilterYearChange}
-                    name="YearTo"
-                    defaultValue={yearTo}
-                  >
-                    {YEARS.map((item) => (
-                      <option
-                        key={item}
-                        value={item}
-                        disabled={Boolean(
-                          yearFrom && Number(yearFrom) > Number(item),
-                        )}
-                      >
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-12">
-            <div className="widget catagory mb-4">
-              <h6 className="widget-title mb-2">Tipo de vehículo</h6>
-              <div
-                className="widget-desc mt-2 w-100 position-sitcky top-0"
-                style={{
-                  maxHeight: 130,
-                  overflow: "auto",
-                }}
-              >
-                {!vehicleTypes.loading &&
-                  !vehicleTypes.error &&
-                  vehicleTypes.data.map((item) => (
-                    <div key={item.key} className="form-check">
-                      <input
-                        className="form-check-input"
-                        id={item.key}
-                        type="checkbox"
-                        name="VehicleTypes"
-                        value={item.key}
-                        onChange={handleCheckChange}
-                        defaultChecked={vehicleTypeChecked(item.key)}
-                      />
-                      <label className="form-check-label" htmlFor={item.key}>
-                        {item.type}
-                      </label>
-                    </div>
-                  ))}
-                {vehicleTypes.loading &&
-                  [0, 1, 2].map((i) => (
-                    <div key={i} className="placeholder">
-                      <div className="form-input placeholder-glow"></div>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          </div>
-          <div className="col-12">
-            <div className="widget catagory mb-4">
-              <h6 className="widget-title mb-2">Tipo de título</h6>
-              <div
-                className="widget-desc mt-2 w-100 position-sitcky top-0"
-                style={{
-                  maxHeight: 130,
-                  overflow: "auto",
-                }}
-              >
-                {!titleTypes.loading &&
-                  !titleTypes.error &&
-                  titleTypes.data.map((item) => (
-                    <div key={item.key} className="form-check">
-                      <input
-                        className="form-check-input"
-                        id={item.key}
-                        type="checkbox"
-                        name="TitleTypes"
-                        value={item.key}
-                        onChange={handleCheckChange}
-                        defaultChecked={titleChecked(item.key)}
-                      />
-                      <label className="form-check-label" htmlFor={item.key}>
-                        {item.meaning}
-                      </label>
-                    </div>
-                  ))}
-                {titleTypes.loading &&
-                  [0, 1, 2].map((i) => (
-                    <div key={i} className="placeholder">
-                      <div className="form-input placeholder-glow"></div>
-                    </div>
-                  ))}
               </div>
             </div>
           </div>
