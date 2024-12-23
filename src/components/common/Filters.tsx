@@ -149,7 +149,7 @@ export default function Filters() {
                     name="YearFrom"
                     defaultValue={yearFrom}
                   >
-                    <option value=""></option>
+                    <option value="">Escoge un año</option>
                     {YEARS.map((item) => (
                       <option key={item} value={item}>
                         {item}
@@ -163,7 +163,7 @@ export default function Filters() {
                     name="YearTo"
                     defaultValue={yearTo}
                   >
-                    <option value=""></option>
+                    <option value="">Escoge un año</option>
                     {YEARS.map((item) => (
                       <option
                         key={item}
