@@ -3,7 +3,7 @@ import { useCallback } from "react";
 import { MAX_ODOMETER_VAL, STEP_ODOMETER_VAL } from "@/types/vehicle";
 import Nouislider from "nouislider-react";
 import "nouislider/dist/nouislider.min.css";
-import { resetData } from "@/redux/features/vehicles.slice";
+import { resetData, toggleLoading } from "@/redux/features/vehicles.slice";
 import { useAppDispatch } from "@/redux/hooks";
 
 export default function OdometerFilter() {
@@ -36,10 +36,14 @@ const useOdometerRange = () => {
   const max = searchParams.get("OdometerTo") ?? MAX_ODOMETER_VAL;
 
   const createQueryString = useCallback(
-    (...params: { name: string; value: string }[]) => {
+    (...params: { name: string; value: string | null }[]) => {
       const sp = new URLSearchParams(searchParams.toString());
       for (const param of params) {
-        sp.set(param.name, param.value);
+        if (param.value) {
+          sp.set(param.name, param.value);
+        } else {
+          sp.delete(param.name);
+        }
       }
       return sp.toString();
     },
@@ -47,21 +51,21 @@ const useOdometerRange = () => {
   );
 
   const filterByOdometer = (values: string[]) => {
+    dispatch(toggleLoading());
     dispatch(resetData());
+    const from = Number(values[0]);
+    const to = Number(values[1]);
     r.push(
       pathname +
         "?" +
         createQueryString(
           {
             name: "OdometerFrom",
-            value: `${Number(values[0])}`,
+            value: from > 0 ? `${from}` : null,
           },
           {
             name: "OdometerTo",
-            value:
-              Number(values[1]) < MAX_ODOMETER_VAL
-                ? `${Number(values[1])}`
-                : "null",
+            value: to < MAX_ODOMETER_VAL ? `${to}` : null,
           },
         ),
     );
