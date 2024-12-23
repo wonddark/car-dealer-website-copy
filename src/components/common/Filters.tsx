@@ -149,6 +149,7 @@ export default function Filters() {
                     name="YearFrom"
                     defaultValue={yearFrom}
                   >
+                    <option value=""></option>
                     {YEARS.map((item) => (
                       <option key={item} value={item}>
                         {item}
@@ -162,6 +163,7 @@ export default function Filters() {
                     name="YearTo"
                     defaultValue={yearTo}
                   >
+                    <option value=""></option>
                     {YEARS.map((item) => (
                       <option
                         key={item}
@@ -399,9 +401,9 @@ const useFilters = () => {
     const {
       target: { checked, name, value },
     } = e;
+    dispatch(toggleLoading());
+    dispatch(resetData());
     if (checked) {
-      dispatch(toggleLoading());
-      dispatch(resetData());
       r.push(
         pathname +
           "?" +
@@ -412,8 +414,6 @@ const useFilters = () => {
           }),
       );
     } else {
-      dispatch(toggleLoading());
-      dispatch(resetData());
       r.push(
         pathname +
           "?" +
