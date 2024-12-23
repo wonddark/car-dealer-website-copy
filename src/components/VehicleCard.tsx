@@ -15,6 +15,11 @@ export default function VehicleCard({
   };
   const [fullyLoaded, setFullyLoaded] = useState(false);
   const sp = useSearchParams();
+  const [imgUrl, setImgUrl] = useState(vehicle.imageUrl);
+  const handleError = () => {
+    setImgUrl("/assets/img/core-img/sedan.png");
+    setFullyLoaded(true);
+  };
   return (
     <div className="col-12 col-md-6 col-xl-4">
       <div className="card product-card h-100">
@@ -30,9 +35,10 @@ export default function VehicleCard({
             >
               <img
                 className="mb-2 rounded-2"
-                src={vehicle.imageUrl}
+                src={imgUrl}
                 alt={vehicle.titleCode}
                 onLoad={() => setFullyLoaded(true)}
+                onError={handleError}
               />
             </Link>
             {!fullyLoaded ? (
