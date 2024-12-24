@@ -8,9 +8,11 @@ export async function GET(request: NextRequest) {
     const sp = request.nextUrl.searchParams;
     const response = await fetch(
       `${process.env.API_ENDPOINT}/auction-inventories/search?${sp.toString()}`,
+      { next: { revalidate: 43200 /* 12 hours */ } },
     );
     if (response.status === 200) {
       const data = await response.json();
+      console.log(data.totalCount);
       return Response.json({ ...data }, { status: 200 });
     }
     if (response.status === 204) {

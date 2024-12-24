@@ -28,7 +28,7 @@ export default function useTopProducts() {
         "&PageSize=" +
         response.pageSize +
         (sp.toString() !== "" ? `&${sp.toString()}` : "") +
-        (isBestOffer ? "&IsBestOffert=true&IsBestOffer=true" : ""),
+        (isBestOffer ? "&IsBestOffer=true" : ""),
       { signal: controller.signal },
     )
       .then((res) => res.json())
