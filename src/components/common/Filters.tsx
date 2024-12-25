@@ -9,7 +9,6 @@ import React, {
 } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { BRANDS, MODELS } from "@/data/hardcoded";
 import {
   getIsBestOffer,
   resetData,
@@ -20,11 +19,11 @@ import { VehicleTitle, VehicleType } from "@/types/vehicle";
 import OdometerFilter from "@/components/common/OdometerFilter";
 import { YEARS } from "@/data/options";
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Filters() {
   const {
-    brands,
-    models,
+    brandsAndModels,
     vehicleTypes,
     titleTypes,
     bestOfferChecked,
@@ -214,22 +213,30 @@ export default function Filters() {
                   onChange={filterBrands}
                 />
                 <FilterOptionsCheckContainer>
-                  {brands.map((item) => (
-                    <div key={item.value} className="form-check">
-                      <input
-                        className="form-check-input"
-                        id={item.value}
-                        type="checkbox"
-                        name="Makes"
-                        value={item.value}
-                        onChange={handleCheckChange}
-                        checked={brandChecked(item.value)}
-                      />
-                      <label className="form-check-label" htmlFor={item.value}>
-                        {item.label}
-                      </label>
-                    </div>
-                  ))}
+                  {!brandsAndModels.loading &&
+                    !brandsAndModels.error &&
+                    brandsAndModels.brands.map((item) => (
+                      <div key={item + uuidv4()} className="form-check">
+                        <input
+                          className="form-check-input"
+                          id={item}
+                          type="checkbox"
+                          name="Makes"
+                          value={item}
+                          onChange={handleCheckChange}
+                          checked={brandChecked(item)}
+                        />
+                        <label className="form-check-label" htmlFor={item}>
+                          {item}
+                        </label>
+                      </div>
+                    ))}
+                  {brandsAndModels.loading &&
+                    [0, 1, 2].map((i) => (
+                      <div key={i} className="placeholder">
+                        <div className="form-input placeholder-glow"></div>
+                      </div>
+                    ))}
                 </FilterOptionsCheckContainer>
               </div>
             </div>
@@ -244,22 +251,30 @@ export default function Filters() {
                   onChange={filterModels}
                 />
                 <FilterOptionsCheckContainer>
-                  {models.map((item) => (
-                    <div key={item.value} className="form-check">
-                      <input
-                        className="form-check-input"
-                        id={item.value}
-                        type="checkbox"
-                        name="Models"
-                        value={item.value}
-                        onChange={handleCheckChange}
-                        checked={modelChecked(item.value)}
-                      />
-                      <label className="form-check-label" htmlFor={item.value}>
-                        {item.label}
-                      </label>
-                    </div>
-                  ))}
+                  {!brandsAndModels.loading &&
+                    !brandsAndModels.error &&
+                    brandsAndModels.models.map((item) => (
+                      <div key={item + uuidv4()} className="form-check">
+                        <input
+                          className="form-check-input"
+                          id={item}
+                          type="checkbox"
+                          name="Models"
+                          value={item}
+                          onChange={handleCheckChange}
+                          checked={modelChecked(item)}
+                        />
+                        <label className="form-check-label" htmlFor={item}>
+                          {item}
+                        </label>
+                      </div>
+                    ))}
+                  {brandsAndModels.loading &&
+                    [0, 1, 2].map((i) => (
+                      <div key={i} className="placeholder">
+                        <div className="form-input placeholder-glow"></div>
+                      </div>
+                    ))}
                 </FilterOptionsCheckContainer>
               </div>
             </div>
@@ -310,10 +325,101 @@ export const useFilters = () => {
   const pathname = usePathname();
   const r = useRouter();
   const searchParams = useSearchParams();
-  const [brands, setBrands] =
-    useState<{ value: string; label: string }[]>(BRANDS);
-  const [models, setModels] =
-    useState<{ value: string; label: string }[]>(MODELS);
+
+  const [brandsAndModels, setBrandsAndModels] = useState<{
+    original: Record<string, string[]>;
+    brands: string[];
+    models: string[];
+    loading: boolean;
+    error: boolean;
+  }>({ original: {}, brands: [], models: [], loading: true, error: false });
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/brands-models`, {
+      signal: controller.signal,
+    })
+      .then((res) => res.json())
+      .then((data) =>
+        setBrandsAndModels({
+          original: data,
+          brands: Object.keys(data),
+          models: Object.values(data).flat() as string[],
+          loading: false,
+          error: false,
+        }),
+      )
+      .catch(() =>
+        setBrandsAndModels({
+          original: {},
+          brands: [],
+          models: [],
+          loading: false,
+          error: true,
+        }),
+      );
+
+    return () => {
+      controller.abort();
+    };
+  }, []);
+
+  const filterBrands: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setBrandsAndModels((prevState) => {
+      const keys = Object.keys(prevState.original).filter((item) =>
+        item.toLowerCase().includes(value.toLowerCase()),
+      );
+      const result = {};
+      for (const key of keys) {
+        Object.assign(result, { [key]: prevState.original[key] });
+      }
+
+      return {
+        ...prevState,
+        brands: keys,
+        models: Object.values(result).flat() as string[],
+      };
+    });
+  };
+
+  const filterModels: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const {
+      target: { value },
+    } = e;
+    setBrandsAndModels((prevState) => {
+      const result = [];
+
+      for (const brand of prevState.brands) {
+        for (const model of prevState.original[brand]) {
+          if (model.toLowerCase().includes(value.toLowerCase())) {
+            result.push(model);
+          }
+        }
+      }
+
+      return { ...prevState, models: result };
+    });
+  };
+
+  useEffect(() => {
+    if (Object.keys(brandsAndModels.original).length) {
+      const filteredBrands = searchParams.getAll("Makes");
+      if (filteredBrands.length > 0) {
+        const result: string[] = [];
+        for (const brand of filteredBrands) {
+          result.push(...brandsAndModels.original[brand]);
+        }
+        setBrandsAndModels((prevState) => ({
+          ...prevState,
+          models: result,
+        }));
+      }
+    }
+  }, [brandsAndModels.original, searchParams]);
+
   const createQueryString = useCallback(
     (...params: { name: string; value: string; add: boolean }[]) => {
       const sp = new URLSearchParams(searchParams.toString());
@@ -384,28 +490,6 @@ export const useFilters = () => {
           }),
       );
     }
-  };
-
-  const filterBrands: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const {
-      target: { value },
-    } = e;
-    setBrands(
-      BRANDS.filter(
-        (item) => item.label.includes(value) || item.value.includes(value),
-      ),
-    );
-  };
-
-  const filterModels: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const {
-      target: { value },
-    } = e;
-    setModels(
-      MODELS.filter(
-        (item) => item.label.includes(value) || item.value.includes(value),
-      ),
-    );
   };
 
   const [vehicleTypes, setVehicleTypes] = useState<{
@@ -492,8 +576,7 @@ export const useFilters = () => {
   };
 
   return {
-    brands,
-    models,
+    brandsAndModels,
     auctionName,
     auctionState,
     vehicleTypes,
