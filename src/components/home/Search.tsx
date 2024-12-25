@@ -1,44 +1,49 @@
 "use client";
+
 import React, { useState } from "react";
 import OffCanvasTwo from "@/components/common/OffCanvasTwo";
 import { useSearchParams } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
+import { getIsBestOffer } from "@/redux/features/vehicles.slice";
+import useTopProducts from "@/components/home/use-top-products";
 
 const Search = () => {
-  const p = useSearchParams();
-  const query = p.get("makes") ?? "";
+  const { response, loading } = useTopProducts();
+  const sp = useSearchParams();
+  const isBestOffer = useAppSelector(getIsBestOffer);
+  const activeFilters = Array.from(sp.entries()).length + (isBestOffer ? 1 : 0);
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
   return (
     <>
-      <div className="container">
-        <div className="search-form pt-3 rtl-flex-d-row-r">
-          <form action="/vehicles/search">
-            <input
-              className="form-control"
-              type="search"
-              name="makes"
-              placeholder="Buscar vehículos"
-              defaultValue={query}
-            />
-            <button type="submit">
-              <i className="ti ti-search"></i>
-            </button>
-          </form>
-
-          <div className="alternative-search-options">
-            <div
-              className="filter-option ms-2"
-              data-bs-toggle="offcanvas"
-              data-bs-target="#suhaFilterOffcanvas"
-              aria-controls="suhaFilterOffcanvas"
-            >
-              <button
-                onClick={() => handleShow()}
-                className="text-primary p-1 rounded-2"
-              >
-                <i className="ti ti-adjustments-horizontal"></i>
-              </button>
+      <div className="container-xl mb-3">
+        <div className="card">
+          <div className="card-body">
+            <div className="search-form d-lg-none2">
+              <div className="alternative-search-options">
+                <div className="ms-2">
+                  <button
+                    onClick={handleShow}
+                    className="btn btn-sm text-primary"
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#suhaFilterOffcanvas"
+                    aria-controls="suhaFilterOffcanvas"
+                  >
+                    Filtros
+                    {activeFilters ? (
+                      <strong className="badge text-bg-primary rounded-pill ms-2">
+                        {activeFilters}
+                      </strong>
+                    ) : null}
+                  </button>
+                </div>
+              </div>
             </div>
+            {!loading && response.totalCount > 0 && (
+              <p className="mb-0 mt-2">
+                <strong>{response.totalCount}</strong> vehículos encontrados
+              </p>
+            )}
           </div>
         </div>
       </div>

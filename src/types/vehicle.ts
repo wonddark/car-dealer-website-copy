@@ -36,6 +36,45 @@ export type Vehicle = {
   laneAndItem: string;
   lastUpdate: string;
   images: string[];
+  imageUrl: string;
+  year: string;
+  make: string;
+  model: string;
+  runAndDrive: boolean;
 };
 
-export type SearchResults = Vehicle[];
+export type VehicleResponse = {
+  totalPages: number;
+  totalCount: number;
+  prev?: string;
+  next?: string;
+  pageNumber: number;
+  pageSize: number;
+  data: Vehicle[];
+};
+
+export const DEFAULT_VEHICLE_PAGE_SIZE = 12;
+
+export type VehicleCategory = {
+  title: string;
+  img: string;
+  url: string;
+  apiFilter: string;
+};
+
+export type VehicleType = {
+  key: string;
+  type: string;
+  weight: string;
+};
+
+export type VehicleTitle = {
+  key: string;
+  type: string;
+  meaning: string;
+  cleanOrSalvage: string;
+  process: string;
+};
+
+export const STEP_ODOMETER_VAL = 5000;
+export const MAX_ODOMETER_VAL = 200_000;
