@@ -61,7 +61,7 @@ export default function Filters() {
                   name="InBuyNow"
                   value="true"
                   onChange={handleCheckChange}
-                  defaultChecked={buyNowChecked}
+                  checked={buyNowChecked}
                 />
                 <label
                   className="form-check-label"
@@ -82,7 +82,7 @@ export default function Filters() {
                   id="best-offer"
                   name="IsBestOffer"
                   value="true"
-                  defaultChecked={bestOfferChecked}
+                  checked={bestOfferChecked}
                   onChange={handleToggleBestOffer}
                 />
                 <label className="form-check-label" htmlFor="best-offer">
@@ -188,7 +188,7 @@ export default function Filters() {
                         name="TitleTypes"
                         value={item.key}
                         onChange={handleCheckChange}
-                        defaultChecked={titleChecked(item.key)}
+                        checked={titleChecked(item.key)}
                       />
                       <label className="form-check-label" htmlFor={item.key}>
                         {item.meaning}
@@ -223,7 +223,7 @@ export default function Filters() {
                         name="Makes"
                         value={item.value}
                         onChange={handleCheckChange}
-                        defaultChecked={brandChecked(item.value)}
+                        checked={brandChecked(item.value)}
                       />
                       <label className="form-check-label" htmlFor={item.value}>
                         {item.label}
@@ -253,7 +253,7 @@ export default function Filters() {
                         name="Models"
                         value={item.value}
                         onChange={handleCheckChange}
-                        defaultChecked={modelChecked(item.value)}
+                        checked={modelChecked(item.value)}
                       />
                       <label className="form-check-label" htmlFor={item.value}>
                         {item.label}
