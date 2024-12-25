@@ -19,13 +19,12 @@ import {
 import { VehicleTitle, VehicleType } from "@/types/vehicle";
 import OdometerFilter from "@/components/common/OdometerFilter";
 import { YEARS } from "@/data/options";
+import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
 
 export default function Filters() {
   const {
     brands,
     models,
-    odometerMin,
-    odometerMax,
     vehicleTypes,
     titleTypes,
     bestOfferChecked,
@@ -95,13 +94,7 @@ export default function Filters() {
           <div className="col-12">
             <div className="widget catagory mb-4">
               <h6 className="widget-title mb-2">Tipo de vehículo</h6>
-              <div
-                className="widget-desc mt-2 w-100 position-sitcky top-0"
-                style={{
-                  maxHeight: 130,
-                  overflow: "auto",
-                }}
-              >
+              <FilterOptionsCheckContainer>
                 {!vehicleTypes.loading &&
                   !vehicleTypes.error &&
                   vehicleTypes.data.map((item) => (
@@ -126,7 +119,7 @@ export default function Filters() {
                       <div className="form-input placeholder-glow"></div>
                     </div>
                   ))}
-              </div>
+              </FilterOptionsCheckContainer>
             </div>
           </div>
           <div className="col-12">
@@ -183,13 +176,7 @@ export default function Filters() {
           <div className="col-12">
             <div className="widget catagory mb-4">
               <h6 className="widget-title mb-2">Tipo de título</h6>
-              <div
-                className="widget-desc mt-2 w-100 position-sitcky top-0"
-                style={{
-                  maxHeight: 130,
-                  overflow: "auto",
-                }}
-              >
+              <FilterOptionsCheckContainer>
                 {!titleTypes.loading &&
                   !titleTypes.error &&
                   titleTypes.data.map((item) => (
@@ -214,7 +201,7 @@ export default function Filters() {
                       <div className="form-input placeholder-glow"></div>
                     </div>
                   ))}
-              </div>
+              </FilterOptionsCheckContainer>
             </div>
           </div>
           <div className="col-12">
@@ -226,13 +213,7 @@ export default function Filters() {
                   type="search"
                   onChange={filterBrands}
                 />
-                <div
-                  className="widget-desc mt-2 w-100"
-                  style={{
-                    maxHeight: 130,
-                    overflow: "auto",
-                  }}
-                >
+                <FilterOptionsCheckContainer>
                   {brands.map((item) => (
                     <div key={item.value} className="form-check">
                       <input
@@ -249,7 +230,7 @@ export default function Filters() {
                       </label>
                     </div>
                   ))}
-                </div>
+                </FilterOptionsCheckContainer>
               </div>
             </div>
           </div>
@@ -262,13 +243,7 @@ export default function Filters() {
                   type="search"
                   onChange={filterModels}
                 />
-                <div
-                  className="widget-desc mt-2 w-100 position-sitcky top-0"
-                  style={{
-                    maxHeight: 130,
-                    overflow: "auto",
-                  }}
-                >
+                <FilterOptionsCheckContainer>
                   {models.map((item) => (
                     <div key={item.value} className="form-check">
                       <input
@@ -285,7 +260,7 @@ export default function Filters() {
                       </label>
                     </div>
                   ))}
-                </div>
+                </FilterOptionsCheckContainer>
               </div>
             </div>
           </div>
@@ -317,10 +292,7 @@ export default function Filters() {
             <button
               className="btn btn-lg btn-primary w-100"
               disabled={
-                !auctionName.current?.value &&
-                !auctionState.current?.value &&
-                !odometerMin &&
-                !odometerMax
+                !auctionName.current?.value && !auctionState.current?.value
               }
               onClick={applyFilters}
             >
@@ -358,8 +330,6 @@ const useFilters = () => {
   );
   const auctionName = useRef<HTMLInputElement>(null);
   const auctionState = useRef<HTMLInputElement>(null);
-  const odometerMin = useRef<HTMLInputElement>(null);
-  const odometerMax = useRef<HTMLInputElement>(null);
 
   const applyFilters = () => {
     dispatch(toggleLoading());
@@ -376,16 +346,6 @@ const useFilters = () => {
           {
             name: "State",
             value: auctionState.current?.value ?? "",
-            add: true,
-          },
-          {
-            name: "OdometerFrom",
-            value: odometerMin.current?.value ?? "",
-            add: true,
-          },
-          {
-            name: "OdometerTo",
-            value: odometerMax.current?.value ?? "",
             add: true,
           },
         ),
@@ -536,8 +496,6 @@ const useFilters = () => {
     models,
     auctionName,
     auctionState,
-    odometerMin,
-    odometerMax,
     vehicleTypes,
     titleTypes,
     bestOfferChecked,
