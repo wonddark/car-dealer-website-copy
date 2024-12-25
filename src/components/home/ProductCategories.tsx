@@ -4,7 +4,7 @@ import vehicleCategories from "@/data/vehicle_categories";
 
 const ProductCategories = () => {
   return (
-    <div className="product-catagories-wrapper py-3">
+    <div className="py-3">
       <div className="container-xl">
         <div className="row g-2 align-items-stretch overflow-x-auto flex-nowrap">
           {vehicleCategories.slice(0, 6).map((item) => (
