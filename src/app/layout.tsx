@@ -1,7 +1,6 @@
 "use client";
 
 import "../styles/style.css";
-import "../styles/style.scss";
 import Wrapper from "@/layouts/Wrapper";
 import React from "react";
 import Footer from "@/layouts/Footer";

@@ -305,7 +305,7 @@ export default function Filters() {
   );
 }
 
-const useFilters = () => {
+export const useFilters = () => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const r = useRouter();
