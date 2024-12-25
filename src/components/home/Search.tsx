@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
 import { getIsBestOffer } from "@/redux/features/vehicles.slice";
 import useTopProducts from "@/components/home/use-top-products";
+import FiltersBanner from "@/components/FiltersBanner";
 
 const Search = () => {
   const { response, loading } = useTopProducts();
@@ -19,26 +20,19 @@ const Search = () => {
       <div className="container-xl mb-3">
         <div className="card">
           <div className="card-body">
-            <div className="search-form d-lg-none2">
-              <div className="alternative-search-options">
-                <div className="ms-2">
-                  <button
-                    onClick={handleShow}
-                    className="btn btn-sm text-primary"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#suhaFilterOffcanvas"
-                    aria-controls="suhaFilterOffcanvas"
-                  >
-                    Filtros
-                    {activeFilters ? (
-                      <strong className="badge text-bg-primary rounded-pill ms-2">
-                        {activeFilters}
-                      </strong>
-                    ) : null}
-                  </button>
-                </div>
-              </div>
+            <div className="d-lg-none2 hstack">
+              <input type="search" className="form-control form-control-sm" />
+              <button
+                onClick={handleShow}
+                className="btn btn-outline-primary"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#suhaFilterOffcanvas"
+                aria-controls="suhaFilterOffcanvas"
+              >
+                <i className="ti ti-filter"></i>
+              </button>
             </div>
+            <FiltersBanner />
             {!loading && response.totalCount > 0 && (
               <p className="mb-0 mt-2">
                 <strong>{response.totalCount}</strong> vehículos encontrados

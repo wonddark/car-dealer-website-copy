@@ -1,10 +1,9 @@
 @import url("swiper/css/bundle");
-@import url("/node_modules/bootstrap/scss/bootstrap.scss");
 @import url("../../public/assets/css/animate.css");
 @import url("../../public/assets/css/nice-select.css");
 @import url("../../public/assets/css/tabler-icons.min.css");
-@import url("../../public/assets/css/bootstrap.min.css");
 @import url("../../public/assets/css/magnific-popup.css");
-@import url("../../public/assets/css/flaticon.css");
 @import url("../../public/assets/css/style.css");
+@import url("../../public/assets/css/flaticon.css");
+@import url("../../public/assets/css/bootstrap.min.css");
 @import url("../../public/assets/css/extra.css");
