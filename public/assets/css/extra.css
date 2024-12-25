@@ -2,8 +2,22 @@
     border-top: 1px solid #eaeaea;
     padding-top: 20px;
 }
+
 .logo-wrapper {
     padding-top: 8px;
     padding-bottom: 8px;
     height: 100%;
+}
+
+.noUi-connect {
+    background: #042cd7 !important;
+}
+
+.noUi-handle {
+    border-color: #042cd7 !important;
+}
+
+.filter-options-check {
+    max-height: 130px;
+    overflow: auto
 }
