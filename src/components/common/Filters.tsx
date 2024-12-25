@@ -106,7 +106,7 @@ export default function Filters() {
                         name="VehicleTypes"
                         value={item.key}
                         onChange={handleCheckChange}
-                        defaultChecked={vehicleTypeChecked(item.key)}
+                        checked={vehicleTypeChecked(item.key)}
                       />
                       <label className="form-check-label" htmlFor={item.key}>
                         {item.type}
