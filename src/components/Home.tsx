@@ -15,10 +15,10 @@ const Home = () => {
     >
       <div className="container-xl">
         <div className="row">
-          <div className="d-none d-lg-block col-3 top-0 bottom-0 position-sticky">
+          <div className="d-none d-lg-block col-3 py-3">
             <FiltersSidebar />
           </div>
-          <div className="col-12 col-lg-9">
+          <div className="col-12 col-lg-9 p-0">
             <ProductCategories />
             <Search />
             <TopProducts />
