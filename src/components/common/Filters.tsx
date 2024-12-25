@@ -133,7 +133,7 @@ export default function Filters() {
             <div className="widget price-range mb-4">
               <h6 className="widget-title mb-2">Año</h6>
               <div className="widget-desc">
-                <div className="hstack gap-4">
+                <div className="hstack gap-2">
                   <select
                     className="form-select"
                     aria-label="Default select example"
@@ -141,7 +141,7 @@ export default function Filters() {
                     name="YearFrom"
                     defaultValue={yearFrom}
                   >
-                    <option value="">Escoge un año</option>
+                    <option value="">Desde</option>
                     {YEARS.map((item) => (
                       <option key={item} value={item}>
                         {item}
@@ -155,7 +155,7 @@ export default function Filters() {
                     name="YearTo"
                     defaultValue={yearTo}
                   >
-                    <option value="">Escoge un año</option>
+                    <option value="">Hasta</option>
                     {YEARS.map((item) => (
                       <option
                         key={item}
