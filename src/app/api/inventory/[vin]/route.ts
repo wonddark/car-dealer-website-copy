@@ -13,7 +13,6 @@ export async function GET(
       return Response.json({ ...data }, { status: 200 });
     }
     const text = await response.text();
-    console.log(text);
     return Response.json(
       { data: {}, message: text },
       { status: response.status, statusText: response.statusText },
