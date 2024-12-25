@@ -12,7 +12,6 @@ export async function GET(request: NextRequest) {
     );
     if (response.status === 200) {
       const data = await response.json();
-      console.log(data.totalCount);
       return Response.json({ ...data }, { status: 200 });
     }
     if (response.status === 204) {
