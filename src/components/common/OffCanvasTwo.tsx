@@ -1,5 +1,6 @@
 import React, { MouseEventHandler } from "react";
 import Filters from "@/components/common/Filters";
+import FloatingResultsCounter from "@/components/FloatingResultsCounter";
 
 type Props = {
   handleShow: MouseEventHandler<HTMLButtonElement>;
@@ -23,6 +24,7 @@ const OffCanvasTwo = ({ handleShow, show }: Readonly<Props>) => {
         aria-label="Cerrar"
       ></button>
       <Filters />
+      <FloatingResultsCounter />
     </div>
   );
 };
