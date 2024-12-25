@@ -74,12 +74,7 @@ const EndMessage = ({
 }: Readonly<{
   length: number;
   loading: boolean;
-}>) => (
-  <>
-    {!loading && length === 0 && <EmptyResult />}
-    {!loading && length > 0 && <p>No hay más vehículos para mostrar.</p>}
-  </>
-);
+}>) => <>{!loading ? length === 0 && <EmptyResult /> : null}</>;
 
 const EmptyResult = () => {
   return (
