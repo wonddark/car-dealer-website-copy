@@ -13,7 +13,7 @@ const Search = () => {
     <>
       <div className="container-xl py-3">
         <div className="card">
-          <div className="card-body">
+          <div className="card-body p-2 p-md-3">
             <div className="vstack gap-2">
               <div className="hstack align-items-stretch gap-2">
                 <input
