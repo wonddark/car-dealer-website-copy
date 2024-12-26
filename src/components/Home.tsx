@@ -1,6 +1,5 @@
 import React from "react";
 import TopProducts from "./home/TopProducts";
-import ProductCategories from "./home/ProductCategories";
 import * as motion from "motion/react-client";
 import Search from "@/components/home/Search";
 import FiltersSidebar from "@/components/common/FiltersSidebar";
@@ -19,7 +18,6 @@ const Home = () => {
             <FiltersSidebar />
           </div>
           <div className="col-12 col-lg-9 p-0">
-            <ProductCategories />
             <Search />
             <TopProducts />
           </div>
