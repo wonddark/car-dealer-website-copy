@@ -23,7 +23,7 @@ export default function DismissTitleTypeFilter() {
       {appliedTitleTypes.map((item) => (
         <button
           key={item.key}
-          className="btn btn-sm btn-outline-secondary hstack gap-2 text-nowrap"
+          className="btn btn-outline-secondary d-flex align-items-center gap-2 text-nowrap"
           onClick={() => {
             const sp_copy = new URLSearchParams(sp);
             sp_copy.delete("TitleTypes", item.key);

@@ -1081,7 +1081,7 @@ textarea:invalid {
   left: 0;
   right: 0;
   z-index: 1000;
-  box-shadow: 0 0 0.25rem 0 rgb(15 15 15 / 10%);
+  box-shadow: 0 0 0.55rem 0 rgb(15 15 15 / 20%);
 }
 
 .cart-icon-wrap a {
@@ -1757,7 +1757,7 @@ li.suha-dropdown-menu .dropdown-trigger-btn.active i {
 }
 
 .suha-filter-offcanvas-wrap {
-  width: 270px !important;
+  width: 77% !important;
   border-right: 0;
   background-color: #fff;
 }
