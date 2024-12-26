@@ -12,7 +12,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   getIsBestOffer,
   resetData,
-  toggleBestOffer,
+  setBestOffer,
   toggleLoading,
 } from "@/redux/features/vehicles.slice";
 import { VehicleTitle, VehicleType } from "@/types/vehicle";
@@ -42,6 +42,7 @@ export default function Filters() {
     modelChecked,
     vehicleTypeChecked,
     titleChecked,
+    fuelTypeChecked,
     applyFilters,
     handleFilterYearChange,
   } = useFilters();
@@ -282,6 +283,36 @@ export default function Filters() {
             </div>
           </div>
           <div className="col-12">
+            <div className="widget catagory mb-4">
+              <h6 className="widget-title mb-2">Tipo de combustible</h6>
+              <FilterOptionsCheckContainer>
+                {[
+                  "Gasoline",
+                  "Gasoline Hybrid",
+                  "Gasoline Plug-In Hybrid",
+                  "Electric",
+                  "Diesel",
+                  "Flex",
+                ].map((item) => (
+                  <div key={item + uuidv4()} className="form-check">
+                    <input
+                      className="form-check-input"
+                      id={item}
+                      type="checkbox"
+                      name="FuelTypes"
+                      value={item}
+                      onChange={handleCheckChange}
+                      checked={fuelTypeChecked(item)}
+                    />
+                    <label className="form-check-label" htmlFor={item}>
+                      {item}
+                    </label>
+                  </div>
+                ))}
+              </FilterOptionsCheckContainer>
+            </div>
+          </div>
+          <div className="col-12">
             <div className="widget color mb-4">
               <div className="widget-desc">
                 <div className="vstack gap-3">
@@ -459,8 +490,10 @@ export const useFilters = () => {
   };
 
   const isBestOffer = useAppSelector(getIsBestOffer);
-  const handleToggleBestOffer: ChangeEventHandler<HTMLInputElement> = () => {
-    dispatch(toggleBestOffer());
+  const handleToggleBestOffer: ChangeEventHandler<HTMLInputElement> = ({
+    target: { checked },
+  }) => {
+    dispatch(setBestOffer(checked));
   };
 
   const handleCheckChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -558,6 +591,11 @@ export const useFilters = () => {
 
     return titles.includes(titleVal);
   };
+  const fuelTypeChecked = (titleVal: string) => {
+    const fuelTypes = searchParams.getAll("FuelTypes") ?? [];
+
+    return fuelTypes.includes(titleVal);
+  };
 
   const yearFrom = searchParams.get("YearFrom") ?? "";
   const yearTo = searchParams.get("YearTo") ?? "";
@@ -581,6 +619,7 @@ export const useFilters = () => {
     auctionState,
     vehicleTypes,
     titleTypes,
+    fuelTypeChecked,
     bestOfferChecked,
     buyNowChecked,
     odometerMinVal,
