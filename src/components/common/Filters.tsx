@@ -208,9 +208,10 @@ export default function Filters() {
               <h6 className="widget-title mb-2">Marca</h6>
               <div className="position-relative">
                 <input
-                  className="w-100 position-sticky top-0"
+                  className="form-control border-secondary position-sticky top-0"
                   type="search"
                   onChange={filterBrands}
+                  placeholder="Buscar marca..."
                 />
                 <FilterOptionsCheckContainer>
                   {!brandsAndModels.loading &&
@@ -246,9 +247,10 @@ export default function Filters() {
               <h6 className="widget-title mb-2">Modelo</h6>
               <div className="position-relative">
                 <input
-                  className="w-100"
+                  className="form-control border-secondary"
                   type="search"
                   onChange={filterModels}
+                  placeholder="Buscar modelo"
                 />
                 <FilterOptionsCheckContainer>
                   {!brandsAndModels.loading &&
@@ -282,7 +284,7 @@ export default function Filters() {
           <div className="col-12">
             <div className="widget color mb-4">
               <div className="widget-desc">
-                <div className="mb-2">
+                <div className="vstack gap-3">
                   <input
                     type="text"
                     className="form-control"
@@ -290,11 +292,9 @@ export default function Filters() {
                     ref={auctionName}
                     defaultValue={auctionVal}
                   />
-                </div>
-                <div className="mb-3">
                   <input
                     type="text"
-                    className="form-control form-control-sm"
+                    className="form-control"
                     placeholder="Estado"
                     ref={auctionState}
                     defaultValue={stateVal}
