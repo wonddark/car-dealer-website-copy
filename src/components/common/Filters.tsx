@@ -56,17 +56,14 @@ export default function Filters() {
                   className="form-check-input"
                   type="checkbox"
                   role="switch"
-                  id="flexSwitchCheckDefault"
-                  name="InBuyNow"
+                  id="best-offer"
+                  name="IsBestOffer"
                   value="true"
-                  onChange={handleCheckChange}
-                  checked={buyNowChecked}
+                  checked={bestOfferChecked}
+                  onChange={handleToggleBestOffer}
                 />
-                <label
-                  className="form-check-label"
-                  htmlFor="flexSwitchCheckDefault"
-                >
-                  Para comprar ahora
+                <label className="form-check-label" htmlFor="best-offer">
+                  Solo mejores ofertas
                 </label>
               </div>
             </div>
@@ -78,14 +75,17 @@ export default function Filters() {
                   className="form-check-input"
                   type="checkbox"
                   role="switch"
-                  id="best-offer"
-                  name="IsBestOffer"
+                  id="flexSwitchCheckDefault"
+                  name="InBuyNow"
                   value="true"
-                  checked={bestOfferChecked}
-                  onChange={handleToggleBestOffer}
+                  onChange={handleCheckChange}
+                  checked={buyNowChecked}
                 />
-                <label className="form-check-label" htmlFor="best-offer">
-                  Solo mejores ofertas
+                <label
+                  className="form-check-label"
+                  htmlFor="flexSwitchCheckDefault"
+                >
+                  Para comprar ahora
                 </label>
               </div>
             </div>
