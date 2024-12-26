@@ -42,9 +42,9 @@ const vehiclesSlice = createSlice({
       };
     },
     resetData: (state) => ({ ...state, response: initialState.response }),
-    toggleBestOffer: (state) => ({
+    setBestOffer: (state, { payload }: PayloadAction<boolean>) => ({
       ...initialState,
-      onlyBestOffer: !state.onlyBestOffer,
+      onlyBestOffer: payload,
     }),
     toggleLoading: (state) => ({
       ...state,
@@ -64,13 +64,7 @@ const vehiclesSlice = createSlice({
 });
 
 export const {
-  actions: {
-    appendData,
-    resetData,
-    toggleBestOffer,
-    toggleError,
-    toggleLoading,
-  },
+  actions: { appendData, resetData, setBestOffer, toggleError, toggleLoading },
   selectors: { getResponse, getIsBestOffer, getLoadingStatus, getErrorStatus },
 } = vehiclesSlice;
 
