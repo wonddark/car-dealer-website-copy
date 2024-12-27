@@ -28,7 +28,8 @@ export default function FiltersBanner() {
           onClick={clearAll}
           title="Limpiar filtros"
         >
-          <i className="ti ti-filter-off"></i>
+          Limpiar todos
+          {/*<i className="ti ti-filter-off"></i>*/}
         </button>
       )}
       <div className="hstack overflow-auto gap-2 flex-fill">

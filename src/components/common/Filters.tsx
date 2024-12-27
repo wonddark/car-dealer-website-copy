@@ -47,7 +47,7 @@ export default function Filters() {
     handleFilterYearChange,
   } = useFilters();
   return (
-    <div className="offcanvas-body py-5">
+    <div className="offcanvas-body py-5 py-lg-0 ps-0">
       <div className="container">
         <div className="row">
           <div className="col-12">
@@ -613,6 +613,29 @@ export const useFilters = () => {
     r.push(pathname + "?" + sp);
   };
 
+  const orderBySelected = (val: string) => {
+    const sortBy = searchParams.get("SortBy") ?? "";
+    return val === sortBy;
+  };
+
+  const orderActive = (val: string) => {
+    const order = searchParams.get("IsDescending") ?? "true";
+    return val === order;
+  };
+
+  const changeSort = (val: string) => {
+    dispatch(toggleLoading());
+    dispatch(resetData());
+    const sp = new URLSearchParams(searchParams.toString());
+    const currentSort = sp.get("IsDescending") ?? "";
+    if (currentSort === val) {
+      sp.delete("IsDescending");
+    } else {
+      sp.set("IsDescending", val);
+    }
+    r.push(pathname + "?" + sp);
+  };
+
   return {
     brandsAndModels,
     auctionName,
@@ -638,5 +661,8 @@ export const useFilters = () => {
     filterModels,
     applyFilters,
     handleFilterYearChange,
+    orderBySelected,
+    orderActive,
+    changeSort,
   };
 };
