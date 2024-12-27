@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import useTopProducts from "@/components/home/use-top-products";
+import useVehiclesInventory from "@/hooks/useVehiclesInventory";
 
 export default function FloatingResultsCounter() {
-  const { response, loading, error } = useTopProducts();
+  const { response, loading, error } = useVehiclesInventory();
   return (
     <>
       {!loading && !error && (

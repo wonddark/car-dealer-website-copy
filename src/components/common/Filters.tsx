@@ -47,7 +47,7 @@ export default function Filters() {
     handleFilterYearChange,
   } = useFilters();
   return (
-    <div className="offcanvas-body py-5">
+    <div className="offcanvas-body py-5 py-lg-0 ps-0">
       <div className="container">
         <div className="row">
           <div className="col-12">

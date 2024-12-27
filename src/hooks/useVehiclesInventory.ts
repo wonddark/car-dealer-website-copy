@@ -11,7 +11,7 @@ import {
   toggleLoading,
 } from "@/redux/features/vehicles.slice";
 
-export default function useTopProducts() {
+export default function useVehiclesInventory() {
   const response = useAppSelector(getResponse);
   const isBestOffer = useAppSelector(getIsBestOffer);
   const loading = useAppSelector(getLoadingStatus);
@@ -37,7 +37,7 @@ export default function useTopProducts() {
       })
       .catch((reason) => {
         if (reason instanceof DOMException && reason.name === "AbortError") {
-          null;
+          return null;
         } else {
           dispatch(toggleError());
         }

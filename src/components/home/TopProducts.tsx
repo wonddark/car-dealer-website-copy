@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import useTopProducts from "@/components/home/use-top-products";
+import useVehiclesInventory from "@/hooks/useVehiclesInventory";
 import InfiniteVehiclesList from "@/components/InfiniteVehiclesList";
 
 const TopProducts = () => {
-  const { response, loading, error, getNextPage } = useTopProducts();
+  const { response, loading, error, getNextPage } = useVehiclesInventory();
   return (
     <InfiniteVehiclesList
       response={response}

@@ -2,12 +2,12 @@
 
 import React, { useState } from "react";
 import OffCanvasTwo from "@/components/common/OffCanvasTwo";
-import useTopProducts from "@/components/home/use-top-products";
+import useVehiclesInventory from "@/hooks/useVehiclesInventory";
 import FiltersBanner from "@/components/FiltersBanner";
 import { useFilters } from "@/components/common/Filters";
 
 const Search = () => {
-  const { response, loading } = useTopProducts();
+  const { response, loading } = useVehiclesInventory();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
   const { handleFilterYearChange, orderBySelected, orderActive, changeSort } =
