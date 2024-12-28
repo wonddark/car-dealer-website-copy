@@ -20,6 +20,7 @@ import OdometerFilter from "@/components/common/OdometerFilter";
 import { YEARS } from "@/data/options";
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
 import { v4 as uuidv4 } from "uuid";
+import { primaryDamagesDict } from "@/data/translations";
 
 export default function Filters() {
   const {
@@ -28,16 +29,16 @@ export default function Filters() {
     titleTypes,
     bestOfferChecked,
     buyNowChecked,
-    auctionName,
     auctionState,
     handleToggleBestOffer,
     handleCheckChange,
     filterBrands,
     filterModels,
-    auctionVal,
     stateVal,
     yearFrom,
     yearTo,
+    auctions,
+    primaryDamages,
     brandChecked,
     modelChecked,
     vehicleTypeChecked,
@@ -45,6 +46,8 @@ export default function Filters() {
     fuelTypeChecked,
     applyFilters,
     handleFilterYearChange,
+    auctionChecked,
+    primaryDamageChecked,
   } = useFilters();
   return (
     <div className="offcanvas-body py-5 py-lg-0 ps-0">
@@ -313,16 +316,55 @@ export default function Filters() {
             </div>
           </div>
           <div className="col-12">
+            <div className="widget catagory mb-4">
+              <h6 className="widget-title mb-2">Subasta</h6>
+              <FilterOptionsCheckContainer>
+                {auctions.data.map((item) => (
+                  <div key={item + uuidv4()} className="form-check">
+                    <input
+                      className="form-check-input"
+                      id={item}
+                      type="checkbox"
+                      name="Auction"
+                      value={item}
+                      onChange={handleCheckChange}
+                      checked={auctionChecked(item)}
+                    />
+                    <label className="form-check-label" htmlFor={item}>
+                      {item}
+                    </label>
+                  </div>
+                ))}
+              </FilterOptionsCheckContainer>
+            </div>
+          </div>
+          <div className="col-12">
+            <div className="widget catagory mb-4">
+              <h6 className="widget-title mb-2">Daños primarios</h6>
+              <FilterOptionsCheckContainer>
+                {primaryDamages.data.map((item) => (
+                  <div key={item + uuidv4()} className="form-check">
+                    <input
+                      className="form-check-input"
+                      id={item}
+                      type="checkbox"
+                      name="PrimaryDamages"
+                      value={item}
+                      onChange={handleCheckChange}
+                      checked={primaryDamageChecked(item)}
+                    />
+                    <label className="form-check-label" htmlFor={item}>
+                      {primaryDamagesDict[item]}
+                    </label>
+                  </div>
+                ))}
+              </FilterOptionsCheckContainer>
+            </div>
+          </div>
+          <div className="col-12">
             <div className="widget color mb-4">
               <div className="widget-desc">
                 <div className="vstack gap-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Subasta"
-                    ref={auctionName}
-                    defaultValue={auctionVal}
-                  />
                   <input
                     type="text"
                     className="form-control"
@@ -337,9 +379,7 @@ export default function Filters() {
           <div className="col-12">
             <button
               className="btn btn-lg btn-primary w-100"
-              disabled={
-                !auctionName.current?.value && !auctionState.current?.value
-              }
+              disabled={!auctionState.current?.value}
               onClick={applyFilters}
             >
               Aplicar
@@ -380,15 +420,19 @@ export const useFilters = () => {
           error: false,
         }),
       )
-      .catch(() =>
-        setBrandsAndModels({
-          original: {},
-          brands: [],
-          models: [],
-          loading: false,
-          error: true,
-        }),
-      );
+      .catch((reason) => {
+        if (reason instanceof DOMException && reason.name === "AbortError") {
+          return null;
+        } else {
+          setBrandsAndModels({
+            original: {},
+            brands: [],
+            models: [],
+            loading: false,
+            error: true,
+          });
+        }
+      });
 
     return () => {
       controller.abort();
@@ -465,7 +509,6 @@ export const useFilters = () => {
     },
     [searchParams],
   );
-  const auctionName = useRef<HTMLInputElement>(null);
   const auctionState = useRef<HTMLInputElement>(null);
 
   const applyFilters = () => {
@@ -474,18 +517,11 @@ export const useFilters = () => {
     r.push(
       pathname +
         "?" +
-        createQueryString(
-          {
-            name: "Auction",
-            value: auctionName.current?.value ?? "",
-            add: true,
-          },
-          {
-            name: "State",
-            value: auctionState.current?.value ?? "",
-            add: true,
-          },
-        ),
+        createQueryString({
+          name: "State",
+          value: auctionState.current?.value ?? "",
+          add: true,
+        }),
     );
   };
 
@@ -539,7 +575,13 @@ export const useFilters = () => {
       .then((res) =>
         setVehicleTypes({ data: res, loading: false, error: false }),
       )
-      .catch(() => setVehicleTypes({ data: [], loading: false, error: true }));
+      .catch((reason) => {
+        if (reason instanceof DOMException && reason.name === "AbortError") {
+          return null;
+        } else {
+          setVehicleTypes({ data: [], loading: false, error: true });
+        }
+      });
 
     return () => {
       controller.abort();
@@ -558,7 +600,13 @@ export const useFilters = () => {
     })
       .then((res) => res.json())
       .then((res) => setTitleTypes({ data: res, loading: false, error: false }))
-      .catch(() => setTitleTypes({ data: [], loading: false, error: true }));
+      .catch((reason) => {
+        if (reason instanceof DOMException && reason.name === "AbortError") {
+          return null;
+        } else {
+          setTitleTypes({ data: [], loading: false, error: true });
+        }
+      });
 
     return () => {
       controller.abort();
@@ -569,7 +617,6 @@ export const useFilters = () => {
   const buyNowChecked = Boolean(searchParams.get("InBuyNow"));
   const odometerMinVal = searchParams.get("OdometerFrom") ?? undefined;
   const odometerMaxVal = searchParams.get("OdometerTo") ?? undefined;
-  const auctionVal = searchParams.get("Auction") ?? undefined;
   const stateVal = searchParams.get("State") ?? undefined;
   const brandChecked = (brandVal: string) => {
     const brands = searchParams.getAll("Makes") ?? [];
@@ -636,9 +683,76 @@ export const useFilters = () => {
     r.push(pathname + "?" + sp);
   };
 
+  const [auctions, setAuctions] = useState<{
+    data: string[];
+    loading: boolean;
+    error: boolean;
+  }>({ data: [], loading: true, error: false });
+
+  const auctionChecked = (name: string) => {
+    const auctions = searchParams.getAll("Auction") ?? [];
+
+    return auctions.includes(name);
+  };
+
+  const getAuctions = () => {
+    const controller = new AbortController();
+    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/auctions`, {
+      signal: controller.signal,
+    })
+      .then((res) => res.json())
+      .then((data) => setAuctions({ data, loading: false, error: false }))
+      .catch((reason) => {
+        if (reason instanceof DOMException && reason.name === "AbortError") {
+          return null;
+        } else {
+          setAuctions({ data: [], loading: false, error: true });
+        }
+      });
+
+    return () => {
+      controller.abort();
+    };
+  };
+
+  useEffect(getAuctions, []);
+
+  const [primaryDamages, setPrimaryDamages] = useState<{
+    data: string[];
+    loading: boolean;
+    error: boolean;
+  }>({ data: [], loading: true, error: false });
+
+  const primaryDamageChecked = (value: string) => {
+    const damages = searchParams.getAll("PrimaryDamages") ?? [];
+
+    return damages.includes(value);
+  };
+
+  const getPrimaryDamages = () => {
+    const controller = new AbortController();
+    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/primary-damages`, {
+      signal: controller.signal,
+    })
+      .then((res) => res.json())
+      .then((data) => setPrimaryDamages({ data, loading: false, error: false }))
+      .catch((reason) => {
+        if (reason instanceof DOMException && reason.name === "AbortError") {
+          return null;
+        } else {
+          setPrimaryDamages({ data: [], loading: false, error: true });
+        }
+      });
+
+    return () => {
+      controller.abort();
+    };
+  };
+
+  useEffect(getPrimaryDamages, []);
+
   return {
     brandsAndModels,
-    auctionName,
     auctionState,
     vehicleTypes,
     titleTypes,
@@ -647,10 +761,11 @@ export const useFilters = () => {
     buyNowChecked,
     odometerMinVal,
     odometerMaxVal,
-    auctionVal,
     stateVal,
     yearFrom,
     yearTo,
+    auctions,
+    primaryDamages,
     brandChecked,
     modelChecked,
     vehicleTypeChecked,
@@ -664,5 +779,7 @@ export const useFilters = () => {
     orderBySelected,
     orderActive,
     changeSort,
+    auctionChecked,
+    primaryDamageChecked,
   };
 };

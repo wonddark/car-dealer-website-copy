@@ -7,13 +7,13 @@ const Footer = () => {
       <div className="suha-footer-nav">
         <ul className="h-100 d-flex align-items-center justify-content-between ps-0 d-flex rtl-flex-d-row-r">
           <li>
-            <Link href="/messages">
-              <i className="ti ti-message"></i>Chat
+            <Link href="/" style={{ pointerEvents: "none" }}>
+              <i className="ti ti-basket"></i>Cart
             </Link>
           </li>
           <li>
-            <Link href="/" style={{ pointerEvents: "none" }}>
-              <i className="ti ti-basket"></i>Cart
+            <Link href="/vehicles/wishlist">
+              <i className="ti ti-heart"></i>Wishlist
             </Link>
           </li>
           <li>
@@ -22,8 +22,9 @@ const Footer = () => {
             </Link>
           </li>
           <li>
-            <Link href="/vehicles/wishlist">
-              <i className="ti ti-heart"></i>Wishlist
+            <Link href="/vehicles">
+              <i className="ti ti-car-garage"></i>
+              Inventario
             </Link>
           </li>
           <li>

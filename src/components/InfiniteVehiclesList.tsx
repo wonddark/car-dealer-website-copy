@@ -49,16 +49,18 @@ const EndMessage = ({
 
 const EmptyResult = () => {
   return (
-    <div className="d-flex flex-column align-items-center mx-auto">
-      <div style={{ maxWidth: 200 }} className="mb-4">
-        <NoData />
+    <div className="card">
+      <div className="card-body d-flex flex-column align-items-center py-5">
+        <div style={{ maxWidth: 200 }} className="mb-4">
+          <NoData />
+        </div>
+        <p className="text-center display-6 fw-medium">
+          No tenemos vehículos para mostrar
+        </p>
+        <p className="text-center fs-5">
+          Te sugerimos que modifiques el criterio de búsqueda.
+        </p>
       </div>
-      <p className="text-center display-6 fw-medium">
-        No tenemos vehículos para mostrar
-      </p>
-      <p className="text-center fs-5">
-        Te sugerimos que modifiques el criterio de búsqueda.
-      </p>
     </div>
   );
 };
