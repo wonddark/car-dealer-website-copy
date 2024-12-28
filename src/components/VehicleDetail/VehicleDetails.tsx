@@ -18,7 +18,7 @@ export default function VehicleDetails({
         title={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
       />
       <div className="page-content-wrapper py-3 mt-0">
-        <div className="container-xl">
+        <div className="container-xxl">
           <div className="row row-gap-md-4 align-items-stretch justconten">
             <img
               src={vehicle.imageUrl}

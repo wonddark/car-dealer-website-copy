@@ -9,7 +9,7 @@ export default function CategoriesList() {
       <HeaderThree links="" title="Categorías" />
 
       <div className="page-content-wrapper mt-3">
-        <div className="container-xl">
+        <div className="container-xxl">
           <div className="row g-2 align-items-stretch">
             {vehicleCategories.map((item) => (
               <div key={item.title} className="col-6 col-md-3 col-xl-2">
