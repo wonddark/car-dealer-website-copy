@@ -13,7 +13,7 @@ const HeaderTwo = ({ links, title }: { links: string; title: string }) => {
   return (
     <>
       <div className="header-area" id="headerArea">
-        <div className="container-xl h-100 d-flex align-items-center justify-content-between rtl-flex-d-row-r">
+        <div className="container-xxl h-100 d-flex align-items-center justify-content-between rtl-flex-d-row-r">
           <div className="back-button me-2">
             <Link href={`/${links}?${sp.toString()}`}>
               <i className="ti ti-arrow-left"></i>
@@ -30,11 +30,11 @@ const HeaderTwo = ({ links, title }: { links: string; title: string }) => {
             data-bs-target="#suhaOffcanvas"
             aria-controls="suhaOffcanvas"
           >
-            <div onClick={() => handleShow()}>
+            <button onClick={() => handleShow()}>
               <span></span>
               <span></span>
               <span></span>
-            </div>
+            </button>
           </div>
         </div>
       </div>

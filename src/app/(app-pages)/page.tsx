@@ -16,7 +16,7 @@ export default function Index() {
       transition={{ type: "keyframes" }}
     >
       <div className="container-xxl">
-        <div className="vstack g-3 gap-2">
+        <div className="vstack g-2 gap-2">
           <BuyNow />
           <MostWanted />
         </div>
