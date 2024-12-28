@@ -1,9 +1,9 @@
 import FiltersSidebar from "@/components/common/FiltersSidebar";
 import Search from "@/components/home/Search";
-import TopProducts from "@/components/home/TopProducts";
+import VehiclesInventory from "@/components/home/VehiclesInventory";
 import React from "react";
 
-export default function VehiclesInventory() {
+export default function VehiclesInventoryPage() {
   return (
     <div className="container-xl">
       <div className="row">
@@ -12,7 +12,7 @@ export default function VehiclesInventory() {
         </div>
         <div className="col-12 col-lg-9 p-0 vstack g-2 gap-2">
           <Search />
-          <TopProducts />
+          <VehiclesInventory />
         </div>
       </div>
     </div>

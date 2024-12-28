@@ -4,7 +4,7 @@ import React from "react";
 import useVehiclesInventory from "@/hooks/useVehiclesInventory";
 import InfiniteVehiclesList from "@/components/InfiniteVehiclesList";
 
-const TopProducts = () => {
+const VehiclesInventory = () => {
   const { response, loading, error, getNextPage } = useVehiclesInventory();
   return (
     <InfiniteVehiclesList
@@ -15,4 +15,4 @@ const TopProducts = () => {
   );
 };
 
-export default TopProducts;
+export default VehiclesInventory;
