@@ -1,7 +1,11 @@
 "use client";
 
 import React from "react";
-import { getIsBestOffer, setBestOffer } from "@/redux/features/vehicles.slice";
+import {
+  getIsBestOffer,
+  resetData,
+  setBestOffer,
+} from "@/redux/features/vehicles.slice";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import DismissVehicleTypeFilter from "@/components/DismissVehicleTypeFilter";
@@ -16,6 +20,7 @@ export default function FiltersBanner() {
   const sp = useSearchParams();
   const dispatch = useAppDispatch();
   const clearAll = () => {
+    dispatch(resetData());
     dispatch(setBestOffer(false));
     r.push(pathname);
   };
