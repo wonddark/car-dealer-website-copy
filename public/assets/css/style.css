@@ -670,7 +670,7 @@ textarea:invalid {
 }
 
 .page-content-wrapper {
-  margin-top: 3.125rem;
+  margin-top: 6.125rem;
   margin-bottom: 3.125rem;
 }
 
@@ -838,14 +838,17 @@ textarea:invalid {
 .header-area {
   transition-duration: 500ms;
   background-color: #fff;
-  width: 100%;
-  height: 3.125rem;
+  height: fit-content;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
   box-shadow: 0 0 0.55rem 0 rgb(15 15 15 / 20%);
+}
+
+.header-area form {
+  padding-bottom: 8px;
 }
 
 .cart-icon-wrap a {

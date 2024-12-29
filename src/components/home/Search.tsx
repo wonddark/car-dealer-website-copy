@@ -17,13 +17,6 @@ const Search = () => {
       <div className="card">
         <div className="card-body p-2 p-md-3">
           <div className="vstack gap-2">
-            <div className="hstack align-items-stretch gap-2">
-              <input
-                type="search"
-                className="form-control border-secondary"
-                placeholder="Buscar por marca, modelo o VIN"
-              />
-            </div>
             <div className="hstack gap-2">
               <button
                 onClick={handleShow}
