@@ -2,10 +2,13 @@
 import OffCanvas from "@/components/common/OffCanvas";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const Header = () => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
+  const sp = useSearchParams();
+  const query = sp.get("SearchInput") ?? "";
 
   return (
     <>
@@ -74,6 +77,7 @@ const Header = () => {
                 className="form-control border-secondary"
                 placeholder="VIN, marca, modelo o número de lote"
                 name="SearchInput"
+                defaultValue={query}
               />
             </form>
           </div>
