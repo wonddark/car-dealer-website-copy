@@ -7,14 +7,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import {
-  getIsBestOffer,
-  resetData,
-  setBestOffer,
-  toggleLoading,
-} from "@/redux/features/vehicles.slice";
+import { resetData, toggleLoading } from "@/redux/features/vehicles.slice";
 import { VehicleTitle, VehicleType } from "@/types/vehicle";
 import OdometerFilter from "@/components/common/OdometerFilter";
 import { YEARS } from "@/data/options";
@@ -30,7 +25,6 @@ export default function Filters() {
     bestOfferChecked,
     buyNowChecked,
     auctionState,
-    handleToggleBestOffer,
     handleCheckChange,
     filterBrands,
     filterModels,
@@ -64,7 +58,7 @@ export default function Filters() {
                   name="IsBestOffer"
                   value="true"
                   checked={bestOfferChecked}
-                  onChange={handleToggleBestOffer}
+                  onChange={handleCheckChange}
                 />
                 <label className="form-check-label" htmlFor="best-offer">
                   Solo mejores ofertas
@@ -525,13 +519,6 @@ export const useFilters = () => {
     );
   };
 
-  const isBestOffer = useAppSelector(getIsBestOffer);
-  const handleToggleBestOffer: ChangeEventHandler<HTMLInputElement> = ({
-    target: { checked },
-  }) => {
-    dispatch(setBestOffer(checked));
-  };
-
   const handleCheckChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     const {
       target: { checked, name, value },
@@ -613,7 +600,6 @@ export const useFilters = () => {
     };
   }, []);
 
-  const bestOfferChecked = isBestOffer;
   const buyNowChecked = Boolean(searchParams.get("InBuyNow"));
   const odometerMinVal = searchParams.get("OdometerFrom") ?? undefined;
   const odometerMaxVal = searchParams.get("OdometerTo") ?? undefined;
@@ -643,6 +629,8 @@ export const useFilters = () => {
 
     return fuelTypes.includes(titleVal);
   };
+  const isBestOffer = searchParams.get("IsBestOffer") ?? "";
+  const bestOfferChecked = isBestOffer ? isBestOffer === "true" : true;
 
   const yearFrom = searchParams.get("YearFrom") ?? "";
   const yearTo = searchParams.get("YearTo") ?? "";
@@ -770,7 +758,6 @@ export const useFilters = () => {
     modelChecked,
     vehicleTypeChecked,
     titleChecked,
-    handleToggleBestOffer,
     handleCheckChange,
     filterBrands,
     filterModels,

@@ -1,13 +1,9 @@
 "use client";
 
 import React from "react";
-import {
-  getIsBestOffer,
-  resetData,
-  setBestOffer,
-} from "@/redux/features/vehicles.slice";
+import { resetData } from "@/redux/features/vehicles.slice";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import DismissVehicleTypeFilter from "@/components/DismissVehicleTypeFilter";
 import DismissTitleTypeFilter from "@/components/DismissTitleTypeFilter";
 import DismissBrandFilter from "@/components/DismissBrandFilter";
@@ -21,20 +17,18 @@ export default function FiltersBanner() {
   const dispatch = useAppDispatch();
   const clearAll = () => {
     dispatch(resetData());
-    dispatch(setBestOffer(false));
     r.push(pathname);
   };
-  const isBestOffer = useAppSelector(getIsBestOffer);
   return (
     <div className="hstack gap-2 overflow-auto">
-      {(Boolean(sp.toString().length) || isBestOffer) && (
+      {Boolean(sp.toString().length) && (
         <button
           className="btn btn-outline-secondary"
           onClick={clearAll}
           title="Limpiar filtros"
         >
-          Limpiar todos
-          {/*<i className="ti ti-filter-off"></i>*/}
+          <span>Limpiar</span>
+          <i className="ti ti-filter-off ms-1"></i>
         </button>
       )}
       <div className="hstack overflow-auto gap-2 flex-fill">

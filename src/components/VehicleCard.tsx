@@ -20,6 +20,11 @@ export default function VehicleCard({
     setImgUrl("/assets/img/core-img/sedan.png");
     setFullyLoaded(true);
   };
+  const linkClass = `product-thumbnail` + fullyLoaded ? "d-block" : "d-none";
+  const placeholderClass =
+    "ratio ratio-4x3 w-100 placeholder-glow mb-2" + !fullyLoaded
+      ? "d-none"
+      : "";
   return (
     <div className="card product-card h-100">
       <div className="card-body p-2 p-md-3 h-100">
@@ -28,7 +33,7 @@ export default function VehicleCard({
         </button>
         <div className="d-flex flex-column h-100">
           <Link
-            className={`product-thumbnail ${fullyLoaded ? "d-block" : "d-none"}`}
+            className={linkClass}
             href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
             target="_blank"
           >
@@ -41,11 +46,9 @@ export default function VehicleCard({
               onError={handleError}
             />
           </Link>
-          {!fullyLoaded ? (
-            <div className="ratio ratio-4x3 w-100 placeholder-glow mb-2">
-              <div className="h-100 w-100 placeholder rounded-2"></div>
-            </div>
-          ) : null}
+          <div className={placeholderClass}>
+            <div className="h-100 w-100 placeholder rounded-2"></div>
+          </div>
 
           <Link
             className="product-title"

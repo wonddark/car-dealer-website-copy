@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   appendData,
   getErrorStatus,
-  getIsBestOffer,
   getLoadingStatus,
   getResponse,
   toggleError,
@@ -13,7 +12,6 @@ import {
 
 export default function useVehiclesInventory() {
   const response = useAppSelector(getResponse);
-  const isBestOffer = useAppSelector(getIsBestOffer);
   const loading = useAppSelector(getLoadingStatus);
   const error = useAppSelector(getErrorStatus);
   const dispatch = useAppDispatch();
@@ -27,8 +25,7 @@ export default function useVehiclesInventory() {
         `${response.pageNumber + 1}` +
         "&PageSize=" +
         response.pageSize +
-        (sp.toString() !== "" ? `&${sp.toString()}` : "") +
-        (isBestOffer ? "&IsBestOffer=true" : ""),
+        (sp.toString() !== "" ? `&${sp.toString()}` : ""),
       { signal: controller.signal },
     )
       .then((res) => res.json())
@@ -46,7 +43,7 @@ export default function useVehiclesInventory() {
       controller.abort();
     };
   };
-  useEffect(getNextPage, [sp, isBestOffer]);
+  useEffect(getNextPage, []);
 
   return { response, loading, error, getNextPage };
 }
