@@ -3,7 +3,6 @@ import { DEFAULT_VEHICLE_PAGE_SIZE, VehicleResponse } from "@/types/vehicle";
 
 type VehiclesState = {
   response: VehicleResponse;
-  onlyBestOffer: boolean;
   status: {
     loading: boolean;
     error: boolean;
@@ -20,7 +19,6 @@ export const initialState: VehiclesState = {
     pageSize: DEFAULT_VEHICLE_PAGE_SIZE,
     data: [],
   },
-  onlyBestOffer: true,
   status: {
     loading: true,
     error: false,
@@ -42,10 +40,7 @@ const vehiclesSlice = createSlice({
       };
     },
     resetData: (state) => ({ ...state, response: initialState.response }),
-    setBestOffer: (state, { payload }: PayloadAction<boolean>) => ({
-      ...initialState,
-      onlyBestOffer: payload,
-    }),
+
     toggleLoading: (state) => ({
       ...state,
       status: { loading: true, error: false },
@@ -57,15 +52,14 @@ const vehiclesSlice = createSlice({
   },
   selectors: {
     getResponse: (state) => state.response,
-    getIsBestOffer: (state) => state.onlyBestOffer,
     getLoadingStatus: (state) => state.status.loading,
     getErrorStatus: (state) => state.status.error,
   },
 });
 
 export const {
-  actions: { appendData, resetData, setBestOffer, toggleError, toggleLoading },
-  selectors: { getResponse, getIsBestOffer, getLoadingStatus, getErrorStatus },
+  actions: { appendData, resetData, toggleError, toggleLoading },
+  selectors: { getResponse, getLoadingStatus, getErrorStatus },
 } = vehiclesSlice;
 
 export default vehiclesSlice;

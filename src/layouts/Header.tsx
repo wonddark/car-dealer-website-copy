@@ -2,10 +2,13 @@
 import OffCanvas from "@/components/common/OffCanvas";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useSearchParams } from "next/navigation";
 
 const Header = () => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
+  const sp = useSearchParams();
+  const query = sp.get("SearchInput") ?? "";
 
   return (
     <>
@@ -22,7 +25,22 @@ const Header = () => {
                   />
                 </Link>
               </div>
-              <div className="navbar-logo-container d-flex align-items-center">
+              <form
+                action="/vehicles"
+                className="d-none d-lg-block flex-fill mx-lg-5"
+                style={{ marginTop: 8 }}
+              >
+                <input type="text" hidden name="IsBestOffer" value="false" />
+                <input
+                  type="search"
+                  className="form-control form-control-sm border-secondary"
+                  placeholder="VIN, marca, modelo o número de lote"
+                  name="SearchInput"
+                  defaultValue={query}
+                />
+                <input type="submit" hidden />
+              </form>
+              <div className="d-flex align-items-center">
                 <div className="dropdown">
                   <button
                     className="btn rounded-circle"
@@ -68,13 +86,16 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <form action="/vehicles">
+            <form action="/vehicles" className="d-lg-none">
+              <input type="text" hidden name="IsBestOffer" value="false" />
               <input
                 type="search"
                 className="form-control border-secondary"
                 placeholder="VIN, marca, modelo o número de lote"
                 name="SearchInput"
+                defaultValue={query}
               />
+              <input type="submit" hidden />
             </form>
           </div>
         </div>

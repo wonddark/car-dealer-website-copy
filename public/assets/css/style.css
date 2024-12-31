@@ -674,6 +674,12 @@ textarea:invalid {
   margin-bottom: 3.125rem;
 }
 
+@media screen and (width >= 992px ) {
+  .page-content-wrapper {
+    margin-top: 3.35rem;
+  }
+}
+
 .pwa-install-alert {
   position: fixed;
   z-index: 999;
