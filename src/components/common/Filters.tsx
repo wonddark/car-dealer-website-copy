@@ -10,18 +10,19 @@ import React, {
 import { useAppDispatch } from "@/redux/hooks";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { resetData, toggleLoading } from "@/redux/features/vehicles.slice";
-import { VehicleTitle, VehicleType } from "@/types/vehicle";
 import OdometerFilter from "@/components/common/OdometerFilter";
-import { YEARS } from "@/data/options";
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
 import { v4 as uuidv4 } from "uuid";
-import { primaryDamagesDict } from "@/data/translations";
+import VehicleTypes from "@/components/filters/VehicleTypes";
+import ReleaseYear from "@/components/filters/ReleaseYear";
+import TitleTypes from "@/components/filters/TitleTypes";
+import FuelType from "../filters/FuelType";
+import PrimaryDamages from "@/components/filters/PrimaryDamages";
+import AuctionNames from "../filters/AuctionNames";
 
 export default function Filters() {
   const {
     brandsAndModels,
-    vehicleTypes,
-    titleTypes,
     bestOfferChecked,
     buyNowChecked,
     auctionState,
@@ -29,19 +30,9 @@ export default function Filters() {
     filterBrands,
     filterModels,
     stateVal,
-    yearFrom,
-    yearTo,
-    auctions,
-    primaryDamages,
     brandChecked,
     modelChecked,
-    vehicleTypeChecked,
-    titleChecked,
-    fuelTypeChecked,
     applyFilters,
-    handleFilterYearChange,
-    auctionChecked,
-    primaryDamageChecked,
   } = useFilters();
   return (
     <div className="offcanvas-body py-5 py-lg-0 ps-0">
@@ -89,35 +80,7 @@ export default function Filters() {
             </div>
           </div>
           <div className="col-12">
-            <div className="widget catagory mb-4">
-              <h6 className="widget-title mb-2">Tipo de vehículo</h6>
-              <FilterOptionsCheckContainer>
-                {!vehicleTypes.loading &&
-                  !vehicleTypes.error &&
-                  vehicleTypes.data.map((item) => (
-                    <div key={item.key} className="form-check">
-                      <input
-                        className="form-check-input"
-                        id={item.key}
-                        type="checkbox"
-                        name="VehicleTypes"
-                        value={item.key}
-                        onChange={handleCheckChange}
-                        checked={vehicleTypeChecked(item.key)}
-                      />
-                      <label className="form-check-label" htmlFor={item.key}>
-                        {item.type}
-                      </label>
-                    </div>
-                  ))}
-                {vehicleTypes.loading &&
-                  [0, 1, 2].map((i) => (
-                    <div key={i} className="placeholder">
-                      <div className="form-input placeholder-glow"></div>
-                    </div>
-                  ))}
-              </FilterOptionsCheckContainer>
-            </div>
+            <VehicleTypes />
           </div>
           <div className="col-12">
             <div className="widget price-range mb-4">
@@ -128,78 +91,10 @@ export default function Filters() {
             </div>
           </div>
           <div className="col-12">
-            <div className="widget price-range mb-4">
-              <h6 className="widget-title mb-2">Año</h6>
-              <div className="widget-desc">
-                <div className="hstack gap-2">
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    onChange={handleFilterYearChange}
-                    name="YearFrom"
-                    defaultValue={yearFrom}
-                  >
-                    <option value="">Desde</option>
-                    {YEARS.map((item) => (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    onChange={handleFilterYearChange}
-                    name="YearTo"
-                    defaultValue={yearTo}
-                  >
-                    <option value="">Hasta</option>
-                    {YEARS.map((item) => (
-                      <option
-                        key={item}
-                        value={item}
-                        disabled={Boolean(
-                          yearFrom && Number(yearFrom) > Number(item),
-                        )}
-                      >
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
+            <ReleaseYear />
           </div>
           <div className="col-12">
-            <div className="widget catagory mb-4">
-              <h6 className="widget-title mb-2">Tipo de título</h6>
-              <FilterOptionsCheckContainer>
-                {!titleTypes.loading &&
-                  !titleTypes.error &&
-                  titleTypes.data.map((item) => (
-                    <div key={item.key} className="form-check">
-                      <input
-                        className="form-check-input"
-                        id={item.key}
-                        type="checkbox"
-                        name="TitleTypes"
-                        value={item.key}
-                        onChange={handleCheckChange}
-                        checked={titleChecked(item.key)}
-                      />
-                      <label className="form-check-label" htmlFor={item.key}>
-                        {item.meaning}
-                      </label>
-                    </div>
-                  ))}
-                {titleTypes.loading &&
-                  [0, 1, 2].map((i) => (
-                    <div key={i} className="placeholder">
-                      <div className="form-input placeholder-glow"></div>
-                    </div>
-                  ))}
-              </FilterOptionsCheckContainer>
-            </div>
+            <TitleTypes />
           </div>
           <div className="col-12">
             <div className="widget catagory mb-4">
@@ -280,80 +175,13 @@ export default function Filters() {
             </div>
           </div>
           <div className="col-12">
-            <div className="widget catagory mb-4">
-              <h6 className="widget-title mb-2">Tipo de combustible</h6>
-              <FilterOptionsCheckContainer>
-                {[
-                  "Gasoline",
-                  "Gasoline Hybrid",
-                  "Gasoline Plug-In Hybrid",
-                  "Electric",
-                  "Diesel",
-                  "Flex",
-                ].map((item) => (
-                  <div key={item + uuidv4()} className="form-check">
-                    <input
-                      className="form-check-input"
-                      id={item}
-                      type="checkbox"
-                      name="FuelTypes"
-                      value={item}
-                      onChange={handleCheckChange}
-                      checked={fuelTypeChecked(item)}
-                    />
-                    <label className="form-check-label" htmlFor={item}>
-                      {item}
-                    </label>
-                  </div>
-                ))}
-              </FilterOptionsCheckContainer>
-            </div>
+            <FuelType />
           </div>
           <div className="col-12">
-            <div className="widget catagory mb-4">
-              <h6 className="widget-title mb-2">Subasta</h6>
-              <FilterOptionsCheckContainer>
-                {auctions.data.map((item) => (
-                  <div key={item + uuidv4()} className="form-check">
-                    <input
-                      className="form-check-input"
-                      id={item}
-                      type="checkbox"
-                      name="Auction"
-                      value={item}
-                      onChange={handleCheckChange}
-                      checked={auctionChecked(item)}
-                    />
-                    <label className="form-check-label" htmlFor={item}>
-                      {item}
-                    </label>
-                  </div>
-                ))}
-              </FilterOptionsCheckContainer>
-            </div>
+            <AuctionNames />
           </div>
           <div className="col-12">
-            <div className="widget catagory mb-4">
-              <h6 className="widget-title mb-2">Daños primarios</h6>
-              <FilterOptionsCheckContainer>
-                {primaryDamages.data.map((item) => (
-                  <div key={item + uuidv4()} className="form-check">
-                    <input
-                      className="form-check-input"
-                      id={item}
-                      type="checkbox"
-                      name="PrimaryDamages"
-                      value={item}
-                      onChange={handleCheckChange}
-                      checked={primaryDamageChecked(item)}
-                    />
-                    <label className="form-check-label" htmlFor={item}>
-                      {primaryDamagesDict[item]}
-                    </label>
-                  </div>
-                ))}
-              </FilterOptionsCheckContainer>
-            </div>
+            <PrimaryDamages />
           </div>
           <div className="col-12">
             <div className="widget color mb-4">
@@ -548,58 +376,6 @@ export const useFilters = () => {
     }
   };
 
-  const [vehicleTypes, setVehicleTypes] = useState<{
-    data: VehicleType[];
-    loading: boolean;
-    error: boolean;
-  }>({ data: [], loading: true, error: false });
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/vehicle-type`, {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((res) =>
-        setVehicleTypes({ data: res, loading: false, error: false }),
-      )
-      .catch((reason) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") {
-          return null;
-        } else {
-          setVehicleTypes({ data: [], loading: false, error: true });
-        }
-      });
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
-
-  const [titleTypes, setTitleTypes] = useState<{
-    data: VehicleTitle[];
-    loading: boolean;
-    error: boolean;
-  }>({ data: [], loading: true, error: false });
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/vehicle-title`, {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((res) => setTitleTypes({ data: res, loading: false, error: false }))
-      .catch((reason) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") {
-          return null;
-        } else {
-          setTitleTypes({ data: [], loading: false, error: true });
-        }
-      });
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
-
   const buyNowChecked = Boolean(searchParams.get("InBuyNow"));
   const odometerMinVal = searchParams.get("OdometerFrom") ?? undefined;
   const odometerMaxVal = searchParams.get("OdometerTo") ?? undefined;
@@ -619,34 +395,8 @@ export const useFilters = () => {
 
     return types.includes(typeVal);
   };
-  const titleChecked = (titleVal: string) => {
-    const titles = searchParams.getAll("TitleTypes") ?? [];
-
-    return titles.includes(titleVal);
-  };
-  const fuelTypeChecked = (titleVal: string) => {
-    const fuelTypes = searchParams.getAll("FuelTypes") ?? [];
-
-    return fuelTypes.includes(titleVal);
-  };
   const isBestOffer = searchParams.get("IsBestOffer") ?? "";
   const bestOfferChecked = isBestOffer ? isBestOffer === "true" : true;
-
-  const yearFrom = searchParams.get("YearFrom") ?? "";
-  const yearTo = searchParams.get("YearTo") ?? "";
-  const handleFilterYearChange: ChangeEventHandler<HTMLSelectElement> = ({
-    target: { name, value },
-  }) => {
-    dispatch(toggleLoading());
-    dispatch(resetData());
-    const sp = new URLSearchParams(searchParams.toString());
-    if (value !== "") {
-      sp.set(name, value);
-    } else {
-      sp.delete(name);
-    }
-    r.push(pathname + "?" + sp);
-  };
 
   const orderBySelected = (val: string) => {
     const sortBy = searchParams.get("SortBy") ?? "";
@@ -671,102 +421,38 @@ export const useFilters = () => {
     r.push(pathname + "?" + sp);
   };
 
-  const [auctions, setAuctions] = useState<{
-    data: string[];
-    loading: boolean;
-    error: boolean;
-  }>({ data: [], loading: true, error: false });
-
-  const auctionChecked = (name: string) => {
-    const auctions = searchParams.getAll("Auction") ?? [];
-
-    return auctions.includes(name);
+  const handleOptionChange: ChangeEventHandler<HTMLSelectElement> = ({
+    target: { name, value },
+  }) => {
+    dispatch(toggleLoading());
+    dispatch(resetData());
+    const sp = new URLSearchParams(searchParams.toString());
+    if (value !== "") {
+      sp.set(name, value);
+    } else {
+      sp.delete(name);
+    }
+    r.push(pathname + "?" + sp);
   };
-
-  const getAuctions = () => {
-    const controller = new AbortController();
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/auctions`, {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((data) => setAuctions({ data, loading: false, error: false }))
-      .catch((reason) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") {
-          return null;
-        } else {
-          setAuctions({ data: [], loading: false, error: true });
-        }
-      });
-
-    return () => {
-      controller.abort();
-    };
-  };
-
-  useEffect(getAuctions, []);
-
-  const [primaryDamages, setPrimaryDamages] = useState<{
-    data: string[];
-    loading: boolean;
-    error: boolean;
-  }>({ data: [], loading: true, error: false });
-
-  const primaryDamageChecked = (value: string) => {
-    const damages = searchParams.getAll("PrimaryDamages") ?? [];
-
-    return damages.includes(value);
-  };
-
-  const getPrimaryDamages = () => {
-    const controller = new AbortController();
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/primary-damages`, {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((data) => setPrimaryDamages({ data, loading: false, error: false }))
-      .catch((reason) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") {
-          return null;
-        } else {
-          setPrimaryDamages({ data: [], loading: false, error: true });
-        }
-      });
-
-    return () => {
-      controller.abort();
-    };
-  };
-
-  useEffect(getPrimaryDamages, []);
 
   return {
     brandsAndModels,
     auctionState,
-    vehicleTypes,
-    titleTypes,
-    fuelTypeChecked,
     bestOfferChecked,
     buyNowChecked,
     odometerMinVal,
     odometerMaxVal,
     stateVal,
-    yearFrom,
-    yearTo,
-    auctions,
-    primaryDamages,
     brandChecked,
     modelChecked,
     vehicleTypeChecked,
-    titleChecked,
     handleCheckChange,
     filterBrands,
     filterModels,
     applyFilters,
-    handleFilterYearChange,
     orderBySelected,
     orderActive,
     changeSort,
-    auctionChecked,
-    primaryDamageChecked,
+    handleOptionChange,
   };
 };
