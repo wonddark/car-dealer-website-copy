@@ -30,7 +30,13 @@ const Header = () => {
                 className="d-none d-lg-block flex-fill mx-lg-5"
                 style={{ marginTop: 8 }}
               >
-                <input type="text" hidden name="IsBestOffer" value="false" />
+                <input
+                  type="text"
+                  hidden
+                  name="IsBestOffer"
+                  value="false"
+                  readOnly
+                />
                 <input
                   type="search"
                   className="form-control form-control-sm border-secondary"
@@ -87,7 +93,13 @@ const Header = () => {
               </div>
             </div>
             <form action="/vehicles" className="d-lg-none">
-              <input type="text" hidden name="IsBestOffer" value="false" />
+              <input
+                type="text"
+                hidden
+                name="IsBestOffer"
+                value="false"
+                readOnly
+              />
               <input
                 type="search"
                 className="form-control border-secondary"
