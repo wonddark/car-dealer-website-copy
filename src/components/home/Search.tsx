@@ -10,7 +10,7 @@ const Search = () => {
   const { response, loading } = useVehiclesInventory();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
-  const { handleFilterYearChange, orderBySelected, orderActive, changeSort } =
+  const { handleOptionChange, orderBySelected, orderActive, changeSort } =
     useFilters();
   return (
     <>
@@ -43,7 +43,7 @@ const Search = () => {
                     className="form-select"
                     aria-label="Default select example"
                     name="SortBy"
-                    onChange={handleFilterYearChange}
+                    onChange={handleOptionChange}
                   >
                     <option selected={orderBySelected("")} value="">
                       Ordenar por

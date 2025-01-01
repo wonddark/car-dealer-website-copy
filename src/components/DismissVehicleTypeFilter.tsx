@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { useFilters } from "@/components/common/Filters";
 import DismissFilter from "@/components/DismissFilter";
+import { useVehicleTypes } from "@/components/filters/VehicleTypes";
 
 export default function DismissVehicleTypeFilter() {
-  const { vehicleTypes } = useFilters();
+  const { data: vehicleTypes } = useVehicleTypes();
   const findFunction = (val: string) =>
-    vehicleTypes.data.find((token) => token.key === val);
+    vehicleTypes.find((token) => token.key === val);
   return (
     <DismissFilter
       filterName="VehicleTypes"
