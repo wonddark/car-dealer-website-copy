@@ -43,7 +43,7 @@ export default function useVehiclesInventory() {
       controller.abort();
     };
   };
-  useEffect(getNextPage, []);
+  useEffect(getNextPage, [sp]);
 
   return { response, loading, error, getNextPage };
 }
