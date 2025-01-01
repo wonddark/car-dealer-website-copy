@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Vehicle } from "@/types/vehicle";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
+import { renderCurrentOffer } from "@/utils/vehicle-data";
 
 export default function VehicleCard({
   vehicle,
@@ -120,12 +121,14 @@ export default function VehicleCard({
                         {vehicle.currentOffer > 0 ? (
                           <>
                             <strong className="me-1">
-                              ${vehicle.currentOffer.toLocaleString("en-US")}
+                              {renderCurrentOffer(vehicle.currentOffer)}
                             </strong>
                             <small>Oferta actual</small>
                           </>
                         ) : (
-                          <small>No hay oferta actualmente</small>
+                          <small>
+                            {renderCurrentOffer(vehicle.currentOffer)}
+                          </small>
                         )}
                       </p>
                     </div>
@@ -237,7 +240,7 @@ export default function VehicleCard({
                       <div className="d-flex justify-content-between">
                         <strong className="opacity-75">Oferta actual</strong>
                         <span className="text-end">
-                          ${vehicle.currentOffer ?? "No disponible"}
+                          {renderCurrentOffer(vehicle.currentOffer)}
                         </span>
                       </div>
                     </div>

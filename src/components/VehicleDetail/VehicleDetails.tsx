@@ -2,6 +2,7 @@ import HeaderTwo from "@/layouts/HeaderTwo";
 import OfferInput from "@/components/OfferInput";
 import { Vehicle } from "@/types/vehicle";
 import * as motion from "motion/react-client";
+import { renderCurrentOffer } from "@/utils/vehicle-data";
 
 export default function VehicleDetails({
   vehicle,
@@ -180,9 +181,7 @@ export default function VehicleDetails({
                     <div className="hstack">
                       <strong className="text-muted">Oferta actual</strong>
                       <span className="text-end ms-auto">
-                        {vehicle.currentOffer
-                          ? `$${vehicle.currentOffer}`
-                          : "No hay ofertas aún"}
+                        {renderCurrentOffer(vehicle.currentOffer)}
                       </span>
                     </div>
                     <div className="hstack">
