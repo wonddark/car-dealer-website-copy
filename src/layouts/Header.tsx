@@ -40,7 +40,7 @@ const Header = () => {
                 <input
                   type="search"
                   className="form-control form-control-sm border-secondary"
-                  placeholder="VIN, marca, modelo o número de lote"
+                  placeholder="VIN, marca, modelo o número de lote separados por comas"
                   name="SearchInput"
                   defaultValue={query}
                 />
