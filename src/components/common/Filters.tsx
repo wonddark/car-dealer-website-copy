@@ -19,6 +19,7 @@ import TitleTypes from "@/components/filters/TitleTypes";
 import FuelType from "../filters/FuelType";
 import PrimaryDamages from "@/components/filters/PrimaryDamages";
 import AuctionNames from "../filters/AuctionNames";
+import AuctionDate from "@/components/filters/AuctionDate";
 
 export default function Filters() {
   const {
@@ -182,6 +183,9 @@ export default function Filters() {
           </div>
           <div className="col-12">
             <PrimaryDamages />
+          </div>
+          <div className="col-12">
+            <AuctionDate />
           </div>
           <div className="col-12">
             <div className="widget color mb-4">
