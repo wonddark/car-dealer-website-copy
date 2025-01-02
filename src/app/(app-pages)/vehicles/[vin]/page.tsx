@@ -4,6 +4,7 @@ import { Vehicle } from "@/types/vehicle";
 type Props = {
   params: { vin: string };
 };
+
 export default async function VehicleDetailsPage(props: Readonly<Props>) {
   const {
     params: { vin },
@@ -33,6 +34,21 @@ export async function generateStaticParams(): Promise<{ vin: string }[]> {
       ]),
     ).map((item) => ({ vin: item }));
   } catch (e) {
+    console.error(e);
     return [];
   }
+}
+
+export async function generateMetadata(props: Readonly<Props>) {
+  const {
+    params: { vin },
+  } = props;
+  const vehicle = await fetch(
+    process.env.API_ENDPOINT + `/auction-inventories?vin=${vin}`,
+  ).then((res) => res.json());
+
+  return {
+    title: `${vehicle.year} ${vehicle.make} ${vehicle.model}`,
+    description: `${vehicle.year} ${vehicle.make} ${vehicle.model} subasta carros SUVs camionetas compra inmediata florida`,
+  };
 }
