@@ -42,7 +42,7 @@ export default function VehicleCard({
               className="mb-2 rounded-2 object-fit-cover ratio ratio-4x3"
               style={{ aspectRatio: "4/3" }}
               src={imgUrl}
-              alt={vehicle.titleCode}
+              alt={`${vehicle.year} ${vehicle.make} ${vehicle.model} subasta carros suv camionetas camiones compra inmediata florida usa`}
               onLoad={() => setFullyLoaded(true)}
               onError={handleError}
             />
