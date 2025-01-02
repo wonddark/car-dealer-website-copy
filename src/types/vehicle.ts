@@ -31,7 +31,7 @@ export type Vehicle = {
   titleDeliveryFee: number;
   totalCost: number;
   auctionLocation: string;
-  saleDate: string;
+  saleAuctionDate: string;
   auction: string;
   laneAndItem: string;
   lastUpdate: string;

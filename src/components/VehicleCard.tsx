@@ -6,6 +6,14 @@ import { Vehicle } from "@/types/vehicle";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
 import { renderCurrentOffer } from "@/utils/vehicle-data";
+import dayjs from "dayjs";
+import duration from "dayjs/plugin/duration";
+import relativeTime from "dayjs/plugin/relativeTime";
+import es from "dayjs/locale/es-us";
+
+dayjs.extend(duration);
+dayjs.extend(relativeTime);
+dayjs.locale(es);
 
 export default function VehicleCard({
   vehicle,
@@ -26,12 +34,22 @@ export default function VehicleCard({
     "ratio ratio-4x3 w-100 placeholder-glow mb-2" + !fullyLoaded
       ? "d-none"
       : "";
+  const dateDiff = dayjs(vehicle.saleAuctionDate ?? undefined).diff(
+    dayjs(),
+    "days",
+  );
   return (
     <div className="card product-card h-100">
       <div className="card-body p-2 p-md-3 h-100">
         <button className="wishlist-btn">
           <i className="ti ti-heart"></i>
         </button>
+        <div
+          className={`badge text-bg-${dateDiff > 5 ? "success" : "danger"} rounded-pill p-1 px-2 hstack gap-1`}
+        >
+          <i className="ti ti-clock-play"></i>
+          <span>{dayjs(vehicle.saleAuctionDate).fromNow()}</span>
+        </div>
         <div className="d-flex flex-column h-100">
           <Link
             className={linkClass}
@@ -217,7 +235,11 @@ export default function VehicleCard({
                       <div className="d-flex justify-content-between">
                         <strong className="opacity-75">Fecha de venta</strong>
                         <span className="text-end">
-                          {vehicle.saleDate ?? "No disponible"}
+                          {vehicle.saleAuctionDate
+                            ? dayjs(vehicle.saleAuctionDate).format(
+                                "DD/MM/YYYY HH:mm",
+                              )
+                            : "No disponible"}
                         </span>
                       </div>
                       <hr className="border-1 border-secondary m-0" />

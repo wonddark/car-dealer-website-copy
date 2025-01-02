@@ -161,7 +161,7 @@ export default function VehicleDetails({
                     <div className="hstack">
                       <strong>Información de la oferta</strong>
                       <span className="text-end ms-auto">
-                        {vehicle.saleDate}
+                        {vehicle.saleAuctionDate}
                       </span>
                     </div>
                     <div className="hstack">
