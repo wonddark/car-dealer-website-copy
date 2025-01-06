@@ -9,27 +9,45 @@ export default function PrimaryDamages() {
   const { damages, checked } = usePrimaryDamages();
   const { handleCheckChange: handleChange } = useFilters();
   return (
-    <div className="widget catagory mb-4">
-      <h6 className="widget-title mb-2">Daños primarios</h6>
-      <FilterOptionsCheckContainer>
-        {damages.data.map((item) => (
-          <div key={item + uuidv4()} className="form-check">
-            <input
-              className="form-check-input"
-              id={item}
-              type="checkbox"
-              name="PrimaryDamages"
-              value={item}
-              onChange={handleChange}
-              checked={checked(item)}
-            />
-            <label className="form-check-label" htmlFor={item}>
-              {primaryDamagesDict[item]}
-            </label>
-          </div>
-        ))}
-      </FilterOptionsCheckContainer>
-    </div>
+    <>
+      <h2 className="accordion-header">
+        <button
+          className="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapse-primary-damages"
+          aria-controls="collapse-primary-damages"
+        >
+          <strong>Daños primarios</strong>
+        </button>
+      </h2>
+      <div
+        id="collapse-primary-damages"
+        className="accordion-collapse collapse"
+        data-bs-parent="#accordion-filters"
+      >
+        <div className="accordion-body">
+          <FilterOptionsCheckContainer>
+            {damages.data.map((item) => (
+              <div key={item + uuidv4()} className="form-check">
+                <input
+                  className="form-check-input"
+                  id={item}
+                  type="checkbox"
+                  name="PrimaryDamages"
+                  value={item}
+                  onChange={handleChange}
+                  checked={checked(item)}
+                />
+                <label className="form-check-label" htmlFor={item}>
+                  {primaryDamagesDict[item]}
+                </label>
+              </div>
+            ))}
+          </FilterOptionsCheckContainer>
+        </div>
+      </div>
+    </>
   );
 }
 

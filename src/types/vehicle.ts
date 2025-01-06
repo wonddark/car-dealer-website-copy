@@ -3,6 +3,7 @@ export type Vehicle = {
   vin: string;
   titleCode: string;
   odometer: string;
+  odometerBrand: string;
   color: string;
   primaryDamage: string;
   secondaryDamage: string;

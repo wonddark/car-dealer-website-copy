@@ -8,35 +8,53 @@ export default function TitleTypes() {
   const { titleTypes, checked } = useTitleTypes();
   const { handleCheckChange: handleChange } = useFilters();
   return (
-    <div className="widget catagory mb-4">
-      <h6 className="widget-title mb-2">Tipo de título</h6>
-      <FilterOptionsCheckContainer>
-        {!titleTypes.loading &&
-          !titleTypes.error &&
-          titleTypes.data.map((item) => (
-            <div key={item.key} className="form-check">
-              <input
-                className="form-check-input"
-                id={item.key}
-                type="checkbox"
-                name="TitleTypes"
-                value={item.key}
-                onChange={handleChange}
-                checked={checked(item.key)}
-              />
-              <label className="form-check-label" htmlFor={item.key}>
-                {item.meaning}
-              </label>
-            </div>
-          ))}
-        {titleTypes.loading &&
-          [0, 1, 2].map((i) => (
-            <div key={i} className="placeholder">
-              <div className="form-input placeholder-glow"></div>
-            </div>
-          ))}
-      </FilterOptionsCheckContainer>
-    </div>
+    <>
+      <h2 className="accordion-header">
+        <button
+          className="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapse-title-type"
+          aria-controls="collapse-title-type"
+        >
+          <strong>Tipo de título</strong>
+        </button>
+      </h2>
+      <div
+        id="collapse-title-type"
+        className="accordion-collapse collapse"
+        data-bs-parent="#accordion-filters"
+      >
+        <div className="accordion-body">
+          <FilterOptionsCheckContainer>
+            {!titleTypes.loading &&
+              !titleTypes.error &&
+              titleTypes.data.map((item) => (
+                <div key={item.key} className="form-check">
+                  <input
+                    className="form-check-input"
+                    id={item.key}
+                    type="checkbox"
+                    name="TitleTypes"
+                    value={item.key}
+                    onChange={handleChange}
+                    checked={checked(item.key)}
+                  />
+                  <label className="form-check-label" htmlFor={item.key}>
+                    {item.meaning}
+                  </label>
+                </div>
+              ))}
+            {titleTypes.loading &&
+              [0, 1, 2].map((i) => (
+                <div key={i} className="placeholder">
+                  <div className="form-input placeholder-glow"></div>
+                </div>
+              ))}
+          </FilterOptionsCheckContainer>
+        </div>
+      </div>
+    </>
   );
 }
 

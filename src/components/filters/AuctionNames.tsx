@@ -8,27 +8,45 @@ export default function AuctionNames() {
   const { auctions, checked } = useAuctionNames();
   const { handleCheckChange: handleChange } = useFilters();
   return (
-    <div className="widget catagory mb-4">
-      <h6 className="widget-title mb-2">Subasta</h6>
-      <FilterOptionsCheckContainer>
-        {auctions.data.map((item) => (
-          <div key={item + uuidv4()} className="form-check">
-            <input
-              className="form-check-input"
-              id={item}
-              type="checkbox"
-              name="Auction"
-              value={item}
-              onChange={handleChange}
-              checked={checked(item)}
-            />
-            <label className="form-check-label" htmlFor={item}>
-              {item}
-            </label>
-          </div>
-        ))}
-      </FilterOptionsCheckContainer>
-    </div>
+    <>
+      <h2 className="accordion-header">
+        <button
+          className="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapse-auction"
+          aria-controls="collapse-auction"
+        >
+          <strong>Subasta</strong>
+        </button>
+      </h2>
+      <div
+        id="collapse-auction"
+        className="accordion-collapse collapse"
+        data-bs-parent="#accordion-filters"
+      >
+        <div className="accordion-body">
+          <FilterOptionsCheckContainer>
+            {auctions.data.map((item) => (
+              <div key={item + uuidv4()} className="form-check">
+                <input
+                  className="form-check-input"
+                  id={item}
+                  type="checkbox"
+                  name="Auction"
+                  value={item}
+                  onChange={handleChange}
+                  checked={checked(item)}
+                />
+                <label className="form-check-label" htmlFor={item}>
+                  {item}
+                </label>
+              </div>
+            ))}
+          </FilterOptionsCheckContainer>
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -4,9 +4,7 @@ import Filters from "@/components/common/Filters";
 const FiltersSidebar = () => {
   return (
     <div className="card">
-      <div className="card-body">
-        <Filters />
-      </div>
+      <Filters />
     </div>
   );
 };
