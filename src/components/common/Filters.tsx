@@ -19,6 +19,7 @@ import TitleTypes from "@/components/filters/TitleTypes";
 import FuelType from "../filters/FuelType";
 import PrimaryDamages from "@/components/filters/PrimaryDamages";
 import AuctionNames from "../filters/AuctionNames";
+import AuctionDate from "@/components/filters/AuctionDate";
 
 export default function Filters() {
   const {
@@ -33,72 +34,72 @@ export default function Filters() {
     brandChecked,
     modelChecked,
     applyFilters,
+    handleBestOfferToggler,
   } = useFilters();
   return (
-    <div className="offcanvas-body py-5 py-lg-0 ps-0">
-      <div className="container">
-        <div className="row">
-          <div className="col-12">
-            <div className="widget catagory mb-4">
-              <div className="form-check form-switch">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="best-offer"
-                  name="IsBestOffer"
-                  value="true"
-                  checked={bestOfferChecked}
-                  onChange={handleCheckChange}
-                />
-                <label className="form-check-label" htmlFor="best-offer">
-                  Solo mejores ofertas
-                </label>
-              </div>
-            </div>
-          </div>
-          <div className="col-12">
-            <div className="widget catagory mb-4">
-              <div className="form-check form-switch">
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckDefault"
-                  name="InBuyNow"
-                  value="true"
-                  onChange={handleCheckChange}
-                  checked={buyNowChecked}
-                />
-                <label
-                  className="form-check-label"
-                  htmlFor="flexSwitchCheckDefault"
-                >
-                  Para comprar ahora
-                </label>
-              </div>
-            </div>
-          </div>
-          <div className="col-12">
-            <VehicleTypes />
-          </div>
-          <div className="col-12">
-            <div className="widget price-range mb-4">
-              <h6 className="widget-title mb-2">Odómetro</h6>
-              <div className="widget-desc">
-                <OdometerFilter />
-              </div>
-            </div>
-          </div>
-          <div className="col-12">
-            <ReleaseYear />
-          </div>
-          <div className="col-12">
-            <TitleTypes />
-          </div>
-          <div className="col-12">
-            <div className="widget catagory mb-4">
-              <h6 className="widget-title mb-2">Marca</h6>
+    <div className="offcanvas-body py-5 py-lg-3 px-0">
+      <div className="vstack px-3 gap-2 mb-2">
+        <div className="form-check form-switch">
+          <label className="form-check-label" htmlFor="best-offer">
+            Mejores ofertas
+          </label>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="best-offer"
+            name="IsBestOffer"
+            checked={bestOfferChecked}
+            onChange={handleBestOfferToggler}
+          />
+        </div>
+        <div className="form-check form-switch">
+          <label className="form-check-label" htmlFor="flexSwitchCheckDefault">
+            Comprar ahora
+          </label>
+          <input
+            className="form-check-input"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckDefault"
+            name="InBuyNow"
+            value="true"
+            onChange={handleCheckChange}
+            checked={buyNowChecked}
+          />
+        </div>
+      </div>
+      <div className="accordion mb-4" id="accordion-filters">
+        <div className="accordion-item">
+          <VehicleTypes />
+        </div>
+        <div className="accordion-item">
+          <OdometerFilter />
+        </div>
+        <div className="accordion-item">
+          <ReleaseYear />
+        </div>
+        <div className="accordion-item">
+          <TitleTypes />
+        </div>
+        <div className="accordion-item">
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse-brand"
+              aria-controls="collapse-brand"
+            >
+              <strong>Marca</strong>
+            </button>
+          </h2>
+          <div
+            id="collapse-brand"
+            className="accordion-collapse collapse"
+            data-bs-parent="#accordion-filters"
+          >
+            <div className="accordion-body">
               <div className="position-relative">
                 <input
                   className="form-control border-secondary position-sticky top-0"
@@ -135,9 +136,25 @@ export default function Filters() {
               </div>
             </div>
           </div>
-          <div className="col-12">
-            <div className="widget catagory mb-4">
-              <h6 className="widget-title mb-2">Modelo</h6>
+        </div>
+        <div className="accordion-item">
+          <h2 className="accordion-header">
+            <button
+              className="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse-model"
+              aria-controls="collapse-model"
+            >
+              <strong>Modelo</strong>
+            </button>
+          </h2>
+          <div
+            id="collapse-model"
+            className="accordion-collapse collapse"
+            data-bs-parent="#accordion-filters"
+          >
+            <div className="accordion-body">
               <div className="position-relative">
                 <input
                   className="form-control border-secondary"
@@ -174,41 +191,55 @@ export default function Filters() {
               </div>
             </div>
           </div>
-          <div className="col-12">
-            <FuelType />
-          </div>
-          <div className="col-12">
-            <AuctionNames />
-          </div>
-          <div className="col-12">
-            <PrimaryDamages />
-          </div>
-          <div className="col-12">
-            <div className="widget color mb-4">
-              <div className="widget-desc">
-                <div className="vstack gap-3">
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Estado"
-                    ref={auctionState}
-                    defaultValue={stateVal}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-12">
+        </div>
+        <div className="accordion-item">
+          <FuelType />
+        </div>
+        <div className="accordion-item">
+          <AuctionNames />
+        </div>
+        <div className="accordion-item">
+          <PrimaryDamages />
+        </div>
+        <div className="accordion-item">
+          <AuctionDate />
+        </div>
+        <div className="accordion-item">
+          <h2 className="accordion-header">
             <button
-              className="btn btn-lg btn-primary w-100"
-              disabled={!auctionState.current?.value}
-              onClick={applyFilters}
+              className="accordion-button"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapse-auction-state"
+              aria-controls="collapse-auction-state"
             >
-              Aplicar
+              <strong>Estado</strong>
             </button>
+          </h2>
+          <div
+            id="collapse-auction-state"
+            className="accordion-collapse collapse"
+            data-bs-parent="#accordion-filters"
+          >
+            <div className="accordion-body">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Estado"
+                ref={auctionState}
+                defaultValue={stateVal}
+              />
+            </div>
           </div>
         </div>
       </div>
+      <button
+        className="btn btn-lg btn-primary w-100"
+        disabled={!auctionState.current?.value}
+        onClick={applyFilters}
+      >
+        Aplicar
+      </button>
     </div>
   );
 }
@@ -397,6 +428,34 @@ export const useFilters = () => {
   };
   const isBestOffer = searchParams.get("IsBestOffer") ?? "";
   const bestOfferChecked = isBestOffer ? isBestOffer === "true" : true;
+  const handleBestOfferToggler: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const {
+      target: { checked, name },
+    } = e;
+    dispatch(toggleLoading());
+    dispatch(resetData());
+    if (checked) {
+      r.push(
+        pathname +
+          "?" +
+          createQueryString({
+            name,
+            value: "false",
+            add: false,
+          }),
+      );
+    } else {
+      r.push(
+        pathname +
+          "?" +
+          createQueryString({
+            name,
+            value: "false",
+            add: true,
+          }),
+      );
+    }
+  };
 
   const orderBySelected = (val: string) => {
     const sortBy = searchParams.get("SortBy") ?? "";
@@ -454,5 +513,6 @@ export const useFilters = () => {
     orderActive,
     changeSort,
     handleOptionChange,
+    handleBestOfferToggler,
   };
 };

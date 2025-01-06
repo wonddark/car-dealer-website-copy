@@ -8,19 +8,37 @@ export default function VehicleTypes() {
   const { data } = useVehicleTypes();
 
   return (
-    <div className="widget catagory mb-4">
-      <h6 className="widget-title mb-2">Tipo de vehículo</h6>
-      <FilterOptionsCheckContainer>
-        {data.map((item: VehicleType) => (
-          <div key={item.key} className="form-check">
-            <VehicleTypeInput value={item.key} />
-            <label className="form-check-label" htmlFor={item.key}>
-              {item.type}
-            </label>
-          </div>
-        ))}
-      </FilterOptionsCheckContainer>
-    </div>
+    <>
+      <h2 className="accordion-header position-relative">
+        <button
+          className="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapseOne"
+          aria-controls="collapseOne"
+        >
+          <strong>Tipo de vehículo</strong>
+        </button>
+      </h2>
+      <div
+        id="collapseOne"
+        className="accordion-collapse collapse"
+        data-bs-parent="#accordion-filters"
+      >
+        <div className="accordion-body">
+          <FilterOptionsCheckContainer>
+            {data.map((item: VehicleType) => (
+              <div key={item.key} className="form-check">
+                <VehicleTypeInput value={item.key} />
+                <label className="form-check-label" htmlFor={item.key}>
+                  {item.type}
+                </label>
+              </div>
+            ))}
+          </FilterOptionsCheckContainer>
+        </div>
+      </div>
+    </>
   );
 }
 

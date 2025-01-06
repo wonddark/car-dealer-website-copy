@@ -30,11 +30,16 @@ const vehiclesSlice = createSlice({
   initialState,
   reducers: {
     appendData: (state, { payload }: PayloadAction<VehicleResponse>) => {
+      const uniqueData = state.response.data.concat(
+        payload.data.filter(
+          (item) => !state.response.data.find((i) => i.vin === item.vin),
+        ),
+      );
       return {
         ...state,
         response: {
           ...payload,
-          data: state.response.data.concat(payload.data),
+          data: uniqueData,
         },
         status: { loading: false, error: false },
       };

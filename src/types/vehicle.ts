@@ -3,6 +3,7 @@ export type Vehicle = {
   vin: string;
   titleCode: string;
   odometer: string;
+  odometerBrand: string;
   color: string;
   primaryDamage: string;
   secondaryDamage: string;
@@ -31,7 +32,7 @@ export type Vehicle = {
   titleDeliveryFee: number;
   totalCost: number;
   auctionLocation: string;
-  saleDate: string;
+  saleAuctionDate: string;
   auction: string;
   laneAndItem: string;
   lastUpdate: string;

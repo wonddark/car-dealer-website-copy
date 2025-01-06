@@ -8,34 +8,52 @@ export default function FuelType() {
   const { checked } = useFuelTypes();
   const { handleCheckChange: handleChange } = useFilters();
   return (
-    <div className="widget catagory mb-4">
-      <h6 className="widget-title mb-2">Tipo de combustible</h6>
-      <FilterOptionsCheckContainer>
-        {[
-          "Gasoline",
-          "Gasoline Hybrid",
-          "Gasoline Plug-In Hybrid",
-          "Electric",
-          "Diesel",
-          "Flex",
-        ].map((item) => (
-          <div key={item + uuidv4()} className="form-check">
-            <input
-              className="form-check-input"
-              id={item}
-              type="checkbox"
-              name="FuelTypes"
-              value={item}
-              onChange={handleChange}
-              checked={checked(item)}
-            />
-            <label className="form-check-label" htmlFor={item}>
-              {item}
-            </label>
-          </div>
-        ))}
-      </FilterOptionsCheckContainer>
-    </div>
+    <>
+      <h2 className="accordion-header">
+        <button
+          className="accordion-button"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#collapse-fuel-type"
+          aria-controls="collapse-fuel-type"
+        >
+          <strong>Tipo de combustible</strong>
+        </button>
+      </h2>
+      <div
+        id="collapse-fuel-type"
+        className="accordion-collapse collapse"
+        data-bs-parent="#accordion-filters"
+      >
+        <div className="accordion-body">
+          <FilterOptionsCheckContainer>
+            {[
+              "Gasoline",
+              "Gasoline Hybrid",
+              "Gasoline Plug-In Hybrid",
+              "Electric",
+              "Diesel",
+              "Flex",
+            ].map((item) => (
+              <div key={item + uuidv4()} className="form-check">
+                <input
+                  className="form-check-input"
+                  id={item}
+                  type="checkbox"
+                  name="FuelTypes"
+                  value={item}
+                  onChange={handleChange}
+                  checked={checked(item)}
+                />
+                <label className="form-check-label" htmlFor={item}>
+                  {item}
+                </label>
+              </div>
+            ))}
+          </FilterOptionsCheckContainer>
+        </div>
+      </div>
+    </>
   );
 }
 

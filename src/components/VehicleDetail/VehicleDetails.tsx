@@ -3,10 +3,20 @@ import OfferInput from "@/components/OfferInput";
 import { Vehicle } from "@/types/vehicle";
 import * as motion from "motion/react-client";
 import { renderCurrentOffer } from "@/utils/vehicle-data";
+import { TOdometerBrand } from "@/types/features";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 export default function VehicleDetails({
   vehicle,
-}: Readonly<{ vehicle: Vehicle }>) {
+  odometerBrands,
+}: Readonly<{
+  vehicle: Vehicle;
+  odometerBrands: TOdometerBrand[];
+}>) {
+  const odometerBrand = odometerBrands.filter(
+    (item) => item.key === vehicle.odometerBrand,
+  )[0];
   return (
     <motion.div
       initial={{ opacity: 0, x: "200vw", shadow: "-1px 0 0 7px #333" }}
@@ -55,9 +65,32 @@ export default function VehicleDetails({
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Odómetro</strong>
-                        <span className="ms-auto text-end">
-                          {vehicle.odometer}
-                        </span>
+                        <div className="ms-auto text-end">
+                          <span>{vehicle.odometer}</span>
+                          {odometerBrand && (
+                            <>
+                              <span className="ms-1">
+                                {odometerBrand.brand}
+                              </span>
+                              <OverlayTrigger
+                                placement="left"
+                                delay={{ show: 250, hide: 400 }}
+                                overlay={
+                                  <Tooltip id="button-tooltip">
+                                    <strong className="d-block mb-2 text-start">
+                                      {odometerBrand.brand}
+                                    </strong>
+                                    <p className="m-0 text-start">
+                                      ${odometerBrand.description}
+                                    </p>
+                                  </Tooltip>
+                                }
+                              >
+                                <i className="ti ti-info-circle ms-2"></i>
+                              </OverlayTrigger>
+                            </>
+                          )}
+                        </div>
                       </div>
                       <div className="hstack">
                         <strong className="text-muted">Color</strong>
@@ -161,7 +194,7 @@ export default function VehicleDetails({
                     <div className="hstack">
                       <strong>Información de la oferta</strong>
                       <span className="text-end ms-auto">
-                        {vehicle.saleDate}
+                        {vehicle.saleAuctionDate}
                       </span>
                     </div>
                     <div className="hstack">
