@@ -34,6 +34,7 @@ export default function Filters() {
     brandChecked,
     modelChecked,
     applyFilters,
+    handleBestOfferToggler,
   } = useFilters();
   return (
     <div className="offcanvas-body py-5 py-lg-3 px-0">
@@ -48,9 +49,8 @@ export default function Filters() {
             role="switch"
             id="best-offer"
             name="IsBestOffer"
-            value="true"
             checked={bestOfferChecked}
-            onChange={handleCheckChange}
+            onChange={handleBestOfferToggler}
           />
         </div>
         <div className="form-check form-switch">
@@ -428,6 +428,34 @@ export const useFilters = () => {
   };
   const isBestOffer = searchParams.get("IsBestOffer") ?? "";
   const bestOfferChecked = isBestOffer ? isBestOffer === "true" : true;
+  const handleBestOfferToggler: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const {
+      target: { checked, name },
+    } = e;
+    dispatch(toggleLoading());
+    dispatch(resetData());
+    if (checked) {
+      r.push(
+        pathname +
+          "?" +
+          createQueryString({
+            name,
+            value: "false",
+            add: false,
+          }),
+      );
+    } else {
+      r.push(
+        pathname +
+          "?" +
+          createQueryString({
+            name,
+            value: "false",
+            add: true,
+          }),
+      );
+    }
+  };
 
   const orderBySelected = (val: string) => {
     const sortBy = searchParams.get("SortBy") ?? "";
@@ -485,5 +513,6 @@ export const useFilters = () => {
     orderActive,
     changeSort,
     handleOptionChange,
+    handleBestOfferToggler,
   };
 };
