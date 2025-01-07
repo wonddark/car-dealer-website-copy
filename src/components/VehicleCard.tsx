@@ -10,6 +10,7 @@ import dayjs from "dayjs";
 import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import es from "dayjs/locale/es-us";
+import { Button } from "react-bootstrap";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -41,9 +42,12 @@ export default function VehicleCard({
   return (
     <div className="card product-card h-100">
       <div className="card-body p-2 p-md-3 h-100">
-        <button className="wishlist-btn">
-          <i className="ti ti-heart"></i>
-        </button>
+        <Button
+          variant="primary"
+          className="wishlist-btn rounded-0 p-0 text-secondary"
+        >
+          <i className="ti ti-category-plus"></i>
+        </Button>
         <div
           className={`badge text-bg-${dateDiff > 5 ? "success" : "danger"} rounded-pill p-1 px-2 hstack gap-1`}
         >
