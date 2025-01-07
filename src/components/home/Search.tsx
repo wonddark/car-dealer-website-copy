@@ -14,7 +14,7 @@ const Search = () => {
     useFilters();
   return (
     <>
-      <div className="card">
+      <div className="card d-none d-lg-block">
         <div className="card-body p-2 p-md-3">
           <div className="vstack gap-2">
             <div className="hstack gap-2">
