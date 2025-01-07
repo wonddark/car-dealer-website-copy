@@ -11,7 +11,7 @@ export default function TitleTypes() {
     <>
       <h2 className="accordion-header">
         <button
-          className="accordion-button"
+          className="accordion-button collapsed"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#collapse-title-type"

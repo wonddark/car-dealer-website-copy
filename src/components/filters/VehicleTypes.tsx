@@ -11,7 +11,7 @@ export default function VehicleTypes() {
     <>
       <h2 className="accordion-header position-relative">
         <button
-          className="accordion-button"
+          className="accordion-button collapsed"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#collapseOne"
@@ -24,6 +24,7 @@ export default function VehicleTypes() {
         id="collapseOne"
         className="accordion-collapse collapse"
         data-bs-parent="#accordion-filters"
+        aria-expanded="false"
       >
         <div className="accordion-body">
           <FilterOptionsCheckContainer>
