@@ -97,9 +97,8 @@ export default function VehicleCard({
                       <li className="list-inline-item me-2">
                         <span className="flaticon-road-perspective me-1" />
                         <span className="me-1">
-                          {Number(vehicle.odometer).toLocaleString("en-US")}
+                          {`${Number(vehicle.odometer).toLocaleString("en-US")} / ${vehicle.odometerBrand}`}
                         </span>
-                        <span>mi</span>
                       </li>
                       <li className="list-inline-item me-2">
                         <span className="flaticon-gas-station me-1" />
@@ -206,9 +205,13 @@ export default function VehicleCard({
                       <hr className="border-1 border-secondary m-0" />
                       <div className="d-flex justify-content-between">
                         <strong className="opacity-75">Odómetro</strong>
-                        <span className="text-end">
-                          {vehicle.odometer ?? "No disponible"}
-                        </span>
+                        {vehicle.odometer ? (
+                          <span className="text-end">
+                            {`${Number(vehicle.odometer).toLocaleString("en-US")} / ${vehicle.odometerBrand}`}
+                          </span>
+                        ) : (
+                          "No disponible"
+                        )}
                       </div>
                       <hr className="border-1 border-secondary m-0" />
                       <div className="d-flex justify-content-between">
