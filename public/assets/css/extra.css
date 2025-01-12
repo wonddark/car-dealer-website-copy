@@ -21,3 +21,46 @@
     max-height: 130px;
     overflow: auto
 }
+
+.slider-root {
+    position: relative;
+    display: flex;
+    align-items: center;
+    user-select: none;
+    touch-action: none;
+    width: 100%;
+    height: 32px;
+}
+
+.slider-track {
+    background-color: #aaa;
+    position: relative;
+    flex-grow: 1;
+    border-radius: 9999px;
+    height: 4px;
+}
+
+.slider-range {
+    position: absolute;
+    background-color: #00f;
+    border-radius: 9999px;
+    height: 100%;
+}
+
+.slider-thumb {
+    display: block;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border-radius: 10px;
+    border: 1px solid #042cd7;
+}
+
+.slider-thumb:hover {
+    background-color: #042cd7;
+}
+
+.slider-thumb:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(208 208 208 / 20%);
+}

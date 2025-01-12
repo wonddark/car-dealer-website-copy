@@ -457,10 +457,7 @@ export const useFilters = () => {
     }
   };
 
-  const orderBySelected = (val: string) => {
-    const sortBy = searchParams.get("SortBy") ?? "";
-    return val === sortBy;
-  };
+  const orderBy = searchParams.get("SortBy") ?? "";
 
   const orderActive = (val: string) => {
     const order = searchParams.get("IsDescending") ?? "true";
@@ -509,7 +506,7 @@ export const useFilters = () => {
     filterBrands,
     filterModels,
     applyFilters,
-    orderBySelected,
+    orderBy,
     orderActive,
     changeSort,
     handleOptionChange,

@@ -13,7 +13,7 @@ const Footer = () => {
           </li>
           <li>
             <Link href="/vehicles/wishlist">
-              <i className="ti ti-heart"></i>Wishlist
+              <i className="ti ti-category-plus"></i>Comparar
             </Link>
           </li>
           <li>
@@ -23,8 +23,7 @@ const Footer = () => {
           </li>
           <li>
             <Link href="/vehicles">
-              <i className="ti ti-car-garage"></i>
-              Inventario
+              <i className="ti ti-car-garage"></i>Inventario
             </Link>
           </li>
           <li>
