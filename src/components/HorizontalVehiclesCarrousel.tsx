@@ -4,31 +4,15 @@ import React from "react";
 import Link from "next/link";
 import { VehicleResponse } from "@/types/vehicle";
 
-export default function BuyNowCarrusel({
-  data,
-}: Readonly<{ data: VehicleResponse }>) {
+type Props = { data: VehicleResponse; fullListLink: string };
+export default function HorizontalVehiclesCarrousel(props: Readonly<Props>) {
+  const { data, fullListLink } = props;
   return (
-    <div className="container">
-      <Swiper
-        spaceBetween={0}
-        slidesPerView="auto"
-        onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
-        style={{ height: "220px" }}
-      >
+    <div className="container-xxl">
+      <Swiper spaceBetween={0} slidesPerView="auto">
         {data.data.map((item) => (
-          <SwiperSlide
-            key={item.vin}
-            style={{
-              width: "fit-content !important",
-              margin: "0 2px !important",
-            }}
-          >
-            <div
-              key={item.vin}
-              className="card position-relative"
-              style={{ width: "200px", height: "100%" }}
-            >
+          <SwiperSlide key={item.vin}>
+            <div className="card position-relative slide-card">
               <Link
                 className="product-thumbnail h-100 w-100"
                 href={`/vehicles/${item.vin}`}
@@ -54,6 +38,17 @@ export default function BuyNowCarrusel({
             </div>
           </SwiperSlide>
         ))}
+        <SwiperSlide>
+          <div
+            className="card flex align-items-center justify-content-center"
+            style={{ width: "200px", height: "100%" }}
+          >
+            <Link href={fullListLink} className="btn btn-link">
+              <span>Ver más </span>
+              <i className="ti ti-chevron-right"></i>
+            </Link>
+          </div>
+        </SwiperSlide>
       </Swiper>
     </div>
   );
