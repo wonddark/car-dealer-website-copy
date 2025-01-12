@@ -5,13 +5,13 @@ import OffCanvasTwo from "@/components/common/OffCanvasTwo";
 import useVehiclesInventory from "@/hooks/useVehiclesInventory";
 import FiltersBanner from "@/components/FiltersBanner";
 import { useFilters } from "@/components/common/Filters";
+import OrderBySelector from "@/components/OrderBySelector";
 
 const Search = () => {
   const { response, loading } = useVehiclesInventory();
   const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
-  const { handleOptionChange, orderBySelected, orderActive, changeSort } =
-    useFilters();
+  const { orderActive, changeSort } = useFilters();
   return (
     <>
       <div className="card d-none d-lg-block">
@@ -39,49 +39,7 @@ const Search = () => {
                   vehículos encontrados
                 </p>
                 <div className="hstack gap-4">
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    name="SortBy"
-                    onChange={handleOptionChange}
-                  >
-                    <option selected={orderBySelected("")} value="">
-                      Ordenar por
-                    </option>
-                    <option
-                      selected={orderBySelected("BuyNowPrice")}
-                      value="BuyNowPrice"
-                    >
-                      Precio de venta
-                    </option>
-                    <option
-                      selected={orderBySelected("Mileage")}
-                      value="Mileage"
-                    >
-                      Cantidad de millas
-                    </option>
-                    <option
-                      selected={orderBySelected("SaleDate")}
-                      value="SaleDate"
-                    >
-                      Fecha de subasta
-                    </option>
-                    <option
-                      selected={orderBySelected("HighBid")}
-                      value="HighBid"
-                    >
-                      Oferta actual
-                    </option>
-                    <option selected={orderBySelected("Make")} value="Make">
-                      Marca
-                    </option>
-                    <option selected={orderBySelected("Model")} value="Model">
-                      Modelo
-                    </option>
-                    <option selected={orderBySelected("Year")} value="Year">
-                      Año
-                    </option>
-                  </select>
+                  <OrderBySelector />
                   <div className="hstack">
                     <button
                       type="button"
