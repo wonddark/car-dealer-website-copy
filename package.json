@@ -18,7 +18,6 @@
     "motion": "^11.15.0",
     "next": "14.2.22",
     "nouislider": "^15.8.1",
-    "nouislider-react": "^3.4.2",
     "react": "^18",
     "react-18-image-lightbox": "^5.1.4",
     "react-bootstrap": "^2.10.7",
