@@ -1,13 +1,13 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useCallback, useState } from "react";
 import { MAX_ODOMETER_VAL, STEP_ODOMETER_VAL } from "@/types/vehicle";
-import Nouislider from "nouislider-react";
 import "nouislider/dist/nouislider.min.css";
 import { resetData, toggleLoading } from "@/redux/features/vehicles.slice";
 import { useAppDispatch } from "@/redux/hooks";
+import * as Slider from "@radix-ui/react-slider";
 
 export default function OdometerFilter() {
-  const { limits, filterByOdometer } = useOdometerRange();
+  const { limits, filterByOdometer, updateLimits } = useOdometerRange();
 
   return (
     <>
@@ -35,14 +35,22 @@ export default function OdometerFilter() {
                 {`${Number(limits.max) < MAX_ODOMETER_VAL ? limits.max : MAX_ODOMETER_VAL + "+"} Millas`}
               </small>
             </div>
-            <Nouislider
-              range={{ min: 0, max: MAX_ODOMETER_VAL }}
-              start={[Number(limits.min), Number(limits.max)]}
-              connect
-              animate
-              onChange={filterByOdometer}
+            <Slider.Root
+              className="slider-root"
+              value={[Number(limits.min), Number(limits.max)]}
+              max={MAX_ODOMETER_VAL}
               step={STEP_ODOMETER_VAL}
-            />
+              min={0}
+              minStepsBetweenThumbs={1}
+              onValueChange={updateLimits}
+              onValueCommit={filterByOdometer}
+            >
+              <Slider.Track className="slider-track">
+                <Slider.Range className="slider-range" />
+              </Slider.Track>
+              <Slider.Thumb className="slider-thumb" />
+              <Slider.Thumb className="slider-thumb" />
+            </Slider.Root>
           </div>
         </div>
       </div>
@@ -62,6 +70,9 @@ const useOdometerRange = () => {
     min: searchParams.get("OdometerFrom") ?? 0,
     max: searchParams.get("OdometerTo") ?? MAX_ODOMETER_VAL,
   });
+  const updateLimits = (vals: number[]) => {
+    setLimits({ min: vals[0], max: vals[1] });
+  };
 
   const createQueryString = useCallback(
     (...params: { name: string; value: string | null }[]) => {
@@ -78,7 +89,7 @@ const useOdometerRange = () => {
     [searchParams],
   );
 
-  const filterByOdometer = (values: string[]) => {
+  const filterByOdometer = (values: number[]) => {
     dispatch(toggleLoading());
     dispatch(resetData());
     const from = Number(values[0]);
@@ -100,5 +111,5 @@ const useOdometerRange = () => {
     );
   };
 
-  return { limits, filterByOdometer };
+  return { limits, filterByOdometer, updateLimits };
 };
