@@ -73,9 +73,7 @@ export default function Filters() {
         <div className="accordion-item">
           <VehicleTypes />
         </div>
-        <div className="accordion-item">
-          <OdometerFilter />
-        </div>
+        <OdometerFilter />
         <div className="accordion-item">
           <ReleaseYear />
         </div>
