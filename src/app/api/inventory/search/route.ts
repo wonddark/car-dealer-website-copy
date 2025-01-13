@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const sp = request.nextUrl.searchParams;
     const response = await fetch(
       `${process.env.API_ENDPOINT}/auction-inventories/search?${sp.toString()}`,
-      { next: { revalidate: 43200 /* 12 hours */ } },
+      { next: { revalidate: 3600 } },
     );
     if (response.status === 200) {
       const data = await response.json();
@@ -23,7 +23,6 @@ export async function GET(request: NextRequest) {
       { status: response.status, statusText: response.statusText },
     );
   } catch (e) {
-    console.error(e);
     return Response.json({ error: JSON.stringify(e) }, { status: 500 });
   }
 }

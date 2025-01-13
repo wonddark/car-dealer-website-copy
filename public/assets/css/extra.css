@@ -64,3 +64,32 @@
     outline: none;
     box-shadow: 0 0 0 3px rgb(208 208 208 / 20%);
 }
+
+.swiper {
+    height: 180px;
+    width: 100%
+}
+
+.swiper-slide {
+    width: fit-content !important;
+    margin: 0 2px !important;
+}
+
+.slide-card {
+    width: 200px;
+    height: 100%;
+}
+
+@media (width >= 960px) {
+    .swiper {
+        height: 220px;
+    }
+
+    .swiper-slide {
+        margin: 0 4px !important;
+    }
+
+    .slide-card {
+        width: 280px;
+    }
+}
