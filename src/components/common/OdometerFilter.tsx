@@ -28,7 +28,7 @@ export default function OdometerFilter() {
         data-bs-parent="#accordion-filters"
       >
         <div className="accordion-body">
-          <div className="vstack gap-2 pt-4 px-3 pb-1">
+          <div className="vstack gap-2">
             <div className="hstack justify-content-between align-items-center text-muted">
               <small> {`${limits.min} Millas`}</small>
               <small>
