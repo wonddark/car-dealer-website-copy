@@ -47,10 +47,15 @@ export const useVehicleTypes = () => {
   const [data, setData] = useState<VehicleType[]>([]);
   useEffect(() => {
     (async function () {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/vehicle-type`,
-      ).then((res) => res.json());
-      setData(res);
+      try {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/vehicle-type`,
+        ).then((res) => res.json());
+        setData(res);
+      } catch (e) {
+        console.error("Got this error", e);
+        setData([]);
+      }
     })();
   }, []);
 
