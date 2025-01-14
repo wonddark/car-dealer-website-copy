@@ -66,18 +66,22 @@ export const useTitleTypes = () => {
   }>({ data: [], loading: true, error: false });
   useEffect(() => {
     const controller = new AbortController();
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/vehicle-title`, {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((res) => setTitleTypes({ data: res, loading: false, error: false }))
-      .catch((reason) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") {
-          return null;
-        } else {
-          setTitleTypes({ data: [], loading: false, error: true });
-        }
-      });
+    if (window && window.location) {
+      fetch(`${window.location.origin}/api/filters/vehicle-title`, {
+        signal: controller.signal,
+      })
+        .then((res) => res.json())
+        .then((res) =>
+          setTitleTypes({ data: res, loading: false, error: false }),
+        )
+        .catch((reason) => {
+          if (reason instanceof DOMException && reason.name === "AbortError") {
+            return null;
+          } else {
+            setTitleTypes({ data: [], loading: false, error: true });
+          }
+        });
+    }
 
     return () => {
       controller.abort();
