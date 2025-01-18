@@ -1,16 +1,16 @@
 "use client";
 
-import { resetData, toggleLoading } from "@/redux/features/vehicles.slice";
+import { resetData } from "@/store/features/vehicles.slice";
 import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import { v4 as uuidv4 } from "uuid";
 
 type Props = {
   filterName: string;
   searchFunction: (
     value: string,
-  ) => string | Record<string, string> | undefined;
+  ) => string | { [k: string]: string | number } | undefined;
   keyValue?: string;
   keyLabel?: string;
 };
@@ -40,7 +40,6 @@ export default function DismissFilter(props: Readonly<Props>) {
               : (item as string),
           );
           const sp_copy_string = sp_copy.toString();
-          dispatch(toggleLoading());
           dispatch(resetData());
           r.push(pathname + sp_copy_string ? `?${sp_copy_string}` : "");
         };

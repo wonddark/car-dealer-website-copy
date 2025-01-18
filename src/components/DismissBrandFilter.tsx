@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
-import { useFilters } from "@/components/common/Filters";
 import DismissFilter from "@/components/DismissFilter";
+import { useAppSelector } from "@/store/hooks";
+import { getMakers } from "@/store/features/filters.slice";
 
 export default function DismissBrandFilter() {
-  const { brandsAndModels } = useFilters();
+  const makers = useAppSelector(getMakers);
   const findFunction = (val: string) =>
-    Object.keys(brandsAndModels.original).find((token) => token === val);
+    makers.find((token) => token.key === val);
   return <DismissFilter filterName="Makes" searchFunction={findFunction} />;
 }
