@@ -9,5 +9,12 @@ export default function DismissBrandFilter() {
   const makers = useAppSelector(getMakers);
   const findFunction = (val: string) =>
     makers.find((token) => token.key === val);
-  return <DismissFilter filterName="Makes" searchFunction={findFunction} />;
+  return (
+    <DismissFilter
+      filterName="Makes"
+      searchFunction={findFunction}
+      keyValue="key"
+      keyLabel="key"
+    />
+  );
 }

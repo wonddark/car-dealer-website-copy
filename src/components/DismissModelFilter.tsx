@@ -10,5 +10,12 @@ export default function DismissModelFilter() {
   const findFunction = (val: string) =>
     models.find((token) => token.key === val);
 
-  return <DismissFilter filterName="Models" searchFunction={findFunction} />;
+  return (
+    <DismissFilter
+      filterName="Models"
+      searchFunction={findFunction}
+      keyValue="key"
+      keyLabel="key"
+    />
+  );
 }
