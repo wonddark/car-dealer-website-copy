@@ -1,63 +1,80 @@
 "use client";
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
-import React, { useEffect, useState } from "react";
-import { VehicleType } from "@/types/vehicle";
+import React, { useState } from "react";
 import VehicleTypeInput from "@/components/filters/VehicleTypeInput";
+import { useAppSelector } from "@/store/hooks";
+import {
+  getVehicleTypes,
+  getVehicleTypesCounters,
+} from "@/store/features/filters.slice";
+import * as Collapsible from "@radix-ui/react-collapsible";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function VehicleTypes() {
-  const { data } = useVehicleTypes();
+  const { data, isOpen, toggle, anyValue, clearFilters } = useVehicleTypes();
 
   return (
-    <>
-      <h2 className="accordion-header position-relative">
-        <button
-          className="accordion-button collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseOne"
-          aria-controls="collapseOne"
-        >
-          <strong>Tipo de vehículo</strong>
-        </button>
-      </h2>
-      <div
-        id="collapseOne"
-        className="accordion-collapse collapse"
-        data-bs-parent="#accordion-filters"
-        aria-expanded="false"
-      >
-        <div className="accordion-body">
-          <FilterOptionsCheckContainer>
-            {data.map((item: VehicleType) => (
-              <div key={item.key} className="form-check">
-                <VehicleTypeInput value={item.key} />
-                <label className="form-check-label" htmlFor={item.key}>
-                  {item.type}
-                </label>
-              </div>
-            ))}
-          </FilterOptionsCheckContainer>
+    <Collapsible.Root
+      className="sidebar-filter"
+      open={isOpen}
+      onOpenChange={toggle}
+    >
+      <Collapsible.Trigger className="f-trigger" asChild>
+        <div className="f-trigger-inner">
+          <strong className="flex-fill">Tipo de vehículo</strong>
+          {anyValue && (
+            <button className="f-reset btn" onClick={clearFilters}>
+              Limpiar
+            </button>
+          )}
         </div>
-      </div>
-    </>
+      </Collapsible.Trigger>
+      <Collapsible.Content className="f-content">
+        <FilterOptionsCheckContainer>
+          {data.map((item) => (
+            <div key={item.key} className="form-check">
+              <VehicleTypeInput value={item.key} />
+              <label
+                className="form-check-label d-inline-flex justify-content-between align-items-center w-100"
+                htmlFor={item.key}
+              >
+                <span>{item.type}</span>
+                <small>{item.count}</small>
+              </label>
+            </div>
+          ))}
+        </FilterOptionsCheckContainer>
+      </Collapsible.Content>
+    </Collapsible.Root>
   );
 }
 
 export const useVehicleTypes = () => {
-  const [data, setData] = useState<VehicleType[]>([]);
-  useEffect(() => {
-    (async function () {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/vehicle-type`,
-        ).then((res) => res.json());
-        setData(res);
-      } catch (e) {
-        console.error("Got this error", e);
-        setData([]);
-      }
-    })();
-  }, []);
+  const vehicleTypes = useAppSelector(getVehicleTypes);
+  const vehicleTypesCounters = useAppSelector(getVehicleTypesCounters);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => {
+    setIsOpen((prevState) => !prevState);
+  };
 
-  return { data };
+  const data = vehicleTypes.map((item) => ({
+    ...item,
+    count:
+      (vehicleTypesCounters as { [k: string]: number } | undefined)?.[
+        item.key
+      ] ?? 0,
+  }));
+
+  const sp = useSearchParams();
+  const anyValue = Boolean(sp.get("VehicleTypes"));
+
+  const { push } = useRouter();
+  const pathname = usePathname();
+  const clearFilters = () => {
+    const query = new URLSearchParams(sp);
+    query.delete("VehicleTypes");
+    push(pathname + query);
+  };
+
+  return { data, isOpen, toggle, anyValue, clearFilters };
 };

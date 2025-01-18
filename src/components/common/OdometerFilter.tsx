@@ -2,8 +2,8 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { MouseEventHandler, useCallback, useState } from "react";
 import { MAX_ODOMETER_VAL, STEP_ODOMETER_VAL } from "@/types/vehicle";
 import "nouislider/dist/nouislider.min.css";
-import { resetData, toggleLoading } from "@/redux/features/vehicles.slice";
-import { useAppDispatch } from "@/redux/hooks";
+import { resetData } from "@/store/features/vehicles.slice";
+import { useAppDispatch } from "@/store/hooks";
 import * as Slider from "@radix-ui/react-slider";
 import * as Collapsible from "@radix-ui/react-collapsible";
 
@@ -79,7 +79,6 @@ const useOdometerRange = () => {
   };
   const clearOdometerFilters: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
-    dispatch(toggleLoading());
     dispatch(resetData());
     setLimits({ min: 0, max: MAX_ODOMETER_VAL });
     r.push(
@@ -114,7 +113,6 @@ const useOdometerRange = () => {
   );
 
   const filterByOdometer = (values: number[]) => {
-    dispatch(toggleLoading());
     dispatch(resetData());
     const from = Number(values[0]);
     const to = Number(values[1]);

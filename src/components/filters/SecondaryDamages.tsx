@@ -1,21 +1,21 @@
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
 import { v4 as uuidv4 } from "uuid";
 import React, { MouseEventHandler, useState } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useFilters } from "@/components/common/Filters";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
-  getAuctions,
-  getAuctionsCounters,
+  getDamagesTranslations,
+  getSecondaryDamagesCounters,
 } from "@/store/features/filters.slice";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { resetData } from "@/store/features/vehicles.slice";
 
-const FILTER_NAME = "Auction";
+const FILTER_NAME = "SecondaryDamages";
 
-export default function AuctionNames() {
-  const { auctions, checked, isOpen, toggle, anyValue, clearFilter } =
-    useAuctionNames();
+export default function SecondaryDamages() {
+  const { damages, checked, isOpen, toggle, anyValue, clearFilter } =
+    useDamages();
   const { handleCheckChange: handleChange } = useFilters();
   return (
     <Collapsible.Root
@@ -25,7 +25,7 @@ export default function AuctionNames() {
     >
       <Collapsible.Trigger className="f-trigger" asChild>
         <div className="f-trigger-inner">
-          <strong className="flex-fill">Subasta</strong>
+          <strong className="flex-fill">Daños secundarios</strong>
           {anyValue && (
             <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar
@@ -35,24 +35,24 @@ export default function AuctionNames() {
       </Collapsible.Trigger>
       <Collapsible.Content className="f-content">
         <FilterOptionsCheckContainer>
-          {auctions.map((item) => (
+          {damages.map((item) => (
             <div key={item.key + uuidv4()} className="form-check">
               <input
                 className="form-check-input"
                 id={item.key}
                 type="checkbox"
-                name="Auction"
+                name={FILTER_NAME}
                 value={item.key}
                 onChange={handleChange}
                 checked={checked(item.key)}
                 disabled={item.count === 0}
               />
               <label
-                className="form-check-label d-inline-flex justify-content-between w-100"
+                className="form-check-label d-flex justify-content-between align-items-end"
                 htmlFor={item.key}
               >
                 <span>{item.label}</span>
-                <span>{item.count}</span>
+                <small>{item.count}</small>
               </label>
             </div>
           ))}
@@ -62,39 +62,37 @@ export default function AuctionNames() {
   );
 }
 
-const useAuctionNames = () => {
-  const data = useAppSelector(getAuctions);
-  const counters = useAppSelector(getAuctionsCounters);
+const useDamages = () => {
+  const searchParams = useSearchParams();
+  const translations = useAppSelector(getDamagesTranslations);
+  const counters = useAppSelector(getSecondaryDamagesCounters);
   const { push } = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();
 
-  const auctions = data.map((item) => ({
-    key: item,
-    label: item,
-    count:
-      (counters as { [k: string]: number } | undefined)?.[item.toLowerCase()] ??
-      0,
+  const damages = Object.entries(translations).map((item) => ({
+    key: item[0],
+    label: item[1],
+    count: (counters as { [k: string]: number } | undefined)?.[item[0]] ?? 0,
   }));
 
-  const searchParams = useSearchParams();
-  const checked = (name: string) => {
-    const auctions = searchParams.getAll(FILTER_NAME) ?? [];
-
-    return auctions.includes(name);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => {
+    setIsOpen((prev) => !prev);
   };
+
   const anyValue = Boolean((searchParams.getAll(FILTER_NAME) ?? []).length);
+
+  const checked = (val: string) => searchParams.get(FILTER_NAME) === val;
+
   const clearFilter: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
-    const sp = new URLSearchParams(searchParams);
-    sp.delete(FILTER_NAME);
     dispatch(resetData());
+    const sp = new URLSearchParams();
+    sp.delete(FILTER_NAME);
 
     push(`${pathname}?${sp}`);
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen((prev) => !prev);
-
-  return { auctions, checked, isOpen, toggle, anyValue, clearFilter };
+  return { damages, checked, isOpen, toggle, anyValue, clearFilter };
 };
