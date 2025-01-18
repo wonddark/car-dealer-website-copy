@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { DEFAULT_VEHICLE_PAGE_SIZE, VehicleResponse } from "@/types/vehicle";
+import {
+  DEFAULT_VEHICLE_PAGE_SIZE,
+  Vehicle,
+  VehicleResponse,
+} from "@/types/vehicle";
 import vehiclesApi from "@/store/api";
 
 type VehiclesState = {
@@ -8,6 +12,8 @@ type VehiclesState = {
     loading: boolean;
     error: boolean;
   };
+  buyNow: Vehicle[];
+  mostWanted: Vehicle[];
 };
 
 export const initialState: VehiclesState = {
@@ -24,6 +30,8 @@ export const initialState: VehiclesState = {
     loading: true,
     error: false,
   },
+  buyNow: [],
+  mostWanted: [],
 };
 
 const vehiclesSlice = createSlice({
@@ -55,17 +63,27 @@ const vehiclesSlice = createSlice({
         state.status = { error: false, loading: true };
       },
     );
+    builder.addMatcher(
+      vehiclesApi.endpoints.getBuyNow.matchFulfilled,
+      (state, action) => ({ ...state, buyNow: action.payload.data }),
+    );
+    builder.addMatcher(
+      vehiclesApi.endpoints.getMostWanted.matchFulfilled,
+      (state, action) => ({ ...state, mostWanted: action.payload.data }),
+    );
   },
   selectors: {
     getResponse: (state) => state.response,
     isLoading: (state) => state.status.loading,
     isError: (state) => state.status.error,
+    getBuyNow: (state) => state.buyNow,
+    getMostWanted: (state) => state.mostWanted,
   },
 });
 
 export const {
   actions: { resetData },
-  selectors: { getResponse, isLoading, isError },
+  selectors: { getResponse, isLoading, isError, getBuyNow, getMostWanted },
 } = vehiclesSlice;
 
 export default vehiclesSlice;

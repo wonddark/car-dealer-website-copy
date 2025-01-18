@@ -1,60 +1,23 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { VehicleResponse } from "@/types/vehicle";
 import HorizontalVehiclesCarrousel from "@/components/HorizontalVehiclesCarrousel";
+import { useAppSelector } from "@/store/hooks";
+import { getBuyNow } from "@/store/features/vehicles.slice";
+import { useGetBuyNowQuery } from "@/store/api";
 
 export default function BuyNow() {
-  const [result, setResult] = useState<{
-    response: VehicleResponse;
-    error: boolean;
-    loading: boolean;
-  }>({
-    response: {
-      data: [],
-      pageNumber: 1,
-      pageSize: 12,
-      totalPages: 0,
-      totalCount: 0,
-    },
-    loading: true,
-    error: false,
-  });
-
-  useEffect(() => {
-    const controller = new AbortController();
-    (async () => {
-      try {
-        const res = await fetch(
-          process.env.NEXT_PUBLIC_DOMAIN +
-            "/api/inventory/search?HasBuyNowPrice=true&IsBestOffer=false&PageNumber=1&PageSize=12",
-          { signal: controller.signal },
-        ).then((res) => res.json());
-
-        setResult({ response: res, loading: false, error: false });
-      } catch (e) {
-        if (e instanceof DOMException && e.name === "AbortError") {
-          return null;
-        } else {
-          console.error(e);
-          setResult((prev) => ({ ...prev, loading: false, error: true }));
-        }
-      }
-    })();
-
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  useGetBuyNowQuery({});
+  const data = useAppSelector(getBuyNow);
 
   return (
     <>
-      {!result.loading && !result.error && result.response.data.length > 0 && (
+      {data && (
         <section className="card p-1">
           <h5 className="ps-1">Comprar ahora</h5>
           <HorizontalVehiclesCarrousel
-            data={result.response}
+            data={data}
             fullListLink="/vehicles?HasBuyNowPrice=true&IsBestOffer=false"
           />
           <div className="hstack justify-content-end mt-1">
