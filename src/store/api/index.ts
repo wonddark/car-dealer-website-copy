@@ -34,6 +34,14 @@ const vehiclesApi = createApi({
     getMakersAndModels: build.query({
       query: () => "/api/filters/brands-and-models",
     }),
+    getBuyNow: build.query({
+      query: () =>
+        "/api/inventory/search?HasBuyNowPrice=true&IsBestOffer=false&PageNumber=1&PageSize=24",
+    }),
+    getMostWanted: build.query({
+      query: () =>
+        "/api/inventory/search?IsBestOffer=true&PageNumber=1&PageSize=24",
+    }),
   }),
 });
 
@@ -46,6 +54,8 @@ export const {
   useGetFuelTypesQuery,
   useGetTitleTypesQuery,
   useGetMakersAndModelsQuery,
+  useGetBuyNowQuery,
+  useGetMostWantedQuery,
 } = vehiclesApi;
 
 export default vehiclesApi;

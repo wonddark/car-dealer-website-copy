@@ -2,14 +2,14 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import React from "react";
 import Link from "next/link";
-import { VehicleResponse } from "@/types/vehicle";
+import { Vehicle } from "@/types/vehicle";
 
-type Props = { data: VehicleResponse; fullListLink: string };
+type Props = { data: Vehicle[]; fullListLink: string };
 export default function HorizontalVehiclesCarrousel(props: Readonly<Props>) {
   const { data, fullListLink } = props;
   return (
-    <Swiper spaceBetween={0} slidesPerView="auto">
-      {data.data.map((item) => (
+    <Swiper spaceBetween={0} resistanceRatio={0.5} slidesPerView="auto">
+      {data.map((item) => (
         <SwiperSlide key={item.vin}>
           <div className="position-relative slide-card">
             <Link
