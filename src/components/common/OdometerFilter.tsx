@@ -1,60 +1,64 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useCallback, useState } from "react";
+import React, { MouseEventHandler, useCallback, useState } from "react";
 import { MAX_ODOMETER_VAL, STEP_ODOMETER_VAL } from "@/types/vehicle";
 import "nouislider/dist/nouislider.min.css";
-import { resetData, toggleLoading } from "@/redux/features/vehicles.slice";
-import { useAppDispatch } from "@/redux/hooks";
+import { resetData } from "@/store/features/vehicles.slice";
+import { useAppDispatch } from "@/store/hooks";
 import * as Slider from "@radix-ui/react-slider";
+import * as Collapsible from "@radix-ui/react-collapsible";
 
 export default function OdometerFilter() {
-  const { limits, filterByOdometer, updateLimits } = useOdometerRange();
+  const { limits, filterByOdometer, updateLimits, clearOdometerFilters } =
+    useOdometerRange();
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleIsOpen = () => {
+    setIsOpen((prevState) => !prevState);
+  };
 
   return (
-    <>
-      <h2 className="accordion-header">
-        <button
-          className="accordion-button collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapse-odometer"
-          aria-controls="collapse-odometer"
-        >
-          <strong>Odómetro</strong>
-        </button>
-      </h2>
-      <div
-        id="collapse-odometer"
-        className="accordion-collapse collapse"
-        data-bs-parent="#accordion-filters"
-      >
-        <div className="accordion-body">
-          <div className="vstack gap-2 pt-4 px-3 pb-1">
-            <div className="hstack justify-content-between align-items-center text-muted">
-              <small> {`${limits.min} Millas`}</small>
-              <small>
-                {`${Number(limits.max) < MAX_ODOMETER_VAL ? limits.max : MAX_ODOMETER_VAL + "+"} Millas`}
-              </small>
-            </div>
-            <Slider.Root
-              className="slider-root"
-              value={[Number(limits.min), Number(limits.max)]}
-              max={MAX_ODOMETER_VAL}
-              step={STEP_ODOMETER_VAL}
-              min={0}
-              minStepsBetweenThumbs={1}
-              onValueChange={updateLimits}
-              onValueCommit={filterByOdometer}
-            >
-              <Slider.Track className="slider-track">
-                <Slider.Range className="slider-range" />
-              </Slider.Track>
-              <Slider.Thumb className="slider-thumb" />
-              <Slider.Thumb className="slider-thumb" />
-            </Slider.Root>
-          </div>
+    <Collapsible.Root
+      className="sidebar-filter"
+      open={isOpen}
+      onOpenChange={toggleIsOpen}
+    >
+      <Collapsible.Trigger className="f-trigger" asChild>
+        <div className="f-trigger-inner">
+          <strong className="flex-fill">Odómetro</strong>
+          {(Number(limits.max) !== MAX_ODOMETER_VAL ||
+            Number(limits.min) > 0) && (
+            <button className="f-reset btn" onClick={clearOdometerFilters}>
+              Limpiar
+            </button>
+          )}
         </div>
-      </div>
-    </>
+      </Collapsible.Trigger>
+      <Collapsible.Content className="f-content">
+        <div className="vstack gap-2">
+          <div className="hstack justify-content-between align-items-center text-muted">
+            <small> {`${limits.min} Millas`}</small>
+            <small>
+              {`${Number(limits.max) < MAX_ODOMETER_VAL ? limits.max : MAX_ODOMETER_VAL + "+"} Millas`}
+            </small>
+          </div>
+          <Slider.Root
+            className="slider-root"
+            value={[Number(limits.min), Number(limits.max)]}
+            max={MAX_ODOMETER_VAL}
+            step={STEP_ODOMETER_VAL}
+            min={0}
+            minStepsBetweenThumbs={1}
+            onValueChange={updateLimits}
+            onValueCommit={filterByOdometer}
+          >
+            <Slider.Track className="slider-track">
+              <Slider.Range className="slider-range" />
+            </Slider.Track>
+            <Slider.Thumb className="slider-thumb" />
+            <Slider.Thumb className="slider-thumb" />
+          </Slider.Root>
+        </div>
+      </Collapsible.Content>
+    </Collapsible.Root>
   );
 }
 
@@ -73,6 +77,25 @@ const useOdometerRange = () => {
   const updateLimits = (vals: number[]) => {
     setLimits({ min: vals[0], max: vals[1] });
   };
+  const clearOdometerFilters: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    dispatch(resetData());
+    setLimits({ min: 0, max: MAX_ODOMETER_VAL });
+    r.push(
+      pathname +
+        "?" +
+        createQueryString(
+          {
+            name: "OdometerFrom",
+            value: null,
+          },
+          {
+            name: "OdometerTo",
+            value: null,
+          },
+        ),
+    );
+  };
 
   const createQueryString = useCallback(
     (...params: { name: string; value: string | null }[]) => {
@@ -90,7 +113,6 @@ const useOdometerRange = () => {
   );
 
   const filterByOdometer = (values: number[]) => {
-    dispatch(toggleLoading());
     dispatch(resetData());
     const from = Number(values[0]);
     const to = Number(values[1]);
@@ -111,5 +133,5 @@ const useOdometerRange = () => {
     );
   };
 
-  return { limits, filterByOdometer, updateLimits };
+  return { limits, filterByOdometer, updateLimits, clearOdometerFilters };
 };

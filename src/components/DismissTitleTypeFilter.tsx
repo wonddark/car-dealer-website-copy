@@ -2,12 +2,13 @@
 
 import React from "react";
 import DismissFilter from "@/components/DismissFilter";
-import { useTitleTypes } from "@/components/filters/TitleTypes";
+import { useAppSelector } from "@/store/hooks";
+import { getTitles } from "@/store/features/filters.slice";
 
 export default function DismissTitleTypeFilter() {
-  const { titleTypes } = useTitleTypes();
+  const titles = useAppSelector(getTitles);
   const findFunction = (val: string) =>
-    titleTypes.data.find((token) => token.key === val);
+    titles.find((token) => token.key === val);
 
   return (
     <DismissFilter

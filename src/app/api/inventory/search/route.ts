@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { initialState } from "@/redux/features/vehicles.slice";
+import { initialState } from "@/store/features/vehicles.slice";
 
 export const dynamic = "force-dynamic";
 
@@ -23,6 +23,7 @@ export async function GET(request: NextRequest) {
       { status: response.status, statusText: response.statusText },
     );
   } catch (e) {
+    console.error(e);
     return Response.json({ error: JSON.stringify(e) }, { status: 500 });
   }
 }

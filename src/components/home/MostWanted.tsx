@@ -52,7 +52,7 @@ export default function MostWanted() {
   return (
     <>
       {!result.loading && !result.error && result.response.data.length > 0 && (
-        <section className="pt-2">
+        <section className="card p-1">
           <h5 className="ps-1">Más buscados</h5>
           <HorizontalVehiclesCarrousel
             data={result.response}

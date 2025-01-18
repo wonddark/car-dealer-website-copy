@@ -1,94 +1,88 @@
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
-import React, { useEffect, useState } from "react";
-import { VehicleTitle } from "@/types/vehicle";
+import React, { useState } from "react";
 import { useFilters } from "@/components/common/Filters";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useAppSelector } from "@/store/hooks";
+import { getTitles, getTitlesCounters } from "@/store/features/filters.slice";
+import * as Collapsible from "@radix-ui/react-collapsible";
 
 export default function TitleTypes() {
-  const { titleTypes, checked } = useTitleTypes();
+  const { titles, checked, isOpen, toggle, anyVal, clearFilters } =
+    useTitleTypes();
   const { handleCheckChange: handleChange } = useFilters();
   return (
-    <>
-      <h2 className="accordion-header">
-        <button
-          className="accordion-button collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapse-title-type"
-          aria-controls="collapse-title-type"
-        >
-          <strong>Tipo de título</strong>
-        </button>
-      </h2>
-      <div
-        id="collapse-title-type"
-        className="accordion-collapse collapse"
-        data-bs-parent="#accordion-filters"
-      >
-        <div className="accordion-body">
-          <FilterOptionsCheckContainer>
-            {!titleTypes.loading &&
-              !titleTypes.error &&
-              titleTypes.data.map((item) => (
-                <div key={item.key} className="form-check">
-                  <input
-                    className="form-check-input"
-                    id={item.key}
-                    type="checkbox"
-                    name="TitleTypes"
-                    value={item.key}
-                    onChange={handleChange}
-                    checked={checked(item.key)}
-                  />
-                  <label className="form-check-label" htmlFor={item.key}>
-                    {item.meaning}
-                  </label>
-                </div>
-              ))}
-            {titleTypes.loading &&
-              [0, 1, 2].map((i) => (
-                <div key={i} className="placeholder">
-                  <div className="form-input placeholder-glow"></div>
-                </div>
-              ))}
-          </FilterOptionsCheckContainer>
+    <Collapsible.Root
+      className="sidebar-filter"
+      open={isOpen}
+      onOpenChange={toggle}
+    >
+      <Collapsible.Trigger className="f-trigger" asChild>
+        <div className="f-trigger-inner">
+          <strong className="flex-fill">Tipo de título</strong>
+          {anyVal && (
+            <button className="f-reset btn" onClick={clearFilters}>
+              Limpiar
+            </button>
+          )}
         </div>
-      </div>
-    </>
+      </Collapsible.Trigger>
+      <Collapsible.Content className="f-content">
+        <FilterOptionsCheckContainer>
+          {titles.map((item) => (
+            <div key={item.key} className="form-check">
+              <input
+                className="form-check-input"
+                id={item.key}
+                type="checkbox"
+                name="TitleTypes"
+                value={item.key}
+                onChange={handleChange}
+                checked={checked(item.key)}
+              />
+              <label
+                className="form-check-label d-inline-flex justify-content-between w-100"
+                htmlFor={item.key}
+              >
+                <span>{item.meaning}</span>
+                <span>{item.count}</span>
+              </label>
+            </div>
+          ))}
+        </FilterOptionsCheckContainer>
+      </Collapsible.Content>
+    </Collapsible.Root>
   );
 }
 
 export const useTitleTypes = () => {
-  const [titleTypes, setTitleTypes] = useState<{
-    data: VehicleTitle[];
-    loading: boolean;
-    error: boolean;
-  }>({ data: [], loading: true, error: false });
-  useEffect(() => {
-    const controller = new AbortController();
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/vehicle-title`, {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((res) => setTitleTypes({ data: res, loading: false, error: false }))
-      .catch((reason) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") {
-          return null;
-        } else {
-          setTitleTypes({ data: [], loading: false, error: true });
-        }
-      });
+  const data = useAppSelector(getTitles);
+  const counters = useAppSelector(getTitlesCounters);
 
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  const titles = data.map((item) => ({
+    ...item,
+    count: (counters as { [k: string]: number } | undefined)?.[item.key] ?? 0,
+  }));
+
   const searchParams = useSearchParams();
   const checked = (titleVal: string) => {
-    const titles = searchParams.getAll("TitleTypes") ?? [];
+    const queries = searchParams.getAll("TitleTypes") ?? [];
 
-    return titles.includes(titleVal);
+    return queries.includes(titleVal);
+  };
+  const anyVal = Boolean((searchParams.getAll("TitleTypes") ?? []).length);
+
+  const { push } = useRouter();
+  const pathname = usePathname();
+  const clearFilters = () => {
+    const query = new URLSearchParams(searchParams);
+    query.delete("TitleTypes");
+    push(pathname + query);
   };
 
-  return { titleTypes, checked };
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => {
+    setIsOpen((prevState) => !prevState);
+  };
+
+  return { titles, checked, isOpen, toggle, anyVal, clearFilters };
 };

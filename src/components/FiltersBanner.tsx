@@ -1,16 +1,30 @@
 "use client";
 
 import React from "react";
-import { resetData } from "@/redux/features/vehicles.slice";
+import { resetData } from "@/store/features/vehicles.slice";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch } from "@/store/hooks";
 import DismissVehicleTypeFilter from "@/components/DismissVehicleTypeFilter";
 import DismissTitleTypeFilter from "@/components/DismissTitleTypeFilter";
 import DismissBrandFilter from "@/components/DismissBrandFilter";
 import DismissModelFilter from "@/components/DismissModelFilter";
 import DismissFilter from "@/components/DismissFilter";
+import {
+  useGetAuctionsQuery,
+  useGetDamageTranslationsQuery,
+  useGetFuelTypesQuery,
+  useGetMakersAndModelsQuery,
+  useGetTitleTypesQuery,
+  useGetVehicleTypesQuery,
+} from "@/store/api";
 
 export default function FiltersBanner() {
+  useGetVehicleTypesQuery({});
+  useGetDamageTranslationsQuery({});
+  useGetAuctionsQuery({});
+  useGetFuelTypesQuery({});
+  useGetTitleTypesQuery({});
+  useGetMakersAndModelsQuery({});
   const r = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();

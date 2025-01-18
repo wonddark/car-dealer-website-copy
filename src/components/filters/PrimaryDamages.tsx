@@ -1,91 +1,95 @@
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
 import { v4 as uuidv4 } from "uuid";
-import { primaryDamagesDict } from "@/data/translations";
-import React, { useEffect, useState } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import { useFilters } from "@/components/common/Filters";
-import { useSearchParams } from "next/navigation";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import {
+  getDamagesTranslations,
+  getPrimaryDamagesCounters,
+} from "@/store/features/filters.slice";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import * as Collapsible from "@radix-ui/react-collapsible";
+import { resetData } from "@/store/features/vehicles.slice";
+
+const FILTER_NAME = "PrimaryDamages";
 
 export default function PrimaryDamages() {
-  const { damages, checked } = usePrimaryDamages();
+  const { damages, checked, isOpen, toggle, anyValue, clearFilter } =
+    useDamages();
   const { handleCheckChange: handleChange } = useFilters();
   return (
-    <>
-      <h2 className="accordion-header">
-        <button
-          className="accordion-button collapsed"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapse-primary-damages"
-          aria-controls="collapse-primary-damages"
-        >
-          <strong>Daños primarios</strong>
-        </button>
-      </h2>
-      <div
-        id="collapse-primary-damages"
-        className="accordion-collapse collapse"
-        data-bs-parent="#accordion-filters"
-      >
-        <div className="accordion-body">
-          <FilterOptionsCheckContainer>
-            {damages.data.map((item) => (
-              <div key={item + uuidv4()} className="form-check">
-                <input
-                  className="form-check-input"
-                  id={item}
-                  type="checkbox"
-                  name="PrimaryDamages"
-                  value={item}
-                  onChange={handleChange}
-                  checked={checked(item)}
-                />
-                <label className="form-check-label" htmlFor={item}>
-                  {primaryDamagesDict[item]}
-                </label>
-              </div>
-            ))}
-          </FilterOptionsCheckContainer>
+    <Collapsible.Root
+      className="sidebar-filter"
+      open={isOpen}
+      onOpenChange={toggle}
+    >
+      <Collapsible.Trigger className="f-trigger" asChild>
+        <div className="f-trigger-inner">
+          <strong className="flex-fill">Daños primarios</strong>
+          {anyValue && (
+            <button className="f-reset btn" onClick={clearFilter}>
+              Limpiar
+            </button>
+          )}
         </div>
-      </div>
-    </>
+      </Collapsible.Trigger>
+      <Collapsible.Content className="f-content">
+        <FilterOptionsCheckContainer>
+          {damages.map((item) => (
+            <div key={item.key + uuidv4()} className="form-check">
+              <input
+                className="form-check-input"
+                id={item.key}
+                type="checkbox"
+                name={FILTER_NAME}
+                value={item.key}
+                onChange={handleChange}
+                checked={checked(item.key)}
+                disabled={item.count === 0}
+              />
+              <label
+                className="form-check-label d-flex justify-content-between align-items-end"
+                htmlFor={item.key}
+              >
+                <span>{item.label}</span>
+                <small>{item.count}</small>
+              </label>
+            </div>
+          ))}
+        </FilterOptionsCheckContainer>
+      </Collapsible.Content>
+    </Collapsible.Root>
   );
 }
 
-const usePrimaryDamages = () => {
+const useDamages = () => {
   const searchParams = useSearchParams();
-  const [damages, setDamages] = useState<{
-    data: string[];
-    loading: boolean;
-    error: boolean;
-  }>({ data: [], loading: true, error: false });
+  const translations = useAppSelector(getDamagesTranslations);
+  const counters = useAppSelector(getPrimaryDamagesCounters);
+  const { push } = useRouter();
+  const pathname = usePathname();
+  const dispatch = useAppDispatch();
 
-  const checked = (value: string) => {
-    const damages = searchParams.getAll("PrimaryDamages") ?? [];
+  const damages = Object.entries(translations).map((item) => ({
+    key: item[0],
+    label: item[1],
+    count: (counters as { [k: string]: number } | undefined)?.[item[0]] ?? 0,
+  }));
 
-    return damages.includes(value);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen((prev) => !prev);
+
+  const anyValue = Boolean((searchParams.getAll(FILTER_NAME) ?? []).length);
+
+  const checked = (val: string) => searchParams.get(FILTER_NAME) === val;
+
+  const clearFilter: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
+    dispatch(resetData());
+    const sp = new URLSearchParams(searchParams);
+    sp.delete(FILTER_NAME);
+    push(`${pathname}?${sp}`);
   };
 
-  const getPrimaryDamages = () => {
-    const controller = new AbortController();
-    fetch(`${process.env.NEXT_PUBLIC_DOMAIN}/api/filters/primary-damages`, {
-      signal: controller.signal,
-    })
-      .then((res) => res.json())
-      .then((data) => setDamages({ data, loading: false, error: false }))
-      .catch((reason) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") {
-          return null;
-        } else {
-          setDamages({ data: [], loading: false, error: true });
-        }
-      });
-
-    return () => {
-      controller.abort();
-    };
-  };
-
-  useEffect(getPrimaryDamages, []);
-
-  return { damages, checked };
+  return { damages, checked, isOpen, anyValue, clearFilter, toggle };
 };

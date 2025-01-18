@@ -1,17 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import cartSlice from "./features/cartSlice";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import vehiclesSlice from "@/redux/features/vehicles.slice";
+import vehiclesSlice from "@/store/features/vehicles.slice";
+import vehiclesApi from "@/store/api";
+import filtersSlice from "@/store/features/filters.slice";
 
 const store = configureStore({
   reducer: {
-    cart: cartSlice,
     [vehiclesSlice.reducerPath]: vehiclesSlice.reducer,
+    [vehiclesApi.reducerPath]: vehiclesApi.reducer,
+    [filtersSlice.reducerPath]: filtersSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }),
+    }).concat(vehiclesApi.middleware),
 });
 
 export default store;

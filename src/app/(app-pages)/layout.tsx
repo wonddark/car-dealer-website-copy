@@ -1,6 +1,6 @@
 "use client";
 
-import store from "@/redux/store";
+import store from "@/store";
 import { Provider } from "react-redux";
 import Header from "@/layouts/Header";
 import React from "react";
