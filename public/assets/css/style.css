@@ -4450,3 +4450,633 @@ li.suha-dropdown-menu .dropdown-trigger-btn.active i {
   left: 16px;
   transform: translateY(-50%);
 }
+
+
+/* Night Mode */
+[theme-color="dark"] {
+  background-color: #0C153B;
+}
+
+[theme-color="dark"] .preview-iframe-wrapper {
+  background-color: #0C153B;
+}
+
+[theme-color="dark"] body,
+[theme-color="dark"] #preloader {
+  background-color: #0C153B;
+}
+
+[theme-color="dark"] body,
+[theme-color="dark"] .card-body {
+  color: #747794;
+}
+
+[theme-color="dark"] a,
+[theme-color="dark"] a:hover,
+[theme-color="dark"] a:focus,
+[theme-color="dark"] h1,
+[theme-color="dark"] h2,
+[theme-color="dark"] h3,
+[theme-color="dark"] h4,
+[theme-color="dark"] h5,
+[theme-color="dark"] h6 {
+  color: #fff;
+}
+
+[theme-color="dark"] .header-area,
+[theme-color="dark"] .footer-nav-area {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .card {
+  border-color: #242644;
+  background-color: #242644;
+}
+
+[theme-color="dark"] .border,
+[theme-color="dark"] .border-start,
+[theme-color="dark"] .border-right,
+[theme-color="dark"] .border-bottom,
+[theme-color="dark"] .border-top,
+[theme-color="dark"] .list-group-item {
+  border-color: rgb(255 255 255 / 10%) !important;
+}
+
+[theme-color="dark"] .user-profile-icon a,
+[theme-color="dark"] .suha-navbar-toggler {
+  border-color: rgb(255 255 255 / 20%);
+}
+
+[theme-color="dark"] .cart-icon-wrap a span {
+  background-color: #625AFA;
+}
+
+[theme-color="dark"] .dropdown-menu {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .dropdown-menu .dropdown-item:hover,
+[theme-color="dark"] .dropdown-menu .dropdown-item:focus {
+  color: #fff !important;
+}
+
+[theme-color="dark"] .bg-white {
+  background-color: #332858 !important;
+}
+
+[theme-color="dark"] .btn-warning,
+[theme-color="dark"] .btn-info {
+  color: #020310;
+}
+
+[theme-color="dark"] .btn-warning:hover,
+[theme-color="dark"] .btn-info:hover {
+  color: #020310;
+}
+
+[theme-color="dark"] .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+[theme-color="dark"] .form-control::input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+[theme-color="dark"] .form-control::placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+[theme-color="dark"] .form-control:input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+[theme-color="dark"] .form-control::input-placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+[theme-color="dark"] .form-control::placeholder {
+  color: #fff;
+  opacity: 0.6;
+}
+
+[theme-color="dark"] .widget .form-check-label {
+  color: #fff;
+}
+
+[theme-color="dark"] .search-form .form-control {
+  background-color: #332858;
+  color: #fff;
+}
+
+[theme-color="dark"] .search-form .form-control::input-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+[theme-color="dark"] .search-form .form-control::placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+[theme-color="dark"] .search-form .form-control:input-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+[theme-color="dark"] .search-form .form-control::input-placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+[theme-color="dark"] .search-form .form-control::placeholder {
+  color: #fff;
+  opacity: 0.5;
+}
+
+[theme-color="dark"] .btn-light {
+  background-color: #242644;
+}
+
+[theme-color="dark"] .btn-light:hover {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .catagory-card.active, [theme-color="dark"] .catagory-card:hover {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .catagory-card.active span, [theme-color="dark"] .catagory-card:hover span {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .suha-footer-nav ul li a {
+  color: #fff;
+}
+
+[theme-color="dark"] .flash-sale-card .product-title {
+  color: #fff;
+}
+
+[theme-color="dark"] .flash-sale-card .sale-price {
+  color: #fff;
+}
+
+[theme-color="dark"] .product-card .product-title {
+  color: #fff;
+}
+
+[theme-color="dark"] .product-card .product-title:hover {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .product-card .sale-price {
+  color: #fff;
+}
+
+[theme-color="dark"] .horizontal-product-card .product-thumbnail-side .product-thumbnail {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .horizontal-product-card .product-thumbnail-side .wishlist-btn {
+  color: #ea4c62;
+  background-color: #242644;
+  border-color: #242644;
+}
+
+[theme-color="dark"] .horizontal-product-card .product-thumbnail-side .delete-btn {
+  color: #ea4c62;
+  background-color: #242644;
+  border-color: #242644;
+}
+
+[theme-color="dark"] .horizontal-product-card .product-description .product-title {
+  color: #fff;
+}
+
+[theme-color="dark"] .horizontal-product-card .product-description .product-rating {
+  color: #fff;
+}
+
+[theme-color="dark"] .horizontal-product-card .product-description .delete-btn {
+  background-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .horizontal-product-card .product-description .sale-price {
+  color: #fff;
+}
+
+[theme-color="dark"] .featured-product-card .product-description .product-title {
+  color: #fff;
+}
+
+[theme-color="dark"] .featured-product-card .product-description .product-title:hover {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .featured-product-card .product-description .sale-price {
+  color: #fff;
+}
+
+[theme-color="dark"] .page-nav li a {
+  background-color: #332858;
+  color: #fff;
+}
+
+[theme-color="dark"] .page-nav li a:hover {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .back-button a {
+  color: #fff;
+}
+
+[theme-color="dark"] .back-button a:hover {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .suha-filter-offcanvas-wrap {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .form-check-input {
+  background-color: #0C153B;
+  border: 0.063rem solid rgb(0 0 0 / 25%);
+}
+
+[theme-color="dark"] .form-control {
+  border-color: rgb(255 255 255 / 10%);
+  background-color: #242644;
+  color: #fff;
+}
+
+[theme-color="dark"] .product-catagories a {
+  background-color: #332858;
+  color: #fff;
+}
+
+[theme-color="dark"] .single-order-status .order-text span {
+  color: #747794;
+}
+
+[theme-color="dark"] .nice-select {
+  background-color: #332858;
+  border-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .nice-select .list {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .nice-select .list .option:hover,
+[theme-color="dark"] .nice-select .list .option.focus,
+[theme-color="dark"] .nice-select .list .option.selected.focus {
+  background-color: rgb(255 255 255 / 20%);
+  color: #fff;
+}
+
+[theme-color="dark"] .product-title-meta-data {
+  background-color: #242644 !important;
+}
+
+[theme-color="dark"] .product-title-meta-data::after {
+  background-image: url("../img/core-img/curve2.png");
+}
+
+[theme-color="dark"] .p-wishlist-share a {
+  color: #ea4c62;
+}
+
+[theme-color="dark"] .progress {
+  background-color: rgb(255 255 255 / 15%);
+}
+
+[theme-color="dark"] .cart-form .quantity-button-handler {
+  background-color: #242644;
+  border-color: rgb(255 255 255 / 10%);
+  color: #fff;
+}
+
+[theme-color="dark"] .product-slide-wrapper .video-btn {
+  background-color: #0C153B;
+  color: #ea4c62;
+}
+
+[theme-color="dark"] .product-slides .owl-prev,
+[theme-color="dark"] .product-slides .owl-next {
+  background-color: #0C153B !important;
+  color: #fff;
+}
+
+[theme-color="dark"] .single-user-review {
+  border-bottom-color: rgb(255 255 255 / 15%);
+}
+
+[theme-color="dark"] .layout-options a {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .layout-options a.active, [theme-color="dark"] .layout-options a:hover {
+  color: #fff;
+  background-color: #ea4c62;
+}
+
+[theme-color="dark"] .single-order-status.active .order-text h6 {
+  color: #fff;
+}
+
+[theme-color="dark"] .single-order-status .order-status {
+  background-color: #242644;
+}
+
+[theme-color="dark"] .single-order-status .order-status i {
+  color: rgb(255 255 255 / 21%);
+}
+
+[theme-color="dark"] .single-order-status.active .order-status i {
+  color: #00b894;
+}
+
+[theme-color="dark"] .my-order-wrapper .card::after {
+  border-right-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .vendor-tabs {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .vendor-tabs .nav-item.show .nav-link,
+[theme-color="dark"] .vendor-tabs .nav-link.active {
+  color: #ffaf00;
+  background-color: transparent;
+}
+
+[theme-color="dark"] .register-form .form-control {
+  background-color: transparent;
+}
+
+[theme-color="dark"] .cart-table table tbody tr {
+  background-color: transparent;
+  border-bottom-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .cart-table table a {
+  color: #fff;
+}
+
+[theme-color="dark"] .cart-table table a:hover {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .cart-table img {
+  border-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .language-area-wrapper input[type="radio"]:checked ~ label,
+[theme-color="dark"] .language-area-wrapper input[type="radio"]:checked ~ label,
+[theme-color="dark"] .shipping-method-choose input[type="radio"]:checked ~ label,
+[theme-color="dark"] .shipping-method-choose input[type="radio"]:checked ~ label {
+  color: #fff;
+  background-color: rgb(255 255 255 / 10.3%);
+}
+
+[theme-color="dark"] .language-area-wrapper input[type="radio"]:checked ~ .check,
+[theme-color="dark"] .language-area-wrapper input[type="radio"]:checked ~ .check,
+[theme-color="dark"] .shipping-method-choose input[type="radio"]:checked ~ .check,
+[theme-color="dark"] .shipping-method-choose input[type="radio"]:checked ~ .check {
+  border-color: #ffaf00;
+}
+
+[theme-color="dark"] .language-area-wrapper input[type="radio"]:checked ~ .check::before,
+[theme-color="dark"] .language-area-wrapper input[type="radio"]:checked ~ .check::before,
+[theme-color="dark"] .shipping-method-choose input[type="radio"]:checked ~ .check::before,
+[theme-color="dark"] .shipping-method-choose input[type="radio"]:checked ~ .check::before {
+  background: #ffaf00;
+}
+
+[theme-color="dark"] .single-payment-method a {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .single-payment-method a.active h6, [theme-color="dark"] .single-payment-method a:hover h6 {
+  color: #625AFA;
+}
+
+[theme-color="dark"] .list-group-item {
+  background-color: #242644;
+  color: #fff;
+}
+
+[theme-color="dark"] .pay-credit-card-form .form-control {
+  box-shadow: none !important;
+}
+
+[theme-color="dark"] .otp-form input.form-control {
+  background-color: rgb(255 255 255 / 25%);
+}
+
+[theme-color="dark"] .otp-form .nice-select {
+  background-color: rgb(255 255 255 / 25%);
+  color: #fff;
+}
+
+[theme-color="dark"] .otp-verify-form .form-control {
+  background-color: rgb(255 255 255 / 25%);
+}
+
+[theme-color="dark"] .user-info-card {
+  background-color: #625AFA;
+  border-color: #625AFA;
+}
+
+[theme-color="dark"] .user-info-card h5 {
+  color: #fff;
+}
+
+[theme-color="dark"] .user-data-card .title {
+  color: #fff;
+}
+
+[theme-color="dark"] .user-data-card .password-score {
+  color: #fff;
+}
+
+[theme-color="dark"] .table > :not(caption) > * > * {
+  background-color: transparent;
+}
+
+[theme-color="dark"] .blog-card .post-content {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .blog-card .post-content .post-title {
+  color: #fff;
+}
+
+[theme-color="dark"] .blog-card .post-content .post-title:hover {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .blog-card .post-content .post-meta a {
+  color: #747794;
+}
+
+[theme-color="dark"] .blog-card .post-content .post-meta a:hover {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .blog-card .post-content .bg-shapes .circle1,
+[theme-color="dark"] .blog-card .post-content .bg-shapes .circle2,
+[theme-color="dark"] .blog-card .post-content .bg-shapes .circle3,
+[theme-color="dark"] .blog-card .post-content .bg-shapes .circle4,
+[theme-color="dark"] .blog-card .post-content .bg-shapes .circle5 {
+  border-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .blog-catagory-card a i {
+  color: #fff;
+}
+
+[theme-color="dark"] .blog-catagory-card a span {
+  color: #747794;
+}
+
+[theme-color="dark"] .blog-catagory-card a span:hover {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .blog-details-post-thumbnail .post-bookmark {
+  background-color: #242644;
+  color: #fff;
+}
+
+[theme-color="dark"] .blog-details-post-thumbnail .post-bookmark:hover {
+  background-color: #ea4c62;
+  color: #fff;
+}
+
+[theme-color="dark"] .agent-message-content .agent-message-text p {
+  background-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .agent-message-content .agent-message-text .writing-mode {
+  background-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .type-text-form .form-control {
+  border: 0 !important;
+  border-radius: 0;
+}
+
+[theme-color="dark"] .type-text-form .file-upload {
+  border-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .type-text-form .file-upload i {
+  background-color: #332858;
+  color: #fff;
+}
+
+[theme-color="dark"] .type-text-form button[type="submit"] {
+  background-color: transparent;
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .notification-area .list-group-item.readed {
+  background-color: #332858;
+}
+
+[theme-color="dark"] .faq-search-form button {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .accordian-card .accordian-header button {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .accordian-card .accordian-header button.collapsed > span {
+  color: #fff;
+}
+
+[theme-color="dark"] .preview-iframe-wrapper .preview-hero-area {
+  background-image: none;
+  background-color: #0C153B;
+}
+
+[theme-color="dark"] .preview-iframe-wrapper .preview-hero-area::after {
+  background-image: url("../img/core-img/curve2.png");
+}
+
+[theme-color="dark"] .preview-iframe-wrapper .preview-content-wrapper .demo-title span {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .preview-iframe-wrapper .qr-code-wrapper {
+  background-color: #242644;
+}
+
+[theme-color="dark"] .preview-iframe-wrapper .features-area {
+  background-color: #242644 !important;
+}
+
+[theme-color="dark"] .preview-iframe-wrapper .features-area ul li.active {
+  color: #fff;
+}
+
+[theme-color="dark"] .preview-iframe-wrapper .features-area ul li.active::before {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .preview-footer-area .footer-nav a:hover {
+  color: #ffaf00;
+}
+
+[theme-color="dark"] .form-floating > .form-control:not(:placeholder-shown) ~ label::after {
+  background-color: #090909;
+}
+
+[theme-color="dark"] .form-floating > .form-control:not(:input-placeholder) ~ label::after {
+  background-color: #090909;
+}
+
+[theme-color="dark"] .form-floating > .form-control-plaintext ~ label::after,
+[theme-color="dark"] .form-floating > .form-control:focus ~ label::after,
+[theme-color="dark"] .form-floating > .form-control:not(:placeholder-shown) ~ label::after,
+[theme-color="dark"] .form-floating > .form-select ~ label::after {
+  background-color: #090909;
+}
+
+[theme-color="dark"] .form-floating > .form-control:not(:placeholder-shown) ~ label {
+  color: #fff;
+}
+
+[theme-color="dark"] .form-floating > .form-control:not(:input-placeholder) ~ label {
+  color: #fff;
+}
+
+[theme-color="dark"] .form-floating > .form-control-plaintext ~ label,
+[theme-color="dark"] .form-floating > .form-control:focus ~ label,
+[theme-color="dark"] .form-floating > .form-control:not(:placeholder-shown) ~ label,
+[theme-color="dark"] .form-floating > .form-select ~ label {
+  color: #fff;
+}
+
+[theme-color="dark"] .ratings-submit-form textarea.form-control {
+  border-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .single-order-status .order-icon {
+  background-color: rgb(255 255 255 / 10%);
+}
+
+[theme-color="dark"] .single-order-status.active .order-icon {
+  color: #fff;
+  background-color: #625AFA;
+}
+
+[theme-color="dark"] .shipping-method-choose-title-card, [theme-color="dark"] .billing-information-title-card {
+  border-bottom-color: rgb(255 255 255 / 10%) !important;
+}
