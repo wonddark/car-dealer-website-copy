@@ -31,7 +31,7 @@ export default function Models() {
         <div className="f-trigger-inner">
           <strong className="flex-fill">Modelo</strong>
           {anyVal && (
-            <button className="f-reset btn" onClick={clearFilter}>
+            <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar
             </button>
           )}

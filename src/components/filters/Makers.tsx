@@ -35,7 +35,7 @@ export default function Makers() {
         <div className="f-trigger-inner">
           <strong className="flex-fill">Fabricante</strong>
           {anyVal && (
-            <button className="f-reset btn" onClick={clearFilter}>
+            <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar
             </button>
           )}

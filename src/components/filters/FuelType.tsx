@@ -22,7 +22,7 @@ export default function FuelType() {
         <div className="f-trigger-inner">
           <strong className="flex-fill">Tipo de combustible</strong>
           {anyValue && (
-            <button className="f-reset btn" onClick={clearFilter}>
+            <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar
             </button>
           )}

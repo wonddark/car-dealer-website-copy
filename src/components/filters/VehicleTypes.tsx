@@ -77,7 +77,7 @@ export const useVehicleTypes = () => {
     dispatch(resetData());
     const query = new URLSearchParams(sp);
     query.delete("VehicleTypes");
-    push(pathname + query);
+    push(`${pathname}?${query}`);
   };
 
   return { data, isOpen, toggle, anyValue, clearFilters };
