@@ -8,24 +8,28 @@ type Props = {
 };
 const OffCanvasTwo = ({ handleShow, show }: Readonly<Props>) => {
   return (
-    <div
-      className={`d-lg-none offcanvas offcanvas-start suha-filter-offcanvas-wrap ${
-        show ? "show" : ""
-      }`}
-      tabIndex={-1}
-      id="suhaFilterOffcanvas"
-      aria-labelledby="suhaFilterOffcanvasLabel"
-    >
-      <button
-        onClick={handleShow}
-        className="btn-close text-reset"
-        type="button"
-        data-bs-dismiss="offcanvas"
-        aria-label="Cerrar"
-      ></button>
-      <Filters />
-      <FloatingResultsCounter />
-    </div>
+    <>
+      {show && (
+        <div
+          className={`d-lg-none offcanvas offcanvas-start suha-filter-offcanvas-wrap ${
+            show ? "show" : ""
+          }`}
+          tabIndex={-1}
+          id="suhaFilterOffcanvas"
+          aria-labelledby="suhaFilterOffcanvasLabel"
+        >
+          <button
+            onClick={handleShow}
+            className="btn-close text-reset"
+            type="button"
+            data-bs-dismiss="offcanvas"
+            aria-label="Cerrar"
+          ></button>
+          <Filters />
+          <FloatingResultsCounter />
+        </div>
+      )}
+    </>
   );
 };
 
