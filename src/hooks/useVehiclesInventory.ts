@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/store/hooks";
 import {
-  appendData,
-  getErrorStatus,
-  getLoadingStatus,
   getResponse,
-  toggleError,
-  toggleLoading,
-} from "@/redux/features/vehicles.slice";
+  isError,
+  isLoading,
+} from "@/store/features/vehicles.slice";
 import dayjs from "dayjs";
+import {
+  useCountFiltersResultMutation,
+  useLazyGetInventoryQuery,
+} from "@/store/api";
 
 export default function useVehiclesInventory() {
   const response = useAppSelector(getResponse);
-  const loading = useAppSelector(getLoadingStatus);
-  const error = useAppSelector(getErrorStatus);
-  const dispatch = useAppDispatch();
+  const loading = useAppSelector(isLoading);
+  const error = useAppSelector(isError);
   const searchParams = useSearchParams();
   const sp = new URLSearchParams(searchParams);
   if (searchParams.get("saleDate") !== null) {
@@ -71,123 +71,103 @@ export default function useVehiclesInventory() {
     }
   }
 
+  const [getInventory] = useLazyGetInventoryQuery();
   const getNextPage = () => {
-    dispatch(toggleLoading());
-    const controller = new AbortController();
-    fetch(
-      process.env.NEXT_PUBLIC_DOMAIN +
-        "/api/inventory/search?PageNumber=" +
-        `${response.pageNumber + 1}` +
-        "&PageSize=" +
-        response.pageSize +
-        (sp.toString() !== "" ? `&${sp.toString()}` : ""),
-      { signal: controller.signal },
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        dispatch(appendData(res));
-      })
-      .catch((reason) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") {
-          return null;
-        } else {
-          dispatch(toggleError());
-        }
-      });
-    return () => {
-      controller.abort();
-    };
+    sp.set("PageNumber", `${response.pageNumber + 1}`);
+    sp.set("PageSize", `${response.pageSize}`);
+    getInventory(sp);
   };
-  const getNextPageV2 = () => {
-    dispatch(toggleLoading());
-    const controller = new AbortController();
-    const body = JSON.stringify({
-      pageNumber: response.pageNumber + 1,
+
+  const [countFiltersResult] = useCountFiltersResultMutation();
+  const getCounters = () => {
+    const body = {
+      pageNumber: 1,
       pageSize: 12,
-      ...(searchParams.get("sb") ? { sortBy: searchParams.get("sb") } : {}),
-      isDescending: searchParams.get("sd") === "1",
-      ...(searchParams.get("q") ? { searchInput: searchParams.get("q") } : {}),
-      ...(searchParams.get("b") ? { makes: searchParams.getAll("b") } : {}),
-      ...(searchParams.get("m") ? { models: searchParams.getAll("m") } : {}),
-      ...(searchParams.get("vt")
-        ? { vehicleTypes: searchParams.getAll("vt") }
+      ...(searchParams.get("SortBy")
+        ? { sortBy: searchParams.get("SortBy") }
         : {}),
-      ...(searchParams.get("tt")
-        ? { titleTypes: searchParams.getAll("tt") }
+      isDescending: searchParams.get("IsDescending") !== "false",
+      ...(searchParams.get("SearchInput")
+        ? { searchInput: searchParams.get("SearchInput") }
         : {}),
-      ...(searchParams.get("pd")
-        ? { primaryDamages: searchParams.getAll("pd") }
+      ...(searchParams.get("Makes")
+        ? { makes: searchParams.getAll("Makes") }
         : {}),
-      ...(searchParams.get("sd")
-        ? { secondaryDamages: searchParams.getAll("sd") }
+      ...(searchParams.get("Models")
+        ? { models: searchParams.getAll("Models") }
         : {}),
-      ...(searchParams.get("l") ? { locations: searchParams.getAll("l") } : {}),
-      ...(searchParams.get("c") ? { colors: searchParams.getAll("c") } : {}),
-      ...(searchParams.get("s") ? { condition: searchParams.getAll("s") } : {}),
-      ...(searchParams.get("t") ? { type: searchParams.getAll("t") } : {}),
-      ...(searchParams.get("yf")
-        ? { yearFrom: searchParams.getAll("yf") }
+      ...(searchParams.get("VehicleTypes")
+        ? { vehicleTypes: searchParams.getAll("VehicleTypes") }
         : {}),
-      ...(searchParams.get("yt") ? { yearTo: searchParams.getAll("yt") } : {}),
-      ...(searchParams.get("of")
-        ? { odometerFrom: searchParams.getAll("of") }
+      ...(searchParams.get("TitleTypes")
+        ? { titleTypes: searchParams.getAll("TitleTypes") }
         : {}),
-      ...(searchParams.get("ot")
-        ? { odometerTo: searchParams.getAll("ot") }
+      ...(searchParams.get("PrimaryDamages")
+        ? { primaryDamages: searchParams.getAll("PrimaryDamages") }
         : {}),
-      ...(searchParams.get("an") ? { auction: searchParams.getAll("an") } : {}),
-      ...(searchParams.get("as") ? { state: searchParams.getAll("as") } : {}),
-      ...(searchParams.get("ft")
-        ? { fuelTypes: searchParams.getAll("ft") }
+      ...(searchParams.get("SecondaryDamages")
+        ? { secondaryDamages: searchParams.getAll("SecondaryDamages") }
         : {}),
-      ...(searchParams.get("tsst")
-        ? { transmissionTypes: searchParams.getAll("tsst") }
+      ...(searchParams.get("Locations")
+        ? { locations: searchParams.getAll("Locations") }
         : {}),
-      ...(searchParams.get("dt")
-        ? { driveTypes: searchParams.getAll("dt") }
+      ...(searchParams.get("Colors")
+        ? { colors: searchParams.getAll("Colors") }
         : {}),
-      ...(searchParams.get("sf")
-        ? { saleDateFrom: searchParams.getAll("sf") }
+      ...(searchParams.get("Condition")
+        ? { condition: searchParams.getAll("Condition") }
         : {}),
-      ...(searchParams.get("st")
-        ? { saleDateTo: searchParams.getAll("st") }
+      ...(searchParams.get("Type")
+        ? { type: searchParams.getAll("Type") }
         : {}),
-      ...(searchParams.get("bo")
-        ? { isBestOffer: searchParams.getAll("bo") }
+      ...(searchParams.get("YearFrom")
+        ? { yearFrom: searchParams.get("YearFrom") }
         : {}),
-      ...(searchParams.get("bn")
-        ? { inBuyNow: searchParams.getAll("bn") }
+      ...(searchParams.get("YearTo")
+        ? { yearTo: searchParams.get("YearTo") }
         : {}),
-      ...(searchParams.get("bnp")
-        ? { hasBuyNowPrice: searchParams.getAll("bnp") }
+      ...(searchParams.get("OdometerFrom")
+        ? { odometerFrom: searchParams.get("OdometerFrom") }
         : {}),
-    });
-    console.log(body);
-    fetch(
-      process.env.NEXT_PUBLIC_API_ENDPOINT + "/auction-inventories/v1/search",
-      {
-        signal: controller.signal,
-        body: JSON.stringify({ pageNumber: 1, pageSize: 12 }),
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      },
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        dispatch(appendData(res));
-      })
-      .catch((reason) => {
-        if (reason instanceof DOMException && reason.name === "AbortError") {
-          return null;
-        } else {
-          dispatch(toggleError());
-        }
-      });
-    return () => {
-      controller.abort();
+      ...(searchParams.get("OdometerTo")
+        ? { odometerTo: searchParams.get("OdometerTo") }
+        : {}),
+      ...(searchParams.get("Auction")
+        ? { auction: searchParams.getAll("Auction") }
+        : {}),
+      ...(searchParams.get("State")
+        ? { state: searchParams.getAll("State") }
+        : {}),
+      ...(searchParams.get("FuelTypes")
+        ? { fuelTypes: searchParams.getAll("FuelTypes") }
+        : {}),
+      ...(searchParams.get("TransmissionTypes")
+        ? { transmissionTypes: searchParams.getAll("TransmissionTypes") }
+        : {}),
+      ...(searchParams.get("DriveTypes")
+        ? { driveTypes: searchParams.getAll("DriveTypes") }
+        : {}),
+      ...(searchParams.get("SaleDateFrom")
+        ? { saleDateFrom: searchParams.get("SaleDateFrom") }
+        : {}),
+      ...(searchParams.get("SaleDateTo")
+        ? { saleDateTo: searchParams.get("SaleDateTo") }
+        : {}),
+      isBestOffer: searchParams.get("IsBestOffer") === "true",
+      inBuyNow: searchParams.get("InBuyNow") === "true",
+      hasBuyNowPrice: searchParams.get("HasBuyNowPrice") === "true",
     };
+    countFiltersResult(body);
   };
-  useEffect(getNextPage, [searchParams]);
+
+  useEffect(
+    () => {
+      getNextPage();
+      getCounters();
+    },
+    // eslint-disable-next-line
+    [searchParams],
+  );
 
   return { response, loading, error, getNextPage };
 }
