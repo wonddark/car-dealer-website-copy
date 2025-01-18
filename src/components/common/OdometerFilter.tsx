@@ -26,7 +26,7 @@ export default function OdometerFilter() {
           <strong className="flex-fill">Odómetro</strong>
           {(Number(limits.max) !== MAX_ODOMETER_VAL ||
             Number(limits.min) > 0) && (
-            <button className="f-reset btn" onClick={clearOdometerFilters}>
+            <button className="f-reset btn p-0" onClick={clearOdometerFilters}>
               Limpiar
             </button>
           )}

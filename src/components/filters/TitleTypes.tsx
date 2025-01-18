@@ -20,7 +20,7 @@ export default function TitleTypes() {
         <div className="f-trigger-inner">
           <strong className="flex-fill">Tipo de título</strong>
           {anyVal && (
-            <button className="f-reset btn" onClick={clearFilters}>
+            <button className="f-reset btn p-0" onClick={clearFilters}>
               Limpiar
             </button>
           )}
@@ -76,7 +76,7 @@ export const useTitleTypes = () => {
   const clearFilters = () => {
     const query = new URLSearchParams(searchParams);
     query.delete("TitleTypes");
-    push(pathname + query);
+    push(`${pathname}?${query}`);
   };
 
   const [isOpen, setIsOpen] = useState(false);

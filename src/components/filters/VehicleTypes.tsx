@@ -2,13 +2,14 @@
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
 import React, { useState } from "react";
 import VehicleTypeInput from "@/components/filters/VehicleTypeInput";
-import { useAppSelector } from "@/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
   getVehicleTypes,
   getVehicleTypesCounters,
 } from "@/store/features/filters.slice";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { resetData } from "@/store/features/vehicles.slice";
 
 export default function VehicleTypes() {
   const { data, isOpen, toggle, anyValue, clearFilters } = useVehicleTypes();
@@ -23,7 +24,7 @@ export default function VehicleTypes() {
         <div className="f-trigger-inner">
           <strong className="flex-fill">Tipo de vehículo</strong>
           {anyValue && (
-            <button className="f-reset btn" onClick={clearFilters}>
+            <button className="f-reset btn p-0" onClick={clearFilters}>
               Limpiar
             </button>
           )}
@@ -52,6 +53,8 @@ export default function VehicleTypes() {
 export const useVehicleTypes = () => {
   const vehicleTypes = useAppSelector(getVehicleTypes);
   const vehicleTypesCounters = useAppSelector(getVehicleTypesCounters);
+  const dispatch = useAppDispatch();
+
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
     setIsOpen((prevState) => !prevState);
@@ -71,9 +74,10 @@ export const useVehicleTypes = () => {
   const { push } = useRouter();
   const pathname = usePathname();
   const clearFilters = () => {
+    dispatch(resetData());
     const query = new URLSearchParams(sp);
     query.delete("VehicleTypes");
-    push(pathname + query);
+    push(`${pathname}?${query}`);
   };
 
   return { data, isOpen, toggle, anyValue, clearFilters };

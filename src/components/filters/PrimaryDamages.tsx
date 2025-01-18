@@ -27,7 +27,7 @@ export default function PrimaryDamages() {
         <div className="f-trigger-inner">
           <strong className="flex-fill">Daños primarios</strong>
           {anyValue && (
-            <button className="f-reset btn" onClick={clearFilter}>
+            <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar
             </button>
           )}
