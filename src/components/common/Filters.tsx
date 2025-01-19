@@ -10,13 +10,15 @@ import ReleaseYear from "@/components/filters/ReleaseYear";
 import TitleTypes from "@/components/filters/TitleTypes";
 import FuelType from "../filters/FuelType";
 import PrimaryDamages from "@/components/filters/PrimaryDamages";
-import AuctionNames from "../filters/AuctionNames";
+import DealersNames from "../filters/DealersNames";
 import AuctionDate from "@/components/filters/AuctionDate";
 import SecondaryDamages from "@/components/filters/SecondaryDamages";
 import BestOffers from "@/components/filters/BestOffers";
 import BuyNow from "@/components/filters/BuyNow";
 import Makers from "@/components/filters/Makers";
 import Models from "@/components/filters/Modells";
+import TransmissionTypes from "@/components/filters/TransmissionTypes";
+import EngineTypes from "@/components/filters/EngineTypes";
 
 export default function Filters() {
   const { auctionState, stateVal, applyFilters } = useFilters();
@@ -36,12 +38,10 @@ export default function Filters() {
         <PrimaryDamages />
         <SecondaryDamages />
         <FuelType />
-        <div className="accordion-item">
-          <AuctionNames />
-        </div>
-        <div className="accordion-item">
-          <AuctionDate />
-        </div>
+        <DealersNames />
+        <TransmissionTypes />
+        <EngineTypes />
+        <AuctionDate />
         <div className="accordion-item">
           <h2 className="accordion-header">
             <button

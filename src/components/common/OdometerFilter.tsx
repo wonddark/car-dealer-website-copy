@@ -21,9 +21,9 @@ export default function OdometerFilter() {
       open={isOpen}
       onOpenChange={toggleIsOpen}
     >
-      <Collapsible.Trigger className="f-trigger" asChild>
+      <Collapsible.Trigger className="btn f-trigger" asChild>
         <div className="f-trigger-inner">
-          <strong className="flex-fill">Odómetro</strong>
+          <span className="flex-fill">Odómetro</span>
           {(Number(limits.max) !== MAX_ODOMETER_VAL ||
             Number(limits.min) > 0) && (
             <button className="f-reset btn p-0" onClick={clearOdometerFilters}>

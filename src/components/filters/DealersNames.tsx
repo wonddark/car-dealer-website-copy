@@ -1,16 +1,21 @@
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
 import { v4 as uuidv4 } from "uuid";
 import React, { MouseEventHandler, useState } from "react";
-import { useFilters } from "@/components/common/Filters";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useFilters } from "@/components/common/Filters";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { getFuelCounters, getFuelTypes } from "@/store/features/filters.slice";
+import {
+  getAuctions,
+  getAuctionsCounters,
+} from "@/store/features/filters.slice";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { resetData } from "@/store/features/vehicles.slice";
 
-export default function FuelType() {
-  const { fuelTypes, checked, isOpen, toggle, anyValue, clearFilter } =
-    useFuelTypes();
+const FILTER_NAME = "Auction";
+
+export default function DealersNames() {
+  const { auctions, checked, isOpen, toggle, anyValue, clearFilter } =
+    useAuctionNames();
   const { handleCheckChange: handleChange } = useFilters();
   return (
     <Collapsible.Root
@@ -20,7 +25,7 @@ export default function FuelType() {
     >
       <Collapsible.Trigger className="btn f-trigger" asChild>
         <div className="f-trigger-inner">
-          <span className="flex-fill">Tipo de combustible</span>
+          <span className="flex-fill">Vendedor</span>
           {anyValue && (
             <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar
@@ -30,24 +35,24 @@ export default function FuelType() {
       </Collapsible.Trigger>
       <Collapsible.Content className="f-content">
         <FilterOptionsCheckContainer>
-          {fuelTypes.map((item) => (
-            <div key={item.category + uuidv4()} className="form-check">
+          {auctions.map((item) => (
+            <div key={item.key + uuidv4()} className="form-check">
               <input
                 className="form-check-input"
-                id={item.category}
+                id={item.key}
                 type="checkbox"
-                name="FuelTypes"
-                value={item.category}
+                name="Auction"
+                value={item.key}
                 onChange={handleChange}
-                checked={checked(item.category)}
+                checked={checked(item.key)}
                 disabled={item.count === 0}
               />
               <label
                 className="form-check-label d-inline-flex justify-content-between w-100"
-                htmlFor={item.category}
+                htmlFor={item.key}
               >
-                <span>{item.spanishTranslation}</span>
-                <small>{item.count}</small>
+                <span>{item.label}</span>
+                <span>{item.count}</span>
               </label>
             </div>
           ))}
@@ -57,36 +62,39 @@ export default function FuelType() {
   );
 }
 
-const useFuelTypes = () => {
-  const data = useAppSelector(getFuelTypes);
-  const counters = useAppSelector(getFuelCounters);
-  const r = useRouter();
-  const dispatch = useAppDispatch();
+const useAuctionNames = () => {
+  const data = useAppSelector(getAuctions);
+  const counters = useAppSelector(getAuctionsCounters);
+  const { push } = useRouter();
   const pathname = usePathname();
+  const dispatch = useAppDispatch();
 
-  const fuelTypes = data.map((item) => ({
-    ...item,
+  const auctions = data.map((item) => ({
+    key: item,
+    label: item,
     count:
-      (counters as { [k: string]: number } | undefined)?.[item.category] ?? 0,
+      (counters as { [k: string]: number } | undefined)?.[item.toLowerCase()] ??
+      0,
   }));
 
   const searchParams = useSearchParams();
-  const checked = (titleVal: string) => {
-    const fuelTypes = searchParams.getAll("FuelTypes") ?? [];
-    return fuelTypes.includes(titleVal);
-  };
-  const anyValue = Boolean((searchParams.getAll("FuelTypes") ?? []).length);
+  const checked = (name: string) => {
+    const auctions = searchParams.getAll(FILTER_NAME) ?? [];
 
+    return auctions.includes(name);
+  };
+  const anyValue = Boolean((searchParams.getAll(FILTER_NAME) ?? []).length);
   const clearFilter: MouseEventHandler<HTMLButtonElement> = (e) => {
     e.stopPropagation();
-    dispatch(resetData());
     const sp = new URLSearchParams(searchParams);
-    sp.delete("FuelTypes");
-    r.push(`${pathname}?${sp}`);
+    sp.delete(FILTER_NAME);
+    dispatch(resetData());
+
+    push(`${pathname}?${sp}`);
   };
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen((prev) => !prev);
 
-  return { fuelTypes, checked, clearFilter, anyValue, isOpen, toggle };
+  return { auctions, checked, isOpen, toggle, anyValue, clearFilter };
 };

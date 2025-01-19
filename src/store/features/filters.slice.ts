@@ -29,6 +29,8 @@ type FiltersState = {
   makersFiltered: { key: string }[];
   models: { key: string; maker: string }[];
   modelsFiltered: { key: string; maker: string }[];
+  transmissions: { [k: string]: number };
+  engines: { [k: string]: number };
 };
 const initialState: FiltersState = {
   counters: {},
@@ -41,6 +43,8 @@ const initialState: FiltersState = {
   makersFiltered: [],
   models: [],
   modelsFiltered: [],
+  transmissions: {},
+  engines: {},
 };
 
 const filtersSlice = createSlice({
@@ -119,6 +123,10 @@ const filtersSlice = createSlice({
         };
       },
     );
+    builder.addMatcher(
+      vehiclesApi.endpoints.getTransmissionTranslations.matchFulfilled,
+      (state, action) => ({ ...state, transmissions: action.payload }),
+    );
   },
   selectors: {
     getAllFilters: (state) => state,
@@ -155,13 +163,32 @@ const filtersSlice = createSlice({
               | undefined
           )?.[item.maker]?.models?.[item.key] ?? 0,
       })),
+    getTransmissions: (state) =>
+      Object.keys(state.transmissions).map((item) => ({
+        key: item,
+        count:
+          (
+            state.counters["transmissions"] as
+              | { [k: string]: number }
+              | undefined
+          )?.[item] ?? 0,
+        label: item,
+      })),
+    getEngines: (state) =>
+      Object.keys(state.counters["cylinders"] ?? {}).map((item) => ({
+        key: item,
+        count:
+          (
+            state.counters["cylinders"] as { [k: string]: number } | undefined
+          )?.[item] ?? 0,
+        label: item,
+      })),
   },
 });
 
 export const {
   actions: { filterMakers, filterModels },
   selectors: {
-    getAllFilters,
     getVehicleTypes,
     getDamagesTranslations,
     getPrimaryDamagesCounters,
@@ -177,6 +204,8 @@ export const {
     getTitlesCounters,
     getMakers,
     getModels,
+    getTransmissions,
+    getEngines,
   },
 } = filtersSlice;
 

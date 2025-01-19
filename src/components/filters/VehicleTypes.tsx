@@ -1,6 +1,6 @@
 "use client";
 import FilterOptionsCheckContainer from "@/components/common/FilterOptionsCheckContainer";
-import React, { useState } from "react";
+import React, { MouseEventHandler, useState } from "react";
 import VehicleTypeInput from "@/components/filters/VehicleTypeInput";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import {
@@ -20,9 +20,9 @@ export default function VehicleTypes() {
       open={isOpen}
       onOpenChange={toggle}
     >
-      <Collapsible.Trigger className="f-trigger" asChild>
+      <Collapsible.Trigger className="btn f-trigger" asChild>
         <div className="f-trigger-inner">
-          <strong className="flex-fill">Tipo de vehículo</strong>
+          <span className="flex-fill">Tipo de vehículo</span>
           {anyValue && (
             <button className="f-reset btn p-0" onClick={clearFilters}>
               Limpiar
@@ -73,7 +73,8 @@ export const useVehicleTypes = () => {
 
   const { push } = useRouter();
   const pathname = usePathname();
-  const clearFilters = () => {
+  const clearFilters: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.stopPropagation();
     dispatch(resetData());
     const query = new URLSearchParams(sp);
     query.delete("VehicleTypes");
