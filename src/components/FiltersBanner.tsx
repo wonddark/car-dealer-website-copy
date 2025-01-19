@@ -15,6 +15,7 @@ import {
   useGetFuelTypesQuery,
   useGetMakersAndModelsQuery,
   useGetTitleTypesQuery,
+  useGetTransmissionTranslationsQuery,
   useGetVehicleTypesQuery,
 } from "@/store/api";
 
@@ -25,6 +26,7 @@ export default function FiltersBanner() {
   useGetFuelTypesQuery({});
   useGetTitleTypesQuery({});
   useGetMakersAndModelsQuery({});
+  useGetTransmissionTranslationsQuery({});
   const r = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();

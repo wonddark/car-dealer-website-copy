@@ -42,6 +42,9 @@ const vehiclesApi = createApi({
       query: () =>
         "/api/inventory/search?IsBestOffer=true&PageNumber=1&PageSize=36",
     }),
+    getTransmissionTranslations: build.query({
+      query: () => "/api/filters/transmissions",
+    }),
   }),
 });
 
@@ -56,6 +59,7 @@ export const {
   useGetMakersAndModelsQuery,
   useGetBuyNowQuery,
   useGetMostWantedQuery,
+  useGetTransmissionTranslationsQuery,
 } = vehiclesApi;
 
 export default vehiclesApi;
