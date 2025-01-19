@@ -30,6 +30,7 @@ type FiltersState = {
   models: { key: string; maker: string }[];
   modelsFiltered: { key: string; maker: string }[];
   transmissions: { [k: string]: number };
+  engines: { [k: string]: number };
 };
 const initialState: FiltersState = {
   counters: {},
@@ -43,6 +44,7 @@ const initialState: FiltersState = {
   models: [],
   modelsFiltered: [],
   transmissions: {},
+  engines: {},
 };
 
 const filtersSlice = createSlice({
@@ -172,6 +174,15 @@ const filtersSlice = createSlice({
           )?.[item] ?? 0,
         label: item,
       })),
+    getEngines: (state) =>
+      Object.keys(state.counters["cylinders"] ?? {}).map((item) => ({
+        key: item,
+        count:
+          (
+            state.counters["cylinders"] as { [k: string]: number } | undefined
+          )?.[item] ?? 0,
+        label: item,
+      })),
   },
 });
 
@@ -194,6 +205,7 @@ export const {
     getMakers,
     getModels,
     getTransmissions,
+    getEngines,
   },
 } = filtersSlice;
 

@@ -18,6 +18,7 @@ import BuyNow from "@/components/filters/BuyNow";
 import Makers from "@/components/filters/Makers";
 import Models from "@/components/filters/Modells";
 import TransmissionTypes from "@/components/filters/TransmissionTypes";
+import EngineTypes from "@/components/filters/EngineTypes";
 
 export default function Filters() {
   const { auctionState, stateVal, applyFilters } = useFilters();
@@ -39,6 +40,7 @@ export default function Filters() {
         <FuelType />
         <AuctionNames />
         <TransmissionTypes />
+        <EngineTypes />
         <div className="accordion-item">
           <AuctionDate />
         </div>
