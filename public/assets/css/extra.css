@@ -9,14 +9,6 @@
     height: 3.125rem;
 }
 
-.noUi-connect {
-    background: #042cd7 !important;
-}
-
-.noUi-handle {
-    border-color: #042cd7 !important;
-}
-
 .filter-options-check {
     max-height: 130px;
     overflow: auto
