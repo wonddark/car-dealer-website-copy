@@ -13,7 +13,7 @@ import { resetData } from "@/store/features/vehicles.slice";
 
 const FILTER_NAME = "Auction";
 
-export default function AuctionNames() {
+export default function DealersNames() {
   const { auctions, checked, isOpen, toggle, anyValue, clearFilter } =
     useAuctionNames();
   const { handleCheckChange: handleChange } = useFilters();
@@ -25,7 +25,7 @@ export default function AuctionNames() {
     >
       <Collapsible.Trigger className="f-trigger" asChild>
         <div className="f-trigger-inner">
-          <strong className="flex-fill">Subasta</strong>
+          <strong className="flex-fill">Vendedor</strong>
           {anyValue && (
             <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar

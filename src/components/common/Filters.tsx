@@ -10,7 +10,7 @@ import ReleaseYear from "@/components/filters/ReleaseYear";
 import TitleTypes from "@/components/filters/TitleTypes";
 import FuelType from "../filters/FuelType";
 import PrimaryDamages from "@/components/filters/PrimaryDamages";
-import AuctionNames from "../filters/AuctionNames";
+import DealersNames from "../filters/DealersNames";
 import AuctionDate from "@/components/filters/AuctionDate";
 import SecondaryDamages from "@/components/filters/SecondaryDamages";
 import BestOffers from "@/components/filters/BestOffers";
@@ -38,7 +38,7 @@ export default function Filters() {
         <PrimaryDamages />
         <SecondaryDamages />
         <FuelType />
-        <AuctionNames />
+        <DealersNames />
         <TransmissionTypes />
         <EngineTypes />
         <div className="accordion-item">
