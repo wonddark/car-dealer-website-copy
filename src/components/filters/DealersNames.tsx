@@ -23,9 +23,9 @@ export default function DealersNames() {
       open={isOpen}
       onOpenChange={toggle}
     >
-      <Collapsible.Trigger className="f-trigger" asChild>
+      <Collapsible.Trigger className="btn f-trigger" asChild>
         <div className="f-trigger-inner">
-          <strong className="flex-fill">Vendedor</strong>
+          <span className="flex-fill">Vendedor</span>
           {anyValue && (
             <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar

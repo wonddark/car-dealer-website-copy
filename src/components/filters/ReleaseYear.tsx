@@ -18,9 +18,9 @@ export default function ReleaseYear() {
       open={isOpen}
       onOpenChange={toggle}
     >
-      <Collapsible.Trigger className="f-trigger" asChild>
+      <Collapsible.Trigger className="btn f-trigger" asChild>
         <div className="f-trigger-inner">
-          <strong className="flex-fill">Año de fabricación</strong>
+          <span className="flex-fill">Año de fabricación</span>
           {anyValue && (
             <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar

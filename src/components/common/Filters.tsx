@@ -41,9 +41,7 @@ export default function Filters() {
         <DealersNames />
         <TransmissionTypes />
         <EngineTypes />
-        <div className="accordion-item">
-          <AuctionDate />
-        </div>
+        <AuctionDate />
         <div className="accordion-item">
           <h2 className="accordion-header">
             <button

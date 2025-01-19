@@ -20,9 +20,9 @@ export default function TransmissionTypes() {
       open={isOpen}
       onOpenChange={toggle}
     >
-      <Collapsible.Trigger className="f-trigger" asChild>
+      <Collapsible.Trigger className="btn f-trigger" asChild>
         <div className="f-trigger-inner">
-          <strong className="flex-fill">Tipo de transmisión</strong>
+          <span className="flex-fill">Tipo de transmisión</span>
           {anyValue && (
             <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar

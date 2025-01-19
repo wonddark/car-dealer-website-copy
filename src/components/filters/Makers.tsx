@@ -31,9 +31,9 @@ export default function Makers() {
       open={isOpen}
       onOpenChange={toggle}
     >
-      <Collapsible.Trigger className="f-trigger" asChild>
+      <Collapsible.Trigger className="btn f-trigger" asChild>
         <div className="f-trigger-inner">
-          <strong className="flex-fill">Fabricante</strong>
+          <span className="flex-fill">Fabricante</span>
           {anyVal && (
             <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar
