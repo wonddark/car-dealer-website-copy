@@ -28,7 +28,7 @@ const Footer = () => {
           </li>
           <li>
             <Link href="/settings">
-              <i className="ti ti-settings"></i>Settings
+              <i className="ti ti-help"></i>Ayuda
             </Link>
           </li>
         </ul>
