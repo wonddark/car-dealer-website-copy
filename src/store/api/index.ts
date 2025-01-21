@@ -36,11 +36,11 @@ const vehiclesApi = createApi({
     }),
     getBuyNow: build.query({
       query: () =>
-        "/api/inventory/search?HasBuyNowPrice=true&IsBestOffer=false&PageNumber=1&PageSize=36",
+        "/api/inventory/search?HasBuyNowPrice=true&IsBestOffer=false&PageNumber=1&PageSize=8",
     }),
     getMostWanted: build.query({
       query: () =>
-        "/api/inventory/search?IsBestOffer=true&PageNumber=1&PageSize=36",
+        "/api/inventory/search?IsBestOffer=true&PageNumber=1&PageSize=8",
     }),
     getTransmissionTranslations: build.query({
       query: () => "/api/filters/transmissions",
