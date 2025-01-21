@@ -124,6 +124,39 @@ const Header = () => {
                 <i className="ti ti-adjustments"></i>
               </Button>
             </form>
+            <nav className="d-none d-lg-block">
+              <ul className="d-inline-flex align-items-center gap-2 p-0">
+                <li>
+                  <Link href="/" className="btn btn-link text-decoration-none">
+                    Inicio
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/vehicles"
+                    className="btn btn-link text-decoration-none"
+                  >
+                    Inventario
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/support/price-calculator"
+                    className="btn btn-link text-decoration-none"
+                  >
+                    Calculadora de precios
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/support"
+                    className="btn btn-link text-decoration-none"
+                  >
+                    Soporte
+                  </Link>
+                </li>
+              </ul>
+            </nav>
             <Collapse in={open} appear>
               <div className="pb-2">
                 <div className="vstack gap-2">
