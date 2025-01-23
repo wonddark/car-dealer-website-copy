@@ -20,21 +20,7 @@ import {
 } from "@/store/api";
 
 export default function FiltersBanner() {
-  useGetVehicleTypesQuery({});
-  useGetDamageTranslationsQuery({});
-  useGetAuctionsQuery({});
-  useGetFuelTypesQuery({});
-  useGetTitleTypesQuery({});
-  useGetMakersAndModelsQuery({});
-  useGetTransmissionTranslationsQuery({});
-  const r = useRouter();
-  const pathname = usePathname();
-  const sp = useSearchParams();
-  const dispatch = useAppDispatch();
-  const clearAll = () => {
-    dispatch(resetData());
-    r.push(pathname);
-  };
+  const { sp, clearAll } = useFiltersBanner();
   return (
     <div className="hstack gap-2 overflow-auto">
       {Boolean(sp.toString().length) && (
@@ -69,3 +55,23 @@ export default function FiltersBanner() {
     </div>
   );
 }
+
+const useFiltersBanner = () => {
+  useGetVehicleTypesQuery({});
+  useGetDamageTranslationsQuery({});
+  useGetAuctionsQuery({});
+  useGetFuelTypesQuery({});
+  useGetTitleTypesQuery({});
+  useGetMakersAndModelsQuery({});
+  useGetTransmissionTranslationsQuery({});
+  const r = useRouter();
+  const pathname = usePathname();
+  const sp = useSearchParams();
+  const dispatch = useAppDispatch();
+  const clearAll = () => {
+    dispatch(resetData());
+    r.push(pathname);
+  };
+
+  return { sp, clearAll };
+};

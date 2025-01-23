@@ -3,12 +3,12 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div className="footer-nav-area" id="footerNav">
+    <div className="footer-nav-area d-lg-none" id="footerNav">
       <div className="suha-footer-nav">
         <ul className="h-100 d-flex align-items-center justify-content-between ps-0 d-flex rtl-flex-d-row-r">
           <li>
-            <Link href="/" style={{ pointerEvents: "none" }}>
-              <i className="ti ti-basket"></i>Cart
+            <Link href="/support/price-calculator">
+              <i className="ti ti-calculator"></i>Calculadora
             </Link>
           </li>
           <li>
@@ -27,8 +27,8 @@ const Footer = () => {
             </Link>
           </li>
           <li>
-            <Link href="/settings">
-              <i className="ti ti-settings"></i>Settings
+            <Link href="/support/faq">
+              <i className="ti ti-help"></i>FAQ
             </Link>
           </li>
         </ul>

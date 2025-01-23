@@ -6,6 +6,7 @@ import { Vehicle } from "@/types/vehicle";
 import dayjs from "dayjs";
 import { renderBuyNowPrice, renderSuggestedBid } from "@/utils/vehicle-data";
 import "swiper/css";
+import { Button } from "react-bootstrap";
 
 type Props = { data: Vehicle[]; fullListLink: string };
 export default function HorizontalVehiclesCarrousel(props: Readonly<Props>) {
@@ -20,6 +21,7 @@ export default function HorizontalVehiclesCarrousel(props: Readonly<Props>) {
         momentumVelocityRatio: 1.7,
       }}
       className="swiper"
+      slidesPerView="auto"
     >
       {data.map((item) => (
         <SwiperSlide key={item.vin}>
@@ -50,7 +52,7 @@ export default function HorizontalVehiclesCarrousel(props: Readonly<Props>) {
                 </small>
               </div>
             </div>
-            <div className="vstack gap-1 align-items-stretch mt-3">
+            <div className="vstack gap-1 align-items-stretch mt-3 flex-grow-0">
               <Link href={`/vehicles/${item.vin}`} className="btn btn-primary">
                 <span>Ofertar</span>
                 <span className="ps-2">{renderSuggestedBid(item)}</span>
@@ -63,7 +65,11 @@ export default function HorizontalVehiclesCarrousel(props: Readonly<Props>) {
                   <span>Comprar ahora</span>
                   <span className="ms-2">{renderBuyNowPrice(item)}</span>
                 </Link>
-              ) : null}
+              ) : (
+                <Button variant="success" disabled>
+                  Sin compra inmediata
+                </Button>
+              )}
             </div>
           </div>
         </SwiperSlide>

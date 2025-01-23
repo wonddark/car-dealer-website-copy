@@ -4,17 +4,15 @@ import "../styles/style.css";
 import Wrapper from "@/layouts/Wrapper";
 import React from "react";
 import Footer from "@/layouts/Footer";
-
-if (typeof window !== "undefined") {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  require("bootstrap/dist/js/bootstrap.min");
-}
+import Header from "@/layouts/Header";
+import store from "@/store";
+import { Provider } from "react-redux";
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" theme-color="ligth" data-bs-theme="ligth">
+    <html lang="en" theme-color="dark" data-bs-theme="dark">
       <head>
         <title>La Subasta Cubana</title>
         <link
@@ -29,8 +27,11 @@ export default function RootLayout({
       </head>
       <body>
         <Wrapper>
-          {children}
-          <Footer />
+          <Provider store={store}>
+            <Header />
+            {children}
+            <Footer />
+          </Provider>
         </Wrapper>
       </body>
     </html>
