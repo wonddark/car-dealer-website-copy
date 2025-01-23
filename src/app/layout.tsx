@@ -4,6 +4,9 @@ import "../styles/style.css";
 import Wrapper from "@/layouts/Wrapper";
 import React from "react";
 import Footer from "@/layouts/Footer";
+import Header from "@/layouts/Header";
+import store from "@/store";
+import { Provider } from "react-redux";
 
 if (typeof window !== "undefined") {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -29,8 +32,11 @@ export default function RootLayout({
       </head>
       <body>
         <Wrapper>
-          {children}
-          <Footer />
+          <Provider store={store}>
+            <Header />
+            {children}
+            <Footer />
+          </Provider>
         </Wrapper>
       </body>
     </html>
