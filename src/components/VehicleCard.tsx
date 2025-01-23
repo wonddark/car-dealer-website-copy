@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Vehicle } from "@/types/vehicle";
 import { useSearchParams } from "next/navigation";
 import { AnimatePresence, motion } from "motion/react";
@@ -20,6 +20,7 @@ export default function VehicleCard({
   vehicle,
 }: Readonly<{ vehicle: Vehicle }>) {
   const [expanded, setExpanded] = useState(false);
+  const [saleDate, setSaleDate] = useState("");
   const toggleExpanded = () => {
     setExpanded((prevState) => !prevState);
   };
@@ -39,6 +40,11 @@ export default function VehicleCard({
     dayjs(),
     "days",
   );
+
+  useEffect(() => {
+    setSaleDate(dayjs(vehicle.saleAuctionDate).format("DD/MM/YYYY HH:mm"));
+  }, [vehicle.saleAuctionDate]);
+
   return (
     <div className="card product-card h-100">
       <div className="card-body p-2 p-md-3 h-100">
@@ -242,11 +248,7 @@ export default function VehicleCard({
                       <div className="d-flex justify-content-between">
                         <strong className="opacity-75">Fecha de venta</strong>
                         <span className="text-end">
-                          {vehicle.saleAuctionDate
-                            ? dayjs(vehicle.saleAuctionDate).format(
-                                "DD/MM/YYYY HH:mm",
-                              )
-                            : "No disponible"}
+                          {vehicle.saleAuctionDate ? saleDate : "No disponible"}
                         </span>
                       </div>
                       <hr className="border-1 border-secondary m-0" />
