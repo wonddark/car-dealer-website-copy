@@ -217,5 +217,5 @@
 .tabs-trigger[data-state="active"] {
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-primary);
     color: var(--bs-primary);
-    cursor: none;
+    cursor: initial;
 }

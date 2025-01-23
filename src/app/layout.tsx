@@ -8,11 +8,6 @@ import Header from "@/layouts/Header";
 import store from "@/store";
 import { Provider } from "react-redux";
 
-if (typeof window !== "undefined") {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  require("bootstrap/dist/js/bootstrap.min");
-}
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
