@@ -4,6 +4,7 @@ import { renderCurrentOffer } from "@/utils/vehicle-data";
 import { TOdometerBrand } from "@/types/features";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
+import SwappableImages from "@/components/VehicleDetail/SwappableImages";
 
 export default function VehicleDetails({
   vehicle,
@@ -20,21 +21,7 @@ export default function VehicleDetails({
       <div className="container-xxl">
         <div className="row align-items-stretch">
           <div className="col-12 col-md-7 order-0 card">
-            <div className="card-body">
-              <div className="row">
-                <img
-                  src={vehicle.imageUrl}
-                  alt={vehicle.vin}
-                  className="col-12 col-md-10 rounded-2 object-fit-cover"
-                />
-                <div className="col-12 col-md-2 order-last order-md-first">
-                  <div
-                    className="bg-secondary bg-opacity-10 rounded-2 h-100"
-                    style={{ minHeight: 70 }}
-                  ></div>
-                </div>
-              </div>
-            </div>
+            <SwappableImages vehicle={vehicle} />
           </div>
           <div className="col-12 order-1 order-md-last card">
             <div className="card-body">

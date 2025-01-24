@@ -38,6 +38,7 @@ export type Vehicle = {
   lastUpdate: string;
   images: string[];
   imageUrl: string;
+  imageUrls: string[];
   year: string;
   make: string;
   model: string;
