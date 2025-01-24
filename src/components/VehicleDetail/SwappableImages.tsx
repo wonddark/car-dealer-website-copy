@@ -2,14 +2,14 @@
 
 import { Vehicle } from "@/types/vehicle";
 import { Controller, FreeMode, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { useState } from "react";
 
 export default function SwappableImages({
   vehicle,
 }: Readonly<{ vehicle: Vehicle }>) {
-  const [control1, setControl1] = useState(null);
-  const [control2, setControl2] = useState(null);
+  const [control1, setControl1] = useState<SwiperClass>();
+  const [control2, setControl2] = useState<SwiperClass>();
   return (
     <div className="card-body">
       <div className="row">
