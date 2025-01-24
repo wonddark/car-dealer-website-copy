@@ -10,6 +10,7 @@ export default function SwappableImages({
 }: Readonly<{ vehicle: Vehicle }>) {
   const [control1, setControl1] = useState<SwiperClass>();
   const [control2, setControl2] = useState<SwiperClass>();
+  console.log(vehicle);
   return (
     <div className="card-body">
       <div className="row">
