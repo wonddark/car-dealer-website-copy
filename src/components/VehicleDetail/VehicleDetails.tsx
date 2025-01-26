@@ -19,7 +19,7 @@ export default function VehicleDetails({
   return (
     <div className="page-content-wrapper py-3 mt-0">
       <div className="container-xxl">
-        <div className="row align-items-stretch">
+        <div className="row align-items-stretch row-gap-3">
           <div className="col-12 col-md-7 order-0">
             <SwappableImages vehicle={vehicle} />
           </div>
