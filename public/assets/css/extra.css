@@ -71,6 +71,10 @@
     height: unset !important;
 }
 
+.swiper-slide img {
+    height: 100%;
+}
+
 .slide-card {
     width: 260px;
     height: 100%;
