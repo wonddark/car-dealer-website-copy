@@ -1,9 +1,10 @@
 "use client";
 
 import { Vehicle } from "@/types/vehicle";
-import { Controller, FreeMode, Pagination } from "swiper/modules";
-import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
-import { useState } from "react";
+import { Controller, FreeMode } from "swiper/modules";
+import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from "swiper/react";
+import { useRef, useState } from "react";
+import { Button } from "react-bootstrap";
 
 export default function SwappableImages({
   vehicle,
@@ -11,20 +12,47 @@ export default function SwappableImages({
   const [control1, setControl1] = useState<SwiperClass>();
   const [control2, setControl2] = useState<SwiperClass>();
   const hasImages = (vehicle.imageUrls ?? []).length > 0;
+  const mainSwiperRef = useRef<SwiperRef>(null);
 
   return (
     <>
       {hasImages ? (
         <Swiper
-          modules={[Pagination, Controller]}
-          className="swiper"
-          slidesPerView="auto"
+          modules={[Controller]}
+          className="swiper position-relative"
+          slidesPerView={1}
           onSwiper={setControl1}
           controller={{ control: control2 }}
           zoom={true}
+          ref={mainSwiperRef}
+          spaceBetween={0}
         >
+          <Button
+            className="fs-1 position-absolute start-0 z-2 top-0 bottom-0 my-auto p-0 border-0 bg-transparent"
+            style={{
+              width: "fit-content",
+              height: "fit-content",
+              lineHeight: "100%",
+            }}
+            variant="dark"
+            onClick={() => mainSwiperRef.current?.swiper?.slidePrev()}
+          >
+            <i className="ti ti-square-chevron-left-filled"></i>
+          </Button>
+          <Button
+            className="fs-1 position-absolute end-0 z-2 top-0 bottom-0 my-auto p-0 border-0 bg-transparent"
+            style={{
+              width: "fit-content",
+              height: "fit-content",
+              lineHeight: "100%",
+            }}
+            variant="dark"
+            onClick={() => mainSwiperRef.current?.swiper?.slideNext()}
+          >
+            <i className="ti ti-square-chevron-right-filled"></i>
+          </Button>
           {vehicle.imageUrls?.map((item) => (
-            <SwiperSlide key={item}>
+            <SwiperSlide key={item} className="m-0">
               <img
                 src={item}
                 className="object-fit-cover"
@@ -42,7 +70,7 @@ export default function SwappableImages({
       )}
       {hasImages ? (
         <Swiper
-          modules={[FreeMode, Pagination, Controller]}
+          modules={[FreeMode, Controller]}
           freeMode={{
             enabled: true,
             momentum: true,
@@ -53,6 +81,7 @@ export default function SwappableImages({
           slidesPerView="auto"
           onSwiper={setControl2}
           controller={{ control: control1 }}
+          spaceBetween={2}
         >
           {vehicle.imageUrls?.map((item) => (
             <SwiperSlide key={item}>
