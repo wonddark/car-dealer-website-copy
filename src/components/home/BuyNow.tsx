@@ -7,7 +7,7 @@ import { getBuyNow } from "@/store/features/vehicles.slice";
 import { useGetBuyNowQuery } from "@/store/api";
 
 export default function BuyNow() {
-  useGetBuyNowQuery({});
+  const { isLoading } = useGetBuyNowQuery({});
   const data = useAppSelector(getBuyNow);
 
   return (
@@ -16,6 +16,7 @@ export default function BuyNow() {
         <section className="vstack align-items-center gap-3">
           <HorizontalVehiclesCarrousel
             data={data}
+            loading={isLoading}
             fullListLink="/vehicles?HasBuyNowPrice=true&IsBestOffer=false"
           />
         </section>
