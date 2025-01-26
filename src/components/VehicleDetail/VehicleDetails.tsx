@@ -20,7 +20,7 @@ export default function VehicleDetails({
     <div className="page-content-wrapper py-3 mt-0">
       <div className="container-xxl">
         <div className="row align-items-stretch">
-          <div className="col-12 col-md-7 order-0 card">
+          <div className="col-12 col-md-7 order-0">
             <SwappableImages vehicle={vehicle} />
           </div>
           <div className="col-12 order-1 order-md-last card">
