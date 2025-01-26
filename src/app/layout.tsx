@@ -12,7 +12,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" theme-color="light" data-bs-theme="light">
+    <html lang="es" theme-color="light" data-bs-theme="light">
       <head>
         <title>La Subasta Cubana</title>
         <link
