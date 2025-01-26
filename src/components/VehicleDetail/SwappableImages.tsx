@@ -55,7 +55,7 @@ export default function SwappableImages({
             <SwiperSlide key={item} className="m-0">
               <img
                 src={item}
-                className="object-fit-cover"
+                className="object-fit-cover rounded-2"
                 alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
               />
             </SwiperSlide>
@@ -64,7 +64,7 @@ export default function SwappableImages({
       ) : (
         <img
           src={vehicle.imageUrl}
-          className="object-fit-cover"
+          className="object-fit-cover rounded-2"
           alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
         />
       )}
@@ -91,6 +91,7 @@ export default function SwappableImages({
                   height: 64,
                   objectFit: "cover",
                 }}
+                className="object-fit-cover rounded-2 shadow"
                 alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
               />
             </SwiperSlide>
