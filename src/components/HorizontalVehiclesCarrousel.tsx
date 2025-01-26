@@ -22,6 +22,7 @@ export default function HorizontalVehiclesCarrousel(props: Readonly<Props>) {
       }}
       className="swiper"
       slidesPerView="auto"
+      spaceBetween={8}
     >
       {data.map((item) => (
         <SwiperSlide key={item.vin}>
