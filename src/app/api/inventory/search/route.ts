@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const sp = request.nextUrl.searchParams;
     const response = await fetch(
       `${process.env.API_ENDPOINT}/auction-inventories/search?${sp.toString()}`,
-      { next: { revalidate: 3600 } },
+      { next: { revalidate: 0 }, cache: "no-cache" },
     );
     if (response.status === 200) {
       const data = await response.json();
