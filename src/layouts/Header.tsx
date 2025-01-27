@@ -246,10 +246,11 @@ const Header = () => {
                   <NavigationMenu.Item>
                     <NavigationMenu.Link asChild>
                       <Link
-                        href="/support/price-calculator"
-                        className="btn btn-link text-decoration-none"
+                        href="/estimar-precio"
+                        className="btn btn-link text-decoration-none d-inline-flex align-items-center gap-2"
                       >
-                        Calculadora de precios
+                        <i className="ti ti-calculator-filled"></i>
+                        <span>Calculador de precios</span>
                       </Link>
                     </NavigationMenu.Link>
                   </NavigationMenu.Item>
