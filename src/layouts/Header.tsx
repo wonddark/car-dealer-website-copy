@@ -7,10 +7,12 @@ import { Button, Card, CardBody, Col, Collapse, Row } from "react-bootstrap";
 import FiltersBanner from "@/components/FiltersBanner";
 import useVehiclesInventory from "@/hooks/useVehiclesInventory";
 import { useFilters } from "@/components/common/Filters";
-import OffCanvasTwo from "@/components/common/OffCanvasTwo";
 import OrderBySelector from "@/components/OrderBySelector";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { SearchInput } from "@/components/SearchInput";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import SidePortal from "@/layouts/SidePortal";
 
 const FilterOptions = () => {
   const { response, loading } = useVehiclesInventory();
@@ -57,10 +59,11 @@ const FilterOptions = () => {
 const Header = () => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow((prevState) => !prevState);
-  const [showTwo, setShowTwo] = useState(false);
-  const handleShowTwo = () => setShowTwo((prevState) => !prevState);
   const [open, setOpen] = useState(false);
   const toggleOpen = () => setOpen((prevState) => !prevState);
+  const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const closePortal = (val: boolean) => setIsOpen(val);
 
   return (
     <>
@@ -109,11 +112,6 @@ const Header = () => {
                     />
                   </button>
                   <ul className="dropdown-menu">
-                    <li>
-                      <Link href="/profile" className="dropdown-item">
-                        Perfil
-                      </Link>
-                    </li>
                     <li>
                       <Link className="dropdown-item" href="/login">
                         Acceder
@@ -164,118 +162,113 @@ const Header = () => {
                     <NavigationMenu.Link asChild>
                       <Link
                         href="/"
-                        className="btn btn-link text-decoration-none"
+                        className={`btn text-decoration-none ${pathname === "/" ? "btn-primary pe-none rounded-bottom-0" : "btn-link"}`}
                       >
-                        Inicio
+                        <i className="ti ti-home"></i>
                       </Link>
                     </NavigationMenu.Link>
                   </NavigationMenu.Item>
                   <NavigationMenu.Item className="position-relative">
-                    <NavigationMenu.Trigger className="btn btn-link text-decoration-none">
-                      Vehículos
+                    <NavigationMenu.Trigger asChild>
+                      <NavigationMenu.Link asChild>
+                        <Button
+                          variant={
+                            pathname.includes("/vehicles") ? "primary" : "link"
+                          }
+                          className={`d-inline-flex align-items-center gap-1 text-decoration-none${pathname.includes("/vehicles") ? " rounded-bottom-0" : ""}`}
+                        >
+                          <i className="ti ti-car-garage"></i>
+                          <span>Vehículos</span>
+                        </Button>
+                      </NavigationMenu.Link>
                     </NavigationMenu.Trigger>
                     <NavigationMenu.Content className="position-absolute">
-                      <Card>
+                      <Card
+                        style={{
+                          maxWidth: "45vw",
+                        }}
+                      >
                         <CardBody>
                           <Row>
-                            <Col xs={5}></Col>
+                            <Col xs={5}>
+                              <Image
+                                src="/assets/img/car1.jpg"
+                                alt=""
+                                width={400}
+                                height={400}
+                                className="h-100 object-fit-cover"
+                              />
+                            </Col>
                             <Col xs={7}>
-                              <Row>
-                                <Col xs={12}>
-                                  <NavigationMenu.Link asChild>
+                              <NavigationMenu.Link asChild>
+                                <Row>
+                                  <Col xs={12}>
                                     <Link
-                                      href="/vehicles"
-                                      className="btn btn-link text-decoration-none"
+                                      href="/vehicles?IsBestOffer=true"
+                                      className="btn btn-link text-decoration-none px-0"
                                     >
                                       Inventario
                                     </Link>
-                                  </NavigationMenu.Link>
-                                </Col>
-                                <Col xs={12}>
-                                  <NavigationMenu.Link asChild>
-                                    <Link
-                                      href="/vehicles"
-                                      className="btn btn-link text-decoration-none"
-                                    >
-                                      Inventario
-                                    </Link>
-                                  </NavigationMenu.Link>
-                                </Col>
-                                <Col xs={12}>
-                                  <NavigationMenu.Link asChild>
-                                    <div className="d-flex flex-column align-items-start">
-                                      <Link
-                                        href="/vehicles"
-                                        className="btn btn-link text-decoration-none"
-                                      >
-                                        Inventario
-                                      </Link>
-                                      <span>
-                                        Inventario completo de los vehículos
-                                        disponibles en La Subasta Cubana
-                                      </span>
-                                    </div>
-                                  </NavigationMenu.Link>
-                                </Col>
-                              </Row>
+                                  </Col>
+                                  <Col xs={12}>
+                                    <span>
+                                      Lorem ipsum dolor sit amet, consectetur
+                                      adipisicing elit. Ab accusamus accusantium
+                                      aliquid aperiam aut deserunt dolor
+                                      dolorem, ipsa nisi nobis pariatur, porro
+                                      quas qui recusandae reprehenderit
+                                      repudiandae sit soluta voluptate?
+                                    </span>
+                                  </Col>
+                                </Row>
+                              </NavigationMenu.Link>
                             </Col>
                           </Row>
                         </CardBody>
                       </Card>
                     </NavigationMenu.Content>
                   </NavigationMenu.Item>
-
                   <NavigationMenu.Item>
-                    <NavigationMenu.Trigger />
-                    <NavigationMenu.Content>
-                      <NavigationMenu.Sub>
-                        <NavigationMenu.List />
-                        <NavigationMenu.Viewport />
-                      </NavigationMenu.Sub>
-                    </NavigationMenu.Content>
+                    <NavigationMenu.Link asChild>
+                      <Link
+                        href="/como-comprar"
+                        className={`btn text-decoration-none ${pathname === "/como-comprar" ? "btn-primary pe-none rounded-bottom-0" : "btn-link"}`}
+                      >
+                        ¿Cómo comprar?
+                      </Link>
+                    </NavigationMenu.Link>
                   </NavigationMenu.Item>
-
-                  <NavigationMenu.Indicator />
+                  <NavigationMenu.Item>
+                    <NavigationMenu.Link asChild>
+                      <Link
+                        href="/estimar-precio"
+                        className="btn btn-link text-decoration-none d-inline-flex align-items-center gap-2"
+                      >
+                        <i className="ti ti-calculator-filled"></i>
+                        <span>Calculador de precios</span>
+                      </Link>
+                    </NavigationMenu.Link>
+                  </NavigationMenu.Item>
+                  <NavigationMenu.Item>
+                    <NavigationMenu.Link asChild>
+                      <Link
+                        href="/support/faq"
+                        className="btn btn-link text-decoration-none"
+                      >
+                        Soporte
+                      </Link>
+                    </NavigationMenu.Link>
+                  </NavigationMenu.Item>
                 </NavigationMenu.List>
-
                 <NavigationMenu.Viewport />
               </NavigationMenu.Root>
             </div>
-            <nav className="d-none d-lg-block">
-              <ul className="d-inline-flex align-items-center gap-2 p-0">
-                <li></li>
-                <li>
-                  <Link
-                    href="/vehicles"
-                    className="btn btn-link text-decoration-none"
-                  >
-                    Inventario
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/support/price-calculator"
-                    className="btn btn-link text-decoration-none"
-                  >
-                    Calculadora de precios
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/support"
-                    className="btn btn-link text-decoration-none"
-                  >
-                    Soporte
-                  </Link>
-                </li>
-              </ul>
-            </nav>
             <Collapse in={open} appear>
               <div className="pb-2">
                 <div className="vstack gap-2">
                   <div className="hstack gap-2">
                     <button
-                      onClick={handleShowTwo}
+                      onClick={() => setIsOpen(true)}
                       className="btn btn-outline-primary d-lg-none d-flex align-items-center gap-2"
                       data-bs-toggle="offcanvas"
                       data-bs-target="#suhaFilterOffcanvas"
@@ -298,7 +291,7 @@ const Header = () => {
         </div>
       </div>
       <OffCanvas handleShow={handleShow} show={show} />
-      <OffCanvasTwo handleShow={handleShowTwo} show={showTwo} />
+      {isOpen ? <SidePortal isOpen={isOpen} toggleOpen={closePortal} /> : null}
     </>
   );
 };

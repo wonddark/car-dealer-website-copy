@@ -1,9 +1,10 @@
 "use client";
 
 import { Vehicle } from "@/types/vehicle";
-import { Controller, FreeMode, Pagination } from "swiper/modules";
-import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
-import { useState } from "react";
+import { Controller, FreeMode } from "swiper/modules";
+import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from "swiper/react";
+import { useRef, useState } from "react";
+import { Button } from "react-bootstrap";
 
 export default function SwappableImages({
   vehicle,
@@ -11,67 +12,92 @@ export default function SwappableImages({
   const [control1, setControl1] = useState<SwiperClass>();
   const [control2, setControl2] = useState<SwiperClass>();
   const hasImages = (vehicle.imageUrls ?? []).length > 0;
+  const mainSwiperRef = useRef<SwiperRef>(null);
 
   return (
-    <div className="card-body">
-      <div className="row">
-        {hasImages ? (
-          <Swiper
-            modules={[Pagination, Controller]}
-            className="swiper col-12"
-            slidesPerView="auto"
-            onSwiper={setControl1}
-            controller={{ control: control2 }}
-            zoom={true}
+    <>
+      {hasImages ? (
+        <Swiper
+          modules={[Controller]}
+          className="swiper position-relative"
+          slidesPerView={1}
+          onSwiper={setControl1}
+          controller={{ control: control2 }}
+          zoom={true}
+          ref={mainSwiperRef}
+          spaceBetween={0}
+        >
+          <Button
+            className="fs-1 position-absolute start-0 z-2 top-0 bottom-0 my-auto p-0 border-0 bg-transparent"
+            style={{
+              width: "fit-content",
+              height: "fit-content",
+              lineHeight: "100%",
+            }}
+            variant="dark"
+            onClick={() => mainSwiperRef.current?.swiper?.slidePrev()}
           >
-            {vehicle.imageUrls?.map((item) => (
-              <SwiperSlide key={item}>
-                <img
-                  src={item}
-                  className="object-fit-cover"
-                  alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : (
-          <img
-            src={vehicle.imageUrl}
-            className="object-fit-cover"
-            alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
-          />
-        )}
-        {hasImages ? (
-          <div className="col-12 py-1">
-            <Swiper
-              modules={[FreeMode, Pagination, Controller]}
-              freeMode={{
-                enabled: true,
-                momentum: true,
-                momentumRatio: 0.9,
-                momentumVelocityRatio: 0.9,
-              }}
-              className="swiper"
-              slidesPerView="auto"
-              onSwiper={setControl2}
-              controller={{ control: control1 }}
-            >
-              {vehicle.imageUrls?.map((item) => (
-                <SwiperSlide key={item}>
-                  <img
-                    src={item}
-                    style={{
-                      height: 64,
-                      objectFit: "cover",
-                    }}
-                    alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </div>
-        ) : null}
-      </div>
-    </div>
+            <i className="ti ti-square-chevron-left-filled"></i>
+          </Button>
+          <Button
+            className="fs-1 position-absolute end-0 z-2 top-0 bottom-0 my-auto p-0 border-0 bg-transparent"
+            style={{
+              width: "fit-content",
+              height: "fit-content",
+              lineHeight: "100%",
+            }}
+            variant="dark"
+            onClick={() => mainSwiperRef.current?.swiper?.slideNext()}
+          >
+            <i className="ti ti-square-chevron-right-filled"></i>
+          </Button>
+          {vehicle.imageUrls?.map((item) => (
+            <SwiperSlide key={item} className="m-0">
+              <img
+                src={item}
+                className="object-fit-cover rounded-2"
+                alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : (
+        <img
+          src={vehicle.imageUrl}
+          className="object-fit-cover rounded-2"
+          alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
+        />
+      )}
+      {hasImages ? (
+        <Swiper
+          modules={[FreeMode, Controller]}
+          freeMode={{
+            enabled: true,
+            momentum: true,
+            momentumRatio: 0.9,
+            momentumVelocityRatio: 0.9,
+          }}
+          className="swiper pt-1"
+          slidesPerView="auto"
+          onSwiper={setControl2}
+          controller={{ control: control1 }}
+          spaceBetween={2}
+        >
+          {vehicle.imageUrls?.map((item) => (
+            <SwiperSlide key={item}>
+              <img
+                src={item}
+                style={{
+                  height: 64,
+                  objectFit: "cover",
+                }}
+                className="object-fit-cover rounded-2 shadow"
+                alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      ) : null}
+    </>
   );
 }

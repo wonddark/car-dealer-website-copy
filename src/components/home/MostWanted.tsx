@@ -8,7 +8,7 @@ import { getMostWanted } from "@/store/features/vehicles.slice";
 import { useGetMostWantedQuery } from "@/store/api";
 
 export default function MostWanted() {
-  useGetMostWantedQuery({});
+  const { isLoading } = useGetMostWantedQuery({});
   const data = useAppSelector(getMostWanted);
 
   return (
@@ -17,6 +17,7 @@ export default function MostWanted() {
         <section className="vstack align-items-center gap-3">
           <HorizontalVehiclesCarrousel
             data={data}
+            loading={isLoading}
             fullListLink="/vehicles?IsBestOffer=true"
           />
         </section>

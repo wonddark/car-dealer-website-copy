@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="suha-footer-nav">
         <ul className="h-100 d-flex align-items-center justify-content-between ps-0 d-flex rtl-flex-d-row-r">
           <li>
-            <Link href="/support/price-calculator">
+            <Link href="/estimar-precio">
               <i className="ti ti-calculator"></i>Calculadora
             </Link>
           </li>

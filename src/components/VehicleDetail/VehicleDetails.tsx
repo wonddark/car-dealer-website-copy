@@ -19,14 +19,14 @@ export default function VehicleDetails({
   return (
     <div className="page-content-wrapper py-3 mt-0">
       <div className="container-xxl">
-        <div className="row align-items-stretch">
-          <div className="col-12 col-md-7 order-0 card">
+        <div className="row align-items-stretch row-gap-3">
+          <h1 className="fw-medium fs-3 col-12">{`${vehicle.year} ${vehicle.make} ${vehicle.model}`}</h1>
+          <div className="col-12 col-md-7 order-0">
             <SwappableImages vehicle={vehicle} />
           </div>
           <div className="col-12 order-1 order-md-last card">
             <div className="card-body">
               <div className="vstack gap-4">
-                <h1 className="fw-medium fs-3">{`${vehicle.year} ${vehicle.make} ${vehicle.model}`}</h1>
                 <div className="vstack gap-2">
                   <div className="hstack">
                     <strong className="text-muted">Número de lote</strong>
