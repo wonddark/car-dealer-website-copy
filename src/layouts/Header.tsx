@@ -7,12 +7,12 @@ import { Button, Card, CardBody, Col, Collapse, Row } from "react-bootstrap";
 import FiltersBanner from "@/components/FiltersBanner";
 import useVehiclesInventory from "@/hooks/useVehiclesInventory";
 import { useFilters } from "@/components/common/Filters";
-import OffCanvasTwo from "@/components/common/OffCanvasTwo";
 import OrderBySelector from "@/components/OrderBySelector";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { SearchInput } from "@/components/SearchInput";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import SidePortal from "@/layouts/SidePortal";
 
 const FilterOptions = () => {
   const { response, loading } = useVehiclesInventory();
@@ -59,11 +59,11 @@ const FilterOptions = () => {
 const Header = () => {
   const [show, setShow] = useState(false);
   const handleShow = () => setShow((prevState) => !prevState);
-  const [showTwo, setShowTwo] = useState(false);
-  const handleShowTwo = () => setShowTwo((prevState) => !prevState);
   const [open, setOpen] = useState(false);
   const toggleOpen = () => setOpen((prevState) => !prevState);
   const pathname = usePathname();
+  const [isOpen, setIsOpen] = useState(false);
+  const closePortal = (val: boolean) => setIsOpen(val);
 
   return (
     <>
@@ -112,11 +112,6 @@ const Header = () => {
                     />
                   </button>
                   <ul className="dropdown-menu">
-                    <li>
-                      <Link href="/profile" className="dropdown-item">
-                        Perfil
-                      </Link>
-                    </li>
                     <li>
                       <Link className="dropdown-item" href="/login">
                         Acceder
@@ -273,7 +268,7 @@ const Header = () => {
                 <div className="vstack gap-2">
                   <div className="hstack gap-2">
                     <button
-                      onClick={handleShowTwo}
+                      onClick={() => setIsOpen(true)}
                       className="btn btn-outline-primary d-lg-none d-flex align-items-center gap-2"
                       data-bs-toggle="offcanvas"
                       data-bs-target="#suhaFilterOffcanvas"
@@ -296,7 +291,7 @@ const Header = () => {
         </div>
       </div>
       <OffCanvas handleShow={handleShow} show={show} />
-      <OffCanvasTwo handleShow={handleShowTwo} show={showTwo} />
+      {isOpen ? <SidePortal isOpen={isOpen} toggleOpen={closePortal} /> : null}
     </>
   );
 };
