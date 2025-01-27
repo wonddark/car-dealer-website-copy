@@ -211,7 +211,7 @@
 }
 
 .tabs-root {
-    padding: var(--bs-padd, 4px) 0;
+    padding: 4px 0;
 }
 
 .tabs-trigger {
@@ -222,4 +222,9 @@
     border: var(--bs-border-width) var(--bs-border-style) var(--bs-primary);
     color: var(--bs-primary);
     cursor: initial;
+}
+
+.btn-toggle[data-state='on'] {
+    background-color: var(--bs-primary);
+    color: #fff;
 }
