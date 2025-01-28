@@ -8,7 +8,6 @@ import DismissVehicleTypeFilter from "@/components/DismissVehicleTypeFilter";
 import DismissTitleTypeFilter from "@/components/DismissTitleTypeFilter";
 import DismissBrandFilter from "@/components/DismissBrandFilter";
 import DismissModelFilter from "@/components/DismissModelFilter";
-import DismissFilter from "@/components/DismissFilter";
 import {
   useGetAuctionsQuery,
   useGetDamageTranslationsQuery,
@@ -18,6 +17,7 @@ import {
   useGetTransmissionTranslationsQuery,
   useGetVehicleTypesQuery,
 } from "@/store/api";
+import DismissFuelTypeFilter from "@/components/DismissFuelTypeFilter";
 
 export default function FiltersBanner() {
   const { sp, clearAll } = useFiltersBanner();
@@ -38,19 +38,7 @@ export default function FiltersBanner() {
         <DismissTitleTypeFilter />
         <DismissBrandFilter />
         <DismissModelFilter />
-        <DismissFilter
-          filterName="FuelTypes"
-          searchFunction={(val) =>
-            [
-              "Gasoline",
-              "Gasoline Hybrid",
-              "Gasoline Plug-In Hybrid",
-              "Electric",
-              "Diesel",
-              "Flex",
-            ].find((item) => item === val)
-          }
-        />
+        <DismissFuelTypeFilter />
       </div>
     </div>
   );
