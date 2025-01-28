@@ -145,8 +145,8 @@ const filtersSlice = createSlice({
     getTitlesCounters: (state) => state.counters["titles"],
     getMakersFiltered: (state) => state.makersFiltered,
     getModelsFiltered: (state) => state.modelsFiltered,
-    getTransmissions_v1: (state) => state.transmissions,
-    getEngines_v1: (state) => state.counters["cylinders"],
+    getTransmissionTypes: (state) => state.transmissions,
+    getEngineTypes: (state) => state.counters["cylinders"],
     getTransmissionsCount: (state) => state.counters["transmissions"],
     getMakeAndModelsCount: (state) => state.counters.makesAndModels,
     getEngineCount: (state) => state.counters.cylinders,
@@ -171,8 +171,8 @@ export const {
     getTitlesCounters,
     getMakersFiltered,
     getModelsFiltered,
-    getTransmissions_v1,
-    getEngines_v1,
+    getTransmissionTypes,
+    getEngineTypes,
     getMakeAndModelsCount,
     getTransmissionsCount,
     getEngineCount,
@@ -205,7 +205,7 @@ export const getModels = createSelector(
 );
 
 export const getTransmissions = createSelector(
-  [getTransmissions_v1, getTransmissionsCount],
+  [getTransmissionTypes, getTransmissionsCount],
   (data, count) =>
     Object.keys(data).map((item) => ({
       key: item,
@@ -215,7 +215,7 @@ export const getTransmissions = createSelector(
 );
 
 export const getEngines = createSelector(
-  [getEngines_v1, getEngineCount],
+  [getEngineTypes, getEngineCount],
   (data, count) =>
     Object.keys(data ?? {}).map((item) => ({
       key: item,
