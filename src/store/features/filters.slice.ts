@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import vehiclesApi from "@/store/api";
 
 type FiltersState = {
@@ -143,46 +143,13 @@ const filtersSlice = createSlice({
     getFuelCounters: (state) => state.counters["fuelType"],
     getTitles: (state) => state.titles,
     getTitlesCounters: (state) => state.counters["titles"],
-    getMakers: (state) =>
-      state.makersFiltered.map((item) => ({
-        ...item,
-        count:
-          (
-            state.counters.makesAndModels as
-              | { [k: string]: { count: number } }
-              | undefined
-          )?.[item.key]?.count ?? 0,
-      })),
-    getModels: (state) =>
-      state.modelsFiltered.map((item) => ({
-        ...item,
-        count:
-          (
-            state.counters.makesAndModels as
-              | { [k: string]: { models: { [k: string]: number } } }
-              | undefined
-          )?.[item.maker]?.models?.[item.key] ?? 0,
-      })),
-    getTransmissions: (state) =>
-      Object.keys(state.transmissions).map((item) => ({
-        key: item,
-        count:
-          (
-            state.counters["transmissions"] as
-              | { [k: string]: number }
-              | undefined
-          )?.[item] ?? 0,
-        label: item,
-      })),
-    getEngines: (state) =>
-      Object.keys(state.counters["cylinders"] ?? {}).map((item) => ({
-        key: item,
-        count:
-          (
-            state.counters["cylinders"] as { [k: string]: number } | undefined
-          )?.[item] ?? 0,
-        label: item,
-      })),
+    getMakersFiltered: (state) => state.makersFiltered,
+    getModelsFiltered: (state) => state.modelsFiltered,
+    getTransmissions_v1: (state) => state.transmissions,
+    getEngines_v1: (state) => state.counters["cylinders"],
+    getTransmissionsCount: (state) => state.counters["transmissions"],
+    getMakeAndModelsCount: (state) => state.counters.makesAndModels,
+    getEngineCount: (state) => state.counters.cylinders,
   },
 });
 
@@ -202,11 +169,59 @@ export const {
     getFuelCounters,
     getTitles,
     getTitlesCounters,
-    getMakers,
-    getModels,
-    getTransmissions,
-    getEngines,
+    getMakersFiltered,
+    getModelsFiltered,
+    getTransmissions_v1,
+    getEngines_v1,
+    getMakeAndModelsCount,
+    getTransmissionsCount,
+    getEngineCount,
   },
 } = filtersSlice;
+
+export const getMakers = createSelector(
+  [getMakersFiltered, getMakeAndModelsCount],
+  (makers, count) =>
+    makers.map((item) => ({
+      ...item,
+      count:
+        (count as { [k: string]: { count: number } } | undefined)?.[item.key]
+          ?.count ?? 0,
+    })),
+);
+
+export const getModels = createSelector(
+  [getModelsFiltered, getMakeAndModelsCount],
+  (models, count) =>
+    models.map((item) => ({
+      ...item,
+      count:
+        (
+          count as
+            | { [k: string]: { models: { [k: string]: number } } }
+            | undefined
+        )?.[item.maker]?.models?.[item.key] ?? 0,
+    })),
+);
+
+export const getTransmissions = createSelector(
+  [getTransmissions_v1, getTransmissionsCount],
+  (data, count) =>
+    Object.keys(data).map((item) => ({
+      key: item,
+      count: (count as { [k: string]: number } | undefined)?.[item] ?? 0,
+      label: item,
+    })),
+);
+
+export const getEngines = createSelector(
+  [getEngines_v1, getEngineCount],
+  (data, count) =>
+    Object.keys(data ?? {}).map((item) => ({
+      key: item,
+      count: (count as { [k: string]: number } | undefined)?.[item] ?? 0,
+      label: item,
+    })),
+);
 
 export default filtersSlice;
