@@ -224,4 +224,28 @@ export const getEngines = createSelector(
     })),
 );
 
+export const getDamages = createSelector(getDamagesTranslations, (data) =>
+  Object.entries(data).map((item) => ({ key: item[0], label: item[1] })),
+);
+
+export const getPrimaryDamages = createSelector(
+  [getDamagesTranslations, getPrimaryDamagesCounters],
+  (translations, counter) =>
+    Object.entries(translations).map((item) => ({
+      key: item[0],
+      label: item[1],
+      count: (counter as { [k: string]: number } | undefined)?.[item[0]] ?? 0,
+    })),
+);
+
+export const getSecondaryDamages = createSelector(
+  [getDamagesTranslations, getSecondaryDamagesCounters],
+  (translations, counter) =>
+    Object.entries(translations).map((item) => ({
+      key: item[0],
+      label: item[1],
+      count: (counter as { [k: string]: number } | undefined)?.[item[0]] ?? 0,
+    })),
+);
+
 export default filtersSlice;
