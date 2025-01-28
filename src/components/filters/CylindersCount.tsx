@@ -4,13 +4,13 @@ import React, { MouseEventHandler, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useFilters } from "@/components/common/Filters";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { getEngines } from "@/store/features/filters.slice";
+import { getCylinders } from "@/store/features/filters.slice";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { resetData } from "@/store/features/vehicles.slice";
 
-const FILTER_NAME = "EngineTypes";
+const FILTER_NAME = "Cylinders";
 
-export default function EngineTypes() {
+export default function CylindersCount() {
   const { engines, checked, isOpen, toggle, anyValue, clearFilter } =
     useTransmissionTypes();
   const { handleCheckChange: handleChange } = useFilters();
@@ -22,7 +22,7 @@ export default function EngineTypes() {
     >
       <Collapsible.Trigger className="btn f-trigger" asChild>
         <div className="f-trigger-inner">
-          <span className="flex-fill">Tipo de motor</span>
+          <span className="flex-fill">Cantidad de cilindros</span>
           {anyValue && (
             <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar
@@ -60,7 +60,7 @@ export default function EngineTypes() {
 }
 
 const useTransmissionTypes = () => {
-  const engines = useAppSelector(getEngines);
+  const engines = useAppSelector(getCylinders);
   const { push } = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();

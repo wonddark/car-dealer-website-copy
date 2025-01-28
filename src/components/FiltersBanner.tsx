@@ -23,6 +23,7 @@ import DismissYearOfReleaseFilter from "@/components/DismissYearOfReleaseFilter"
 import DismissDamagesFilter from "@/components/DismissDamagesFilter";
 import DismissDealersNameFilter from "@/components/DismissDealersNameFilter";
 import DismissTransmissionTypeFilter from "@/components/DismissTransmissionTypeFilter";
+import DismissCylindersCountFilter from "@/components/DismissCylindersCountFilter";
 
 export default function FiltersBanner() {
   const { sp, clearAll } = useFiltersBanner();
@@ -49,6 +50,7 @@ export default function FiltersBanner() {
         <DismissDamagesFilter />
         <DismissDealersNameFilter />
         <DismissTransmissionTypeFilter />
+        <DismissCylindersCountFilter />
       </div>
     </div>
   );
