@@ -33,7 +33,7 @@ export default function Makers() {
     >
       <Collapsible.Trigger className="btn f-trigger" asChild>
         <div className="f-trigger-inner">
-          <span className="flex-fill">Fabricante</span>
+          <span className="flex-fill">Marca</span>
           {anyVal && (
             <button className="f-reset btn p-0" onClick={clearFilter}>
               Limpiar
