@@ -19,6 +19,7 @@ import {
 } from "@/store/api";
 import DismissFuelTypeFilter from "@/components/DismissFuelTypeFilter";
 import DismissOdometerFilter from "@/components/DismissOdometerFilter";
+import DismissYearOfReleaseFilter from "@/components/DismissYearOfReleaseFilter";
 
 export default function FiltersBanner() {
   const { sp, clearAll } = useFiltersBanner();
@@ -41,6 +42,7 @@ export default function FiltersBanner() {
         <DismissModelFilter />
         <DismissFuelTypeFilter />
         <DismissOdometerFilter />
+        <DismissYearOfReleaseFilter />
       </div>
     </div>
   );
