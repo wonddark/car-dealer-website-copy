@@ -4,10 +4,7 @@ import React, { MouseEventHandler, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useFilters } from "@/components/common/Filters";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-  getAuctions,
-  getAuctionsCounters,
-} from "@/store/features/filters.slice";
+import { getDealers } from "@/store/features/filters.slice";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { resetData } from "@/store/features/vehicles.slice";
 
@@ -63,19 +60,10 @@ export default function DealersNames() {
 }
 
 const useAuctionNames = () => {
-  const data = useAppSelector(getAuctions);
-  const counters = useAppSelector(getAuctionsCounters);
+  const auctions = useAppSelector(getDealers);
   const { push } = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();
-
-  const auctions = data.map((item) => ({
-    key: item,
-    label: item,
-    count:
-      (counters as { [k: string]: number } | undefined)?.[item.toLowerCase()] ??
-      0,
-  }));
 
   const searchParams = useSearchParams();
   const checked = (name: string) => {

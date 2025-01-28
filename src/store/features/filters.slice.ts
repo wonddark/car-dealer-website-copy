@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import vehiclesApi from "@/store/api";
 
 type FiltersState = {
@@ -143,46 +143,12 @@ const filtersSlice = createSlice({
     getFuelCounters: (state) => state.counters["fuelType"],
     getTitles: (state) => state.titles,
     getTitlesCounters: (state) => state.counters["titles"],
-    getMakers: (state) =>
-      state.makersFiltered.map((item) => ({
-        ...item,
-        count:
-          (
-            state.counters.makesAndModels as
-              | { [k: string]: { count: number } }
-              | undefined
-          )?.[item.key]?.count ?? 0,
-      })),
-    getModels: (state) =>
-      state.modelsFiltered.map((item) => ({
-        ...item,
-        count:
-          (
-            state.counters.makesAndModels as
-              | { [k: string]: { models: { [k: string]: number } } }
-              | undefined
-          )?.[item.maker]?.models?.[item.key] ?? 0,
-      })),
-    getTransmissions: (state) =>
-      Object.keys(state.transmissions).map((item) => ({
-        key: item,
-        count:
-          (
-            state.counters["transmissions"] as
-              | { [k: string]: number }
-              | undefined
-          )?.[item] ?? 0,
-        label: item,
-      })),
-    getEngines: (state) =>
-      Object.keys(state.counters["cylinders"] ?? {}).map((item) => ({
-        key: item,
-        count:
-          (
-            state.counters["cylinders"] as { [k: string]: number } | undefined
-          )?.[item] ?? 0,
-        label: item,
-      })),
+    getMakersFiltered: (state) => state.makersFiltered,
+    getModelsFiltered: (state) => state.modelsFiltered,
+    getTransmissionTypes: (state) => state.transmissions,
+    getCylindersCount: (state) => state.counters.cylinders,
+    getTransmissionsCount: (state) => state.counters["transmissions"],
+    getMakeAndModelsCount: (state) => state.counters.makesAndModels,
   },
 });
 
@@ -202,11 +168,93 @@ export const {
     getFuelCounters,
     getTitles,
     getTitlesCounters,
-    getMakers,
-    getModels,
-    getTransmissions,
-    getEngines,
+    getMakersFiltered,
+    getModelsFiltered,
+    getTransmissionTypes,
+    getCylindersCount,
+    getMakeAndModelsCount,
+    getTransmissionsCount,
   },
 } = filtersSlice;
+
+export const getMakers = createSelector(
+  [getMakersFiltered, getMakeAndModelsCount],
+  (makers, count) =>
+    makers.map((item) => ({
+      ...item,
+      count:
+        (count as { [k: string]: { count: number } } | undefined)?.[item.key]
+          ?.count ?? 0,
+    })),
+);
+
+export const getModels = createSelector(
+  [getModelsFiltered, getMakeAndModelsCount],
+  (models, count) =>
+    models.map((item) => ({
+      ...item,
+      count:
+        (
+          count as
+            | { [k: string]: { models: { [k: string]: number } } }
+            | undefined
+        )?.[item.maker]?.models?.[item.key] ?? 0,
+    })),
+);
+
+export const getTransmissions = createSelector(
+  [getTransmissionTypes, getTransmissionsCount],
+  (data, count) =>
+    Object.keys(data).map((item) => ({
+      key: item,
+      count: (count as { [k: string]: number } | undefined)?.[item] ?? 0,
+      label: item,
+    })),
+);
+
+export const getCylinders = createSelector([getCylindersCount], (data) =>
+  Object.entries(data ?? {}).map((item) => ({
+    key: item[0],
+    count: item[1] ?? 0,
+    label: `${item[0]} cilindros`,
+  })),
+);
+
+export const getDamages = createSelector(getDamagesTranslations, (data) =>
+  Object.entries(data).map((item) => ({ key: item[0], label: item[1] })),
+);
+
+export const getPrimaryDamages = createSelector(
+  [getDamagesTranslations, getPrimaryDamagesCounters],
+  (translations, counter) =>
+    Object.entries(translations).map((item) => ({
+      key: item[0],
+      label: item[1],
+      count: (counter as { [k: string]: number } | undefined)?.[item[0]] ?? 0,
+    })),
+);
+
+export const getSecondaryDamages = createSelector(
+  [getDamagesTranslations, getSecondaryDamagesCounters],
+  (translations, counter) =>
+    Object.entries(translations).map((item) => ({
+      key: item[0],
+      label: item[1],
+      count: (counter as { [k: string]: number } | undefined)?.[item[0]] ?? 0,
+    })),
+);
+
+export const getDealers = createSelector(
+  [getAuctions, getAuctionsCounters],
+  (data, counters) =>
+    data.map((item) => ({
+      key: item,
+      label: item,
+      count:
+        (counters as { [k: string]: number } | undefined)?.[
+          item.toLowerCase()
+        ] ?? 0,
+    })),
+);
 
 export default filtersSlice;

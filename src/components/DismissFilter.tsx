@@ -50,7 +50,6 @@ export default function DismissFilter(props: Readonly<Props>) {
         const label = keyLabel
           ? (item as Record<string, string>)[keyLabel]
           : (item as string);
-        console.log(key, label);
         return (
           <button
             key={key}

@@ -3,10 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import React, { MouseEventHandler, useState } from "react";
 import { useFilters } from "@/components/common/Filters";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import {
-  getDamagesTranslations,
-  getSecondaryDamagesCounters,
-} from "@/store/features/filters.slice";
+import { getSecondaryDamages } from "@/store/features/filters.slice";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { resetData } from "@/store/features/vehicles.slice";
@@ -63,18 +60,12 @@ export default function SecondaryDamages() {
 }
 
 const useDamages = () => {
+  const damages = useAppSelector(getSecondaryDamages);
+
   const searchParams = useSearchParams();
-  const translations = useAppSelector(getDamagesTranslations);
-  const counters = useAppSelector(getSecondaryDamagesCounters);
   const { push } = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();
-
-  const damages = Object.entries(translations).map((item) => ({
-    key: item[0],
-    label: item[1],
-    count: (counters as { [k: string]: number } | undefined)?.[item[0]] ?? 0,
-  }));
 
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => {
