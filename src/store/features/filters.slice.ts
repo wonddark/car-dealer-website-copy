@@ -248,4 +248,17 @@ export const getSecondaryDamages = createSelector(
     })),
 );
 
+export const getDealers = createSelector(
+  [getAuctions, getAuctionsCounters],
+  (data, counters) =>
+    data.map((item) => ({
+      key: item,
+      label: item,
+      count:
+        (counters as { [k: string]: number } | undefined)?.[
+          item.toLowerCase()
+        ] ?? 0,
+    })),
+);
+
 export default filtersSlice;
