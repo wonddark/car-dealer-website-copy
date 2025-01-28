@@ -18,6 +18,7 @@ import {
   useGetVehicleTypesQuery,
 } from "@/store/api";
 import DismissFuelTypeFilter from "@/components/DismissFuelTypeFilter";
+import DismissOdometerFilter from "@/components/DismissOdometerFilter";
 
 export default function FiltersBanner() {
   const { sp, clearAll } = useFiltersBanner();
@@ -39,6 +40,7 @@ export default function FiltersBanner() {
         <DismissBrandFilter />
         <DismissModelFilter />
         <DismissFuelTypeFilter />
+        <DismissOdometerFilter />
       </div>
     </div>
   );
