@@ -24,6 +24,7 @@ export default function VehicleCard({
   const toggleExpanded = () => {
     setExpanded((prevState) => !prevState);
   };
+  const [isMobile, setIsMobile] = useState(false);
   const [fullyLoaded, setFullyLoaded] = useState(false);
   const sp = useSearchParams();
   const [imgUrl, setImgUrl] = useState(vehicle.imageUrl);
@@ -45,6 +46,12 @@ export default function VehicleCard({
     setSaleDate(dayjs(vehicle.saleAuctionDate).format("DD/MM/YYYY HH:mm"));
   }, [vehicle.saleAuctionDate]);
 
+  useEffect(() => {
+    if (window) {
+      setIsMobile(window.innerWidth < 580);
+    }
+  }, []);
+
   return (
     <div className="card product-card h-100">
       <div className="card-body p-2 p-md-3 h-100">
@@ -64,7 +71,7 @@ export default function VehicleCard({
           <Link
             className={linkClass}
             href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
-            target="_blank"
+            target={isMobile ? "_self" : "_blank"}
           >
             <img
               className="mb-2 rounded-2 object-fit-cover ratio ratio-4x3"
