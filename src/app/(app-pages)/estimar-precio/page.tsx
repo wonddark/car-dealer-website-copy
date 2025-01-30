@@ -1,16 +1,27 @@
+"use client";
+
 import {
-  Button,
   Card,
   CardBody,
   Container,
+  FormCheck,
   FormControl,
+  FormSelect,
   ListGroup,
   ListGroupItem,
   Stack,
 } from "react-bootstrap";
-import * as ToggleGroup from "@radix-ui/react-toggle-group";
+import * as Slider from "@radix-ui/react-slider";
+import FormCheckLabel from "react-bootstrap/FormCheckLabel";
+import FormCheckInput from "react-bootstrap/FormCheckInput";
+import { useState } from "react";
 
 export default function PriceCalculator() {
+  const MAX_OFFER = 500_000;
+  const MIN_OFFER = 250;
+  const [maxOffer, setMaxOffer] = useState(MIN_OFFER);
+  const updateMaxOffer = (val: number[]) => setMaxOffer(val[0]);
+
   return (
     <Container fluid="xxl">
       <h1>Estimador de costo</h1>
@@ -18,83 +29,70 @@ export default function PriceCalculator() {
       <Card>
         <CardBody>
           <div
-            className="d-grid gap-2"
+            className="d-grid"
             style={{
-              gridTemplateColumns: "1fr 1.2fr",
+              gridTemplateColumns: "1.15fr 1fr",
             }}
           >
             <Stack direction="vertical">
               <p className="display-6 fs-5 mb-1">Subasta</p>
-              <ToggleGroup.Root
-                type="single"
-                className="d-inline-flex align-items-stretch"
-              >
-                <ToggleGroup.Item
-                  value="copart"
-                  className="btn flex-fill btn-outline-secondary rounded-0 rounded-start border-end-0 btn-toggle"
-                >
-                  Copart
-                </ToggleGroup.Item>
-                <ToggleGroup.Item
-                  value="manheim"
-                  className="btn flex-fill btn-outline-secondary rounded-0 btn-toggle"
-                >
-                  Manheim
-                </ToggleGroup.Item>
-                <ToggleGroup.Item
-                  value="iia"
-                  className="btn flex-fill btn-outline-secondary rounded-0 rounded-end border-start-0 btn-toggle"
-                >
-                  IIA
-                </ToggleGroup.Item>
-              </ToggleGroup.Root>
+              <FormSelect>
+                <option value="">Escoge una subasta</option>
+                <option value="copart">Copart</option>
+                <option value="manheim">Manheim</option>
+                <option value="iia">IIA</option>
+              </FormSelect>
+
               <p className="display-6 fs-5 mt-3 mb-1">Tipo de Título</p>
-              <ToggleGroup.Root
-                type="single"
-                className="d-inline-flex align-items-stretch"
-              >
-                <ToggleGroup.Item
-                  value="clean"
-                  className="btn btn-outline-secondary flex-fill rounded-0 rounded-start"
-                >
-                  Título limpio
-                </ToggleGroup.Item>
-                <ToggleGroup.Item
-                  value="savage"
-                  className="btn btn-outline-secondary flex-fill rounded-0 rounded-end"
-                >
-                  Titulo de salvamento
-                </ToggleGroup.Item>
-              </ToggleGroup.Root>
+              <FormCheck className="d-flex gap-3">
+                <FormCheckLabel className="d-flex align-items-center gap-1">
+                  <FormCheckInput
+                    type="radio"
+                    name="title-type"
+                    value="clean"
+                  />
+                  <span>Limpio</span>
+                </FormCheckLabel>
+                <FormCheckLabel className="d-flex align-items-center gap-1">
+                  <FormCheckInput
+                    type="radio"
+                    name="title-type"
+                    value="salvage"
+                  />
+                  <span>Salvamento</span>
+                </FormCheckLabel>
+              </FormCheck>
+
               <p className="display-6 fs-5 mt-3 mb-1">Peso del vehículo</p>
-              <ToggleGroup.Root type="single" className="hstack">
-                <ToggleGroup.Item
-                  value="light"
-                  className="btn btn-outline-secondary flex-fill rounded-0 rounded-start"
-                >
-                  Vehículo ligero
-                </ToggleGroup.Item>
-                <ToggleGroup.Item
-                  value="heavy"
-                  className="btn btn-outline-secondary flex-fill rounded-0 rounded-end"
-                >
-                  Vehículo pesado
-                </ToggleGroup.Item>
-              </ToggleGroup.Root>
+              <FormCheck className="d-flex gap-3">
+                <FormCheckLabel className="d-flex align-items-center gap-1">
+                  <FormCheckInput type="radio" name="weigth" value="light" />
+                  <span>Ligero</span>
+                </FormCheckLabel>
+                <FormCheckLabel className="d-flex align-items-center gap-1">
+                  <FormCheckInput type="radio" name="weigth" value="heavy" />
+                  <span>Pesado</span>
+                </FormCheckLabel>
+              </FormCheck>
+
               <p className="display-6 fs-5 mt-3 mb-1">Oferta máxima</p>
-              <Stack direction="horizontal">
-                <Button className="rounded-end-0" variant="outline-secondary">
-                  <i className="ti ti-minus"></i>
-                </Button>
-                <FormControl
-                  type="text"
-                  className="flex-fill text-center rounded-0"
-                />
-                <Button className="rounded-start-0" variant="outline-secondary">
-                  <i className="ti ti-plus"></i>
-                </Button>
-              </Stack>
-              <Button className="mt-3 w-50 mx-auto">Calcular</Button>
+              <Slider.Root
+                className="slider-root"
+                min={MIN_OFFER}
+                max={MAX_OFFER}
+                step={250}
+                onValueChange={updateMaxOffer}
+              >
+                <Slider.Track className="slider-track">
+                  <Slider.Range className="slider-range" />
+                </Slider.Track>
+                <Slider.Thumb className="slider-thumb" />
+              </Slider.Root>
+              <FormControl
+                type="text"
+                className="text-center"
+                value={maxOffer}
+              />
             </Stack>
             <Stack direction="vertical">
               <p className="display-6 text-center border-bottom border-secondary pb-1">
