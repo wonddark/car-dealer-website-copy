@@ -19,6 +19,7 @@ import Makers from "@/components/filters/Makers";
 import Models from "@/components/filters/Modells";
 import TransmissionTypes from "@/components/filters/TransmissionTypes";
 import CylindersCount from "@/components/filters/CylindersCount";
+import DriveTypes from "@/components/filters/DriveTypes";
 
 export default function Filters() {
   const { auctionState, stateVal, applyFilters } = useFilters();
@@ -42,6 +43,7 @@ export default function Filters() {
         <TransmissionTypes />
         <CylindersCount />
         <AuctionDate />
+        <DriveTypes />
         <div className="accordion-item">
           <h2 className="accordion-header">
             <button
