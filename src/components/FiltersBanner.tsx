@@ -25,20 +25,22 @@ import DismissDamagesFilter from "@/components/DismissDamagesFilter";
 import DismissDealersNameFilter from "@/components/DismissDealersNameFilter";
 import DismissTransmissionTypeFilter from "@/components/DismissTransmissionTypeFilter";
 import DismissCylindersCountFilter from "@/components/DismissCylindersCountFilter";
+import DismissDriveTypeFilter from "@/components/DismissDriveTypeFilter";
+import { Button } from "react-bootstrap";
 
 export default function FiltersBanner() {
   const { sp, clearAll } = useFiltersBanner();
   return (
     <div className="hstack gap-2 overflow-auto">
       {Boolean(sp.toString().length) && (
-        <button
-          className="btn btn-outline-secondary"
+        <Button
+          variant="outline-secondary"
           onClick={clearAll}
           title="Limpiar filtros"
         >
           <span>Limpiar</span>
           <i className="ti ti-filter-off ms-1"></i>
-        </button>
+        </Button>
       )}
       <div className="hstack overflow-auto gap-2 flex-fill">
         <DismissVehicleTypeFilter />
@@ -52,6 +54,7 @@ export default function FiltersBanner() {
         <DismissDealersNameFilter />
         <DismissTransmissionTypeFilter />
         <DismissCylindersCountFilter />
+        <DismissDriveTypeFilter />
       </div>
     </div>
   );
