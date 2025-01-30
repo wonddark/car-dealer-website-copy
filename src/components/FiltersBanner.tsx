@@ -14,6 +14,7 @@ import {
   useGetDriveTypesTranslationsQuery,
   useGetFuelTypesQuery,
   useGetMakersAndModelsQuery,
+  useGetSaleStatusTranslationsQuery,
   useGetTitleTypesQuery,
   useGetTransmissionTranslationsQuery,
   useGetVehicleTypesQuery,
@@ -27,6 +28,7 @@ import DismissTransmissionTypeFilter from "@/components/DismissTransmissionTypeF
 import DismissCylindersCountFilter from "@/components/DismissCylindersCountFilter";
 import DismissDriveTypeFilter from "@/components/DismissDriveTypeFilter";
 import { Button } from "react-bootstrap";
+import DismissSaleStatusFilter from "@/components/DismissSaleStatusFilter";
 
 export default function FiltersBanner() {
   const { sp, clearAll } = useFiltersBanner();
@@ -55,6 +57,7 @@ export default function FiltersBanner() {
         <DismissTransmissionTypeFilter />
         <DismissCylindersCountFilter />
         <DismissDriveTypeFilter />
+        <DismissSaleStatusFilter />
       </div>
     </div>
   );
@@ -69,6 +72,7 @@ const useFiltersBanner = () => {
   useGetMakersAndModelsQuery({});
   useGetTransmissionTranslationsQuery({});
   useGetDriveTypesTranslationsQuery({});
+  useGetSaleStatusTranslationsQuery({});
   const r = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();

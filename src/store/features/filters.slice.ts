@@ -36,6 +36,11 @@ type FiltersState = {
     spanishTranslation: string;
     keywords: string[];
   }[];
+  saleStatus: {
+    category: string;
+    spanishTranslation: string;
+    keywords: string[];
+  }[];
 };
 const initialState: FiltersState = {
   counters: {},
@@ -51,6 +56,7 @@ const initialState: FiltersState = {
   transmissions: {},
   engines: {},
   driveTypes: [],
+  saleStatus: [],
 };
 
 const filtersSlice = createSlice({
@@ -137,9 +143,14 @@ const filtersSlice = createSlice({
       vehiclesApi.endpoints.getDriveTypesTranslations.matchFulfilled,
       (state, action) => ({ ...state, driveTypes: action.payload }),
     );
+    builder.addMatcher(
+      vehiclesApi.endpoints.getSaleStatusTranslations.matchFulfilled,
+      (state, action) => ({ ...state, saleStatus: action.payload }),
+    );
   },
   selectors: {
     getAllFilters: (state) => state,
+    getCounters: (state) => state.counters,
     getVehicleTypesCounters: (state) => state.counters["vehicleTypes"],
     getPrimaryDamagesCounters: (state) => state.counters["damages"],
     getSecondaryDamagesCounters: (state) => state.counters["secondaryDamages"],
@@ -161,6 +172,7 @@ const filtersSlice = createSlice({
     getMakeAndModelsCount: (state) => state.counters.makesAndModels,
     getDriveTypesTranslations: (state) => state.driveTypes,
     getDriveTypesCounters: (state) => state.counters.drive,
+    getSaleStatusTranslations: (state) => state.saleStatus,
   },
 });
 
@@ -280,6 +292,22 @@ export const getDriveTypes = createSelector(
       label: item.spanishTranslation,
       count:
         (counters as { [key: string]: number } | null)?.[item.category] ?? 0,
+    })),
+);
+
+export const getSaleStatus = createSelector(
+  [
+    filtersSlice.selectors.getSaleStatusTranslations,
+    filtersSlice.selectors.getCounters,
+  ],
+  (data, counters) =>
+    data.map((item) => ({
+      key: item.category,
+      label: item.spanishTranslation,
+      count:
+        (counters.saleStatus as { [key: string]: number } | null)?.[
+          item.category
+        ] ?? 0,
     })),
 );
 
