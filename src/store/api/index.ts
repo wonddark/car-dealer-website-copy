@@ -45,6 +45,9 @@ const vehiclesApi = createApi({
     getTransmissionTranslations: build.query({
       query: () => "/api/filters/transmissions",
     }),
+    getDriveTypesTranslations: build.query({
+      query: () => "/api/filters/drive-types",
+    }),
   }),
 });
 
@@ -60,6 +63,7 @@ export const {
   useGetBuyNowQuery,
   useGetMostWantedQuery,
   useGetTransmissionTranslationsQuery,
+  useGetDriveTypesTranslationsQuery,
 } = vehiclesApi;
 
 export default vehiclesApi;
