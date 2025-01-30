@@ -10,6 +10,7 @@ import DismissBrandFilter from "@/components/DismissBrandFilter";
 import DismissModelFilter from "@/components/DismissModelFilter";
 import {
   useGetAuctionsQuery,
+  useGetColorsTranslationsQuery,
   useGetDamageTranslationsQuery,
   useGetDriveTypesTranslationsQuery,
   useGetFuelTypesQuery,
@@ -29,6 +30,7 @@ import DismissCylindersCountFilter from "@/components/DismissCylindersCountFilte
 import DismissDriveTypeFilter from "@/components/DismissDriveTypeFilter";
 import { Button } from "react-bootstrap";
 import DismissSaleStatusFilter from "@/components/DismissSaleStatusFilter";
+import DismissColorFilter from "@/components/DismissColorFilter";
 
 export default function FiltersBanner() {
   const { sp, clearAll } = useFiltersBanner();
@@ -58,6 +60,7 @@ export default function FiltersBanner() {
         <DismissCylindersCountFilter />
         <DismissDriveTypeFilter />
         <DismissSaleStatusFilter />
+        <DismissColorFilter />
       </div>
     </div>
   );
@@ -73,6 +76,7 @@ const useFiltersBanner = () => {
   useGetTransmissionTranslationsQuery({});
   useGetDriveTypesTranslationsQuery({});
   useGetSaleStatusTranslationsQuery({});
+  useGetColorsTranslationsQuery({});
   const r = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();

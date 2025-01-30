@@ -51,6 +51,9 @@ const vehiclesApi = createApi({
     getSaleStatusTranslations: build.query({
       query: () => "/api/filters/sale-status",
     }),
+    getColorsTranslations: build.query({
+      query: () => "/api/filters/colors",
+    }),
   }),
 });
 
@@ -68,6 +71,7 @@ export const {
   useGetTransmissionTranslationsQuery,
   useGetDriveTypesTranslationsQuery,
   useGetSaleStatusTranslationsQuery,
+  useGetColorsTranslationsQuery,
 } = vehiclesApi;
 
 export default vehiclesApi;
