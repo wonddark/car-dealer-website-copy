@@ -11,6 +11,7 @@ import DismissModelFilter from "@/components/DismissModelFilter";
 import {
   useGetAuctionsQuery,
   useGetDamageTranslationsQuery,
+  useGetDriveTypesTranslationsQuery,
   useGetFuelTypesQuery,
   useGetMakersAndModelsQuery,
   useGetTitleTypesQuery,
@@ -64,6 +65,7 @@ const useFiltersBanner = () => {
   useGetTitleTypesQuery({});
   useGetMakersAndModelsQuery({});
   useGetTransmissionTranslationsQuery({});
+  useGetDriveTypesTranslationsQuery({});
   const r = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();
