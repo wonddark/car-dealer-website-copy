@@ -31,6 +31,11 @@ type FiltersState = {
   modelsFiltered: { key: string; maker: string }[];
   transmissions: { [k: string]: number };
   engines: { [k: string]: number };
+  driveTypes: {
+    category: string;
+    spanishTranslation: string;
+    keywords: string[];
+  }[];
 };
 const initialState: FiltersState = {
   counters: {},
@@ -45,6 +50,7 @@ const initialState: FiltersState = {
   modelsFiltered: [],
   transmissions: {},
   engines: {},
+  driveTypes: [],
 };
 
 const filtersSlice = createSlice({
@@ -127,6 +133,10 @@ const filtersSlice = createSlice({
       vehiclesApi.endpoints.getTransmissionTranslations.matchFulfilled,
       (state, action) => ({ ...state, transmissions: action.payload }),
     );
+    builder.addMatcher(
+      vehiclesApi.endpoints.getDriveTypesTranslations.matchFulfilled,
+      (state, action) => ({ ...state, driveTypes: action.payload }),
+    );
   },
   selectors: {
     getAllFilters: (state) => state,
@@ -149,6 +159,8 @@ const filtersSlice = createSlice({
     getCylindersCount: (state) => state.counters.cylinders,
     getTransmissionsCount: (state) => state.counters["transmissions"],
     getMakeAndModelsCount: (state) => state.counters.makesAndModels,
+    getDriveTypesTranslations: (state) => state.driveTypes,
+    getDriveTypesCounters: (state) => state.counters.drive,
   },
 });
 
@@ -254,6 +266,20 @@ export const getDealers = createSelector(
         (counters as { [k: string]: number } | undefined)?.[
           item.toLowerCase()
         ] ?? 0,
+    })),
+);
+
+export const getDriveTypes = createSelector(
+  [
+    filtersSlice.selectors.getDriveTypesTranslations,
+    filtersSlice.selectors.getDriveTypesCounters,
+  ],
+  (data, counters) =>
+    data.map((item) => ({
+      key: item.category,
+      label: item.spanishTranslation,
+      count:
+        (counters as { [key: string]: number } | null)?.[item.category] ?? 0,
     })),
 );
 
