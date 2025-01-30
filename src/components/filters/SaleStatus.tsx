@@ -61,7 +61,6 @@ export default function SaleStatus() {
 
 const useDriveTypes = () => {
   const statuses = useAppSelector(getSaleStatus);
-  console.log(statuses);
   const { push } = useRouter();
   const pathname = usePathname();
   const dispatch = useAppDispatch();
