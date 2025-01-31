@@ -15,6 +15,7 @@ import {
   useGetDriveTypesTranslationsQuery,
   useGetFuelTypesQuery,
   useGetMakersAndModelsQuery,
+  useGetPopularModelsQuery,
   useGetSaleStatusTranslationsQuery,
   useGetTitleTypesQuery,
   useGetTransmissionTranslationsQuery,
@@ -77,6 +78,7 @@ const useFiltersBanner = () => {
   useGetDriveTypesTranslationsQuery({});
   useGetSaleStatusTranslationsQuery({});
   useGetColorsTranslationsQuery({});
+  useGetPopularModelsQuery({});
   const r = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();
