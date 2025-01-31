@@ -45,6 +45,21 @@ const vehiclesApi = createApi({
     getTransmissionTranslations: build.query({
       query: () => "/api/filters/transmissions",
     }),
+    getDriveTypesTranslations: build.query({
+      query: () => "/api/filters/drive-types",
+    }),
+    getSaleStatusTranslations: build.query({
+      query: () => "/api/filters/sale-status",
+    }),
+    getColorsTranslations: build.query({
+      query: () => "/api/filters/colors",
+    }),
+    getPopularBrands: build.query({
+      query: () => "/api/inventory/popular/brands",
+    }),
+    getPopularModels: build.query({
+      query: () => "/api/inventory/popular/models",
+    }),
   }),
 });
 
@@ -60,6 +75,10 @@ export const {
   useGetBuyNowQuery,
   useGetMostWantedQuery,
   useGetTransmissionTranslationsQuery,
+  useGetDriveTypesTranslationsQuery,
+  useGetSaleStatusTranslationsQuery,
+  useGetColorsTranslationsQuery,
+  useGetPopularModelsQuery,
 } = vehiclesApi;
 
 export default vehiclesApi;

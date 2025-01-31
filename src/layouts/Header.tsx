@@ -3,16 +3,14 @@
 import OffCanvas from "@/components/common/OffCanvas";
 import Link from "next/link";
 import React, { Suspense, useState } from "react";
-import { Button, Card, CardBody, Col, Collapse, Row } from "react-bootstrap";
+import { Button, Collapse } from "react-bootstrap";
 import FiltersBanner from "@/components/FiltersBanner";
 import useVehiclesInventory from "@/hooks/useVehiclesInventory";
 import { useFilters } from "@/components/common/Filters";
 import OrderBySelector from "@/components/OrderBySelector";
-import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import { SearchInput } from "@/components/SearchInput";
-import Image from "next/image";
-import { usePathname } from "next/navigation";
 import SidePortal from "@/layouts/SidePortal";
+import DesktopTopNavbar from "@/components/common/DekstopTopNavbar";
 
 const FilterOptions = () => {
   const { response, loading } = useVehiclesInventory();
@@ -61,7 +59,6 @@ const Header = () => {
   const handleShow = () => setShow((prevState) => !prevState);
   const [open, setOpen] = useState(false);
   const toggleOpen = () => setOpen((prevState) => !prevState);
-  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const closePortal = (val: boolean) => setIsOpen(val);
 
@@ -156,112 +153,7 @@ const Header = () => {
               </Button>
             </form>
             <div className="d-none d-lg-block">
-              <NavigationMenu.Root>
-                <NavigationMenu.List className="d-flex p-0">
-                  <NavigationMenu.Item>
-                    <NavigationMenu.Link asChild>
-                      <Link
-                        href="/"
-                        className={`btn text-decoration-none ${pathname === "/" ? "btn-primary pe-none rounded-bottom-0" : "btn-link"}`}
-                      >
-                        <i className="ti ti-home"></i>
-                      </Link>
-                    </NavigationMenu.Link>
-                  </NavigationMenu.Item>
-                  <NavigationMenu.Item className="position-relative">
-                    <NavigationMenu.Trigger asChild>
-                      <NavigationMenu.Link asChild>
-                        <Button
-                          variant={
-                            pathname.includes("/vehicles") ? "primary" : "link"
-                          }
-                          className={`d-inline-flex align-items-center gap-1 text-decoration-none${pathname.includes("/vehicles") ? " rounded-bottom-0" : ""}`}
-                        >
-                          <i className="ti ti-car-garage"></i>
-                          <span>Vehículos</span>
-                        </Button>
-                      </NavigationMenu.Link>
-                    </NavigationMenu.Trigger>
-                    <NavigationMenu.Content className="position-absolute">
-                      <Card
-                        style={{
-                          maxWidth: "45vw",
-                        }}
-                      >
-                        <CardBody>
-                          <Row>
-                            <Col xs={5}>
-                              <Image
-                                src="/assets/img/car1.jpg"
-                                alt=""
-                                width={400}
-                                height={400}
-                                className="h-100 object-fit-cover"
-                              />
-                            </Col>
-                            <Col xs={7}>
-                              <NavigationMenu.Link asChild>
-                                <Row>
-                                  <Col xs={12}>
-                                    <Link
-                                      href="/vehicles?IsBestOffer=true"
-                                      className="btn btn-link text-decoration-none px-0"
-                                    >
-                                      Inventario
-                                    </Link>
-                                  </Col>
-                                  <Col xs={12}>
-                                    <span>
-                                      Lorem ipsum dolor sit amet, consectetur
-                                      adipisicing elit. Ab accusamus accusantium
-                                      aliquid aperiam aut deserunt dolor
-                                      dolorem, ipsa nisi nobis pariatur, porro
-                                      quas qui recusandae reprehenderit
-                                      repudiandae sit soluta voluptate?
-                                    </span>
-                                  </Col>
-                                </Row>
-                              </NavigationMenu.Link>
-                            </Col>
-                          </Row>
-                        </CardBody>
-                      </Card>
-                    </NavigationMenu.Content>
-                  </NavigationMenu.Item>
-                  <NavigationMenu.Item>
-                    <NavigationMenu.Link asChild>
-                      <Link
-                        href="/como-comprar"
-                        className={`btn text-decoration-none ${pathname === "/como-comprar" ? "btn-primary pe-none rounded-bottom-0" : "btn-link"}`}
-                      >
-                        ¿Cómo comprar?
-                      </Link>
-                    </NavigationMenu.Link>
-                  </NavigationMenu.Item>
-                  <NavigationMenu.Item>
-                    <NavigationMenu.Link asChild>
-                      <Link
-                        href="/estimar-precio"
-                        className="btn btn-link text-decoration-none d-inline-flex align-items-center gap-2"
-                      >
-                        <i className="ti ti-calculator-filled"></i>
-                        <span>Calculador de precios</span>
-                      </Link>
-                    </NavigationMenu.Link>
-                  </NavigationMenu.Item>
-                  <NavigationMenu.Item>
-                    <NavigationMenu.Link asChild>
-                      <Link
-                        href="/support/faq"
-                        className="btn btn-link text-decoration-none"
-                      >
-                        Soporte
-                      </Link>
-                    </NavigationMenu.Link>
-                  </NavigationMenu.Item>
-                </NavigationMenu.List>
-                <NavigationMenu.Viewport />
-              </NavigationMenu.Root>
+              <DesktopTopNavbar />
             </div>
             <Collapse in={open} appear>
               <div className="pb-2">

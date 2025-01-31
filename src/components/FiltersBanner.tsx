@@ -10,9 +10,13 @@ import DismissBrandFilter from "@/components/DismissBrandFilter";
 import DismissModelFilter from "@/components/DismissModelFilter";
 import {
   useGetAuctionsQuery,
+  useGetColorsTranslationsQuery,
   useGetDamageTranslationsQuery,
+  useGetDriveTypesTranslationsQuery,
   useGetFuelTypesQuery,
   useGetMakersAndModelsQuery,
+  useGetPopularModelsQuery,
+  useGetSaleStatusTranslationsQuery,
   useGetTitleTypesQuery,
   useGetTransmissionTranslationsQuery,
   useGetVehicleTypesQuery,
@@ -24,20 +28,24 @@ import DismissDamagesFilter from "@/components/DismissDamagesFilter";
 import DismissDealersNameFilter from "@/components/DismissDealersNameFilter";
 import DismissTransmissionTypeFilter from "@/components/DismissTransmissionTypeFilter";
 import DismissCylindersCountFilter from "@/components/DismissCylindersCountFilter";
+import DismissDriveTypeFilter from "@/components/DismissDriveTypeFilter";
+import { Button } from "react-bootstrap";
+import DismissSaleStatusFilter from "@/components/DismissSaleStatusFilter";
+import DismissColorFilter from "@/components/DismissColorFilter";
 
 export default function FiltersBanner() {
   const { sp, clearAll } = useFiltersBanner();
   return (
     <div className="hstack gap-2 overflow-auto">
       {Boolean(sp.toString().length) && (
-        <button
-          className="btn btn-outline-secondary"
+        <Button
+          variant="outline-secondary"
           onClick={clearAll}
           title="Limpiar filtros"
         >
           <span>Limpiar</span>
           <i className="ti ti-filter-off ms-1"></i>
-        </button>
+        </Button>
       )}
       <div className="hstack overflow-auto gap-2 flex-fill">
         <DismissVehicleTypeFilter />
@@ -51,6 +59,9 @@ export default function FiltersBanner() {
         <DismissDealersNameFilter />
         <DismissTransmissionTypeFilter />
         <DismissCylindersCountFilter />
+        <DismissDriveTypeFilter />
+        <DismissSaleStatusFilter />
+        <DismissColorFilter />
       </div>
     </div>
   );
@@ -64,6 +75,10 @@ const useFiltersBanner = () => {
   useGetTitleTypesQuery({});
   useGetMakersAndModelsQuery({});
   useGetTransmissionTranslationsQuery({});
+  useGetDriveTypesTranslationsQuery({});
+  useGetSaleStatusTranslationsQuery({});
+  useGetColorsTranslationsQuery({});
+  useGetPopularModelsQuery({});
   const r = useRouter();
   const pathname = usePathname();
   const sp = useSearchParams();

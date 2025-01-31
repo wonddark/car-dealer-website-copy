@@ -5,6 +5,7 @@ import { Controller, FreeMode } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from "swiper/react";
 import { useRef, useState } from "react";
 import { Button } from "react-bootstrap";
+import ReliableImage from "@/components/ReliableImage";
 
 export default function SwappableImages({
   vehicle,
@@ -53,18 +54,17 @@ export default function SwappableImages({
           </Button>
           {vehicle.imageUrls?.map((item) => (
             <SwiperSlide key={item} className="m-0">
-              <img
-                src={item}
-                className="object-fit-cover rounded-2"
+              <ReliableImage
+                key={item}
+                imageUrl={item}
                 alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
               />
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
-        <img
-          src={vehicle.imageUrl}
-          className="object-fit-cover rounded-2"
+        <ReliableImage
+          imageUrl={vehicle.imageUrl}
           alt={`${vehicle.year}${vehicle.make}${vehicle.model} subasta cubana comprar carros baratos`}
         />
       )}

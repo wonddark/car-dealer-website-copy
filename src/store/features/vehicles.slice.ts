@@ -14,6 +14,11 @@ type VehiclesState = {
   };
   buyNow: Vehicle[];
   mostWanted: Vehicle[];
+  popular: {
+    name: string;
+    count: number;
+    models: { name: string; count: number }[];
+  }[];
 };
 
 export const initialState: VehiclesState = {
@@ -32,6 +37,7 @@ export const initialState: VehiclesState = {
   },
   buyNow: [],
   mostWanted: [],
+  popular: [],
 };
 
 const vehiclesSlice = createSlice({
@@ -71,6 +77,13 @@ const vehiclesSlice = createSlice({
       vehiclesApi.endpoints.getMostWanted.matchFulfilled,
       (state, action) => ({ ...state, mostWanted: action.payload.data }),
     );
+    builder.addMatcher(
+      vehiclesApi.endpoints.getPopularModels.matchFulfilled,
+      (state, action) => ({
+        ...state,
+        popular: action.payload,
+      }),
+    );
   },
   selectors: {
     getResponse: (state) => state.response,
@@ -78,12 +91,20 @@ const vehiclesSlice = createSlice({
     isError: (state) => state.status.error,
     getBuyNow: (state) => state.buyNow,
     getMostWanted: (state) => state.mostWanted,
+    getPopular: (state) => state.popular,
   },
 });
 
 export const {
   actions: { resetData },
-  selectors: { getResponse, isLoading, isError, getBuyNow, getMostWanted },
+  selectors: {
+    getResponse,
+    isLoading,
+    isError,
+    getBuyNow,
+    getMostWanted,
+    getPopular,
+  },
 } = vehiclesSlice;
 
 export default vehiclesSlice;

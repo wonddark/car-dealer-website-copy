@@ -5,6 +5,7 @@ import React from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/store/hooks";
 import { v4 as uuidv4 } from "uuid";
+import { Button } from "react-bootstrap";
 
 type Props = {
   filterName: string;
@@ -51,14 +52,10 @@ export default function DismissFilter(props: Readonly<Props>) {
           ? (item as Record<string, string>)[keyLabel]
           : (item as string);
         return (
-          <button
-            key={key}
-            className="btn btn-outline-secondary d-flex align-items-center gap-2 text-nowrap"
-            onClick={callback}
-          >
+          <Button key={key} variant="outline-secondary" onClick={callback}>
             <span>{label}</span>
-            <i className="ti ti-x"></i>
-          </button>
+            <i className="ti ti-x ms-1"></i>
+          </Button>
         );
       })}
     </>

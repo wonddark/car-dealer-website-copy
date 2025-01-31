@@ -31,6 +31,17 @@ type FiltersState = {
   modelsFiltered: { key: string; maker: string }[];
   transmissions: { [k: string]: number };
   engines: { [k: string]: number };
+  driveTypes: {
+    category: string;
+    spanishTranslation: string;
+    keywords: string[];
+  }[];
+  saleStatus: {
+    category: string;
+    spanishTranslation: string;
+    keywords: string[];
+  }[];
+  colors: { [key: string]: string };
 };
 const initialState: FiltersState = {
   counters: {},
@@ -45,6 +56,9 @@ const initialState: FiltersState = {
   modelsFiltered: [],
   transmissions: {},
   engines: {},
+  driveTypes: [],
+  saleStatus: [],
+  colors: {},
 };
 
 const filtersSlice = createSlice({
@@ -127,9 +141,22 @@ const filtersSlice = createSlice({
       vehiclesApi.endpoints.getTransmissionTranslations.matchFulfilled,
       (state, action) => ({ ...state, transmissions: action.payload }),
     );
+    builder.addMatcher(
+      vehiclesApi.endpoints.getDriveTypesTranslations.matchFulfilled,
+      (state, action) => ({ ...state, driveTypes: action.payload }),
+    );
+    builder.addMatcher(
+      vehiclesApi.endpoints.getSaleStatusTranslations.matchFulfilled,
+      (state, action) => ({ ...state, saleStatus: action.payload }),
+    );
+    builder.addMatcher(
+      vehiclesApi.endpoints.getColorsTranslations.matchFulfilled,
+      (state, action) => ({ ...state, colors: action.payload }),
+    );
   },
   selectors: {
     getAllFilters: (state) => state,
+    getCounters: (state) => state.counters,
     getVehicleTypesCounters: (state) => state.counters["vehicleTypes"],
     getPrimaryDamagesCounters: (state) => state.counters["damages"],
     getSecondaryDamagesCounters: (state) => state.counters["secondaryDamages"],
@@ -149,6 +176,10 @@ const filtersSlice = createSlice({
     getCylindersCount: (state) => state.counters.cylinders,
     getTransmissionsCount: (state) => state.counters["transmissions"],
     getMakeAndModelsCount: (state) => state.counters.makesAndModels,
+    getDriveTypesTranslations: (state) => state.driveTypes,
+    getDriveTypesCounters: (state) => state.counters.drive,
+    getSaleStatusTranslations: (state) => state.saleStatus,
+    getColors: (state) => state.colors,
   },
 });
 
@@ -253,6 +284,49 @@ export const getDealers = createSelector(
       count:
         (counters as { [k: string]: number } | undefined)?.[
           item.toLowerCase()
+        ] ?? 0,
+    })),
+);
+
+export const getDriveTypes = createSelector(
+  [
+    filtersSlice.selectors.getDriveTypesTranslations,
+    filtersSlice.selectors.getDriveTypesCounters,
+  ],
+  (data, counters) =>
+    data.map((item) => ({
+      key: item.category,
+      label: item.spanishTranslation,
+      count:
+        (counters as { [key: string]: number } | null)?.[item.category] ?? 0,
+    })),
+);
+
+export const getSaleStatus = createSelector(
+  [
+    filtersSlice.selectors.getSaleStatusTranslations,
+    filtersSlice.selectors.getCounters,
+  ],
+  (data, counters) =>
+    data.map((item) => ({
+      key: item.category,
+      label: item.spanishTranslation,
+      count:
+        (counters.saleStatus as { [key: string]: number } | null)?.[
+          item.category
+        ] ?? 0,
+    })),
+);
+
+export const getColors = createSelector(
+  [filtersSlice.selectors.getColors, filtersSlice.selectors.getCounters],
+  (data, counters) =>
+    Object.entries(data ?? {}).map((item) => ({
+      key: item[0].toLowerCase(),
+      label: item[1],
+      count:
+        (counters.colors as { [key: string]: number } | undefined)?.[
+          item[0].toUpperCase()
         ] ?? 0,
     })),
 );

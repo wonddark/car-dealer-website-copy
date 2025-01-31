@@ -11,6 +11,7 @@ import duration from "dayjs/plugin/duration";
 import relativeTime from "dayjs/plugin/relativeTime";
 import es from "dayjs/locale/es-us";
 import { Button } from "react-bootstrap";
+import ReliableImage from "@/components/ReliableImage";
 
 dayjs.extend(duration);
 dayjs.extend(relativeTime);
@@ -24,18 +25,8 @@ export default function VehicleCard({
   const toggleExpanded = () => {
     setExpanded((prevState) => !prevState);
   };
-  const [fullyLoaded, setFullyLoaded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sp = useSearchParams();
-  const [imgUrl, setImgUrl] = useState(vehicle.imageUrl);
-  const handleError = () => {
-    setImgUrl("/assets/img/core-img/sedan.png");
-    setFullyLoaded(true);
-  };
-  const linkClass = `product-thumbnail` + fullyLoaded ? "d-block" : "d-none";
-  const placeholderClass =
-    "ratio ratio-4x3 w-100 placeholder-glow mb-2" + !fullyLoaded
-      ? "d-none"
-      : "";
   const dateDiff = dayjs(vehicle.saleAuctionDate ?? undefined).diff(
     dayjs(),
     "days",
@@ -44,6 +35,12 @@ export default function VehicleCard({
   useEffect(() => {
     setSaleDate(dayjs(vehicle.saleAuctionDate).format("DD/MM/YYYY HH:mm"));
   }, [vehicle.saleAuctionDate]);
+
+  useEffect(() => {
+    if (window) {
+      setIsMobile(window.innerWidth < 580);
+    }
+  }, []);
 
   return (
     <div className="card product-card h-100">
@@ -62,22 +59,15 @@ export default function VehicleCard({
         </div>
         <div className="d-flex flex-column h-100">
           <Link
-            className={linkClass}
+            className="product-thumbnail"
             href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
-            target="_blank"
+            target={isMobile ? "_self" : "_blank"}
           >
-            <img
-              className="mb-2 rounded-2 object-fit-cover ratio ratio-4x3"
-              style={{ aspectRatio: "4/3" }}
-              src={imgUrl}
+            <ReliableImage
+              imageUrl={vehicle.imageUrls?.[0] ?? vehicle.imageUrl}
               alt={`${vehicle.year} ${vehicle.make} ${vehicle.model} subasta carros suv camionetas camiones compra inmediata florida usa`}
-              onLoad={() => setFullyLoaded(true)}
-              onError={handleError}
             />
           </Link>
-          <div className={placeholderClass}>
-            <div className="h-100 w-100 placeholder rounded-2"></div>
-          </div>
 
           <Link
             className="product-title"
