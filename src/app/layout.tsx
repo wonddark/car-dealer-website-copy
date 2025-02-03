@@ -29,7 +29,7 @@ export default function RootLayout({
         <Wrapper>
           <Provider store={store}>
             <Header />
-            {children}
+            <main style={{ marginTop: "101px" }}>{children}</main>
             <Footer />
           </Provider>
         </Wrapper>

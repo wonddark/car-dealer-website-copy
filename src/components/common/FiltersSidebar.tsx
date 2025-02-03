@@ -3,7 +3,7 @@ import Filters from "@/components/common/Filters";
 
 const FiltersSidebar = () => {
   return (
-    <div className="card">
+    <div className="card h-100">
       <Filters />
     </div>
   );

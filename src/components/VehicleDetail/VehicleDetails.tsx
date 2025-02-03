@@ -5,6 +5,7 @@ import { TOdometerBrand } from "@/types/features";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import Tooltip from "react-bootstrap/Tooltip";
 import SwappableImages from "@/components/VehicleDetail/SwappableImages";
+import SaleDate from "@/components/VehicleDetail/SaleDate";
 
 export default function VehicleDetails({
   vehicle,
@@ -153,12 +154,8 @@ export default function VehicleDetails({
           <div className="col-12 col-md-5 order-last order-md-2 card">
             <div className="card-body">
               <div className="vstack gap-2">
-                <div className="hstack">
-                  <strong>Información de la oferta</strong>
-                  <span className="text-end ms-auto">
-                    {vehicle.saleAuctionDate}
-                  </span>
-                </div>
+                <p className="lead">Información de la oferta</p>
+                <SaleDate date={vehicle.saleAuctionDate} />
                 <div className="hstack">
                   <strong className="text-muted">Estado de la oferta</strong>
                   <span className="text-end ms-auto">

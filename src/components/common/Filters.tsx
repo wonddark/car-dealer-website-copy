@@ -24,9 +24,8 @@ import SaleStatus from "@/components/filters/SaleStatus";
 import Colors from "@/components/filters/Colors";
 
 export default function Filters() {
-  const { auctionState, stateVal, applyFilters } = useFilters();
   return (
-    <div className="offcanvas-body py-5 py-lg-3 px-0">
+    <div className="offcanvas-body py-3 px-0 overflow-scroll h-100">
       <div className="vstack px-3 gap-2 mb-2">
         <BestOffers />
         <BuyNow />
@@ -48,42 +47,7 @@ export default function Filters() {
         <DriveTypes />
         <SaleStatus />
         <Colors />
-        <div className="accordion-item">
-          <h2 className="accordion-header">
-            <button
-              className="accordion-button collapsed"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#collapse-auction-state"
-              aria-controls="collapse-auction-state"
-            >
-              <strong>Estado</strong>
-            </button>
-          </h2>
-          <div
-            id="collapse-auction-state"
-            className="accordion-collapse collapse"
-            data-bs-parent="#accordion-filters"
-          >
-            <div className="accordion-body">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Estado"
-                ref={auctionState}
-                defaultValue={stateVal}
-              />
-            </div>
-          </div>
-        </div>
       </div>
-      <button
-        className="btn btn-lg btn-primary w-100"
-        disabled={!auctionState.current?.value}
-        onClick={applyFilters}
-      >
-        Aplicar
-      </button>
     </div>
   );
 }

@@ -14,36 +14,40 @@ type Props = {
 export default function InfiniteVehiclesList(props: Readonly<Props>) {
   const { response, requestStatus, getNextPage } = props;
   return (
-    <InfiniteScroll
-      dataLength={response.data.length}
-      next={getNextPage}
-      hasMore={Boolean(response.next)}
-      loader={null}
-      endMessage={
-        <EndMessage
-          length={response.data.length}
-          loading={requestStatus.loading}
-        />
-      }
-      refreshFunction={getNextPage}
-      pullDownToRefresh={false}
-      className="row g-2"
-    >
-      {response.data.map((item) => (
-        <div key={item.vin} className="col-12 col-md-6 col-xl-4">
-          <VehicleCard vehicle={item} />
-        </div>
-      ))}
-      {requestStatus.loading && (
-        <>
-          {[0, 1, 3, 4, 5, 6].map((item) => (
-            <div key={item} className="col-12 col-md-6 col-xl-4">
-              <VehiclesLoading />
-            </div>
-          ))}
-        </>
-      )}
-    </InfiniteScroll>
+    <div className="h-100 overflow-auto" id="list-container">
+      <InfiniteScroll
+        dataLength={response.data.length}
+        next={getNextPage}
+        hasMore={Boolean(response.next)}
+        loader={null}
+        scrollableTarget="list-container"
+        scrollThreshold="60%"
+        endMessage={
+          <EndMessage
+            length={response.data.length}
+            loading={requestStatus.loading}
+          />
+        }
+        refreshFunction={getNextPage}
+        pullDownToRefresh={false}
+        className="row g-2"
+      >
+        {response.data.map((item) => (
+          <div key={item.vin} className="col-12 col-md-6 col-xl-4">
+            <VehicleCard vehicle={item} />
+          </div>
+        ))}
+        {requestStatus.loading && (
+          <>
+            {[0, 1, 3, 4, 5, 6].map((item) => (
+              <div key={item} className="col-12 col-md-6 col-xl-4">
+                <VehiclesLoading />
+              </div>
+            ))}
+          </>
+        )}
+      </InfiniteScroll>
+    </div>
   );
 }
 
