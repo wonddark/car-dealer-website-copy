@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function Index() {
   return (
-    <Container fluid="xxl">
+    <Container fluid="xxl" className="h-100 overflow-auto">
       <NewComp />
       <hr className="border-secondary my-5" />
 
