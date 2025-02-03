@@ -22,24 +22,21 @@ export default function VehicleCard({
 }: Readonly<{ vehicle: Vehicle }>) {
   const [expanded, setExpanded] = useState(false);
   const [saleDate, setSaleDate] = useState("");
+  const [dateDiff, setDateDiff] = useState(0);
   const toggleExpanded = () => {
     setExpanded((prevState) => !prevState);
   };
   const [isMobile, setIsMobile] = useState(false);
   const sp = useSearchParams();
-  const dateDiff = dayjs(vehicle.saleAuctionDate ?? undefined).diff(
-    dayjs(),
-    "days",
-  );
-
-  useEffect(() => {
-    setSaleDate(dayjs(vehicle.saleAuctionDate).format("DD/MM/YYYY HH:mm"));
-  }, [vehicle.saleAuctionDate]);
 
   useEffect(() => {
     if (window) {
       setIsMobile(window.innerWidth < 580);
     }
+    setSaleDate(dayjs(vehicle.saleAuctionDate).format("DD/MM/YYYY HH:mm"));
+    setDateDiff(
+      dayjs(vehicle.saleAuctionDate ?? undefined).diff(dayjs(), "days"),
+    );
   }, []);
 
   return (
