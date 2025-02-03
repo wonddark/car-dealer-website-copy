@@ -3,30 +3,29 @@
 import { useState } from "react";
 import { Vehicle } from "@/types/vehicle";
 import Link from "next/link";
-
-const OFFER_STEP = 50;
+import { getStep } from "@/data/offer-ranges";
 
 export default function OfferInput({
   vehicle,
 }: Readonly<{ vehicle: Vehicle }>) {
-  const [myOffer, setMyOffer] = useState<number>(
-    vehicle.currentOffer + OFFER_STEP,
-  );
+  const step = getStep(vehicle.currentOffer ?? 0);
+  const [myOffer, setMyOffer] = useState<number>(vehicle.currentOffer + step);
+
   return (
     <div>
       <div className="hstack">
         <button
           className="btn btn-outline-primary"
           type="button"
-          onClick={() => setMyOffer((prevState) => prevState - OFFER_STEP)}
-          disabled={myOffer === vehicle.currentOffer + OFFER_STEP}
+          onClick={() => setMyOffer((prevState) => prevState - step)}
+          disabled={myOffer === vehicle.currentOffer + step}
         >
           <i className="ti ti-minus"></i>
         </button>
         <input
           type="number"
-          min={vehicle.currentOffer + OFFER_STEP}
-          step={OFFER_STEP}
+          min={vehicle.currentOffer + step}
+          step={step}
           value={myOffer}
           onChange={({ currentTarget: { value } }) => setMyOffer(Number(value))}
           className="form-control text-center"
@@ -34,7 +33,7 @@ export default function OfferInput({
         <button
           className="btn btn-outline-primary"
           type="button"
-          onClick={() => setMyOffer((prevState) => prevState + OFFER_STEP)}
+          onClick={() => setMyOffer((prevState) => prevState + step)}
         >
           <i className="ti ti-plus"></i>
         </button>
