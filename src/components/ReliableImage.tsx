@@ -14,17 +14,21 @@ export default function ReliableImage({ imageUrl, alt }: Readonly<Props>) {
     setImgUrl("/assets/img/core-img/sedan.png");
     setFullyLoaded(true);
   };
-
-  const imgClass =
-    "mb-2 rounded-2 object-fit-cover ratio ratio-4x3 object-fit-cover" +
-    (fullyLoaded ? "" : " w-0 opacity-0");
+  const [imgClass, setImgClass] = useState(
+    "mb-2 rounded-2 object-fit-cover ratio ratio-4x3 object-fit-cover d-none",
+  );
+  useEffect(() => {
+    if (fullyLoaded) {
+      setImgClass((prevState) => prevState.replace(" d-none", ""));
+    }
+  }, [fullyLoaded]);
 
   const placeholderClass =
     "ratio ratio-4x3 w-100 placeholder-glow mb-2" +
     (fullyLoaded ? " d-none" : "");
 
   useEffect(() => {
-    console.log(imgClass, imgUrl, fullyLoaded);
+    console.log(imgClass, placeholderClass, imgUrl, fullyLoaded);
   }, [fullyLoaded]);
 
   return (
