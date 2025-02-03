@@ -57,7 +57,7 @@ export default function VehicleCard({
         <div className="d-flex flex-column h-100">
           <Link
             className="product-thumbnail"
-            href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
+            href={`/vehicles/${vehicle.vin}`}
             target={isMobile ? "_self" : "_blank"}
           >
             <ReliableImage
@@ -68,7 +68,7 @@ export default function VehicleCard({
 
           <Link
             className="product-title"
-            href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
+            href={`/vehicles/${vehicle.vin}`}
             target="_blank"
           >
             {`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
@@ -283,7 +283,7 @@ export default function VehicleCard({
 
           <div>
             <Link
-              href={`/vehicles/${vehicle.vin}?${sp.toString()}`}
+              href={`/vehicles/${vehicle.vin}`}
               target="_blank"
               className="btn btn-primary w-100 mt-2"
             >
