@@ -228,3 +228,13 @@
     background-color: var(--bs-primary);
     color: #fff;
 }
+
+.navigation-menu-item:hover {
+    background-color: rgba(var(--bs-primary-rgb), 7%);
+}
+
+.navigation-menu-item > div[data-state="open"] {
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
