@@ -60,6 +60,9 @@ const vehiclesApi = createApi({
     getPopularModels: build.query({
       query: () => "/api/inventory/popular/models",
     }),
+    getFees: build.query({
+      query: () => `/api/fees`,
+    }),
   }),
 });
 
@@ -79,6 +82,7 @@ export const {
   useGetSaleStatusTranslationsQuery,
   useGetColorsTranslationsQuery,
   useGetPopularModelsQuery,
+  useGetFeesQuery,
 } = vehiclesApi;
 
 export default vehiclesApi;
