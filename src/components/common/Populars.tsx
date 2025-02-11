@@ -75,7 +75,7 @@ export default function Populars() {
   );
 }
 
-const usePopulars = () => {
+export const usePopulars = () => {
   const popular = useAppSelector(getPopular);
   const dispatch = useAppDispatch();
   const { push } = useRouter();
