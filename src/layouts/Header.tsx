@@ -10,7 +10,7 @@ import { useFilters } from "@/components/common/Filters";
 import OrderBySelector from "@/components/OrderBySelector";
 import { SearchInput } from "@/components/SearchInput";
 import SidePortal from "@/layouts/SidePortal";
-import DesktopTopNavbar from "@/components/common/DekstopTopNavbar";
+import DesktopTopNavbar from "@/components/common/DesktopTopNavbar";
 import { useGetFeesQuery } from "@/store/api";
 
 const Header = () => {

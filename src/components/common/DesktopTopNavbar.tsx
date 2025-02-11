@@ -6,6 +6,7 @@ import { Button, Card } from "react-bootstrap";
 import React from "react";
 import { usePathname } from "next/navigation";
 import Populars from "@/components/common/Populars";
+import Highlighted from "@/components/common/Highlighted";
 
 export default function DesktopTopNavbar() {
   const pathname = usePathname();
@@ -22,7 +23,7 @@ export default function DesktopTopNavbar() {
             </Link>
           </NavigationMenu.Link>
         </NavigationMenu.Item>
-        <NavigationMenu.Item>
+        <NavigationMenu.Item className="position-relative">
           <NavigationMenu.Trigger asChild>
             <NavigationMenu.Link asChild>
               <Link
@@ -34,22 +35,26 @@ export default function DesktopTopNavbar() {
               </Link>
             </NavigationMenu.Link>
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="position-absolute">
+          <NavigationMenu.Content>
             <Card className="shadow rounded-0">
               <NavigationMenu.Sub>
                 <NavigationMenu.List className="m-0 p-0 d-flex flex-column align-items-stretch">
-                  <NavigationMenu.Item asChild>
-                    <Button variant="link" className="text-decoration-none">
+                  <NavigationMenu.Item asChild className="navigation-menu-item">
+                    <Button
+                      variant="link"
+                      className="text-decoration-none text-start"
+                    >
                       <NavigationMenu.Link asChild>
                         <Link
                           href="/vehicles?IsBestOffer=true"
-                          className="d-flex gap-3 align-items-center fw-normal"
+                          className="d-flex gap-3 align-items-center fw-normal text-nowrap link-secondary"
                         >
                           Todos los vehículos
                         </Link>
                       </NavigationMenu.Link>
                     </Button>
                   </NavigationMenu.Item>
+                  <Highlighted />
                   <Populars />
                 </NavigationMenu.List>
               </NavigationMenu.Sub>
@@ -58,7 +63,11 @@ export default function DesktopTopNavbar() {
 
           <NavigationMenu.Viewport
             className="position-absolute"
-            style={{ top: "40wpx", left: 0 }}
+            style={{
+              top: "calc(100% + 8px)",
+              left: 0,
+              width: "fit-content",
+            }}
           />
         </NavigationMenu.Item>
         <NavigationMenu.Item>
