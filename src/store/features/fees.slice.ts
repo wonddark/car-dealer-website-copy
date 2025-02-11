@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import vehiclesApi from "@/store/api";
 
-type FeeState = {
+export type FeeState = {
   id: string;
   name: string;
   descript: string;
@@ -20,7 +20,7 @@ type FeeState = {
   applyToGrandTotal: boolean;
   applyToOfferAmount: boolean;
   auctionCategory: string;
-  auctionFeeValues: { [k: string]: number }[];
+  auctionFeeValues: { [k: string]: string }[];
   maxTear: number;
 };
 
@@ -36,7 +36,20 @@ const feesSlice = createSlice({
       (_, action) => action.payload,
     );
   },
-  selectors: {},
+  selectors: {
+    getStandardFee: (state) =>
+      state.filter(
+        (item) => item.status && item.isDefault && !item.auctionCategory,
+      ),
+    getCategorizedFees: (state) =>
+      state.filter(
+        (item) =>
+          item.status && item.isDefault && Boolean(item.auctionCategory),
+      ),
+  },
 });
 
+export const {
+  selectors: { getStandardFee, getCategorizedFees },
+} = feesSlice;
 export default feesSlice;
