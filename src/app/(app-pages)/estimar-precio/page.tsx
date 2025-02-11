@@ -25,53 +25,117 @@ import * as Tabs from "@radix-ui/react-tabs";
 
 export default function PriceCalculator() {
   return (
-    <Container>
+    <Container fluid="sm">
       <h1>Estimador de costo</h1>
-      <Tabs.Root orientation="vertical" defaultValue="copart">
-        <Stack direction="vertical" gap={0}>
-          <Tabs.List asChild>
-            <Stack direction="horizontal" gap={0}>
-              <Tabs.Trigger value="copart" asChild>
-                <Button
-                  className="auction-tab flex-fill"
-                  size="lg"
-                  variant="light"
+      <Card>
+        <CardBody className="d-flex flex-lg-row flex-column gap-4">
+          <Estimator />
+          <div style={{ maxWidth: 500 }}>
+            <p className="display-1 fs-3">
+              ¿Qué puedes hacer con esta calculadora?
+            </p>
+
+            <p className="lead">
+              Descubre de manera precisa todas las tarifas y cargos aplicables
+              al comprar un vehículo en cualquiera de nuestras subastas, Copart,
+              Manheim y IAA. Estos costos varían según el precio del auto, y
+              podrás realizar simulaciones ilimitadas con diferentes valores.
+            </p>
+
+            <p className="lead">
+              ¿Quieres saber cuánto pagarías si ofreces $2,000, $5,000 o incluso
+              $15,000 por un vehículo? Obtén un cálculo del costo total con un
+              99% de precisión para cada escenario posible.
+            </p>
+            <p>
+              <strong>Enlaces de interés:</strong>
+            </p>
+            <ul className="list-unstyled m-0 p-0 d-flex flex-column gap-2">
+              <li>
+                <a
+                  href="https://www.copart.com/content/us/en/member-fees-us-licensed-less"
+                  target="_blank"
+                  className="fw-medium"
                 >
-                  Copart
-                </Button>
-              </Tabs.Trigger>
-              <Tabs.Trigger value="manheim" asChild>
-                <Button
-                  className="auction-tab flex-fill"
-                  size="lg"
-                  variant="light"
+                  Tarifas de Copart <i className="ti ti-external-link" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.manheim.com.au/opalcmsassets/manheim/linkreports/Buyer_Auction_Fees.pdf"
+                  target="_blank"
+                  className="fw-medium"
                 >
-                  Manheim
-                </Button>
-              </Tabs.Trigger>
-              <Tabs.Trigger value="iaa" asChild>
-                <Button
-                  className="auction-tab flex-fill"
-                  size="lg"
-                  variant="light"
+                  Tarifas de Manheim <i className="ti ti-external-link" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.iaai.com/marketing/standard-iaa-licensed-buyer-fees"
+                  target="_blank"
+                  className="fw-medium"
                 >
-                  IAA
-                </Button>
-              </Tabs.Trigger>
-            </Stack>
-          </Tabs.List>
-          <Tabs.Content value="copart">
-            <PriceEstimator auction="copart" />
-          </Tabs.Content>
-          <Tabs.Content value="manheim">
-            <PriceEstimator auction="manheim" />
-          </Tabs.Content>
-          <Tabs.Content value="iaa">
-            <PriceEstimator auction="iaa" />
-          </Tabs.Content>
-        </Stack>
-      </Tabs.Root>
+                  Tarifas de IAA <i className="ti ti-external-link" />
+                </a>
+              </li>
+            </ul>
+          </div>
+        </CardBody>
+      </Card>
     </Container>
+  );
+}
+
+export function Estimator() {
+  return (
+    <Tabs.Root
+      orientation="vertical"
+      defaultValue="copart"
+      className="flex-fill shadow"
+    >
+      <Stack direction="vertical" gap={0}>
+        <Tabs.List asChild>
+          <Stack direction="horizontal" gap={0}>
+            <Tabs.Trigger value="copart" asChild>
+              <Button
+                className="auction-tab flex-fill"
+                size="lg"
+                variant="light"
+              >
+                Copart
+              </Button>
+            </Tabs.Trigger>
+            <Tabs.Trigger value="manheim" asChild>
+              <Button
+                className="auction-tab flex-fill"
+                size="lg"
+                variant="light"
+              >
+                Manheim
+              </Button>
+            </Tabs.Trigger>
+            <Tabs.Trigger value="iaa" asChild>
+              <Button
+                className="auction-tab flex-fill"
+                size="lg"
+                variant="light"
+              >
+                IAA
+              </Button>
+            </Tabs.Trigger>
+          </Stack>
+        </Tabs.List>
+        <Tabs.Content value="copart">
+          <PriceEstimator auction="copart" />
+        </Tabs.Content>
+        <Tabs.Content value="manheim">
+          <PriceEstimator auction="manheim" />
+        </Tabs.Content>
+        <Tabs.Content value="iaa">
+          <PriceEstimator auction="iaa" />
+        </Tabs.Content>
+      </Stack>
+    </Tabs.Root>
   );
 }
 
@@ -292,8 +356,6 @@ const usePriceCalculator = ({ auction }: { auction: string }) => {
               : Number(currentRange.percentToApply) * inputVal;
 
           result.push({ ...item, total: basePrice + plusPrice });
-        } else {
-          console.log("No fee applied");
         }
       } else {
         const feeVal = getFeeValue(inputVal, item.value, item.isPercent);
@@ -321,14 +383,6 @@ const usePriceCalculator = ({ auction }: { auction: string }) => {
             );
           }
         }
-        console.table({
-          fee: item.descript,
-          baseTear: item.baseTear,
-          value,
-          minus: value - item.baseTear,
-          restVal: restVal,
-          toPlus: amountToPlus,
-        });
 
         result.push({ ...item, total: feeVal + amountToPlus });
       }
