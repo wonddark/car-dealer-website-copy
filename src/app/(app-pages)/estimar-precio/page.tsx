@@ -281,8 +281,15 @@ function PriceEstimator(props: Readonly<{ auction: string }>) {
                 </strong>
               </ListGroupItem>
             </ListGroup>
-            <p>
+            <p className="mt-2 mb-0">
               <small>* Este es solo un estimado y no el costo final.</small>
+            </p>
+            <p className="mt-1 mb-2">
+              <small>
+                * Para clientes que compran con nosotros por primera vez la
+                tutoría es gratis, por lo que al estimado le puede restar
+                $149.00.
+              </small>
             </p>
           </Stack>
         </Stack>
