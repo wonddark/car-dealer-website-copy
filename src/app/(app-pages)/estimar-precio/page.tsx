@@ -360,7 +360,7 @@ const usePriceCalculator = ({ auction }: { auction: string }) => {
       } else {
         const feeVal = getFeeValue(inputVal, item.value, item.isPercent);
         const value =
-          item.maxTear === 0 || item.maxTear < inputVal
+          item.maxTear === 0 || item.maxTear > inputVal
             ? inputVal
             : item.maxTear;
         let restVal = value - item.baseTear;
