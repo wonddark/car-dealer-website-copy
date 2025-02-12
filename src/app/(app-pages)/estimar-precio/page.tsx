@@ -86,7 +86,7 @@ export default function PriceCalculator() {
   );
 }
 
-export function Estimator() {
+function Estimator() {
   return (
     <Tabs.Root
       orientation="vertical"
