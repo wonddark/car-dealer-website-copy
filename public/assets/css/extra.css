@@ -228,3 +228,39 @@
     background-color: var(--bs-primary);
     color: #fff;
 }
+
+.navigation-menu-item:hover {
+    background-color: rgba(var(--bs-primary-rgb), 7%);
+}
+
+.navigation-menu-item > div[data-state="open"] {
+    position: absolute;
+    top: 0;
+    left: 100%;
+}
+
+.home-populars {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.auction-tab {
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    border-bottom: none;
+}
+
+.auction-tab:first-of-type {
+    border-radius: var(--bs-border-radius) 0 0 0;
+}
+
+.auction-tab:last-of-type {
+    border-radius: 0 var(--bs-border-radius) 0 0;
+}
+
+.auction-tab[data-state="active"] {
+    background-color: var(--bs-primary);
+    color: #fff
+}

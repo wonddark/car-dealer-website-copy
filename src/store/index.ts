@@ -3,12 +3,14 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import vehiclesSlice from "@/store/features/vehicles.slice";
 import vehiclesApi from "@/store/api";
 import filtersSlice from "@/store/features/filters.slice";
+import feesSlice from "@/store/features/fees.slice";
 
 const store = configureStore({
   reducer: {
     [vehiclesSlice.reducerPath]: vehiclesSlice.reducer,
     [vehiclesApi.reducerPath]: vehiclesApi.reducer,
     [filtersSlice.reducerPath]: filtersSlice.reducer,
+    [feesSlice.reducerPath]: feesSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

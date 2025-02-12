@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   DEFAULT_VEHICLE_PAGE_SIZE,
   Vehicle,
@@ -91,7 +91,7 @@ const vehiclesSlice = createSlice({
     isError: (state) => state.status.error,
     getBuyNow: (state) => state.buyNow,
     getMostWanted: (state) => state.mostWanted,
-    getPopular: (state) => state.popular,
+    getPopulars: (state) => state.popular,
   },
 });
 
@@ -103,8 +103,12 @@ export const {
     isError,
     getBuyNow,
     getMostWanted,
-    getPopular,
+    getPopulars,
   },
 } = vehiclesSlice;
+
+export const getPopular = createSelector([getPopulars], (data) =>
+  data.filter((item) => item.count > 0),
+);
 
 export default vehiclesSlice;

@@ -10,58 +10,12 @@ import { useFilters } from "@/components/common/Filters";
 import OrderBySelector from "@/components/OrderBySelector";
 import { SearchInput } from "@/components/SearchInput";
 import SidePortal from "@/layouts/SidePortal";
-import DesktopTopNavbar from "@/components/common/DekstopTopNavbar";
-
-const FilterOptions = () => {
-  const { response, loading } = useVehiclesInventory();
-  const { orderActive, changeSort } = useFilters();
-  return (
-    <>
-      {!loading && response.totalCount > 0 && (
-        <div className="hstack justify-content-between gap-1">
-          <p className="m-0">
-            <strong className="text-primary-emphasis">
-              {response.totalCount}
-            </strong>
-            <span className="ms-1">resultados</span>
-          </p>
-          <div className="hstack gap-4">
-            <OrderBySelector />
-            <div className="hstack">
-              <button
-                type="button"
-                className={`btn btn-light${orderActive("false") ? " active" : ""}`}
-                data-bs-toggle="button"
-                aria-pressed={orderActive("false")}
-                onClick={() => changeSort("false")}
-              >
-                <i className="ti ti-sort-ascending"></i>
-              </button>
-              <button
-                type="button"
-                className={`btn btn-light${orderActive("true") ? " active" : ""}`}
-                data-bs-toggle="button"
-                aria-pressed={orderActive("true")}
-                onClick={() => changeSort("true")}
-              >
-                <i className="ti ti-sort-descending"></i>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-};
+import DesktopTopNavbar from "@/components/common/DesktopTopNavbar";
+import { useGetFeesQuery } from "@/store/api";
 
 const Header = () => {
-  const [show, setShow] = useState(false);
-  const handleShow = () => setShow((prevState) => !prevState);
-  const [open, setOpen] = useState(false);
-  const toggleOpen = () => setOpen((prevState) => !prevState);
-  const [isOpen, setIsOpen] = useState(false);
-  const closePortal = (val: boolean) => setIsOpen(val);
-
+  const { show, handleShow, isOpen, toggleOpen, closePortal, open, setIsOpen } =
+    useHeader();
   return (
     <>
       <div className="header-area" id="headerArea">
@@ -186,6 +140,61 @@ const Header = () => {
       {isOpen ? <SidePortal isOpen={isOpen} toggleOpen={closePortal} /> : null}
     </>
   );
+};
+
+const FilterOptions = () => {
+  const { response, loading } = useVehiclesInventory();
+  const { orderActive, changeSort } = useFilters();
+  return (
+    <>
+      {!loading && response.totalCount > 0 && (
+        <div className="hstack justify-content-between gap-1">
+          <p className="m-0">
+            <strong className="text-primary-emphasis">
+              {response.totalCount}
+            </strong>
+            <span className="ms-1">resultados</span>
+          </p>
+          <div className="hstack gap-4">
+            <OrderBySelector />
+            <div className="hstack">
+              <button
+                type="button"
+                className={`btn btn-light${orderActive("false") ? " active" : ""}`}
+                data-bs-toggle="button"
+                aria-pressed={orderActive("false")}
+                onClick={() => changeSort("false")}
+              >
+                <i className="ti ti-sort-ascending"></i>
+              </button>
+              <button
+                type="button"
+                className={`btn btn-light${orderActive("true") ? " active" : ""}`}
+                data-bs-toggle="button"
+                aria-pressed={orderActive("true")}
+                onClick={() => changeSort("true")}
+              >
+                <i className="ti ti-sort-descending"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+};
+
+const useHeader = () => {
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow((prevState) => !prevState);
+  const [open, setOpen] = useState(false);
+  const toggleOpen = () => setOpen((prevState) => !prevState);
+  const [isOpen, setIsOpen] = useState(false);
+  const closePortal = (val: boolean) => setIsOpen(val);
+
+  useGetFeesQuery({});
+
+  return { show, handleShow, open, toggleOpen, isOpen, closePortal, setIsOpen };
 };
 
 export default Header;
